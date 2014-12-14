@@ -1,0 +1,8 @@
+<form name="form1"  action=""  method="post">
+	<p ><em>您的申请已经成功提交，爱丫已给您的邮箱发出了通知信！</em>
+	<br />
+    请您立即登录该邮箱，并按信中提示完成找回会员名的操作。</p>
+    <div >
+    	<input type="submit" name="button" value="完成" onClick="javascript:window.close();" />
+    </div>
+</form>

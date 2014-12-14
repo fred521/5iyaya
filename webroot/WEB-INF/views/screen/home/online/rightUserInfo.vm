@@ -1,0 +1,52 @@
+#set( $layout = "layout/home/blank.vm" )
+<html>
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=$!{page_encoding}">
+<title>店主信息</title>
+<link rel="stylesheet" type="text/css" href="${imgServer}/css/style.css">
+</head>
+<body topmargin="0" leftmargin="0">
+<table border="0" width="168" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>
+		<map name="FPMap0">
+		<area href="$appServer.setTarget('/chat/chat_goods_list.htm').addQueryData('member_id',$request.getParameter("member_id"))" shape="rect" coords="86, 3, 163, 23" onFocus="this.blur()">
+		</map>
+		<img border="0" src="${imgServer}/images/contact_right_top.gif" width="168" height="25" usemap="#FPMap0"></td>
+	</tr>
+</table>
+<table border="0" width="168" height="323" cellspacing="0" cellpadding="0" background="${imgServer}/images/contact_right_top_bg1.gif">
+	<tr>
+		<td align="center" valign="top">
+		<table border="0" width="100%" cellspacing="0" cellpadding="8">
+			<tr>
+				<td align="center">
+				#if("$!{shop.logo}" == "")
+				   <img border="0" src="${imgServer}/images/nologo.gif">
+				#else
+				   <img border="0" src="${upServer}/$!{shop.logo}.n.jpg">
+				#end
+				</td>
+			</tr>
+			<tr>
+				<td>$!{shop.shopOwner}(店主)</td>
+			</tr>
+			<tr>
+				<td>$!{shop.shopName}<br><a href="${appServer}/shop/$!{shop.shopId}.htm" target=_blank class="good2">$!{shop.address}</a></td>
+			</tr>
+			<tr>
+				<td>主营:$!{shop.commodity}</td>
+			</tr>
+			<tr>
+				<td>商品数量:$!{shop.goodsCount}</td>
+			</tr>
+			<tr>
+				<td>开店时间:$dateUtils.dtSimpleFormat($!{shop.gmtCreate})</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

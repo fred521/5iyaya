@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="ADMUSER_SPACE">
+	<resultMap id="AdminUser" class="com.nonfamous.tang.domain.AdminUser">
+		<result property="userId" column="USER_ID"/>
+		<result property="loginName" column="LOGIN_NAME"/>
+		<result property="loginPassword" column="LOGIN_PASSWORD"/>
+		<result property="userStatus" column="USER_STATUS"/>
+		<result property="phone" column="PHONE"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+	</resultMap>
+	
+	<insert id="admin_user_insert" parameterClass="com.nonfamous.tang.domain.AdminUser">
+		INSERT INTO ADMIN_USER (
+				USER_ID,
+				LOGIN_NAME,
+				LOGIN_PASSWORD,
+				USER_STATUS,
+				PHONE,
+				GMT_CREATE,
+				CREATOR,
+				GMT_MODIFY,
+				MODIFIER
+	                     )
+	             VALUES ( 
+				#userId#,
+				#loginName#,
+				#loginPassword#,
+				#userStatus#,
+				#phone#,
+				sysdate(),
+				#creator#,
+				sysdate(),
+				#modifier#
+	                     )
+	</insert>
+	
+	<update id="admuser_update" parameterClass="com.nonfamous.tang.domain.AdminUser">
+		UPDATE ADMIN_USER t SET  
+			<isNotEmpty prepend="" property="loginName"> t.LOGIN_NAME = #loginName#,</isNotEmpty>
+			<isNotEmpty prepend="" property="loginPassword"> t.LOGIN_PASSWORD = #loginPassword#,</isNotEmpty>
+			<isNotEmpty prepend="" property="userStatus"> t.USER_STATUS = #userStatus#,</isNotEmpty>
+			<isNotEmpty prepend="" property="phone"> t.PHONE = #phone#,</isNotEmpty>
+			<isNotEmpty prepend="" property="gmtCreate"> t.GMT_CREATE = #gmtCreate#,</isNotEmpty>
+			<isNotEmpty prepend="" property="creator"> t.CREATOR = #creator#,</isNotEmpty>
+			<isNotEmpty prepend="" property="gmtModify"> t.GMT_MODIFY = #gmtModify#,</isNotEmpty>
+			<isNotEmpty prepend="" property="modifier"> t.MODIFIER = #modifier#,</isNotEmpty>
+		WHERE t.USER_ID = #id#
+	</update>
+	
+	<update id="update_admin_user_password" parameterClass="com.nonfamous.tang.domain.AdminUser">
+		UPDATE ADMIN_USER t SET
+			t.LOGIN_PASSWORD = #loginPassword#, t.GMT_MODIFY = sysdate(), t.MODIFIER = #modifier#
+		WHERE t.USER_ID = #userId#
+	</update>
+	
+	<update id="update_admin_user_status" parameterClass="com.nonfamous.tang.domain.AdminUser">
+		UPDATE ADMIN_USER t SET
+			t.USER_STATUS = #userStatus#, t.GMT_MODIFY = sysdate(), t.MODIFIER = #modifier#
+		WHERE t.USER_ID = #userId#
+	</update>
+	
+	<select id="get_admuser_list" parameterClass="java.util.Map" resultMap="AdminUser">
+		SELECT 
+			USER_ID,
+			LOGIN_NAME,
+			LOGIN_PASSWORD,
+			USER_STATUS,
+			PHONE,
+			GMT_CREATE,
+			CREATOR,
+			GMT_MODIFY,
+			MODIFIER
+		FROM ADMIN_USER  t  
+	</select>
+	
+	<select id="get_admin_user_by_name" parameterClass="java.lang.String" resultMap="AdminUser">
+		SELECT 
+			USER_ID,
+			LOGIN_NAME,
+			LOGIN_PASSWORD,
+			USER_STATUS,
+			PHONE,
+			GMT_CREATE,
+			CREATOR,
+			GMT_MODIFY,
+			MODIFIER
+		FROM ADMIN_USER  t     
+		WHERE t.LOGIN_NAME = #value#
+	</select>
+	
+	<select id="get_admin_user_by_id" parameterClass="java.lang.Long" resultMap="AdminUser">
+		SELECT 
+			USER_ID,
+			LOGIN_NAME,
+			LOGIN_PASSWORD,
+			USER_STATUS,
+			PHONE,
+			GMT_CREATE,
+			CREATOR,
+			GMT_MODIFY,
+			MODIFIER
+		FROM ADMIN_USER  t     
+		WHERE t.USER_ID = #value#
+	</select>
+	
+	<select id="get_all_admin_users" resultMap="AdminUser">
+		SELECT 
+			USER_ID,
+			LOGIN_NAME,
+			LOGIN_PASSWORD,
+			USER_STATUS,
+			PHONE,
+			GMT_CREATE,
+			CREATOR,
+			GMT_MODIFY,
+			MODIFIER
+		FROM ADMIN_USER  t
+	</select>
+	
+	<delete id="delete_admuser" parameterClass="java.lang.String">
+		DELETE FROM ADMIN_USER  WHERE USER_ID = #value#
+	</delete>
+</sqlMap>

@@ -1,0 +1,82 @@
+#set( $layout = "layout/home/memberdefault.vm" )
+<script language="JavaScript">
+	function openWin(url){
+		window.open(url,'win','width=600,height=450,top=100,left=300,resizable=yes,scrollbars=yes,location=no');
+	}
+	function addSignShop(){
+		var shopname = document.getElementById('sname').value;
+		if(shopname==''||shopname==null){
+    		alert("请选择添加店铺");
+    		return false;
+		}
+	}
+</script>
+<td width="10" valign="top">　  
+		
+	</td>
+		<td width="740" valign="top">
+<form name="signshopAdd"  action="${homeMoudle}/signshop/addShop.htm" method="post" >	
+			<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>丫丫的payment管理</h1>
+			</div>
+		<table border="0" width="90%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+		<div class="roundCorner gray onlyBottom" style="width: 736px;">
+	    <p>   
+			<div align="center"><img src="${imgServer}/images/logo_copy.gif" align="absmiddle" /></div>
+	    </div>
+	    <p>
+			
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+			<tr>
+				<td></td>
+			</tr>
+		</table>
+		$control.setTemplate("home/trade/tradePayTop").put("menuIndex","1")
+		<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+			<tr>
+				<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+				<table cellSpacing="0" cellPadding="0" width="90%" align="center">
+					<tr>
+						<td align=center>
+							<table border="0" width="560" cellspacing="0" cellpadding="6">
+								<tr>
+									<td height="24" class="tx_title" colspan="2"><b>添加签约店铺</b></td>
+								</tr>
+								<tr>
+									<td width="100">搜索店铺并加入:</td>
+									<td width="460"><input type="text" name="shopName" class="input3" readonly="true" id="sname"><img border="0" src="${imgServer}/images/selectgoods.gif" align=absmiddle onclick="javaScript:openWin('$appServer.setTarget('/member/select_shop_list.htm')');" style="cursor:pointer" align=absmiddle>
+									<span class="red">*</span></td>
+									<input type="hidden" name="shopId" >
+								</tr>
+								<tr>
+									<td width="100">　</td>
+									<td width="460"><input type="submit" value=" 提&nbsp;&nbsp;交 " name="button" class="input6" onclick="javaScript:return addSignShop();"></td>
+								</tr>
+								
+							</table>
+						</td>
+					</tr>
+				</table>
+
+			  </td>
+			</tr>
+		</table>
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" height="6">
+			<tr>
+				<td></td>
+			</tr>
+		</table>
+		<br>
+		</td>
+	</tr>
+</table>
+</form>
+</td>

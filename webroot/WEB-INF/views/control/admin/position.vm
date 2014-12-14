@@ -1,0 +1,39 @@
+
+<select id="commendPage" name="commendPage" size="1" onChange="redirect(this.value);submitForm('Y');">
+	<option value="">«Î—°‘Ò</option>	
+	#listCommendPage($!form.getField('commendPage').value)
+</select>  
+<select id="commendName" name="commendName" size="1" onChange="document.all.posId.value=this.value;submitForm('Y');">
+	#foreach($pos in $posList)
+		<option value="${pos.commendId}" #if("$!form.getField('posId').value"=="${pos.commendId}") selected#end>$!pos.commendName</option>
+	#end
+</select><span class="red"><font color=red>* &nbsp;$!form.getField("posId").message &nbsp;$!form.getField("commendPage").message</font></span>
+<input type="hidden" name="posId" value="$!form.getField('posId').value" id ="posId" >
+
+<script language="JavaScript">	
+	var groups=document.all.commendPage.options.length;
+	var group=new Array(groups);
+	for (i=0; i<groups; i++){
+		group[i]=new Array();
+	}	
+	#foreach($key in $posListMap.keySet())	
+		#set($i=0)	
+		#foreach($pos in $posListMap.get($key))
+			group[$key][$i]=new Option("$!pos.commendName","${pos.commendId}");
+		#set($i=$i+1) 
+		#end	
+	#end	
+	
+	var temp=document.all.commendName;
+	function redirect(x){
+		for (m=temp.options.length;m>=0;m--)
+			temp.options[m]=null;
+		if(x!=''){
+    		for (i=0;i<group[x].length;i++){
+    			temp.options[i]=new Option(group[x][i].text,group[x][i].value);
+    		}  
+			temp.options[0].selected=true;
+			document.all.posId.value=group[x][0].value;		
+		}		
+	}			
+</script>

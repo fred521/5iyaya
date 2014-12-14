@@ -1,0 +1,61 @@
+1、创建数据库表
+CREATE TABLE shop_info (
+  ID number(11) NOT NULL,
+  AREA number(11) default NULL,
+  SHOP_TYPE varchar(200) default NULL,
+  NOTE varchar(200) default NULL,
+  PRODUCT_TYPE varchar(200) default NULL,
+  MARKET number(10)  default NULL,
+  DISTRICT number(10)  default NULL,
+  BUILDING varchar(45) default NULL,
+  DOOR_NUMBER varchar(45) default NULL,
+  CREATED_BY varchar(45) NOT NULL,
+  NAME varchar(200) default NULL,
+  PRIMARY KEY  (ID)
+);
+
+CREATE TABLE user_info (
+  ID number(11) NOT NULL,
+  NAME varchar(200) default NULL,
+  BIRTH_PLACE varchar(200) default NULL,
+  AGE varchar(200) default NULL,
+  BUSINESS_BRAND varchar(200) default NULL,
+  BUSINESS_TYPE varchar(200) default NULL,
+  HAS_PROCESS_ABILITY varchar(2) default NULL,
+  RELATE_ENTERPRISE varchar(200) default NULL,
+  PROXY_TYPE varchar(200) default NULL,
+  BUSINESS_NUMBER varchar(200) default NULL,
+  ID_CARD_NUM varchar(200) default NULL,
+  TEL_NUM varchar(200) default NULL,
+  MOBILE_PHONE varchar(200) default NULL,
+  FAX varchar(200) default NULL,
+  BANK_TYPE varchar(200) default NULL,
+  HAS_COMPUTER varchar(2) default NULL,
+  HAS_NETWORK varchar(2) default NULL,
+  HAS_SIZE varchar(2) default NULL,
+  WEB_SIZE varchar(200) default NULL,
+  NOTE varchar(200) default NULL,
+  ADDRESS_NUM number(11) default NULL,
+  NOTE2 varchar(200) default NULL,
+  PRODUCT_TYPE_CHN varchar(200) default NULL,
+  PRIMARY KEY  (ID)
+);
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+2、整理初始化数据
+   将user_info.sql and shop_info.sql中的`符号，替换为空
+如
+INSERT INTO `user_info` VALUES ('5', '啊啊', '啊啊', '30', '经营品牌', '[1, 2]', 'N', '阿法飞', 'null', '11111111111111', '2222222222222222', '2222222222', '222222222', '222222222', 'null', 'N', null, null, null, 'zsdadadadad', '1111', null);
+替换为
+INSERT INTO user_info VALUES ('5', '啊啊', '啊啊', '30', '经营品牌', '[1, 2]', 'N', '阿法飞', 'null', '11111111111111', '2222222222222222', '2222222222', '222222222', '222222222', 'null', 'N', null, null, null, 'zsdadadadad', '1111', null);
+这样方便初始化oracle数据库
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+3、将存储过程在oracle的sql/plus中运行，创建导入函数
+
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+4、执行数据库导入
+   在oracle的sql/plus中执行  exec sp_import_data;回车即可运行
+   如果要看到运行的输出信息，请打开
+   set serveroutput on;参数

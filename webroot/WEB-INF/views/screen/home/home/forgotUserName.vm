@@ -1,0 +1,11 @@
+<form name="getUserName"  action="$homeMoudle.setTarget('/visitor/getUserName.htm')"  method="post">
+	<p class="WarningMsg">请输入您注册时填写的电子邮件地址，我们将会把您的会员名发到您的邮箱。</p>
+    			<label for="email">电子邮件地址：
+    			<input id="email" name="email" type="email" size="50" value="$!form.getField('email').value" />
+    			<font color="red">*$!form.getField('email').message</font>
+    			</label>
+    			<div class="Submit">
+    				<input type="submit" name="Submit" value="下一步" />
+    			</div>
+    			<p class="BlubMsg">如果您提供的电子邮箱地址不正确，或者您记不起注册时的电子邮箱地址，我们将无法找回您的会员名。您可以<a href="$homeMoudle.setTarget('/visitor/register.htm')">点击这里</a>重新进行注册</p>
+    		</form>

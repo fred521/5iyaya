@@ -1,0 +1,43 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=$!{page_encoding}">
+<title>会员中心主页</title>
+
+<link rel="stylesheet" type="text/css" href="${imgServer}/css/reg.css">
+	<link rel="SHORTCUT ICON" href="${imgServer}/images/favicon.ico" />
+<link rel="icon" href="${imgServer}/images/favicon.gif" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" href="${appServer}/css/main.css" />
+<link rel="stylesheet" type="text/css" href="${appServer}/css/ie_hacks.css" />
+<link rel="stylesheet" href="${appServer}/js/uitabs/ui.tabs.css" type="text/css" media="screen" title="Default" />
+	
+
+<script src="${imgServer}/js/reg.js"></script>
+
+<script language="javascript" type="text/javascript" src="${appServer}/js/jquery-1.2.1.pack.js"></script>
+<script type='text/javascript' src='${appServer}/lib/3rd/jquery.ifixpng.js'></script>
+
+</head>
+
+<body >
+<center>
+<!--head-->
+## top web logo should be here for sso
+##$control.setTemplate("home/member/top")
+<table width="1024" align="center" border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<td>
+<div id="header">$control.setTemplate("home/header")</div>
+</td>
+</tr>
+</table>
+<!--head-->
+$screen_content
+<br>
+<!--end-->
+## end should be another style bottom
+##<div id="bottom">$control.setTemplate("home/footer")</div>
+$control.setTemplate("home/main_footer")
+<!--end-->
+</body>
+</html>

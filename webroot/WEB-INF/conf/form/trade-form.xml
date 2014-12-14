@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="gb2312"?>
+<formmset>
+	<form name="quickPay">
+		<field name="shopId">
+			<required-validator>
+				<message>店铺ID不能为空</message>
+			</required-validator>
+		</field>
+		<field name="shopName">
+			<required-validator>
+				<message>店铺名称不能为空</message>
+			</required-validator>
+		</field>
+		<field name="payMoney">
+			<required-validator>
+				<message>支付金额不能为空</message>
+			</required-validator>
+			<regexp-validator pattern="-?([0-9]+)|([0-9]+[.][0-9]{1,2})">
+				<message>支付金额格式不正确,请确认小数点后最多两位</message>
+			</regexp-validator>
+			<number-validator greaterThanOrEqualTo="0">
+				<message>支付金额不能为负数</message>
+			</number-validator>
+		</field>
+		<field name="memo">
+			<byte-length-validator max="256">
+				<message>备注长度不能超过256个字符</message>
+			</byte-length-validator>	
+		</field>
+		<field name="note">
+			<byte-length-validator max="1024">
+				<message>给店主留言不能超过1024个字符</message>
+			</byte-length-validator>	
+		</field>
+	</form>
+	
+	<form name="searchPay">
+		<field name="buyLoginId"></field>
+		<field name="sellerLoginId"></field>
+		<field name="startDate"></field>
+		<field name="endDate"></field>
+	</form>
+</formmset>

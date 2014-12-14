@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="TRADEORDERNOTE_SPACE">
+	<resultMap id="tradeordernote" class="com.nonfamous.tang.domain.trade.TradeOrderNote">
+		<result property="id" column="ID"/>
+		<result property="orderNo" column="ORDER_NO"/>
+		<result property="memberType" column="MEMBER_TYPE"/>
+		<result property="memo" column="MEMO"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+	</resultMap>
+	
+	<insert id="tradeordernote_insert" parameterClass="com.nonfamous.tang.domain.trade.TradeOrderNote">
+		INSERT INTO TRADE_ORDER_NOTE (
+				ID,
+				ORDER_NO,
+				MEMBER_TYPE,
+				MEMO,
+				CREATOR,
+				GMT_MODIFY,
+				MODIFIER,
+				GMT_CREATE
+	                     )
+	             VALUES ( 
+				#id#,
+				#orderNo#,
+				#memberType#,
+				#memo#,
+				#creator#,
+				null,
+				#modifier#,
+				sysdate()
+	                     )
+	</insert>
+	
+	<select id="get_tradeordernote_list_by_orderid" resultMap="tradeordernote">
+		SELECT 
+			ID,
+			ORDER_NO,
+			MEMBER_TYPE,
+			MEMO,
+			CREATOR,
+			GMT_MODIFY,
+			MODIFIER,
+			GMT_CREATE
+		FROM TRADE_ORDER_NOTE  t 
+		WHERE t.ORDER_NO = #value#
+		ORDER BY t.GMT_CREATE desc
+	</select>
+</sqlMap>

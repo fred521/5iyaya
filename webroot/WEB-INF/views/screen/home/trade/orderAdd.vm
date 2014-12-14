@@ -1,0 +1,123 @@
+#set( $layout = "layout/home/memberdefault.vm" )
+		<td width="10" valign="top">　</td>
+		<td width="740" valign="top">
+		<input type="hidden" name="orderNo"  value="$!order.orderNo">
+					<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>丫丫订单管理</h1>
+			</div>
+		<table border="0" width="90%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+		<div class="roundCorner gray onlyBottom" style="width: 736px;">
+	    <p>   
+			<div align="center"><img src="${imgServer}/images/logo_copy.gif" align="absmiddle" /></div>
+	    </div>
+	    <p>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td>#if($addMessage)
+                				#errorOut($addMessage)
+						#end
+						</td>
+					</tr>
+				</table>
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="18">
+					<tr>
+						<td width="84">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="beorder_list.html" style="text-decoration: none"><font color="#A1A1A1">我的采购单</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td width="96">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">
+								我的订单</td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td>&nbsp;　&nbsp;</td>
+					</tr>
+				</table>
+				<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<table cellSpacing="0" cellPadding="0" width="90%" align="center">
+							<tr>
+								<td align=center>
+									<table border="0" width="560" cellspacing="0" cellpadding="6">
+										<tr>
+											<td height="24" class="tx_title" width="50%"><b>生成订单</b></td>
+											<td height="24" class="tx_title" width="50%" align=right>
+											　</td>
+										</tr>
+										<tr>
+											<td width="560" height="35" colspan="2">
+											<table border="1" width="100%" cellspacing="1" cellpadding="2" style="border-collapse: collapse" bordercolor="#E4E4E4" id="table1">
+												<tr>
+													<td width="36%" align="center"><b>商品名称</b></td>
+													<td width="15%" align="center"><b>商品编号</b></td>
+													<td width="14%" align="center"><b>数量</b></td>
+													<td width="14%" align="center"><b>单价</b></td>
+													<td width="14%" align="center"><b>金额</b></td>
+													<td width="10%" align="center"><b>删除</b></td>
+												</tr>
+												#foreach($item in $items)
+												<tr>
+													<td bgcolor="#FFFFFF" align="left">$item.goodsName</td>
+													<td bgcolor="#FFFFFF" align="center">$item.goodsId</td>
+													<td bgcolor="#FFFFFF" align="center"><input value="" name="" class="input11"></td>
+													<td bgcolor="#FFFFFF" align=center><input value="$!priceUtils.fenToYuanString($!item.batchPrice)" name="" class="input11"></td>
+													<td bgcolor="#FFFFFF" align=center><input value="" name="" class="input11"></td>
+													<td bgcolor="#F6F6F6" align=center>
+													<img border="0" src="${imgServer}/images/btn_del.gif" width="33" height="14"></td>
+												</tr>
+												#end
+											</table>
+											</td>
+										</tr>
+										<tr>
+											<td height="24" class="tx_title" width="50%"><b>给对方留言</b></td>
+											<td height="24" class="tx_title" width="50%" align=right>
+											&nbsp;
+											</td>
+										</tr>
+										<tr>
+											<td height="24" class="tx_title" width="100%" colspan="2">
+											<textarea rows="3" name="S1" cols="20" style="width:100%"></textarea></td>
+										</tr>
+										<tr>
+											<td height="24" colspan="2" align=right>
+											<input type="submit" value=" 生成订单 " name="" class="input6" onclick="location.href='order_list.html'">
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					  </td>
+					</tr>
+				</table>
+				<br>
+				</td>
+			</tr>
+		</table>
+		</td>
+	

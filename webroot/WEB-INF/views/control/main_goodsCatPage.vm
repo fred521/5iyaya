@@ -1,0 +1,51 @@
+<div>
+   <div class="ico_3"> 
+       <h2>商品分类</h2>
+   </div>
+   <div id="leftbar">
+		#foreach($root in $rootCats)
+			#if($!velocityCount<3)
+      <ul class="catbar0$velocityCount">
+		   
+      <h3><a title="$!$root.typeName" target="_blank" href="${appServer}/search/goods/$!{root.typeId}.htm">$!root.typeName</a></h3>
+      <li class="commodities">
+		#foreach($cat in $goodsCats)
+			#if("$cat.levels" == "2" && "$cat.parentId" == "$root.typeId")
+				<a title="$!cat.typeName" target="_blank" href="${appServer}/search/goods/$!{cat.typeId}.htm">$!cat.typeName</a>
+			#end
+		#end
+	  </li>
+    </ul>
+		#end
+		#end
+    <ul class="womanbar">
+    <p>
+			<a href="#" onmouseover='search_by_color.style.display="none";search_by_price.style.display="";' >按价格搜索</a>
+			|
+			<a href="#" onmouseover='search_by_color.style.display="";search_by_price.style.display="none";' >按颜色搜索</a>
+	</p>
+    <li class="commodities" style='height:100px;' id='search_by_price'>
+            <a href="#">50元以下</a>
+			<a href="#">50-100元</a>
+			<a href="#">100-150元</a>
+			<a href="#">150-200元</a>
+			<a href="#">200-250元</a>
+			<a href="#">250-300元</a>
+			<a href="#">300以上</a>
+           </li>
+           <li class="commodities" style='display:none;height:100px;' id='search_by_color'>
+            <a href="#">红</a>
+			<a href="#">黄</a>
+			<a href="#">绿</a>
+			 <a href="#">红</a>
+			<a href="#">黄</a>
+			<a href="#">绿</a>
+			 <a href="#">红</a>
+			<a href="#">黄</a>
+			<a href="#">绿</a>
+           </li>
+   </ul>
+   <div class="clear"></div>
+   </div>
+   <div class="ico_4"></div>
+   </div>

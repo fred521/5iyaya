@@ -1,0 +1,198 @@
+<script language="javascript" type="text/javascript">
+<!-- 
+    var searchType="$!{searchType}";
+    function setup(){
+	    var searchCate=document.getElementById("searchcate");
+	    for(var i= searchCate.length - 1 ; i > 0; i-- ){ 
+	         searchCate.remove(i); 
+	    }
+		var optionIndex = 0;
+		searchType = (!searchType) ? "good" : searchType;
+		if (searchType=="good"||searchType=="group"){
+			if(searchType=="good"){
+				document.getElementById("searchcate").style.display="";
+				document.getElementById("searchtype").selectedIndex=0;			
+			}
+			if(searchType=="group"){
+				document.getElementById("searchcate").style.display="";
+				document.getElementById("searchtype").selectedIndex=1;	
+			}
+			searchCate.options[optionIndex] = new Option("所有商品分类","");
+				searchCate.options[++optionIndex] = new Option("-------------------------------","");
+				var catCount=2;
+		            #foreach($root in $rootCats)
+		                 searchCate.options[++optionIndex]  = new Option("$!{root.typeName}","$!{root.typeId}");
+		                 #if($query.goodsCat && "$!{root.typeId}"=="$!{query.goodsCat}")
+		                   document.getElementById("searchcate").selectedIndex=parseInt(catCount);
+		                 #end
+		                 catCount=parseInt(catCount)+1;
+								#foreach($cat in $goodsCats)
+								#if("$cat.levels" == "2" && "$cat.parentId" == "$root.typeId")
+									   searchCate.options[++optionIndex]  =  new Option("      $!{cat.typeName}","$!{cat.typeId}");
+									#if($query.goodsCat && "$!{cat.typeId}"=="$!{query.goodsCat}")
+		                               document.getElementById("searchcate").selectedIndex=parseInt(catCount);
+		                            #end
+		                               catCount=parseInt(catCount)+1;
+									##显示三级以下的类目
+
+									#if($cat.hasChildren())
+									   #foreach($cat3 in $cat.getAllChildren())
+									     searchCate.options[++optionIndex]  =  new Option("            $!{cat3.typeName}","$!{cat3.typeId}");
+									   
+		                               
+									   #if($!{query.goodsCat} && "$!{cat3.typeId}"=="$!{query.goodsCat}")
+		                               document.getElementById("searchcate").selectedIndex=parseInt(catCount);
+		                               #end
+
+									   catCount=parseInt(catCount)+1;
+									   #end
+									#end
+								#end
+								#end
+						#end
+				var keyword=" ";
+				#foreach($word in $goodKeyWords)
+			       keyword=keyword+ " <a href=#  onClick=toKeyWord('$!{word.keyName}') >"+"$!{word.keyName}"+"</a>";
+				#end
+				document.getElementById("hotSearchKeywords").innerHTML=keyword;
+		}
+		switch(searchType){
+			case "shop":
+				document.getElementById("searchcate").style.display="none";
+				document.getElementById("searchtype").selectedIndex=2;
+				searchCate.options[optionIndex] =  new Option("所有市场分类","");
+				searchCate.options[++optionIndex] =  new Option("-------------------------------","");
+				var markCount=2;
+					#foreach($mtype in $marketType)
+							searchCate.options[++optionIndex] = new Option("$!{mtype.marketName}","$!{mtype.marketType}");
+							#if($query.marketType && "$!{mtype.marketType}"=="$!{query.marketType}")
+							   document.getElementById("searchcate").selectedIndex=parseInt(markCount);
+							#end
+					markCount=parseInt(markCount)+1;		
+					#end
+				var keyword=" ";
+				#foreach($word in $shopKeyWords)
+					keyword=keyword+ " <a href=#  onClick=toKeyWord('$!{word.keyName}') >"+"$!{word.keyName}"+"</a>";
+				#end
+				document.getElementById("hotSearchKeywords").innerHTML=keyword;
+				break;
+			case "member":
+				document.getElementById("searchcate").style.display="none";
+				document.getElementById("searchtype").selectedIndex=3; 
+				var keyword=" ";
+				#foreach($word in $memberKeyWords)
+					keyword=keyword+ " <a href=#  onClick=toKeyWord('$!{word.keyName}') >"+"$!{word.keyName}"+"</a>";
+				#end
+				document.getElementById("hotSearchKeywords").innerHTML=keyword;
+				break;
+			case "news":
+				document.getElementById("searchcate").style.display="inline";
+				document.getElementById("searchtype").selectedIndex=4;
+				searchCate.options[optionIndex] =  new Option("所有信息分类","");
+				searchCate.options[++optionIndex] =  new Option("-------------------------------","");
+				var newsCount=2;
+				#foreach($ntype in $newsType)
+						searchCate.options[++optionIndex] =  new Option("$!{ntype.typeName}","$!{ntype.newsType}");
+						#if($query.newsType &&"$!{ntype.newsType}"=="$!{query.newsType}")
+						  document.getElementById("searchcate").selectedIndex=parseInt(newsCount);
+						#end
+						newsCount=parseInt(newsCount)+1;
+				#end
+				var keyword=" ";
+				#foreach($word in $newsKeyWords)
+			       keyword=keyword+ " <a href=#  onClick=toKeyWord('$!{word.keyName}') >"+"$!{word.keyName}"+"</a>";
+				#end
+				document.getElementById("hotSearchKeywords").innerHTML=keyword;
+			break;
+			default:
+				break;
+		}
+	}
+	
+	function checkEnter(actionType) {
+		if(window.event.keyCode == 13){
+			if(actionType == "login") {
+				changeLoginAction();
+			}
+			if(actionType == "search") {
+				return search();
+			}
+		}
+	}
+    
+	function changeLoginAction() {
+		document.main.action="$homeMoudle.setTarget('/visitor/login.htm')";
+		document.main.submit();
+	} 
+	function toKeyWord(keyword) {
+	    document.main.keywords.value=keyword;
+	    document.main.searchcate.selectedIndex=0;
+	    document.main.sort.value="";
+	    document.main.reverse.value="false";
+		document.main.submit();
+	} 
+	function search(){
+	/*
+		var keywordString = trim(document.main.keywords.value);
+		keywordString = trim(keywordString);
+	    if(keywordString==""&&(searchType=="good" || searchType=="news" || searchType=="group"))
+	        if(document.main.searchcate.options[document.main.searchcate.selectedIndex].value==""){
+	      alert("请输入搜索关键字或选择查询分类!");
+		  document.main.keywords.value="";
+	      return false;
+	     }
+	     if(keywordString==""&&(searchType=="member"||searchType=="shop")){
+	      alert("请输入搜索关键字!");
+		  document.main.keywords.value="";
+	      return false;
+	     }
+	*/
+	    document.main.sort.value="";
+		document.main.marketType.value="";
+	    document.main.reverse.value="false";
+	    document.main.page.value="1";
+		document.main.submit();
+	}
+	
+	function changeValue(cv){
+	  searchType=cv;
+	  setup();
+	}
+	
+	jQuery(document).ready(function(){
+		setup();
+	});
+//--> 
+</script>
+<div id="menu">
+    <div class="menu_top">
+	     <ul class="top_nav">
+		     <li><a class="nav" href="${homeMoudle}/index.htm">首 页</a></li>
+			 <li><a class="nav" href="${homeMoudle}/search/goods/2.htm">童 装</a></li>
+			 <li><a class="nav" href="${homeMoudle}/search/goods/501.htm">孕妇用品</a></li>
+			 <li><a class="nav" href="${homeMoudle}/search/goods/1.htm">婴童用品</a></li>
+			 <li><a class="nav" href="http://home.5iyya.com">丫丫空间</a></li>
+			 <li><a class="nav" href="http://bbs.5iyya.com">丫丫说论坛</a></li>
+		 </ul>
+	</div>
+    <div class="menu_cen clear"></div>
+	<div class="menu_bottom_bg">
+      <div class="menu_bottom">
+		    <select onchange="javascript: changeValue(this.value)" name="searchtype" id="searchtype" class="menu_select_txtbox" style="width:80px;">
+					<option value="good">批发商品</option>					
+					<option value="group">团购商品</option>
+					<option value="shop">搜索店铺</option>
+	    </select>
+		    <input type="text" id="keyword" class="menu_input_txtbox" onfocus="if(this.value=='  关键词  ')this.value='';" onblur="if(this.value=='')this.value='  关键词  ';" value="  关键词  " name="keywords"/>
+			<select id="searchcate" class="menu_select_txtbox" name="searchcate">
+					<option value="">所有商品分类</option>
+				  <option value="">-------------------------------</option>
+			</select>
+	     	<a href="javascript:void(0)" onclick="if(document.forms.main.keywords.value=='  关键词  ')document.forms.main.keywords.value='';document.forms.main.submit();"><img  src="css/img/go.gif"/></a>
+		    <div class="hot">
+			<img src="css/img/gray_dot.gif" />
+	         	 <span id="hotSearchKeywords">奶粉 亲子装 手推车 婴儿床 玩具 戏水玩具 教育软件</span>
+		    </div>
+	  </div>
+	</div>
+</div>

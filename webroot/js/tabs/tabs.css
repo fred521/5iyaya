@@ -1,0 +1,38 @@
+.tabs{
+	margin:10px auto;
+	width:252px;
+	height:220px;
+	position:relative;
+}
+
+.tabs > h2 {
+	float:left;
+	width:82px;
+	height:25px;
+	line-height:25px;
+	color: #9B0624;
+	font-size:12px;
+	text-align:center;
+	background:#eeaaaa;
+	border:1px solid hotpink;
+	border-right:0;
+}
+.tabs > .bg{
+	background:#fff;
+	border-bottom:0;
+}
+.tabs > .r{
+	border-right:1px solid hotpink;
+}
+.tabs > div{
+	position:absolute;
+	top:26px;
+	left:0;
+	width:228px;
+	border:1px solid hotpink;
+	border-top:0;
+	height:180px;
+	padding:10px;
+	line-height:2em;
+	font-size:12px;
+}

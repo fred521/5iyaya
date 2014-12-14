@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="gb2312"?>
+<formmset>
+	<!-- 推荐位置 -->
+	<form name="addPosition">
+		<field name="commendName">
+			<required-validator>
+				<message>位置名称不能为空</message>
+			</required-validator>	
+			<length-validator min="0" max="128">
+				<message>位置名称长度不能超过128个字符</message>
+			</length-validator>			
+		</field>
+		<field name="commendCode">
+			<required-validator>
+				<message>识别码不能为空</message>
+			</required-validator>
+			<regexp-validator pattern="^[a-zA-Z0-9_-]+$">
+				<message>识别码格式不正确</message>
+			</regexp-validator>		
+			<length-validator min="0" max="32">
+				<message>识别码长度不能超过32个字符</message>
+			</length-validator>			
+		</field>
+		<field name="commendPage">		
+		</field>
+		<field name="selectview">		
+		</field>
+		<field name="picHeight">			
+			<regexp-validator pattern="^[1-9]\d*$">
+				<message>图片长度只能为数字</message>
+			</regexp-validator>
+		</field>
+		<field name="picWidth">			
+			<regexp-validator pattern="^[1-9]\d*$">
+				<message>图片宽度只能为数字</message>
+			</regexp-validator>
+		</field>	
+		<field name="textLength">			
+			<regexp-validator pattern="^[1-9]\d*$">
+				<message>文字长度只能为数字</message>
+			</regexp-validator>
+		</field>		
+		<field name="replacePic" />
+		<field name="replaceText">
+			<length-validator min="0" max="40">
+				<message>替换文字长度不能超过40个字符</message>
+			</length-validator>	
+		</field>		
+	</form>
+	
+	<form name="modifyPosition">
+		<field name="commendName">
+			<required-validator>
+				<message>位置名称不能为空</message>
+			</required-validator>	
+			<length-validator min="0" max="128">
+				<message>位置名称长度不能超过128个字符</message>
+			</length-validator>			
+		</field>
+		<field name="commendPage">		
+		</field>
+		<field name="selectview">		
+		</field>
+		<field name="picHeight">			
+			<regexp-validator pattern="^[1-9]\d*$">
+				<message>图片长度只能为数字</message>
+			</regexp-validator>
+		</field>
+		<field name="picWidth">			
+			<regexp-validator pattern="^[1-9]\d*$">
+				<message>图片宽度只能为数字</message>
+			</regexp-validator>
+		</field>	
+		<field name="textLength">			
+			<regexp-validator pattern="^[1-9]\d*$">
+				<message>文字长度只能为数字</message>
+			</regexp-validator>
+		</field>
+		<field name="positionOrder">	
+			<required-validator>
+				<message>位置顺序不能为空</message>
+			</required-validator>			
+			<regexp-validator pattern="^[1-9]\d*$">
+				<message>位置顺序只能为数字</message>
+			</regexp-validator>
+		</field>			
+		<field name="replacePic" />
+		<field name="replaceText">
+			<length-validator min="0" max="40">
+				<message>替换文字长度不能超过40个字符</message>
+			</length-validator>	
+		</field>		
+	</form>
+
+	<!-- 推荐内容 -->
+	<form name="storeContent">
+		<field name="commendName">
+			<required-validator>
+				<message>推荐位置不能为空</message>
+			</required-validator>				
+		</field>		
+		<field name="commendPage">
+			<required-validator>
+					<message>所属推荐页面不能为空</message>
+				</required-validator>
+			</field>			
+		<field name="posId"/>
+		<field name="commendText">	
+			<required-validator>
+					<message>推荐名称不能为空</message>
+				</required-validator>		
+			<length-validator min="0" max="128">
+				<message>推荐名称长度不能超过128个字符</message>
+			</length-validator>		
+		</field>
+		<field name="picUrl">			
+			<regexp-validator pattern="[a-zA-z]+://[^\s]*">
+				<message>推荐图片url格式不正确</message>
+			</regexp-validator>
+		</field>
+		<field name="picPath"/>						
+		<field name="batchNum">			
+			<regexp-validator pattern="^[1-9]\d*$">
+				<message>起批数量只能为正整数</message>
+			</regexp-validator>
+		</field>
+		<field name="batchPrice">			
+			<money-validator greaterThanOrEqualTo="0.00" lessThanOrEqualTo="10000000000.00">
+				<message>批发价格式不正确</message>
+			</money-validator>
+		</field>	
+		<field name="commendUrl">	
+			<required-validator>
+				<message>推荐信息url不能为空</message>
+			</required-validator>		
+			<regexp-validator pattern="[a-zA-z]+://[^\s]*">
+				<message>推荐信息url格式不正确</message>
+			</regexp-validator>
+		</field>	
+		<field name="gmtStart" >
+			<required-validator>
+				<message>开始日期不能为空</message>
+			</required-validator>	
+		</field>
+		<field name="gmtEnd">
+			<required-validator>
+				<message>到期时间不能为空</message>
+			</required-validator>
+		</field>
+		<field name="commendDesc">
+			<length-validator min="0" max="128">
+				<message>推荐说明长度不能超过128个字符</message>
+			</length-validator>	
+		</field>		
+	</form>
+		
+</formmset>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="SHOPCOMMEND_SPACE">
+	<resultMap id="shopcommend" class="com.nonfamous.tang.domain.ShopCommend">
+		<result property="shopId" column="SHOP_ID"/>
+		<result property="commend" column="COMMEND"/>
+	</resultMap>
+	
+	<insert id="shopcommend_insert" parameterClass="com.nonfamous.tang.domain.ShopCommend">
+		INSERT INTO SHOP_COMMEND (
+				SHOP_ID,
+				COMMEND
+	                     )
+	             VALUES ( 
+				#shopId#,
+				#commend#
+	                     )
+	</insert>
+	
+	<update id="shopcommend_update" parameterClass="com.nonfamous.tang.domain.ShopCommend">
+		UPDATE SHOP_COMMEND t SET
+			<isNotEmpty prepend="" property="commend"> t.COMMEND = #commend# </isNotEmpty>
+		WHERE t.SHOP_ID = #shopId#
+	</update>
+	
+	<select id="get_shopcommend_list" parameterClass="java.util.Map" resultMap="shopcommend">
+		SELECT 
+			SHOP_ID,
+			COMMEND
+		FROM SHOP_COMMEND  t  
+	</select>
+	
+	<select id="get_shopcommend" parameterClass="java.lang.String" resultMap="shopcommend">
+		SELECT 
+			SHOP_ID,
+			COMMEND
+		FROM SHOP_COMMEND  t     
+		WHERE t.SHOP_ID = #value#
+	</select>
+	
+	<delete id="delete_shopcommend" parameterClass="java.lang.String">
+		DELETE FROM SHOP_COMMEND  WHERE SHOP_ID = #value#
+	</delete>
+</sqlMap>

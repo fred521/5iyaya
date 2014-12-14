@@ -1,0 +1,64 @@
+#set( $layout = "layout/home/blank.vm" )
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=$!{page_encoding}">
+<title>在线聊天系统--在线聊天</title>
+<link rel="stylesheet" type="text/css" href="${imgServer}/css/style.css">
+</head>
+<body topmargin="0" leftmargin="0" onBlur="this.focus()">
+<table border="0" width="700" cellspacing="0" cellpadding="0" background="${imgServer}/images/contact_top_bg.gif">
+	<tr>
+		<td height="62" background="${imgServer}/images/contact_top_bg.gif" width="10"><img border="0" src="${imgServer}/images/contact_top_bg.gif" width="10" height="62"></td>
+		<td height="62" background="${imgServer}/images/contact_top_bg.gif" width="56"><img border="0" src="${imgServer}/images/contact_btn1_on.gif" width="56" height="62"></td>
+		<td height="62" width="6"><img border="0" src="${imgServer}/images/contact_top_bg.gif"></td>
+		<td height="62" background="${imgServer}/images/contact_top_bg.gif" width="58">
+		#*
+		<a href="duanxin.html" onFocus="this.blur()"><img border="0" src="../images/contact_btn2.gif" width="58" height="62" onmouseover="this.src='../images/contact_btn2_on.gif'" onmouseout="this.src='../images/contact_btn2.gif'"></a></td>
+		<td height="62" width="6"><img border="0" src="../images/contact_top_bg.gif"></td>
+		<td height="62" background="../images/contact_top_bg.gif" width="68">
+		<a href="shexiang.html" onFocus="this.blur()"><img border="0" src="../images/contact_btn3.gif" width="68" height="62" onmouseover="this.src='../images/contact_btn3_on.gif'" onmouseout="this.src='../images/contact_btn3.gif'"></a></td>
+		<td height="62" width="6"><img border="0" src="../images/contact_top_bg.gif"></td>
+		<td height="62" background="../images/contact_top_bg.gif" width="74">
+		<a href="web800.html" onFocus="this.blur()"><img border="0" src="../images/contact_btn4.gif" width="74" height="62" onmouseover="this.src='../images/contact_btn4_on.gif'" onmouseout="this.src='../images/contact_btn4.gif'"></a></td>
+		<td height="62" width="6"><img border="0" src="../images/contact_top_bg.gif"></td>
+		<td height="62" background="../images/contact_top_bg.gif" width="59">
+		　</td>
+		*#
+		<td>&nbsp;　&nbsp;</td>
+	</tr>
+</table>
+##嵌入第三方聊天页面
+<table border="0"  width="700" height="100%" cellspacing="0" cellpadding="0" background="${imgServer}/images/contact_main_bg.gif">
+	<tr>
+		<td width="16">&nbsp;</td>
+		<td valign="top" width="100%"><!--$!member.loginId-->
+		<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
+			<tbody><tr>
+				<td>
+				<iframe src="http://www.53kf.com/company.php?arg=$!{enterpriseAccount}&style=1&kf=$!{member.loginId}" name="mainFrame" id="mainFrame" marginwidth="0" marginheight="0" border="0" frameborder="0" height="100%" scrolling="no" width="100%"></iframe>
+				</td>
+			</tr>
+		</tbody></table>
+		</td>
+		<td width="15">
+		<script language="javaScript">
+		   function shwoProperties(obj_id){
+		      var obj = document.getElementById(obj_id);
+		      //alert(obj);
+		      if ( obj.style.display == 'none'){
+		         obj.style.display = '';
+		      }else{
+		         obj.style.display = 'none';
+		      }
+		   }
+		</script> &nbsp;&nbsp;&nbsp;
+		##<img border="0" src="${imgServer}/images/contact_btn6.gif" style="cursor:pointer;" width="10" height="51" onClick="shwoProperties('right_info_td');"/>
+		</td>
+		<td id="right_info_td" valign="top" style="display:true" >
+		    <iframe name="right_info" src="$appServer.setTarget('/chat/chat_user_info.htm').addQueryData('member_id',$request.getParameter("member_id"))" marginwidth="0" marginheight="0" style="height:100%;width:168;" scrolling="no" border="0" frameborder="0"></iframe>
+		</td>
+		<td width="5">&nbsp;</td>
+	</tr>
+</table>
+</body>
+</html>

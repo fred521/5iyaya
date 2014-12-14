@@ -1,0 +1,7 @@
+User-Agent: *
+Disallow: /WEB-INF/
+Disallow: /upload/
+Disallow: /oimages/
+Disallow: /activemq-data/
+Disallow: /sitemap/
+Allow: /

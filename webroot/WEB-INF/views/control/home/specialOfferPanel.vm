@@ -1,0 +1,29 @@
+<ul class="bargainprice">
+	#foreach($commend in $index_special_offer_goods)
+		<li>
+		<a href="$commend.commendUrl" title="$!commend.commendText">
+		
+			#if($commend.picPath)
+				<img style="border:1px solid #CCC" src="${upServer}$!{commend.picPath}.n.jpg"  width="188" height="150" >
+			#else
+				<img style="border:1px solid #CCC" src="$!commend.picUrl"  width="188" height="150" >
+			#end
+		</a>
+		<p class="text_top"><a href="$commend.commendUrl">$!commend.commendText</a></p>
+		<p class="text_cen">原价：￥
+			#if($!priceUtils.fenToYuanString($!commend.batchPrice).equals("0.00"))
+											<font color="#FF6600">面议</font> 
+			#else 
+				<span>$!priceUtils.fenToYuanString($!commend.batchPrice,1.5)</span>
+			#end
+		</p>
+		<p class="text_bot">现价：￥
+		#if($!priceUtils.fenToYuanString($!commend.batchPrice).equals("0.00"))
+											<font color="#FF6600">面议</font> 
+										#else 
+											<span> $!priceUtils.fenToYuanString($!commend.batchPrice)</span>
+		#end
+		</p>
+		</li>
+	#end
+</ul>

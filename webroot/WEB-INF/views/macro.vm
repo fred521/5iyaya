@@ -1,0 +1,55 @@
+#macro ( errorOut $errorString )
+    #if ( $errorString )
+        <font color="red">${errorString}</font>
+    #end
+#end
+
+##银行
+#macro (selectBankType $controlName $bankId)
+  <select name="$controlName">
+    <option value="001" #if("$!bankId" == "001") selected #end >中国工商银行</option>
+    <option value="002" #if("$!bankId" == "002") selected #end >中国农业银行</option>
+	<option value="003" #if("$!bankId" == "003") selected #end >中国银行</option>
+	<option value="004" #if("$!bankId" == "004") selected #end >中国建设银行</option>
+	<option value="005" #if("$!bankId" == "005") selected #end >中国交通银行</option>
+  </select>
+#end
+#macro ( listCommendPage $commendPage )
+	<option value="0" #if("$commendPage"=="0") selected#end>首页</option>
+    <option value="1" #if("$commendPage"=="1") selected #end>分类信息首页</option>
+    <option value="2" #if("$commendPage"=="2") selected #end>商品首页</option>
+    <option value="3" #if("$commendPage"=="3") selected #end>三维首页</option>
+	<option value="4" #if("$commendPage"=="4") selected #end>商品搜索页面</option>
+	<option value="5" #if("$commendPage"=="5") selected #end>店铺搜索页面</option>
+	<option value="6" #if("$commendPage"=="6") selected #end>分类信息搜索页面</option>
+	<option value="7" #if("$commendPage"=="7") selected #end>团购商品首页</option>
+	<option value="8" #if("$commendPage"=="8") selected #end>团购商品搜索页面</option>
+#end
+
+#macro ( listCommendType $commendType )
+    <option value="1" #if("$commendType"=="1") selected #end>商品推荐</option>
+    <option value="2" #if("$commendType"=="2") selected #end>店铺推荐</option>
+    <option value="3" #if("$commendType"=="3") selected #end>分类信息推荐</option>	
+#end
+#macro ( listSelectView $selectView )
+	<option value="1" #if("$selectView"=="1") selected #end>图片加文字</option>
+    <option value="2" #if("$selectView"=="2") selected #end>仅图片</option>
+    <option value="3" #if("$selectView"=="3") selected #end>仅文字</option>
+#end
+#macro ( showCommendPosition $positionId )
+#if("$positionId"=="0")首页#elseif("$positionId"=="1")分类信息首页#elseif("$positionId"=="2")商品首页#elseif("$positionId"=="3")三维首页#elseif("$positionId"=="4")商品搜索页面#elseif("$positionId"=="5")店铺搜索页面#elseif("$positionId"=="6")分类信息搜索页面#elseif("$positionId"=="7")团购首页页面#elseif("$positionId"=="8")团购搜索页面#end
+#end
+#macro ( showCommendContentType $commendContentType )
+#if("$commendContentType"=="1")图片与文字#elseif("$commendContentType"=="2")图片#elseif("$commendContentType"=="3")文字#end
+#end
+#macro ( showCommendType $commendContentType )
+#if("$commendContentType"=="1") 商品推荐#elseif("$commendContentType"=="2")店铺推荐#elseif("$commendContentType"=="3")分类信息推荐 #elseif("$commendContentType"=="5")品牌推荐#end
+#end
+
+#macro ( showMessageList $messageList )
+	#if($messageList)
+		#foreach($message in $messageList)
+			jQuery.growl("$!{message.title}","$!{message.detail}","$!{message.type}");
+		#end
+	#end
+#end

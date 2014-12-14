@@ -1,0 +1,210 @@
+#set( $layout = "layout/admin/default.vm" )
+<STYLE type=text/css>
+.rb {
+	BORDER-RIGHT: #666666 1px solid
+}
+.tb {
+	BORDER-TOP: #666666 1px solid
+}
+</STYLE>
+<BODY leftMargin=8 background="${imgServer}/images/admin/allbg.gif" topMargin=16>
+	<form name="shopEdit"  action="${adminMoudle}/admin_user/shop_update.htm" method="post" encType="multipart/form-data">
+					<input type="hidden" name="shopId" value="$!shopId">
+					<input type="hidden" name="memberId" value="$!memberId">
+					<input type="hidden" name="img" value="$!shopImg">
+					<input type="hidden" name="logo" value="$!logo">
+<TABLE cellSpacing=1 cellPadding=3 width="98%" align=center bgColor=#666666 border=0>
+  <TBODY>
+  <TR>
+      <TD background="${imgServer}/images/admin/tbg.gif" height=19>&nbsp;<b>添加/修改店铺</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">$!success</font></TD>
+    </TR>
+  <TR>
+      <TD vAlign=top bgColor=#ffffff height=200> <table border="0" width="98%" cellspacing="0" cellpadding="6">
+          
+			<tr> 
+            <td width="100"></td>
+            <td width="460" align="center">&nbsp;&nbsp;<font color=red>$!error &nbsp; $!uploadError</font></td>
+          </tr>
+          <tr> 
+            <td width="100">商铺名称:</td>
+            <td width="460"><input value="$!form.getField("shopName").value" name="shopName" class="input4">
+											<span class="red">*$!form.getField("shopName").message</span></td>
+          </tr>
+          <tr> 
+            <td width="100">主营商品:</td>
+            <td width="460"><input value="$!form.getField("commodity").value" name="commodity" class="input4">
+											<span class="red">*$!form.getField("commodity").message</span>
+											多个主营商品以";"分隔</td>
+          </tr>
+          <tr> 
+            <td>店主姓名:</td>
+            <td><input value="$!form.getField("shopOwner").value" name="shopOwner" class="input5">
+											<span class="red">*$!form.getField("shopOwner").message</span></td>
+          </tr>
+          <tr> 
+            <td>所在市场:</td>
+            <td> <select id="belongMarketId" name="belongMarketId">
+												#foreach($market in $marketType)
+											<option value="$market.marketType" #if("$!form.getField('belongMarketId').value"=="$market.marketType") selected #end>$market.marketName
+											</option>
+											#end
+											</select></td>
+          </tr>
+          <tr> 
+            <td>店铺位置:</td>
+            <td><input value="$!form.getField("address").value" name="address" class="input4">
+											<span class="red">*$!form.getField("address").message</span></td>
+          </tr>
+          <tr> 
+            <td>店内固话:</td>
+            <td><input value="$!form.getField("phone").value" name="phone" class="input3">
+		<span class="red">$!form.getField("phone").message</span>
+	    </td>
+          </tr>
+          <tr> 
+            <td>开户银行:</td>
+            <td>#selectBankType("bank" "$!form.getField('bank').value")</td>
+          </tr>
+          <tr> 
+            <td>银行帐号:</td>
+            <td><input class="input4" name="bankAccount" size="20" value="$!form.getField("bankAccount").value">
+											<span class="red">$!form.getField("bankAccount").message</span></td>
+          </tr>
+          <tr> 
+            <td>开户人:</td>
+            <td><input name="accountName" class="input5" size="20" value="$!form.getField("accountName").value">
+											<span class="red">$!form.getField("accountName").message</span></td>
+          </tr>
+		  <tr> 
+            <td>三维地址:</td>
+            <td><input name="gisAddress" class="input5" size="20" value="$!form.getField("gisAddress").value">
+											<span class="red">$!form.getField("gisAddress").message</span></td>
+          </tr>
+          <tr> 
+            <td width="100" height="35">店铺形象图预览:</td>
+            <td width="460">#if($!shopImg&&$!shopImg!='')
+											<img border="0" src="${upServer}$!{shopImg}.l.jpg" width="80" height="80">
+											#else
+												<img border="0" src="${imgServer}/images/showimg.gif" width="80" height="80">
+												#end</td>
+          </tr>
+          <tr> 
+            <td height="9">上传店铺图片:</td>
+            <td><input type="file" name="shopImg" class="input4"></td>
+          </tr>
+          <tr> 
+            <td width="100" height="35">店铺图标预览:</td>
+            <td width="460">#if($!logo&&$!logo!='')
+													<img border="0" src="${upServer}$!{logo}.n.jpg" width="120" height="60" style="border: 1px solid #EFEFEF">
+												#else
+											<img border="0" src="${imgServer}/images/nologo.gif" width="120" height="60" style="border: 1px solid #EFEFEF">
+											#end</td>
+          </tr>
+          <tr>
+            <td height="9">上传店铺图标:</td>
+            <td><input type="file" name="shopLogo" class="input4">
+			</td>
+          </tr>
+          <tr>
+            <td height="17">商铺公告:</td>
+            <td><textarea name="commend" style="width:100%;height:200">$!form.getField("commend").value</textarea>
+											$!form.getField("commend").message</td>
+          </tr>
+         
+          <tr> 
+            <td>　</td>
+            <td> <input type="submit" value=" 提&nbsp;&nbsp;交 " name="Input2" class="input6" onclick="location.href='shop_list.htm'"></td>
+          </tr>
+          </table></TD>
+    </TR></TBODY></TABLE></form></BODY>
+		
+	
+	
+	
+<script type="text/javascript">
+	var _formName = 'shopEdit';
+	var _textName = 'commend';
+	var _toolBarIconPath = '${imgServer}/images/editor';
+	var _debug = false;
+
+	var _maxCount = 4000;
+	var _postAction = 'preview.htm';
+
+    //语言
+    var _a_lang = new Array();
+    _a_lang['pic'] = '图片';
+    _a_lang['url'] = '地址';
+    _a_lang['viewe'] = '显示效果';
+    _a_lang['border'] = '边框粗细';
+    _a_lang['align'] = '对齐方式';
+    _a_lang['absmiddle'] = '绝对居中';
+    _a_lang['aleft'] = '居左';
+    _a_lang['aright'] = '居右';
+    _a_lang['atop'] = '顶部';
+    _a_lang['amiddle'] = '中部';
+    _a_lang['abottom'] = '底部';
+    _a_lang['absbottom'] = '绝对底部';
+    _a_lang['baseline'] = '基线';
+    _a_lang['submit'] = '确定';
+    _a_lang['cancle'] = '取消';
+    _a_lang['hlink'] = '超级链接';
+    _a_lang['other'] = '其他选项';
+    _a_lang['newwindow'] = '在新窗口打开';
+    _a_lang['ttop'] = '文本顶部';
+    
+    _a_lang['copy'] = '复制';
+    _a_lang['cut'] = '剪切';
+    _a_lang['pau'] = '粘贴';
+    _a_lang['del'] = '删除';
+    
+    _a_lang['bold'] = '粗体';
+    _a_lang['italic'] = '斜体';
+    _a_lang['underline'] = '下划线';
+    _a_lang['st'] = '中划线';
+    _a_lang['jl'] = '左对齐';
+    _a_lang['jc'] = '居中对齐';
+    _a_lang['jr'] = '右对齐';
+    
+    _a_lang['fcolor'] = '文字颜色';
+    _a_lang['bcolor'] = '文字背景颜色';
+    _a_lang['ilist'] = '编号';
+    _a_lang['itlist'] = '项目符号';
+    _a_lang['sup'] = '上标';
+    _a_lang['sub'] = '下标';
+    _a_lang['createlink'] = '插入链接';
+    _a_lang['unlink'] = '取消链接';
+    _a_lang['inserthr'] = '插入水平线';
+    _a_lang['insertimg'] = '插入/修改图片';
+    _a_lang['editsource'] = '编辑源文件';
+    _a_lang['preview'] = '预览';
+    _a_lang['usehtml'] = '使用编辑器编辑';
+    
+    _a_lang['font'] = '字体';
+    _a_lang['simsun'] = '宋体';
+    _a_lang['simhei'] = '黑体';
+    _a_lang['simkai'] = '楷体';
+    _a_lang['fangsong'] = '仿宋';
+    _a_lang['lishu'] = '隶书';
+    _a_lang['youyuan'] = '幼圆';
+    
+    _a_lang['fontsize'] = '字号';
+    _a_lang['fontsize_1'] = '一号';
+    _a_lang['fontsize_2'] = '二号';
+    _a_lang['fontsize_3'] = '三号';
+    _a_lang['fontsize_4'] = '四号';
+    _a_lang['fontsize_5'] = '五号';
+    _a_lang['fontsize_6'] = '六号';
+    _a_lang['fontsize_7'] = '七号';
+    
+    _a_lang['current'] = '当前';
+    _a_lang['word'] = '字';
+	_a_lang['char'] = '字符';
+
+    _a_lang['maxword'] = '最多';
+    
+    _a_lang['modify'] = '修改';
+    _a_lang['insert'] = '插入';
+	
+	
+	</script>
+	<script type="text/javascript" src="${imgServer}/js/editor_multi_lang.js"></script>

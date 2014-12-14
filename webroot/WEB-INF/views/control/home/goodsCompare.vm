@@ -1,0 +1,13 @@
+<ul class="video_preview_ul" >
+     <li class="video_preview_ul_intro"    >
+         <img src="images/example.gif" class="video_preview_ul_img" ></img>
+         111111111111111111</br>
+         111111111111111111</br>
+         111111111111111111</br>
+         111111111111111111</br>
+     </li>
+     <li class="video_preview_ul_price"    ><a href='#' >淘宝价(￥)</a><label>5.55元</label></li>
+     <li class="video_preview_ul_price"    ><a href='#' >拍拍价(￥)</a><label>8.99元</label></li>
+     <li class="video_preview_ul_price"    ><a href='#' >好孩子(￥)</a><label>7.13元</label></li>
+     <li class="video_preview_ul_price"    ><a href='#' >丫丫价(￥)</a><label>15.12元</label></li>
+</ul>

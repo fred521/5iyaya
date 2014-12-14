@@ -1,0 +1,30 @@
+<div class="help">
+	 <h4>帮助中心</h4>
+	 <div style="padding:9px 0 9px 98px;">
+	<ol class="novice">
+	     <li class="help_head">购物指南</li>
+		 <a href="http://www.5iyya.com/helper/detail.htm?id=ff8080811eb4824e011eb49eecc90002" target="_blank"><li>注册会员</li></a>
+		 <a href="http://www.5iyya.com/helper/detail.htm?id=ff808081224eee4d012272c6c67f002a" target="_blank"><li>如何下单</li></a>
+		 <a href="http://www.5iyya.com/helper/detail.htm?id=ff8080811eba6ce6011ebf627ac50012" target="_blank"><li>取消订单</li></a>
+	 </ol>
+	 <ol class="novice">
+	     <li class="help_head">配送方式</li>
+		 <a href="http://www.5iyya.com/html/wuliu.html" target="_blank"><li>物流表</li></a>
+		 <a href="http://www.5iyya.com/helper/detail.htm?id=ff8080811eba6ce6011ebf6220a30011" target="_blank"><li>验货与签收</li></a>
+		 <a href="http://www.5iyya.com/helper/detail.htm?id=ff8080811eba6ce6011ebf62de090014" target="_blank"><li>退换货政策</li></a>
+	 </ol>
+	 <ol class="novice">
+	     <li class="help_head">支付方式</li>
+		 <a href="http://www.5iyya.com/helper/detail.htm?id=ff8080811eba6ce6011ebf562d87000a" target="_blank"><li>在线支付</li></a>
+		 <a href="http://www.5iyya.com/helper/detail.htm?id=ff808081224eee4d012272dd84f4002d" target="_blank"><li>银行转账</li></a>
+	 </ol>
+	 <ol class="novice">
+		<li class="help_head">特色服务</li>
+		 <a href="http://www.5iyya.com/helper/detail.htm?id=ff8080811eba6ce6011ebf6a41fd0018" target="_blank"><li>售后服务</li></a>
+		 <a href="http://www.5iyya.com/html/sizeMapping.html" target="_blank"><li>童装尺寸表</li></a>
+		 <a href="http://www.5iyya.com/yynews/ff8080811d2764ef011d522906661414.htm" target="_blank"><li>优惠政策</li></a>
+		 <a href="http://www.5iyya.com/helper/detail.htm?id=ff80808122071f7e01222ef062c00032" target="_blank"><li>厂家直供</li></a>
+	 </ol>
+	 <div class="clear"></div>
+	 </div>
+</div>

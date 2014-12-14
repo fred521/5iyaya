@@ -1,0 +1,62 @@
+#set( $layout = "layout/home/memberdefault.vm" )
+	<td width="10" valign="top">　</td>
+		<td width="740" valign="top">
+			<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>会员信息管理</h1>
+			   </div>
+		<table border="0" width="100%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="354">
+			<tr>
+				<td valign=top align=center height="348">
+				
+				
+				
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td align="center"><font color="red">$!errorMessage$!succMessage</font></td>
+					</tr>
+				</table>
+				  <div class="roundCorner gray onlyBottom" style="width: 736px;">
+					<p>   
+						<div align="center"><img src="${imgServer}/images/logo_copy.gif" align="absmiddle" /></div>
+						<p>  
+						</div>
+						<p>
+				<form name="formActive" method="post" action="$homeMoudle.setTarget('/member/do_active.htm')">
+				$control.setTemplate("home/member/updateTop").put("menuIndex","1")
+				<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<table cellSpacing="0" cellPadding="0" width="90%" align="center">
+							<tr>
+								<td align=center>
+									<table border="0" width="560" cellspacing="0" cellpadding="6">
+										<tr>
+											<td height="24" class="tx_title" colspan="2"><b>输入手机验证码</b></td>
+										</tr>
+										<tr>
+											<td width="100">手机验证码(test)input 111111:</td>
+											<td width="460"><input value="$!activeCode" name="activeCode" class="input3">
+											<span class="red">*</span></td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>如果您尚未收到验证码,点击 <a href="$homeMoudle.setTarget('/member/do_resend.htm')" class="good">重发验证码</a></td>
+										</tr>
+										<tr>
+											<td>　</td>
+											<td>
+											<input type="submit" value=" 提&nbsp;&nbsp;交 " name="" class="input6"></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					  </td>
+					</tr>
+				</table>
+				</form>
+				<br>
+				</td>
+			</tr>
+		</table>
+	</td>

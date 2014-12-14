@@ -1,0 +1,351 @@
+#set( $layout = "layout/admin/default.vm" )
+<STYLE>.tdborder {
+	BORDER-RIGHT: #43938b 1px solid; BORDER-LEFT: #43938b 1px solid; BORDER-BOTTOM: #43938b 1px solid
+}
+.tdline-left {
+	BORDER-LEFT: #788c47 1px solid; BORDER-BOTTOM: #656363 1px solid
+}
+.tdline-right {
+	BORDER-RIGHT: #788c47 1px solid; BORDER-BOTTOM: #656363 1px solid
+}
+.tdrl {
+	BORDER-RIGHT: #788c47 1px solid; BORDER-LEFT: #788c47 1px solid
+}
+.top {
+	CURSOR: hand
+}
+BODY {
+	SCROLLBAR-SHADOW-COLOR: #deefc6; SCROLLBAR-ARROW-COLOR: #ffffff; SCROLLBAR-BASE-COLOR: #c0d586
+}
+</STYLE>
+
+<SCRIPT language=javascript>
+function showHide(objname){
+    var divId = 'items';
+	for ( var i = 0; i < 10; i++){
+	  var tmp = divId + '' + i + '';
+	  if ( objname != tmp){
+    	  var obj = document.getElementById(tmp);
+    	  if ( obj ){
+		    //alert(obj.style.display);
+    	    obj.style.display = "none" 
+    	  }
+	  }
+	}
+    var obj = document.getElementById(objname);
+    obj.style.display == "none" ? obj.style.display = "" : obj.style.display = "none";
+}
+</SCRIPT>
+
+<META content="MSHTML 6.00.2900.2912" name=GENERATOR></HEAD>
+<BODY bgColor=#b5d185 leftMargin=0 topMargin=0 target="main">
+
+
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD height=3></TD></TR></TBODY></TABLE><!-- Item 1 Strat -->
+<TABLE cellSpacing=0 cellPadding=0 width=130 align=center border=0>
+  <TBODY>
+  <TR>
+      <TD class=top onclick='showHide("items0")' background="${imgServer}/images/admin/menu_top.gif" colSpan=2 height=24 style="padding-left:26px;">买家管理</TD>
+  </TR>
+  <TR id=items0 style="DISPLAY: none">
+      <TD align=middle colSpan=2> <TABLE cellSpacing=0 cellPadding=0 width=130 bgColor=#f4fbf4 border=0>
+          <TBODY>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="${adminMoudle}/admin_member/buyer_list.htm" target=main>买家会员列表</A></TD>
+            </TR>
+          </TBODY>
+        </TABLE>
+        
+      </TD>
+    </TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD height=3></TD>
+  </TR>
+  </TBODY>
+</TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width=130 align=center border=0>
+  <TBODY>
+  <TR>
+      <TD class=top onclick='showHide("items1")' background="${imgServer}/images/admin/menu_top.gif" colSpan=2 height=24 style="padding-left:26px;">卖家管理</TD>
+  </TR>
+  <TR id=items1 style="DISPLAY: none">
+    <TD align=middle colSpan=2>
+      <TABLE cellSpacing=0 cellPadding=0 width=130 bgColor=#f4fbf4 border=0>
+          <TBODY>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="${adminMoudle}/admin_member/seller_list.htm" target=main>卖家会员列表</A></TD>
+            </TR>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="${adminMoudle}/admin_member/member_add.htm" target=main>添加卖家</A></TD>
+            </TR>
+          </TBODY>
+        </TABLE></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD height=3></TD>
+  </TR>
+  </TBODY>
+</TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width=130 align=center border=0>
+  <TBODY>
+  <TR>
+      <TD class=top onclick='showHide("items2")' background="${imgServer}/images/admin/menu_top.gif" colSpan=2 height=24 style="padding-left:26px;">商品管理</TD>
+  </TR>
+  <TR id=items2 style="DISPLAY: none">
+    <TD align=middle colSpan=2>
+      <TABLE cellSpacing=0 cellPadding=0 width=130 bgColor=#f4fbf4 border=0>
+          <TBODY>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="${adminMoudle}/mygoods/list_goods.htm" target=main>商品列表</A></TD>
+            </TR>
+            <TR>
+              <TD class=tdline-left align=middle><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right height="24" style="padding-top:3px;"><a href="${adminMoudle}/mygoods/add_init.htm" target=main>添加商品</a></TD>
+            </TR>
+          </TBODY>
+        </TABLE></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD height=3></TD></TR></TBODY></TABLE><!-- Item 3 End --><!-- Item 4 Strat -->
+<TABLE cellSpacing=0 cellPadding=0 width=130 align=center border=0>
+  <TBODY>
+  <TR>
+      <TD class=top onclick='showHide("items3")' background="${imgServer}/images/admin/menu_top.gif" colSpan=2 height=24 style="padding-left:26px;">分类信息管理</TD>
+    </TR>
+  <TR id=items3 style="DISPLAY: none">
+    <TD align=middle colSpan=2>
+      <TABLE cellSpacing=0 cellPadding=0 width=130 bgColor=#f4fbf4 border=0>
+          <TBODY>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="${adminMoudle.setTarget('news/news_list.htm')}" target=main>分类信息列表</A></TD>
+            </TR>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="${adminMoudle.setTarget('news/news_add_init.htm')}" target=main>发布分类信息</A></TD>
+            </TR>
+          </TBODY>
+        </TABLE></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD height=3></TD></TR></TBODY></TABLE><!-- Item 4 End --><!-- Item 5 Strat -->
+<TABLE cellSpacing=0 cellPadding=0 width=130 align=center border=0>
+  <TBODY>
+  <TR>
+      <TD class=top onclick='showHide("items4")' background="${imgServer}/images/admin/menu_top.gif" colSpan=2 height=24 style="padding-left:26px;">订单管理</TD>
+    </TR>
+  <TR id=items4 style="DISPLAY: none">
+    <TD align=middle colSpan=2>
+      <TABLE cellSpacing=0 cellPadding=0 width=130 bgColor=#f4fbf4 border=0>
+          <TBODY>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="${adminMoudle.setTarget('tradeCar/list.htm')}" target=main>采购单列表</A></TD>
+            </TR>
+            <TR>
+              <TD class=tdline-left align=middle><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right height="24" style="padding-top:3px;"><a href="${adminMoudle}/admin_order/list.htm" target=main>订单列表</a></TD>
+            </TR>
+          </TBODY>
+        </TABLE></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD height=3></TD></TR></TBODY></TABLE><!-- Item 5 End --><!-- Item 6 Strat -->
+
+<TABLE cellSpacing=0 cellPadding=0 width=130 align=center border=0>
+  <TBODY>
+  <TR>
+      <TD class=top onclick='showHide("items5")' background="${imgServer}/images/admin/menu_top.gif" colSpan=2 height=24 style="padding-left:26px;">留言管理</TD>
+  </TR>
+  <TR id=items5 style="DISPLAY: none">
+    <TD align=middle colSpan=2>
+      <TABLE cellSpacing=0 cellPadding=0 width=130 bgColor=#f4fbf4 border=0>
+          <TBODY>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="message_list.htm" target=main>留言列表</A></TD>
+            </TR>
+          </TBODY>
+        </TABLE></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD height=3></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width=130 align=center border=0>
+  <TBODY>
+  <TR>
+      <TD class=top onclick='showHide("items6")' background="${imgServer}/images/admin/menu_top.gif" colSpan=2 height=24 style="padding-left:26px;">支付管理</TD>
+    </TR>
+  <TR id=items6 style="DISPLAY: none">
+    <TD align=middle colSpan=2>
+      <TABLE cellSpacing=0 cellPadding=0 width=130 bgColor=#f4fbf4 border=0>
+          <TBODY>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="${adminMoudle.setTarget('admin_pay/pay_list.htm')}" target=main>支付流水查询</A></TD>
+            </TR>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="pay_in.htm" target=main>银行对帐单导入</A></TD>
+            </TR>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="pay_inlist.htm" target=main>入账报表</A></TD>
+            </TR>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="pay_outlist.htm" target=main>出账报表</A></TD>
+			</TR>
+          </TBODY>
+        </TABLE></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD height=3></TD></TR></TBODY></TABLE><!-- Item 7 End --><!-- Item 8 Strat -->
+<TABLE cellSpacing=0 cellPadding=0 width=130 align=center border=0>
+  <TBODY>
+  <TR>
+      <TD class=top onclick='showHide("items7")' background="${imgServer}/images/admin/menu_top.gif" colSpan=2 height=24 style="padding-left:26px;">推荐管理</TD>
+    </TR>
+  <TR id=items7 style="DISPLAY: none">
+      <TD align=middle colSpan=2> <TABLE cellSpacing=0 cellPadding=0 width=130 bgColor=#f4fbf4 border=0>
+          <TBODY>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="../commend_position/position_list.htm" target=main>推荐位置管理</A></TD>
+            </TR>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="../commend_content/content_list.htm" target=main>推荐管理</A></TD>
+            </TR>
+          </TBODY>
+        </TABLE></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD height=3></TD></TR></TBODY></TABLE><!-- Item 8 End --><!-- Item 9 Strat -->
+<TABLE cellSpacing=0 cellPadding=0 width=130 align=center border=0>
+  <TBODY>
+  <TR>
+      <TD class=top onclick='showHide("items8")' background="${imgServer}/images/admin/menu_top.gif" colSpan=2 height=24 style="padding-left:26px;">统计报表</TD>
+    </TR>
+  <TR id=items8 style="DISPLAY: none">
+    <TD align=middle colSpan=2>
+      <TABLE cellSpacing=0 cellPadding=0 width=130 bgColor=#f4fbf4 border=0>
+          <TBODY>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="images/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="table_ec.htm" target=main>交易报表</A></TD>
+            </TR>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="images/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="table_state.htm" target=main>访问统计</A></TD>
+            </TR>
+          </TBODY>
+        </TABLE></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD height=3></TD></TR></TBODY></TABLE>
+<!-- Item 9 End --><!-- Item 10 Strat -->
+<TABLE cellSpacing=0 cellPadding=0 width=130 align=center border=0>
+  <TBODY>
+  <TR>
+      <TD class=top onclick='showHide("items9")' background="${imgServer}/images/admin/menu_top.gif" colSpan=2 height=24 style="padding-left:26px;">系统管理</TD>
+    </TR>
+  <TR id=items9 style="DISPLAY: none">
+    <TD align=middle colSpan=2>
+      <TABLE cellSpacing=0 cellPadding=0 width=130 bgColor=#f4fbf4 border=0>
+          <TBODY>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="${adminMoudle}/admin_user/cg_pwd_init.htm" target=main>修改口令</A></TD>
+            </TR>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" 
+            src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><a href="makehtml.htm"target=main>静态页面管理</a></TD>
+            </TR>
+			<TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" 
+            src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><a href="${appServer}/admin/admin_tasks/generateHomePageInit.htm"target=main>生成首页</a></TD>
+            </TR>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" 
+            src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><a href="log.htm"target=main>日志管理</a></TD>
+            </TR>
+          </TBODY>
+        </TABLE></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD height=3></TD></TR></TBODY></TABLE><!-- Item 10 End -->
+    <!-- Item 11 Strat -->
+<TABLE cellSpacing=0 cellPadding=0 width=130 align=center border=0>
+  <TBODY>
+  <TR>
+      <TD class=top onclick='showHide("items11")' background="${imgServer}/images/admin/menu_top.gif" colSpan=2 height=24 style="padding-left:26px;">帮助信息管理</TD>
+    </TR>
+  <TR id=items11 style="DISPLAY: none">
+    <TD align=middle colSpan=2>
+      <TABLE cellSpacing=0 cellPadding=0 width=130 bgColor=#f4fbf4 border=0>
+          <TBODY>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="${adminMoudle.setTarget('helper/helper_list.htm')}" target=main>帮助信息列表</A></TD>
+            </TR>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="${adminMoudle.setTarget('helper/helper_add_init.htm')}" target=main>发布帮助信息</A></TD>
+            </TR>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="${adminMoudle.setTarget('helper/helper_modify_init.htm')}" target=main>帮助类型列表</A></TD>
+            </TR>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="${adminMoudle.setTarget('helper/add_helper_type_init.htm')}" target=main>新增帮助类型</A></TD>
+            </TR>
+          </TBODY>
+        </TABLE></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD height=3></TD></TR></TBODY></TABLE><!-- Item 11 End -->	
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD height=3></TD></TR></TBODY></TABLE><!-- Item 11 End --><!-- Item 12 Strat -->
+<TABLE cellSpacing=0 cellPadding=0 width=130 align=center border=0>
+  <TBODY>
+  <TR>
+      <TD class=top onclick='showHide("items12")' background="${imgServer}/images/admin/menu_top.gif" colSpan=2 height=24 style="padding-left:26px;">友情链接管理</TD>
+    </TR>
+  <TR id=items12 style="DISPLAY: none">
+    <TD align=middle colSpan=2>
+      <TABLE cellSpacing=0 cellPadding=0 width=130 bgColor=#f4fbf4 border=0>
+          <TBODY>
+            <TR> 
+              <TD class=tdline-left align=middle width="20%"><IMG height=10 alt="" src="${imgServer}/images/admin/newitem.gif" width=7></TD>
+              <TD class=tdline-right width="80%" height="24" style="padding-top:3px;"><A href="${adminMoudle}/urls/urlsAddInit.htm" target=main>添加链接</A></TD>
+            </TR>
+          </TBODY>
+        </TABLE></TD></TR></TBODY></TABLE>
+	
+	</BODY>
+

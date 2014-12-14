@@ -1,0 +1,7 @@
+/*ie hacks*/
+/**
+ * @desc: 这个css文件是用来定义ie6+支持的style
+ */
+div#mainPage_content_bottom div.panel_header{background:transparent url(../images/sp_title_add.png) no-repeat;}
+div#mainPage_content_bottom div.panel_content h5{background:transparent url(../images/gespace_line.png)  no-repeat top center;}
+div#mainPage_content_bottom div.panel_content li{list-style: url(../images/hotsell_icon.png) no-repeat;}

@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>prototype</title>
+    <script>
+        var webchatserver = location.href.toLowerCase().match( /^(http[s]{0,1}[:][/][/][^/]*)[/]{0,1}.*$/ )[1] ;
+    </script>
+    <script type='text/javascript' src='http://www.5iyya.com/lib/core_webchat.js' runtime='true' main_css='false'></script>
+    <script type='text/javascript'>
+        function onLoad( ){
+	        var  chat_link= core.$('chat_link');
+
+	        var  query    = location.href.parseQuery() ;
+	        var  question = query['question'] || '' ;
+	        var  link     = query['link'] || '' ;
+	        var username  = query['username'] || 'δ֪' ;
+	        var workgroup = (query['workgroup'] || 'support')+'@workgroup.www.5iyya.com';
+	        chat_link.setAttribute( 'username' , username );
+	        chat_link.setAttribute( 'question' , question );
+	        chat_link.setAttribute( 'href' , link );
+	        chat_link.setAttribute( 'workgroup' , workgroup );
+	        core.start( );
+        }
+    </script>
+
+  </head>
+  <body onload='onLoad();' onunload='core.onUnload( document.body );' >
+        <a
+            id='chat_link'
+            class="component.WebChat"
+            email="fuyinhai@126.com" >click here start chat</a>
+   </body>
+</html>

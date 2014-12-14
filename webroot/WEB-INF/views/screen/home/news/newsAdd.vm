@@ -1,0 +1,218 @@
+#set( $layout = "layout/home/memberdefault.vm" )
+
+<form name="addNews" action="${homeMoudle}/mynews/news_add.htm?id=$!id" method="post" >
+		<input type="hidden" name="id" value="$!id">
+		<td width="10" valign="top">　</td>
+		<td width="740" valign="top">
+			<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>丫丫信息管理</h1>
+	   </div>
+		<table border="0" width="90%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+				<div class="roundCorner gray onlyBottom" style="width: 736px;">
+	    <p>   
+	   <div align="center"><img src="${imgServer}/images/logo_copy.gif" align="absmiddle" /></div>
+	   </div>
+	   <p>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td align="center"><span class="red">$!infoShow</span></td>
+					</tr>
+				</table>
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="18">
+					<tr>
+						<td width="96">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">
+								发布分类信息</td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td width="96">
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="${homeMoudle.setTarget('mynews/news_member_list.htm')}" style="text-decoration: none"><font color="#A1A1A1">分类信息列表</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>						
+						</td>
+						<td>&nbsp;　&nbsp;</td>
+					</tr>
+				</table>
+				<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<table cellSpacing="0" cellPadding="0" width="90%" align="center">
+							<tr>
+								<td align=center>
+									<table border="0" width="560" cellspacing="0" cellpadding="6">
+										<tr>
+											<td height="24" class="tx_title" colspan="2"><b>输入分类信息</b></td>
+										</tr>
+										<tr>
+											<td width="100">信息标题:</td>
+											<td width="460"><input value="$!form.getField("newsTitle").value" name="newsTitle" class="input4">
+											<span class="red">*$!form.getField("newsTitle").message</span></td>
+										</tr>
+										<tr>
+											<td>信息分类:</td>
+											<td><select id="DropDownList1" name="newsType">
+													#foreach($type in $newsType)
+														#if($!numberUtils.string2Integer($type.newsType)<80)
+											<option value="$type.newsType" #if("$!form.getField('newsType').value"=="$type.newsType") selected #end>$type.typeName</option>
+												        #end
+												    #end
+											</select>
+											<span class="red">*$!form.getField("newsType").message</span></td>
+										</tr>
+										<tr>
+											<td>手机号码:</td>
+											<td><input value="$!form.getField('phone').value" name="phone" class="input3">
+											<span class="red">*$!form.getField('phone').message</span></td>
+										</tr>
+										<tr>
+											<td>信息过期时间:</td>
+											<td>
+											 <input id="A1" type="radio" value="10"  name="abandonDays" 
+            #if("$!form.getField('abandonDays').value" == "") checked #end 
+            #if("$!{form.getField('abandonDays').value}" == "10") checked #end>
+			 <label style="CURSOR: hand" for="A1">10天</label>
+			<input id="A2" type="radio" value="20" name="abandonDays" #if( "$!{form.getField('abandonDays').value}" == "20" ) checked #end>
+			 <label style="CURSOR: hand" for="A2">20天</label>
+			<input id="A3" type="radio" value="30" name="abandonDays" #if( "$!{form.getField('abandonDays').value}" == "30" ) checked #end>
+			 <label style="CURSOR: hand" for="A3">30天</label>
+			<input id="A4" type="radio" value="90" name="abandonDays" #if( "$!{form.getField('abandonDays').value}" == "90" ) checked #end>
+			 <label style="CURSOR: hand" for="A4">90天</label> </td>
+										</tr>
+										<tr>
+											<td>信息描述:</td>
+											<td><textarea  name="content" style="width:100%;height:200">$!form.getField("content").value</textarea>
+											<span class="red">*$!form.getField("content").message</span></td>
+										</tr>
+										<tr>
+											<td>　</td>
+											<td>
+											<input type="submit" value=" 提&nbsp;&nbsp;交 " name="" class="input6"></td>
+										</tr>
+										<tr>
+											<td colspan="2">
+											<font color="#777777">
+											请勿在信息描述框中输入手机/电话,否则被识为非法信息!<br>
+											任何有违国家法律法规的内容将被拒绝<br> 
+											</font> 
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					  </td>
+					</tr>
+				</table>
+				<br>
+				</td>
+			</tr>
+		</table>
+		</td>
+</form>
+<script type="text/javascript">
+	var _formName = 'addNews';
+	var _textName = 'content';
+	var _toolBarIconPath = '${imgServer}/images/editor';
+	var _debug = false;
+
+	var _maxCount = 4000;
+	var _postAction = 'preview.htm';
+
+    //语言
+    var _a_lang = new Array();
+    _a_lang['pic'] = '图片';
+    _a_lang['url'] = '地址';
+    _a_lang['viewe'] = '显示效果';
+    _a_lang['border'] = '边框粗细';
+    _a_lang['align'] = '对齐方式';
+    _a_lang['absmiddle'] = '绝对居中';
+    _a_lang['aleft'] = '居左';
+    _a_lang['aright'] = '居右';
+    _a_lang['atop'] = '顶部';
+    _a_lang['amiddle'] = '中部';
+    _a_lang['abottom'] = '底部';
+    _a_lang['absbottom'] = '绝对底部';
+    _a_lang['baseline'] = '基线';
+    _a_lang['submit'] = '确定';
+    _a_lang['cancle'] = '取消';
+    _a_lang['hlink'] = '超级链接';
+    _a_lang['other'] = '其他选项';
+    _a_lang['newwindow'] = '在新窗口打开';
+    _a_lang['ttop'] = '文本顶部';
+    
+    _a_lang['copy'] = '复制';
+    _a_lang['cut'] = '剪切';
+    _a_lang['pau'] = '粘贴';
+    _a_lang['del'] = '删除';
+    
+    _a_lang['bold'] = '粗体';
+    _a_lang['italic'] = '斜体';
+    _a_lang['underline'] = '下划线';
+    _a_lang['st'] = '中划线';
+    _a_lang['jl'] = '左对齐';
+    _a_lang['jc'] = '居中对齐';
+    _a_lang['jr'] = '右对齐';
+    
+    _a_lang['fcolor'] = '文字颜色';
+    _a_lang['bcolor'] = '文字背景颜色';
+    _a_lang['ilist'] = '编号';
+    _a_lang['itlist'] = '项目符号';
+    _a_lang['sup'] = '上标';
+    _a_lang['sub'] = '下标';
+    _a_lang['createlink'] = '插入链接';
+    _a_lang['unlink'] = '取消链接';
+    _a_lang['inserthr'] = '插入水平线';
+    _a_lang['insertimg'] = '插入/修改图片';
+    _a_lang['editsource'] = '编辑源文件';
+    _a_lang['preview'] = '预览';
+    _a_lang['usehtml'] = '使用编辑器编辑';
+    
+    _a_lang['font'] = '字体';
+    _a_lang['simsun'] = '宋体';
+    _a_lang['simhei'] = '黑体';
+    _a_lang['simkai'] = '楷体';
+    _a_lang['fangsong'] = '仿宋';
+    _a_lang['lishu'] = '隶书';
+    _a_lang['youyuan'] = '幼圆';
+    
+    _a_lang['fontsize'] = '字号';
+    _a_lang['fontsize_1'] = '一号';
+    _a_lang['fontsize_2'] = '二号';
+    _a_lang['fontsize_3'] = '三号';
+    _a_lang['fontsize_4'] = '四号';
+    _a_lang['fontsize_5'] = '五号';
+    _a_lang['fontsize_6'] = '六号';
+    _a_lang['fontsize_7'] = '七号';
+    
+    _a_lang['current'] = '当前';
+    _a_lang['word'] = '字';
+	_a_lang['char'] = '字符';
+
+    _a_lang['maxword'] = '最多';
+    
+    _a_lang['modify'] = '修改';
+    _a_lang['insert'] = '插入';
+	
+		
+	</script>
+	<script type="text/javascript" src="${imgServer}/js/editor_multi_lang.js"></script>

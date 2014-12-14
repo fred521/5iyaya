@@ -1,0 +1,31 @@
+<html>
+<head>
+<title></title>
+<style>
+.content{
+	font-size:14px;
+	font-family:Arial;
+}
+</style>
+<head>
+<body>
+<span class="content">
+</br>
+尊敬的<strong>${username}</strong>:<br><br>
+    非常抱歉，您的订单：<strong>${orderNumber}</strong>, 客服人员已将产品库存进行确认，目前暂时没有您所需要的产品库存，订单已取消。<br><br>
+    若您对该商户的其他产品感兴趣，可点击<a on_click="return top.js.OpenExtLink(window,event,this)" href="http://www.5iyya.com/shop/${shopId}.htm" target="_blank">http://www.5iyya.com/shop/${shopId}.htm</a>，或登入平台搜索其他产品。<br><br><br><br>
+
+
+感谢您对我爱丫丫网的支持，我们愿以最优质的服务于您，欢迎您下次订购！<br><br><br><br>
+
+
+详情可咨询我爱丫丫网客服人员<br><br>
+
+客服QQ：619373550   咨询电话：0571-86799951<br><br>
+
+客服在线时间：9：00----22：30
+
+</br>
+</span>
+</body>
+</html>

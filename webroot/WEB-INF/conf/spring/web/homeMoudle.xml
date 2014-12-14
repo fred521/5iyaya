@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="homeNoSecureHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="requestEncoding" />
+				<ref bean="responseEncoding" />
+				<ref bean="cookyjarInterceptor" />
+			</list>
+		</property>
+		<property name="urlMap">
+			<map>
+				<entry key="/index.htm" value-ref="indexAction" />
+				<entry key="/main.htm" value-ref="indexAction" />
+				<entry key="/goods.htm" value-ref="indexAction" />
+				<entry key="/helper/*.htm" value-ref="helperDetailtAction" />
+				<entry key="/video/*.htm" value-ref="videoAction" />
+				<entry key="/baby.htm" value-ref="indexAction" />
+				<entry key="/lady.htm" value-ref="indexAction" />
+				<entry key="/news.htm" value-ref="indexAction" />
+				<entry key="/group.htm" value-ref="indexAction" />
+				<entry key="/gis.htm" value-ref="indexAction" />
+				<entry key="/chat.htm" value-ref="onlineChatAction" />
+				<entry key="/goods/*.htm" value-ref="goodsDetailAction" />
+				<entry key="/shop/*.htm" value-ref="shopDetailAction" />
+				<entry key="/news/*.htm" value-ref="newsDetailAction" />
+				<entry key="/yynews/*.htm" value-ref="yyNewsDetailAction" />
+				<entry key="/visitor/**/*.htm" value-ref="homeAction" />
+				<entry key="/member/checkEmailExist.htm" value-ref="memberAction"/>
+				<entry key="/member/updatePassword.htm" value-ref="memberAction"/>
+				<entry key="/member/forgotPswEmail.htm" value-ref="memberAction"/>
+				<entry key="/member/isUserExist.htm" value-ref="memberAction"/>
+				<entry key="/member/forgotPasswd.htm" value-ref="memberAction"/>
+				<entry key="/member/forgotUserName.htm" value-ref="memberAction"/>
+				<entry key="/search/goods/*.htm" value-ref="goodsSearchAction" />
+				<entry key="/search/news/*.htm" value-ref="newsSearchAction" />
+				<entry key="/search/shop/*.htm" value-ref="shopSearchAction" />
+				<entry key="/chat/**/*.htm" value-ref="onlineChatAction" />
+				<entry key="/shop/detail.htm" value-ref="shopAction" />
+				<entry key="/shop/info.htm" value-ref="shopAction" />
+				<entry key="/3d/map3.htm" value-ref="marketMap" />
+				<entry key="/helper/index.htm" value-ref="helperAction" />
+				<entry key="/helper/detail.htm" value-ref="helperAction" />
+				<entry key="/news/detail.htm" value-ref="newsMemberAction" />
+				<entry key="/yynews/detail.htm" value-ref="yyNewsAction" />
+				<entry key="/goods/detail.htm" value-ref="goodsAction" />
+				<entry key="/mygoods/load_propertys.htm" value-ref="goodsAction"/>
+				<entry key="/search/*.htm" value-ref="searchAction" />
+				<entry key="/shop/showLocation.htm" value-ref="showLocationAction" />
+				<entry key="/shop/editLocation.htm" value-ref="editLocationAction" />
+				<entry key="/bbs.htm" value-ref="homeAction"/>
+				<entry key="/uchome.htm" value-ref="homeAction"/>
+			</map>
+		</property>
+	</bean>
+	<!-- 首页 -->
+	<bean name="indexAction" class="com.nonfamous.tang.web.home.IndexAction">
+		<property name="cacheSeconds" value="0" />
+		<property name="commendContentDAO">
+			<ref bean="commendContentDAO"/>
+		</property>
+		<property name="newsDAO">
+			<ref bean="newsDAO"/>
+		</property>
+		<property name="newsTypeDAO">
+			<ref bean="newsTypeDAO"/>
+		</property>
+		<property name="marketTypeDAO">
+			<ref bean="marketTypeDAO"/>
+		</property>
+		<property name="goodsService" ref="goodsService"/>
+		<property name="shopService" ref="shopService"/>
+	</bean>
+	<!-- SEO for detail page -->
+	<bean name="goodsDetailAction" class="com.nonfamous.tang.web.home.DetailSeoAction">
+		<property name="idName" value="id" />
+		<property name="detailURL" value="/goods/detail.htm" />
+	</bean>
+
+	<bean name="shopDetailAction" class="com.nonfamous.tang.web.home.DetailSeoAction">
+		<property name="idName" value="id" />
+		<property name="detailURL" value="/shop/detail.htm" />
+	</bean>
+
+	<bean name="newsDetailAction" class="com.nonfamous.tang.web.home.DetailSeoAction">
+		<property name="idName" value="id" />
+		<property name="detailURL" value="/news/detail.htm" />
+	</bean>
+	<bean name="yyNewsDetailAction" class="com.nonfamous.tang.web.home.DetailSeoAction">
+		<property name="idName" value="id" />
+		<property name="detailURL" value="/yynews/detail.htm" />
+	</bean>
+	<!--SEO for search page  -->
+	
+	<bean name="goodsSearchAction" class="com.nonfamous.tang.web.home.SearchSeoAction">
+		<property name="idName" value="searchcate" />
+		<property name="type" value="good" />
+		<property name="searchURL" value="/search/search.htm" />
+	</bean>
+	
+	<bean name="newsSearchAction" class="com.nonfamous.tang.web.home.SearchSeoAction">
+		<property name="idName" value="searchcate" />
+		<property name="type" value="news" />
+		<property name="searchURL" value="/search/search.htm" />
+	</bean>
+	<bean name="shopSearchAction" class="com.nonfamous.tang.web.home.SearchSeoAction">
+		<property name="idName" value="marketType"/>
+		<property name="type" value="shop" />
+		<property name="searchURL" value="/search/search.htm" />
+	</bean>
+	<!-- SEO for helper page -->
+	<bean name="helperDetailtAction" class="com.nonfamous.tang.web.home.SearchSeoAction">
+		<property name="idName" value="id" />
+		<property name="type" value="helper" />
+		<property name="searchURL" value="/helper/detail.htm" />
+	</bean>
+		
+	<bean id="memberSecureHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="requestEncoding" />
+				<ref bean="responseEncoding" />
+				<ref bean="cookyjarInterceptor" />
+				<ref bean="memberMoudleSecure" />
+				<ref bean="memberAuthTokenInterceptor" />
+			</list>
+		</property>
+		<property name="urlMap">
+			<map>
+				<entry key="/member/**/*.htm" value-ref="memberAction" />
+				<entry key="/mygoods/**/*.htm" value-ref="goodsAction" />
+				<entry key="/mynews/*.htm" value-ref="newsMemberAction" />
+				<entry key="/yynews/*.htm" value-ref="yyNewsAction" />
+				<entry key="/myshop/*.htm" value-ref="shopAction" />
+				<entry key="/myvideo/*.htm" value-ref="videoAction" />
+				<entry key="/myaddress/*.htm" value-ref="addressAction"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="memberNonSecureHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="urlMap">
+			<map>
+				<entry key="/myvideo/validateToken.htm" value-ref="videoAction" />
+				<entry key="/myvideo/proxyAuthentication.htm" value-ref="videoAction" />
+				<entry key="/myvideo/viewLive.htm" value-ref="videoAction" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="memberAction" class="com.nonfamous.tang.web.home.MemberAction">
+		<property name="methodNameResolver">
+			<bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"></bean>
+		</property>
+		<property name="cacheSeconds" value="0" />
+		<property name="memberService">
+			<ref bean="memberService"/>
+		</property>
+		<property name="shopService">
+			<ref bean="shopService" />
+		</property>
+		<property name="formFactory">
+			<ref bean="formFactory"/>
+		</property>
+		<property name="newsDAO">
+			<ref bean="newsDAO"/>
+		</property>
+		<property name="tradeOrderService">
+		    <ref bean="tradeOrderService"/>
+		</property>
+		<property name="mailEngine">
+			<ref bean="mailEngine"/>
+		</property>
+		<property name="userCenterService" ref="userCenterService"/>
+	</bean>
+
+	<bean id="goodsAction" class="com.nonfamous.tang.web.home.GoodsAction">
+		<property name="methodNameResolver">
+			<bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver">
+			</bean>
+		</property>
+		<property name="cacheSeconds" value="0" />
+		<property name="goodsService" >
+			<ref bean="goodsService"/>
+		</property>
+		<property name="shopService" >
+			<ref bean="shopService"/>
+		</property>
+		<property name="memberService" >
+			<ref bean="memberService"/>
+		</property>
+		<property name="tradeOrderService">
+		    <ref bean="tradeOrderService"/>
+		</property>
+		<property name="formFactory">
+			<ref bean="formFactory"/>
+		</property>
+		<property name="goodsCatalogService">
+			<ref bean="goodsCatalogService"/>
+		</property>
+		<property name="uploadService">
+			<ref bean="uploadService" />
+		</property>
+	</bean>
+	
+	<bean name="/listGoodsCategory.htm" class="com.nonfamous.tang.web.home.ListCascadeCategoryController">
+		<property name="goodsCatalogService" ref="goodsCatalogService"/>
+	</bean>
+	
+	<bean id="helperAction" class="com.nonfamous.tang.web.home.HelperAction">
+		<property name="methodNameResolver">
+			<bean class="com.nonfamous.commom.util.web.CaseInsensitiveInternalPathMethodNameResolver">
+			</bean>
+		</property>
+		<property name="cacheSeconds" value="0" />
+		<property name="formFactory">
+			<ref bean="formFactory"/>
+		</property>
+		<property name="helperTypeDAO">
+			<ref bean="helperTypeDAO"/>
+		</property>
+		<property name="helperService">
+			<ref bean="helperService"/>
+		</property>
+	</bean>
+	
+	<bean id="addressAction" class="com.nonfamous.tang.web.home.AddressController">
+		<property name="methodNameResolver">
+			<bean class="com.nonfamous.commom.util.web.CaseInsensitiveInternalPathMethodNameResolver"/>
+		</property>
+		<property name="addressService" ref="addressService"/>
+		<property name="formFactory" ref="formFactory"/>
+		<property name="addressHelper" ref="addressHelper"/>
+	</bean>
+	
+	<bean id="videoAction" class="com.nonfamous.tang.web.home.VideoAction">
+		<property name="methodNameResolver">
+			<bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver">
+			</bean>
+		</property>
+      	<property name="uploadAddress"><value>${video.server.uploadAddress}</value></property>
+      	<property name="recordAddress"><value>${video.server.recordAddress}</value></property>
+      	<property name="liveAddress"><value>${video.server.liveAddress}</value></property>
+      	<property name="shopDAO"          ref="shopDAO"  />
+      	<property name="tokenGenerator"          ref="tokenGenerator"  />
+      	<property name="tokenCacheManager"       ref="tokenCacheManager"  />
+	</bean>
+	<bean id="homeAction" class="com.nonfamous.tang.web.home.HomeAction">
+		<property name="methodNameResolver">
+			<bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"></bean>
+		</property>
+		<property name="memberService" ref="memberService"/>
+		 <property name="ucenterService" ref="ucenterService"/>
+		<property name="memberDAO" ref="memberDAO"/>
+		<property name="formFactory" ref="formFactory"/>
+		<property name="mailEngine" ref="mailEngine"/>
+		<property name="homeUrl" value="${uchome.url}"/>
+		<property name="bbsUrl" value="${bbs.url}"/>
+	</bean>
+	<!-- 新闻管理 -->
+	<bean id="newsMemberAction" class="com.nonfamous.tang.web.home.NewsMemmberAction">
+		<property name="methodNameResolver">
+			<bean class="com.nonfamous.commom.util.web.CaseInsensitiveInternalPathMethodNameResolver">
+			</bean>
+		</property>
+		<property name="cacheSeconds" value="0" />
+		<property name="newsTypeDAO">
+			<ref bean="newsTypeDAO"/>
+		</property>
+		<property name="newsContentDAO">
+			<ref bean="newsContentDAO"/>
+		</property>
+		<property name="newsService" >
+			<ref bean="newsService"/>
+		</property>
+		<property name="memberDAO">
+			<ref bean="memberDAO"/>
+		</property>
+		<property name="newsDAO">
+			<ref bean="newsDAO"/>
+		</property>
+		<property name="formFactory">
+			<ref bean="formFactory"/>
+		</property>
+		
+	</bean>
+	<bean id="yyNewsAction" class="com.nonfamous.tang.web.home.YYNewsAction">
+		<property name="methodNameResolver">
+			<bean class="com.nonfamous.commom.util.web.CaseInsensitiveInternalPathMethodNameResolver">
+			</bean>
+		</property>
+		<property name="cacheSeconds" value="0" />
+		<property name="newsTypeDAO">
+			<ref bean="newsTypeDAO"/>
+		</property>
+		<property name="newsContentDAO">
+			<ref bean="newsContentDAO"/>
+		</property>
+		<property name="newsService" >
+			<ref bean="newsService"/>
+		</property>
+		<property name="memberDAO">
+			<ref bean="memberDAO"/>
+		</property>
+		<property name="newsDAO">
+			<ref bean="newsDAO"/>
+		</property>
+		<property name="formFactory">
+			<ref bean="formFactory"/>
+		</property>
+	</bean>
+
+	<bean name="memberMoudleSecure" class="com.nonfamous.tang.web.home.MemberMoudleSecureInterceptor">
+		<property name="loginPage" value="/visitor/init.htm" />
+		<property name="encoding" value="${response.encoding}"/>
+	</bean>
+
+	 <!-- 商品类目control-->
+	<bean name="goods_cat" class="com.nonfamous.tang.web.control.GoodsCatControl">
+		<property name="goodsCatDAO">
+			<ref bean="goodsCatDAO" />
+		</property>
+	</bean>
+	
+	 <!-- 友情链接control-->
+	<bean name="main_friendship" class="com.nonfamous.tang.web.control.FriendshipControl">
+		<property name="urlDAO">
+			<ref bean="urlDAO" />
+		</property>
+	</bean>
+	
+	<!-- main商品类目control-->
+	<bean name="main_goods_cat" class="com.nonfamous.tang.web.control.MainGoodsCatControl">
+		<property name="goodsCatDAO">
+			<ref bean="goodsCatDAO" />
+		</property>
+	</bean>
+	<!-- 帮助 类目 control -->
+	<bean name="helper_control" class="com.nonfamous.tang.web.control.HelperControl">
+		<property name="helperService">
+			<ref bean="helperService" />
+		</property>
+		<property name="helperTypeDAO">
+			<ref bean="helperTypeDAO" />
+		</property>
+	</bean>
+
+	 <!-- 市场分类店铺control-->
+	<bean name="market_shop" class="com.nonfamous.tang.web.control.MarketShopControl">
+		<property name="marketTypeDAO">
+			<ref bean="marketTypeDAO" />
+		</property>
+	</bean>
+	<!-- 省、市、区control-->
+	<bean name="prov_city" class="com.nonfamous.tang.web.control.ProvCityControl">
+		<property name="addressHelper">
+			<ref bean="addressHelper" />
+		</property>
+	</bean>
+	<bean id="onlineChatAction" class="com.nonfamous.tang.web.home.OnlineChatAction">
+		<property name="methodNameResolver">
+			<bean class="com.nonfamous.commom.util.web.CaseInsensitiveInternalPathMethodNameResolver">
+			</bean>
+		</property>
+		<property name="cacheSeconds" value="0" />
+		<property name="shopService">
+			<ref bean="shopService" />
+		</property>
+		<property name="memberService">
+			<ref bean="memberService" />
+		</property>
+		<property name="enterpriseAccount" value="${53kf.enterprise.account}" />
+	</bean>
+	<!-- 快速搜索 -->
+	<bean name="home/search" class="com.nonfamous.tang.web.control.SearchControl">
+		<property name="goodsCatDAO">
+			<ref bean="goodsCatDAO" />
+		</property>
+		<property name="searchKeyWordDAO">
+			<ref bean="searchKeyWordDAO" />
+		</property>
+		<property name="newsTypeDAO">
+			<ref bean="newsTypeDAO" />
+		</property>
+		<property name="marketTypeDAO">
+			<ref bean="marketTypeDAO" />
+		</property>
+	</bean>
+	<!-- 商品列表 -->
+    <bean name="searchAction" class="com.nonfamous.tang.web.home.SearchAction">
+        <property name="keyWordService">
+			<ref bean="keyWordService" />
+		</property>
+		<property name="goodsIndexService">
+			<ref bean="goodsIndexService" />
+		</property>
+		<property name="memberShopIndexService">
+			<ref bean="memberShopIndexService" />
+		</property>
+		<property name="newsIndexService">
+			<ref bean="newsIndexService" />
+		</property>
+		<property name="marketTypeDAO">
+			<ref bean="marketTypeDAO" />
+		</property>
+		<property name="commendContentDAO">
+			<ref bean="commendContentDAO"/>
+		</property>
+	</bean>
+	<bean id="shopAction" class="com.nonfamous.tang.web.home.ShopAction">
+		<property name="methodNameResolver">
+			<bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver">
+			</bean>
+		</property>
+		<property name="cacheSeconds" value="0" />
+		<property name="shopService">
+			<ref bean="shopService" />
+		</property>
+		<property name="formFactory">
+			<ref bean="formFactory" />
+		</property>
+		<property name="uploadService">
+			<ref bean="uploadService" />
+		</property>
+		<property name="marketTypeDAO">
+			<ref bean="marketTypeDAO" />
+		</property>
+		<property name="goodsService" >
+			<ref bean="goodsService"/>
+		</property>
+		<property name="memberService" >
+			<ref bean="memberService"/>
+		</property>
+	</bean>
+	<bean name="searchPageSlider" class="com.nonfamous.tang.web.control.PageSlider">
+		<property name="sliderWidth" value="5" />
+		<property name="sliderPath" value="home/search/searchPageSlider" />
+	</bean>
+	<bean name="goodsPageSlider" class="com.nonfamous.tang.web.control.PageSlider">
+		<property name="sliderWidth" value="5" />
+		<property name="sliderPath" value="home/goods/goodsPageSlider" />
+	</bean>
+	<bean name="goodsDetailPageSlider" class="com.nonfamous.tang.web.control.PageSlider">
+		<property name="sliderWidth" value="5" />
+		<property name="sliderPath" value="home/goods/goodsDetailPageSlider" />
+	</bean>
+	<bean name="newsPageSlider" class="com.nonfamous.tang.web.control.PageSlider">
+		<property name="sliderWidth" value="5" />
+		<property name="sliderPath" value="home/news/newsPageSlider" />
+	</bean>
+	<bean name="marketMap" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" value="home/3d/map3" />
+	</bean>
+	
+	<bean name="showLocationAction" class="com.nonfamous.tang.web.control.SimpleRedirectController">
+		<property name="target" value="home/shop/showLocation" />
+	</bean>
+	<bean name="editLocationAction" class="com.nonfamous.tang.web.control.SimpleRedirectController">
+		<property name="target" value="home/shop/editLocation" />
+	</bean>
+
+</beans>

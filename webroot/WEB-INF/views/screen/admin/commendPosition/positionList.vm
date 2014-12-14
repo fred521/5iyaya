@@ -1,0 +1,107 @@
+#set( $layout = "layout/admin/default.vm" )
+<STYLE type=text/css>.rb {
+	BORDER-RIGHT: #666666 1px solid
+}
+.tb {
+	BORDER-TOP: #666666 1px solid
+}
+</STYLE>
+<script language="JavaScript">
+function showfile()
+{
+	var filetype = document.getElementById("filetype");
+	filetype.style.display = filetype.style.display == "none"?"block":"none";
+}
+function resetcpage(){
+	var reason = findObj('currentPage');
+	reason.value = 1;
+}
+</script>
+<SCRIPT language=JavaScript type=text/JavaScript>
+function turnit(area)
+{
+    if (document.all[area].style.display == "")
+        document.all[area].style.display = "none";
+    else if (document.all[area].style.display == "none")
+        document.all[area].style.display = "";
+}
+</SCRIPT>
+<SCRIPT language=javascript src="${imgServer}/js/page.js"></SCRIPT>
+<FORM name="positionForm" action="positionList.htm" method="post">
+<input type="hidden" name="currentPage" value="$!search.currentPage">
+<BODY leftMargin=8 background="${imgServer}/images/admin/allbg.gif" topMargin=10>
+#*
+<table border="0" width="99%" cellspacing="0" cellpadding="5" align=center>
+	<tr>
+		<td>
+		<input type="button" value="添加推荐位置" name="B3" onclick="location.href='position_add.htm'"></td>
+	</tr>
+</table>
+*#
+<TABLE cellSpacing=1 cellPadding=0 width="98%" align=center bgColor=#666666 border=0>
+  <TBODY>
+    <TR valign="top"> 
+      <TD height=24 colSpan=6> <TABLE width=100% border=0 cellPadding=2 cellSpacing=0 background="${imgServer}/images/admin/tbg.gif">
+         
+            <TBODY>
+              <TR> 
+                ##TODO 以后换成枚举或其他
+				<TD width=160 height="24"><STRONG>&nbsp;推荐位置列表</STRONG></TD>
+                <TD align=right style="padding-right:6px;"><SELECT name="commendPage" class="px12" id=sex onchange="resetcpage();positionForm.submit();">
+                    <option value="">选择广告位置所在栏目</option>                    
+					#listCommendPage($commendPage)	
+				</SELECT></TD>
+              </TR>
+            </TBODY>
+        </TABLE>
+        <span id="filetype" style="DISPLAY: none"> 
+        <table width="100%" border="0" cellspacing="0" cellpadding="4">
+          <tr> 
+            <td bgcolor="#666666" height="1"></td>
+          </tr>
+          <tr> 
+            <td bgcolor="#F7FEEF"><table width="100%" border="0" cellspacing="0" cellpadding="3">
+                <tr> 
+                  <td width="13%">　</td>
+                  <td width="87%">　</td>
+                </tr>
+              </table></td>
+          </tr>
+        </table>
+        </span> </TD>
+    </TR>
+	#if($positionList&&$positionList.size()>0)
+    <TR> 
+      <TD width="6%" align=middle bgcolor="#edf7d0" height="22"><b>序号</b></TD>
+      <TD width="30%" align=middle bgcolor="#edf7d0"><b>位置名称</b></TD>
+      <TD width="15%" align=middle bgcolor="#edf7d0"><b>所属栏目</b></TD>
+      <TD width="12%" align=middle bgcolor="#edf7d0"><b>显示形式</b></TD>
+      <TD width="20%" align=middle bgcolor="#edf7d0"><b>添加日期</b></TD>
+      <TD align=middle bgcolor="#edf7d0"><b>操作</b></TD>
+    </TR>
+	#foreach($pos in $positionList)
+    <TR onmousemove="javascript:this.bgColor='#F3F7EA';" onmouseout="javascript:this.bgColor='#FFFFFF';" align=middle bgcolor="#ffffff"> 
+      #set($itemNumber = (-1 + $velocityCount + $search.getPageFristItem()))
+	  <TD height="30" >$itemNumber</TD>
+      <TD align="left">&nbsp; $pos.commendName</TD>
+      <TD  >
+      #showCommendPosition($pos.commendPage)
+	  </TD>
+      <TD >#showCommendContentType($pos.commendContentType)</TD>
+      <TD  >$!dateUtils.simpleFormat($!pos.gmtCreate)</TD>
+      <TD align=middle >
+		## <a href="position_view.htm?commendId=$!pos.commendId">[修改]</a><a href="pos_del.htm?commendId=$!pos.commendId&commendPage=$!pos.commendPage">[删除]</a> 
+        <a href="../commend_content/con_add.htm?posId=$!pos.commendId&from=posList">[添加或修改推荐]</a></TD>
+    </TR>
+	#end
+    <tr>
+		<td colspan="6"  background="${imgServer}/images/admin/tbg.gif"> 
+		<script>
+		   pageSlider($!search.totalPage,$!search.currentPage,$!search.totalItem,$!search.pageSize,'','positionForm','currentPage','${imgServer}/images/admin');
+    	</script>
+		</td>
+	</tr>
+	#end
+  </TBODY>
+</TABLE>
+</BODY></FORM>

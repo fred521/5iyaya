@@ -1,0 +1,47 @@
+<table class="header" width="990px" cellSpacing="0" cellspacing="0" style="font-weight:normal">
+        <tr>
+          <td width="80px" height="103px"><img src='${imgServer}/images/index_logo.png' id='logo_png' ></img></td>
+          <td style="vertical-align:top;">
+		     <a href='${appServer}/index.htm'>首页</a><label>|</label>
+			 <a href='http://bbs.5iyya.com' target="_blank" >丫丫说论坛</a><label>|</label>
+			 <a href='http://home.5iyya.com' target="_blank" >丫丫空间</a><label>|</label>
+		     <a href='${appServer}/search/search.htm?searchtype=good' >我要买</a><label>|</label>
+        	<script>
+        		function getCookie(c_name)
+                {
+                if (document.cookie.length>0)
+                  {
+                  c_start=document.cookie.indexOf(c_name + "=");
+                  if (c_start!=-1)
+                    {
+                    c_start=c_start + c_name.length+1;
+                    c_end=document.cookie.indexOf(";",c_start);
+                    if (c_end==-1) c_end=document.cookie.length;
+                    return unescape(document.cookie.substring(c_start,c_end));
+                    }
+                  }
+                return "";
+                }
+        		var loginName = getCookie("lname");
+        		var memberPermission = getCookie("mp");
+        		if(loginName!="" && memberPermission != ""){
+        			document.write("欢迎您,"+loginName+"&nbsp;<a href='${homeMoudle}/visitor/logout.htm'>[退出] </a>|&nbsp;");
+        		}
+        		else{
+        			document.write("<a href='${homeMoudle}/visitor/register.htm' >会员注册</a> |&nbsp;");
+        			document.write("<a href='${homeMoudle}/visitor/init.htm' >登录</a> |&nbsp;");       			
+        		}
+        		
+        	</script>
+    	    
+    	    <a href='${homeMoudle}/member/index.htm' >我的帐户</a><label>|</label>
+    	    <a href='${homeMoudle}/helper/index.htm' >帮助中心</a>
+          </td>
+        </tr>
+</table>
+  <script>
+  jQuery().ready( function(){	
+      jQuery.ifixpng( '${imgServer}/images/pixel.gif' )  ;
+      jQuery('#logo_png').ifixpng( );
+  } ) ;
+  </script>

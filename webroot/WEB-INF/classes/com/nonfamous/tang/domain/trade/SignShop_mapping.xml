@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="SIGNSHOP_SPACE">
+	<resultMap id="signshop" class="com.nonfamous.tang.domain.trade.SignShop">
+		<result property="shopId" column="SHOP_ID"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="id" column="ID"/>
+	</resultMap>
+	<resultMap id="shop" class="com.nonfamous.tang.domain.Shop">	
+		<result property="shopName" column="SHOP_NAME"/>
+		<result property="shopOwner" column="SHOP_OWNER"/>	
+		<result property="shopId" column="SHOP_ID"/>
+		<result property="bankAccount" column="BANK_ACCOUNT"/>		
+	</resultMap>
+	
+	<insert id="signshop_insert" parameterClass="com.nonfamous.tang.domain.trade.SignShop">
+		INSERT INTO SIGN_SHOP (
+				ID,
+				SHOP_ID,
+				MEMBER_ID
+	                     )
+	             VALUES ( 
+	            #id#,
+				#shopId#,
+				#memberId#
+	                     )
+	</insert>	
+	
+	<select id="get_signshop"  resultMap="signshop">
+		SELECT 
+		    ID,
+			SHOP_ID,
+			MEMBER_ID
+		FROM SIGN_SHOP  t     
+		WHERE t.id = #value#
+	</select>
+	
+	<select id="get_by_shop_and_member"  resultMap="signshop">
+		SELECT
+		    ID,
+			SHOP_ID,
+			MEMBER_ID
+		FROM SIGN_SHOP  t force index(idx_sign_shop_memberid)     
+		WHERE t.MEMBER_ID = #memberId# and t.SHOP_ID = #shopId# 
+	</select>
+	
+	<delete id="delete_signshop" >
+		DELETE  FROM SIGN_SHOP  WHERE  member_id = #memberId# and SHOP_ID = #shopId#
+	</delete>
+	
+	<select id="count_my_signshop" resultClass="java.lang.Integer">
+		select count(*) from sign_shop t force index( idx_sign_shop_memberid) where  t.MEMBER_ID=#memberId# 
+	</select>
+	
+	<select id="get_my_signshop_paging" resultMap="shop">
+				select  s.shop_name,s.shop_owner,s.bank_account,s.shop_id
+					from sign_shop t force index(idx_sign_shop_memberid),shop s
+					where t.member_id=#memberId#  and t.shop_id = s.shop_id 					   
+	</select>
+	
+	<select id="get_my_signshop" resultMap="shop">
+		select s.shop_name,s.shop_owner,s.bank_account,s.shop_id from sign_shop t force  index( idx_sign_shop_memberid) ,shop s  where t.member_id=#memberId# and t.shop_id = s.shop_id 
+	</select>
+</sqlMap>

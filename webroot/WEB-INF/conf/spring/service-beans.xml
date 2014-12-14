@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+	<bean id="adminUserService" class="com.nonfamous.tang.service.admin.pojo.POJOAdminUserService">
+		<property name="adminUserDAO" ref="adminUserDAO" />
+	</bean>
+	<bean id="goodsIndexService" class="com.nonfamous.tang.service.search.pojo.POJOGoodsIndexService" init-method="init">
+	    <property name="searchGoodsDAO" ref="searchGoodsDAO" />
+	</bean>
+	<bean id="newsIndexService" class="com.nonfamous.tang.service.search.pojo.POJONewsIndexService" init-method="init">
+	    <property name="searchNewsDAO" ref="searchNewsDAO" />
+	</bean>
+	<bean id="memberShopIndexService" class="com.nonfamous.tang.service.search.pojo.POJOMemberShopIndexService" init-method="init">
+	    <property name="searchMemberShopDAO" ref="searchMemberShopDAO" />
+	</bean>
+	<bean id="keyWordService" class="com.nonfamous.tang.service.search.pojo.POJOKeyWordService" >
+		<property name="searchKeyWordDAO" ref="searchKeyWordDAO" />
+		<property name="executor">
+			<bean class="com.nonfamous.commom.util.pool.ThreadPoolExecutorFactory">
+				<property name="corePoolSize" value="5" />
+				<property name="workQueue" >
+					<bean class="java.util.concurrent.LinkedBlockingQueue" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	<bean id="commendService" class="com.nonfamous.tang.service.admin.pojo.POJOCommendService">
+		<property name="commendPositionDAO" ref="commendPositionDAO" />
+		<property name="commendContentDAO" ref="commendContentDAO" />		
+	</bean>	
+	<bean id="smsService" class="com.nonfamous.tang.service.sms.pojo.POJOSmsService">
+		<property name="smsDAO" ref="smsDAO" />
+	</bean>
+	<bean id="memberService" class="com.nonfamous.tang.service.home.pojo.POJOMemberService">
+		<property name="memberDAO" ref="memberDAO" />
+		<property name="mobileValidateDAO" ref="mobileValidateDAO" />
+		<property name="smsService" ref="smsService" />
+		<property name="shopDAO" ref="shopDAO" />
+		<property name="ucenterService" ref="ucenterService" />
+		<property name="userCenterService" ref="userCenterService"/>
+		<property name="mailEngine" ref="mailEngine"/>
+		 <property name="signUpTemplate" value="conf/love/mail/templates/signUpTemplate.vm"></property>
+		 <property name="forgetPasswordTemplate" value="conf/love/mail/templates/passwordBackTemplate.vm"/>
+	     <property name="forgetLoginIdTemplate" value="conf/love/mail/templates/userNameBackTemplate.vm"/>
+	</bean>
+	<bean id="addressHelper" class="com.nonfamous.commom.util.AddressHelper" init-method="init">
+        <property name="addressFile"><value>WEB-INF/conf/addresscode.txt</value></property>
+    </bean>
+	<bean id="goodsService" class="com.nonfamous.tang.service.home.pojo.POJOGoodsService" destroy-method="destroy">
+		<property name="goodsDAO" ref="goodsDAO" />
+		<property name="shopDAO" ref="shopDAO" />
+		<property name="uploadService" ref="uploadService" />
+		<property name="viewCountService.hitsCountMax" value="10" />
+		<property name="viewCountService.executor" ref="hitsCountExecutor" />
+	</bean>
+	<bean id="newsService" class="com.nonfamous.tang.service.home.pojo.POJONewsService" destroy-method="destroy">
+		<property name="newsDAO" ref="newsDAO" />
+		<property name="newsTypeDAO" ref="newsTypeDAO" />
+		<property name="newsContentDAO" ref="newsContentDAO" />
+		<property name="viewCountService.hitsCountMax" value="200" />
+		<property name="viewCountService.executor" ref="hitsCountExecutor" />
+	</bean>
+	<bean id="helperService" class="com.nonfamous.tang.service.home.pojo.POJOHelperService" destroy-method="destroy">
+		<property name="helperDAO" ref="helperDAO" />
+		<property name="helperTypeDAO" ref="helperTypeDAO" />
+	</bean>
+	<bean id="goodsVideoManager" class="com.nonfamous.tang.service.video.pojo.GoodsVideoManager" destroy-method="destroy">
+		<property name="shopDAO" ref="shopDAO" />
+	</bean>
+	<bean id="shopService" class="com.nonfamous.tang.service.home.pojo.POJOShopService">
+		<property name="shopDAO" ref="shopDAO" />
+		<property name="signShopDAO" ref="signShopDAO" />
+		<property name="marketTypeDAO" ref="marketTypeDAO" />
+	</bean>
+	<bean id="goodsCatalogService" class="com.nonfamous.tang.service.home.pojo.POJOGoodsCatalogService">
+		<property name="goodsCatDAO" ref="goodsCatDAO" />
+	</bean>
+	
+	<bean id="hitsCountExecutor" class="com.nonfamous.commom.util.pool.ThreadPoolExecutorFactory">
+		<property name="corePoolSize" value="2" />
+		<property name="workQueue" >
+			<bean class="java.util.concurrent.LinkedBlockingQueue" />
+		</property>
+	</bean>
+	
+	<bean id="adminLogService" class="com.nonfamous.tang.service.admin.pojo.POJOAdminLogService">
+		<property name="adminLogDAO" ref="adminLogDAO" />
+	</bean>
+	<bean id="tradeOrderService" class="com.nonfamous.tang.service.home.pojo.POJOTradeOrderService">
+		<property name="tradeOrderDAO" ref="tradeOrderDAO" />
+	</bean>
+	
+	<bean id="tradePayService" class="com.nonfamous.tang.service.home.pojo.POJOTradePayService">
+		<property name="tradeOrderService" ref="tradeOrderService" />
+		<property name="shopDAO" ref="shopDAO" />
+		<property name="memberDAO" ref="memberDAO" />
+		<property name="tradePayDAO" ref="tradePayDAO" />
+		<property name="transactionTemplate" ref="transactionTemplate" />
+	</bean>
+	
+	<bean id="tradeCarService" class="com.nonfamous.tang.service.home.pojo.POJOTradeCarService">		
+		<property name="tradeCarDAO" ref="tradeCarDAO" />
+		<property name="tradeCarShopDAO" ref="tradeCarShopDAO" />
+		<property name="goodsDAO" ref="goodsDAO" />
+		<property name="shopDAO" ref="shopDAO" />
+		<property name="transactionTemplate" ref="transactionTemplate" />
+	</bean>
+	
+	<bean id="ucenterService" class="com.nonfamous.tang.service.ucenter.UCenterServiceImpl">
+		<property name="ucenterUrl" value="${ucenter.url}"/>
+		<property name="appID" value="${ucenter.apiId}"/>
+		<property name="key" value="${ucenter.authkey}"/>
+	</bean>
+	
+	<bean id="addressService" class="com.nonfamous.tang.service.home.pojo.POJOAddressService">
+		<property name="addressDao" ref="addressDAO"/>
+	</bean>
+	
+	<bean id="urlService" class="com.nonfamous.tang.service.home.pojo.POJOURLService" destroy-method="destroy">
+		<property name="urlDAO" ref="urlDAO" />
+	</bean>
+	
+	<bean id="homePageGenerateService" class="com.nonfamous.tang.service.admin.pojo.POJOHomePageGenerateService">
+		<property name="pageFilePath" value="/usr/local/apache-tomcat-6.0.14/webapps/ROOT/index.html"/>
+		<property name="homePageUrl" value="http://www.5iyya.com/index.htm"/>
+		<property name="fileCharSet" value="UTF-8"/>
+	</bean>
+	
+	<bean id="userCenterService" class="com.nonfamous.tang.service.usercenter.pojo.POJOUserCenterService">
+	     <property name="userCenterDAO" ref="userCenterDAO"/>
+	</bean>
+	
+</beans>

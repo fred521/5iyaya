@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="NEWSBASEINFO_SPACE">
+	<resultMap id="newsbaseinfo" class="com.nonfamous.tang.domain.NewsBaseInfo">
+		<result property="newsId" column="NEWS_ID"/>
+		<result property="newsTitle" column="NEWS_TITLE"/>
+		<result property="newsType" column="NEWS_TYPE"/>
+		<result property="phone" column="PHONE"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="nick" column="NICK"/>
+		<result property="newsStatus" column="NEWS_STATUS"/>
+		<result property="viewCount" column="VIEW_COUNT"/>
+		<result property="abandonDays" column="ABANDON_DAYS"/>
+		<result property="gmtAbandon" column="GMT_ABANDON"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+	</resultMap>
+	<resultMap id="newsinfowithcontent" class="com.nonfamous.tang.domain.NewsBaseInfo">
+		<result property="newsId" column="NEWS_ID"/>
+		<result property="newsTitle" column="NEWS_TITLE"/>
+		<result property="newsType" column="NEWS_TYPE"/>
+		<result property="phone" column="PHONE"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="nick" column="NICK"/>
+		<result property="newsStatus" column="NEWS_STATUS"/>
+		<result property="viewCount" column="VIEW_COUNT"/>
+		<result property="abandonDays" column="ABANDON_DAYS"/>
+		<result property="gmtAbandon" column="GMT_ABANDON"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+		<result property="content.content" column="CONTENT"/>
+	</resultMap>
+	
+	<insert id="NEWS_BASE_INFO_INSERT" parameterClass="com.nonfamous.tang.domain.NewsBaseInfo">
+		INSERT INTO NEWS_BASE_INFO (
+				NEWS_ID,
+				NEWS_TITLE,
+				NEWS_TYPE,
+				PHONE,
+				MEMBER_ID,
+				NICK,
+				NEWS_STATUS,
+				VIEW_COUNT,
+				ABANDON_DAYS,
+				GMT_ABANDON,
+				GMT_CREATE,
+				CREATOR,
+				GMT_MODIFY,
+				MODIFIER
+	                     )
+	             VALUES ( 
+				#newsId#,
+				#newsTitle#,
+				#newsType#,
+				#phone#,
+				#memberId#,
+				#nick#,
+				#newsStatus#,
+				0,
+				#abandonDays#,
+				#gmtAbandon#,
+				sysdate(),
+				#creator#,
+				sysdate(),
+				#modifier#
+	                     )
+	</insert>
+	
+	<update id="NEWS_BASE_INFO_UPDATE" parameterClass="com.nonfamous.tang.domain.NewsBaseInfo">
+		UPDATE NEWS_BASE_INFO t SET   
+			<isNotEmpty prepend="" property="newsTitle"> t.NEWS_TITLE = #newsTitle#,</isNotEmpty>
+			<isNotEmpty prepend="" property="newsType"> t.NEWS_TYPE = #newsType#,</isNotEmpty>
+			<isNotEmpty prepend="" property="phone"> t.PHONE = #phone#,</isNotEmpty>
+			<isNotEmpty prepend="" property="memberId"> t.MEMBER_ID = #memberId#,</isNotEmpty>
+			<isNotEmpty prepend="" property="nick"> t.NICK = #nick#,</isNotEmpty>
+			<isNotEmpty prepend="" property="newsStatus"> t.NEWS_STATUS = #newsStatus#,</isNotEmpty>
+			<isNotEmpty prepend="" property="abandonDays"> t.ABANDON_DAYS = #abandonDays#,</isNotEmpty>
+			<isNotEmpty prepend="" property="gmtAbandon"> t.GMT_ABANDON = #gmtAbandon#,</isNotEmpty>
+			<isNotEmpty prepend="" property="modifier"> t.MODIFIER = #modifier#, </isNotEmpty>
+			t.GMT_MODIFY = sysdate()
+		WHERE t.NEWS_ID = #newsId#
+	</update>
+	
+	<select id="GET_NEWS_BASE_INFO_LIST" parameterClass="java.util.Map" resultMap="newsbaseinfo">
+		SELECT 
+			NEWS_ID,
+			NEWS_TITLE,
+			NEWS_TYPE,
+			PHONE,
+			MEMBER_ID,
+			NICK,
+			NEWS_STATUS,
+			VIEW_COUNT,
+			ABANDON_DAYS,
+			GMT_ABANDON,
+			GMT_CREATE,
+			CREATOR,
+			GMT_MODIFY,
+			MODIFIER
+		FROM NEWS_BASE_INFO  t  
+	</select>
+	<select id="GET_ALL_NEWS_COUNT" resultClass="java.lang.Integer">
+		select count(*) as total
+		FROM NEWS_BASE_INFO  t
+	</select>
+	<select id="GET_ALL_NEWS_COUNT_BY_MEMBERID" resultClass="java.lang.Integer">
+		select count(*) as total
+		FROM NEWS_BASE_INFO  t 
+		where member_Id=#memberId# and news_status &lt;> 'D'
+	</select>	
+    <select id="GET_ALL_NEWS_LIST" parameterClass="com.nonfamous.tang.dao.query.NewsQuery" resultMap="newsbaseinfo">
+		  SELECT t.* FROM NEWS_BASE_INFO  t 
+			limit #dbStartNo#, #dbEndNo#
+	</select>
+	<select id="QUERY_NEWS_COUNT" resultClass="java.lang.Integer">
+		select count(*) as total
+		FROM NEWS_BASE_INFO  t
+			<dynamic prepend="where">
+				<isNotEmpty property="newsType" prepend="and"> t.news_type = #newsType# </isNotEmpty>
+				<isNotEmpty property="newsTitle" prepend="and"> t.news_title = #newsTitle# </isNotEmpty>
+				<isNotEmpty property="memberId" prepend="and"> t.member_id = #memberId# </isNotEmpty>
+				<isNotEmpty property="newsStatus" prepend="and"> t.news_status = #newsStatus# </isNotEmpty>
+				<isEmpty property="newsStatus" prepend="and"> t.news_status &lt;> 'D'</isEmpty>
+				<isNotEmpty property="creator" prepend="and"> t.creator = #creator# </isNotEmpty>
+			    <isNotEmpty property="nick" prepend="and"> t.nick = #nick# </isNotEmpty>
+			    <isNotEmpty property="phone" prepend="and"> t.phone = #phone# </isNotEmpty>					
+			</dynamic>
+	</select>
+	
+    <select id="QUERY_NEWS_LIST" parameterClass="com.nonfamous.tang.dao.query.NewsQuery" resultMap="newsbaseinfo">
+				SELECT t.* FROM NEWS_BASE_INFO  t 
+				<dynamic prepend="where">
+					<isNotEmpty property="newsType" prepend="and"> t.news_type = #newsType# </isNotEmpty>
+					<isNotEmpty property="newsTitle" prepend="and"> t.news_title = #newsTitle# </isNotEmpty>
+					<isNotEmpty property="memberId" prepend="and"> t.member_id = #memberId# </isNotEmpty>
+					<isNotEmpty property="newsStatus" prepend="and"> t.news_status = #newsStatus# </isNotEmpty>
+					<isEmpty property="newsStatus" prepend="and"> t.news_status &lt;> 'D'</isEmpty>
+					<isNotEmpty property="creator" prepend="and"> t.creator = #creator# </isNotEmpty>
+					<isNotEmpty property="nick" prepend="and"> t.nick = #nick# </isNotEmpty>
+					<isNotEmpty property="phone" prepend="and"> t.phone = #phone# </isNotEmpty>			
+			</dynamic>
+			order by t.gmt_create desc LIMIT #dbStartNo#, #dbEndNo#
+	</select>
+	<select id="GET_NEWS_BASE_INFO" parameterClass="java.lang.String" resultMap="newsbaseinfo">
+		SELECT 
+			NEWS_ID,
+			NEWS_TITLE,
+			NEWS_TYPE,
+			PHONE,
+			MEMBER_ID,
+			NICK,
+			NEWS_STATUS,
+			VIEW_COUNT,
+			ABANDON_DAYS,
+			GMT_ABANDON,
+			GMT_CREATE,
+			CREATOR,
+			GMT_MODIFY,
+			MODIFIER,
+			content
+            FROM NEWS_BASE_INFO t  where NEWS_ID = #value#
+	</select>
+	<select id="GET_NEWS_INFO_WITH_CONTENT" parameterClass="java.lang.String" resultMap="newsinfowithcontent">
+		SELECT 
+			t.NEWS_ID,
+			t.NEWS_TITLE,
+			t.NEWS_TYPE,
+			t.PHONE,
+			t.MEMBER_ID,
+			t.NICK,
+			t.NEWS_STATUS,
+			t.VIEW_COUNT,
+			t.ABANDON_DAYS,
+			t.GMT_ABANDON,
+			t.GMT_CREATE,
+			t.CREATOR,
+			t.GMT_MODIFY,
+			t.MODIFIER,
+			c.content
+            FROM NEWS_BASE_INFO t left join NEWS_CONTENT c on t.NEWS_ID=c.NEWS_ID where
+ t.NEWS_ID = #value#
+	</select>
+
+	
+	<delete id="DELETE_NEWS_BASE_INFO_BY_ID" parameterClass="java.lang.String">
+		DELETE FROM NEWS_BASE_INFO  WHERE NEWS_ID = #value#
+	</delete>
+	
+	<select id="QUERY_NEWS_COUNT_FOR_INDEX" parameterClass="com.nonfamous.tang.dao.query.SearchNewsQuery" resultClass="java.lang.Integer">
+		select count(*) as total
+		FROM NEWS_BASE_INFO  t force index(idx_news_modifydate)
+		where  t.GMT_MODIFY &gt;= #begin# AND t.GMT_MODIFY &lt; #end#
+	</select>
+	
+	<select id="QUERY_NEWS_LIST_FOR_INDEX" parameterClass="com.nonfamous.tang.dao.query.SearchNewsQuery" resultMap="newsinfowithcontent">
+			SELECT t2.*, c.CONTENT FROM
+			(SELECT 
+				t.NEWS_ID,
+				t.NEWS_TITLE,
+				t.NEWS_TYPE,
+				t.PHONE,
+				t.MEMBER_ID,
+				t.NICK,
+				t.NEWS_STATUS,
+				t.VIEW_COUNT,
+				t.ABANDON_DAYS,
+				t.GMT_ABANDON,
+				t.GMT_CREATE,
+				t.CREATOR,
+				t.GMT_MODIFY,
+				t.MODIFIER
+			FROM NEWS_BASE_INFO  t FORCE INDEX (idx_news_modifydate)
+			WHERE  t.GMT_MODIFY &gt;= #begin# AND t.GMT_MODIFY &lt; #end#
+			ORDER BY t.GMT_MODIFY ASC 
+			LIMIT #dbStartNo#, #dbEndNo#) t2, NEWS_CONTENT c
+			WHERE t2.news_id=c.news_id
+	</select>
+	
+	<select id="QUERY_YY_NEWS_COUNT_FOR_INDEX" parameterClass="com.nonfamous.tang.dao.query.SearchNewsQuery" resultClass="java.lang.Integer">
+		select count(*) as total
+		FROM NEWS_BASE_INFO  t force index(idx_news_modifydate)
+		where  AND t.GMT_MODIFY &gt;= #begin# AND t.GMT_MODIFY &lt; #end#
+	</select>
+	
+	<select id="QUERY_YY_NEWS_LIST_FOR_INDEX" parameterClass="com.nonfamous.tang.dao.query.SearchNewsQuery" resultMap="newsinfowithcontent">
+			SELECT t2.*, c.CONTENT FROM
+			(SELECT 
+				t.NEWS_ID,
+				t.NEWS_TITLE,
+				t.NEWS_TYPE,
+				t.PHONE,
+				t.MEMBER_ID,
+				t.NICK,
+				t.NEWS_STATUS,
+				t.VIEW_COUNT,
+				t.ABANDON_DAYS,
+				t.GMT_ABANDON,
+				t.GMT_CREATE,
+				t.CREATOR,
+				t.GMT_MODIFY,
+				t.MODIFIER
+			FROM NEWS_BASE_INFO  t FORCE INDEX (idx_news_modifydate)
+			WHERE  t.GMT_MODIFY &gt;= #begin# AND t.GMT_MODIFY &lt; #end#
+			ORDER BY t.GMT_MODIFY ASC 
+			LIMIT #dbStartNo#, #dbEndNo#) t2, NEWS_CONTENT c
+			WHERE t2.news_id=c.news_id
+	</select>
+	
+	<update id="UDPATE_VIEW_COUNT">
+		UPDATE NEWS_BASE_INFO t SET t.VIEW_COUNT = t.VIEW_COUNT + #value# ,t.GMT_MODIFY = sysdate()
+		  WHERE t.NEWS_ID = #key#
+	</update>
+	
+	<select id="QUERY_NEWS_INFOS" resultMap="newsbaseinfo">
+		call  list_top10_news_by_type() 
+ 	</select>
+ 	
+ 	<select id="QUERY_YY_NEWS_INFOS" resultMap="newsbaseinfo">
+		call  list_yy_news_by_type() 
+ 	</select>
+ 	
+ 	<select id="QUERY_NEWS_INFOS_BY_NEWSTYPE" resultMap="newsbaseinfo">
+		select *
+	  	from (select t.*,
+	               ROW_NUMBER() OVER(PARTITION BY t.news_type order by t.gmt_create desc) rn
+	          from news_base_info t 
+	          where t.news_status = 'N' and t.news_type=#value#) tt
+	 	where tt.rn &lt;= 10
+ 	</select>
+ 	 <select id="getSysDate" resultClass="java.util.Date">
+		SELECT sysdate()
+	</select>
+</sqlMap>

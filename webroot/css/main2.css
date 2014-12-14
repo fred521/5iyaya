@@ -1,0 +1,127 @@
+
+body {
+	      /* top right bottom left  */
+	margin: 0 0 0 0;
+	font-family:				Tahoma, Arial, sans-serif;
+	font-size:					12px;
+	/*background-color:			#F6F6F6;*/
+	scrollbar-arrow-color:		#FFFFFF;
+	scrollbar-3dlight-color:	#DDDDDD;
+	scrollbar-highlight-color:	#AAAAAA;
+	scrollbar-face-color:		#AAAAAA;
+	scrollbar-shadow-color:		#AAAAAA;
+	scrollbar-track-color:		#CCCCCC;
+	scrollbar-darkshadow-color:	#666666;
+}
+
+.handCursor {
+	cursor:pointer ;
+}
+
+
+.scroll_div {
+	margin:						0px 0px 0px 0px;
+	scrollbar-arrow-color:		#FFFFFF;
+	scrollbar-3dlight-color:	#DDDDDD;
+	scrollbar-highlight-color:	#AAAAAA;
+	scrollbar-face-color:		#AAAAAA;
+	scrollbar-shadow-color:		#AAAAAA;
+	scrollbar-track-color:		#CCCCCC;
+	scrollbar-darkshadow-color:	#666666;
+	overflow-y:auto;
+	overflow-x:no;
+	border:0px solid black;	
+}
+
+.ajaxError {
+    width: 400 px;
+}
+
+.datetime_input {
+	background: transparent url(../images/calendar_single.png) no-repeat 0 0;
+	background-position:right;
+    border: 1px solid black;
+}
+
+/* content_list */
+.content_list {
+  list-style-type:	none;	
+  margin: 0px;
+  text-align: left;
+  padding:5px 0px 0px 10px;
+}
+
+.content_list li {
+	padding:1px 0px 0px 0px;
+	line-height:15px;
+}
+
+.content_list li a{
+    text-decoration: none ;
+    text-align:		left  ; 
+	font-size:		12px  ;
+	font-family:    ËÎÌו  ;  
+    color      :    black ;    
+}
+.content_list li a:hover{
+	text-decoration: underline;
+}
+
+.content_list_numeric li label{
+	font-size:		12px  ;
+	font-family:    ËÎÌו  ;  
+    color      :    white ;   
+    padding:0px 10px 0px 0px; /* top right bottom left */
+    background: transparent url(../images/label_numeric.gif) no-repeat 0 0;
+}
+
+.content_list_dash {
+	margin: -3px 0px 0px -10px;
+    border-bottom: 1px dotted #999999;	
+    vertical-align:top;
+}
+
+.contact_list {
+  list-style-type:	none;	
+  margin: 0px;
+  text-align: left;
+  padding:0px 0px 0px 10px;
+}
+
+/* list_table */
+.list_table {
+  border: 1px solid #EEAAB9;
+}
+
+.list_table_content {
+  vertical-align: top;	
+}
+
+.list_table_header {	
+  border-spacing: 0px;
+  padding: 0px;	
+  text-decoration: none;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.list_table_header img{
+  cursor:pointer;
+}
+
+
+.contact_list_gm_mail{
+  background: transparent url(../images/contact_mail.gif) no-repeat 0 0;	
+  padding:0px 0px 0px 40px;	
+  color: #026EDD;
+  font-weight: bold;
+}
+
+.contact_list_gm_mail2 a{
+  padding:0px 0px 0px 40px;	
+  color: #FF3199;
+  font-weight: bold;
+  font-size:10pt;
+  text-decoration:none;
+}
+

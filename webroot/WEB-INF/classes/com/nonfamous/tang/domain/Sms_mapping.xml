@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="SMS_SPACE">
+	<resultMap id="sms" class="com.nonfamous.tang.domain.Sms">
+		<result property="smsId" column="SMS_ID"/>
+		<result property="phone" column="PHONE"/>
+		<result property="status" column="STATUS"/>
+		<result property="context" column="CONTEXT"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="sendCount" column="SEND_COUNT"/>
+	</resultMap>
+	
+	<insert id="sms_insert" parameterClass="com.nonfamous.tang.domain.Sms">
+		INSERT INTO SMS (
+				SMS_ID,
+				PHONE,
+				STATUS,
+				CONTEXT,
+				GMT_CREATE,
+				GMT_MODIFY,
+				SEND_COUNT
+	                     )
+	             VALUES ( 
+				#smsId#,
+				#phone#,
+				#status#,
+				#context#,
+				sysdate(),
+				sysdate(),
+				0
+	                     )
+	</insert>
+	
+	<update id="sms_update" parameterClass="com.nonfamous.tang.domain.Sms">
+		UPDATE SMS t SET  
+			<isNotEmpty prepend="" property="phone"> t.PHONE = #phone#,</isNotEmpty>
+			<isNotEmpty prepend="" property="status"> t.STATUS = #status#,</isNotEmpty>
+			<isNotEmpty prepend="" property="context"> t.CONTEXT = #context#,</isNotEmpty>
+			t.GMT_MODIFY = sysdate() 
+		WHERE t.SMS_ID = #smsId#
+	</update>
+	
+	<update id="sms_send_status_update" parameterClass="java.util.Map">
+		UPDATE SMS t SET  
+			 t.SEND_COUNT = NVL(t.SEND_COUNT,0) + 1 ,
+			 <isNotEmpty prepend="" property="success"> t.STATUS = 'S',</isNotEmpty>
+			t.GMT_MODIFY = sysdate() 
+		WHERE t.SMS_ID IN 
+		  <iterate property="list" prepend=" " open="(" close=")" conjunction=","> #list[].smsId# </iterate>
+	</update>
+	
+	<select id="get_wait_sms_list" resultMap="sms">
+		SELECT 
+			SMS_ID,
+			PHONE,
+			STATUS,
+			CONTEXT,
+			GMT_CREATE,
+			GMT_MODIFY,
+			SEND_COUNT
+		FROM SMS  t  
+		WHERE t.GMT_MODIFY >= TO_DATE(TO_CHAR(#value#,'yyyy-mm-dd hh24:mi:ss'),'yyyy-mm-dd hh24:mi:ss')
+		  AND t.STATUS = 'W' 
+	</select>
+	
+	<select id="get_sms" parameterClass="java.lang.Long" resultMap="sms">
+		SELECT 
+			SMS_ID,
+			PHONE,
+			STATUS,
+			CONTEXT,
+			GMT_CREATE,
+			GMT_MODIFY,
+			SEND_COUNT
+		FROM SMS  t     
+		WHERE t.SMS_ID = #value#
+	</select>
+	
+	<delete id="delete_sms" parameterClass="java.lang.Long">
+		DELETE FROM SMS  WHERE SMS_ID = #value#
+	</delete>
+</sqlMap>

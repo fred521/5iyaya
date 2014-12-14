@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="gb2312"?>
+<formmset>
+	<!-- 推荐位置 -->
+	<form name="addNotes">
+		<field name="commend">
+		  <required-validator>
+				<message>店铺公告不能为空</message>
+		  </required-validator>
+		  <length-validator min="0" max="4000">
+				<message>店铺公告输入长度不能超过4000个字符</message>
+		  </length-validator>	
+		</field>
+	</form>
+	<form name="updateShop">
+		<field name="shopName">
+			<required-validator>
+				<message>店铺名称不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="40">
+				<message>店铺名称长度不能超过40个字符</message>
+			</length-validator>			
+		</field>
+		<field name="commodity">
+			<required-validator>
+				<message>主营商品不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="40">
+				<message>主营商品长度不能超过40个字符</message>
+			</length-validator>			
+		</field>
+		<field name="shopOwner">
+			<required-validator>
+				<message>店主姓名不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="6">
+				<message>店主姓名长度不能超过6个字符</message>
+			</length-validator>				
+		</field>
+		<field name="belongMarketId"></field>
+		<field name="address">
+			<required-validator>
+				<message>店铺位置不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="40">
+				<message>店铺位置长度不能超过40个字符</message>
+			</length-validator>	
+		</field>
+		<field name="phone">
+			<length-validator max="32">
+                <message>电话号码不得超过32位</message>
+            </length-validator>
+            <regexp-validator pattern="^([0-9]{3,6}-)?([1-9][0-9]{1,7})(-[0-9]{1,6})?$">
+                <message>电话号码不符合规范</message>
+            </regexp-validator>
+		</field>
+		<field name="bank"></field>
+		<field name="bankAccount">
+			<regexp-validator pattern="[0-9]+">
+				<message>银行帐号只能为数字</message>
+			</regexp-validator>
+			<length-validator min="0" max="16">
+				<message>银行帐号长度不能超过16个字符</message>
+			</length-validator>	
+		</field>
+		<field name="accountName">
+			<length-validator min="0" max="6">
+				<message>开户人长度不能超过6个字符</message>
+			</length-validator>			
+		</field>
+		<field name="gisAddress"></field>
+	</form>
+	
+	<form name="adminShop">
+		<field name="shopName">
+			<required-validator>
+				<message>店铺名称不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="40">
+				<message>店铺名称长度不能超过40个字符</message>
+			</length-validator>			
+		</field>
+		<field name="commodity">
+			<required-validator>
+				<message>主营商品不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="40">
+				<message>主营商品长度不能超过40个字符</message>
+			</length-validator>			
+		</field>
+		<field name="shopOwner">
+			<required-validator>
+				<message>店主姓名不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="6">
+				<message>店主姓名长度不能超过6个字符</message>
+			</length-validator>				
+		</field>
+		<field name="belongMarketId"></field>
+		<field name="address">
+			<required-validator>
+				<message>店铺位置不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="40">
+				<message>店铺位置长度不能超过40个字符</message>
+			</length-validator>	
+		</field>
+		<field name="phone">
+			<length-validator max="32">
+                <message>电话号码不得超过32位</message>
+            </length-validator>
+            <regexp-validator pattern="^([0-9]{3,6}-)?([1-9][0-9]{1,7})(-[0-9]{1,6})?$">
+                <message>电话号码不符合规范</message>
+            </regexp-validator>
+		</field>
+		<field name="bank"></field>
+		<field name="bankAccount">
+			<regexp-validator pattern="[0-9]+">
+				<message>银行帐号只能为数字</message>
+			</regexp-validator>
+			<length-validator min="0" max="16">
+				<message>银行帐号长度不能超过16个字符</message>
+			</length-validator>	
+		</field>
+		<field name="accountName">
+			<length-validator min="0" max="6">
+				<message>开户人长度不能超过6个字符</message>
+			</length-validator>			
+		</field>
+		<field name="commend">
+			<required-validator>
+				<message>信息描述不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="4000">
+				<message>信息描述输入长度不能超过4000个字符</message>
+			</length-validator>
+		</field>
+		<field name="gisAddress"></field>
+	</form>
+	
+</formmset>

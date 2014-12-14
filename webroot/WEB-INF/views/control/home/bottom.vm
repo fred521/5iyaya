@@ -1,0 +1,86 @@
+<table class="main_table" >
+        <tr>
+          <td>
+              <!-- 14, 生活空间 -->
+				<table id="livingspace" cellspacing="0" class="list_table">
+			      <tbody>
+			        <tr>
+						##$appServer.setTarget('/search/search.htm').addQueryData('searchtype','news').addQueryData('searchcate',$lifeDto.newsType.newsType)
+			          <td class="list_table_header list_table_header_livingspace"><a target="_blank" href="${appServer}/search/news/$!{lifeDto.newsType.newsType}.htm" title="$!{lifeDto.newsType.typeName}"><img src="images/more.gif" border=0/></a></td>
+			        </tr>
+			        <tr>
+			        <td class="list_table_content list_table_content_livingspace">
+				        <ul class="content_list">
+						  #foreach($news in $lifeDto.list)
+							<li>
+								<a target="_blank" href="${homeMoudle}/yynews/${news.newsId}.htm"  title="$news.newsTitle">$stringUtils.abbreviate($news.newsTitle,22)</a>
+							</li>			
+						  #end
+						</ul>			
+			        </td>
+			        </tr>
+			      </tbody>
+			    </table>
+          </td>
+          <td>
+              <!-- 15, 社区精华 -->
+				<table id="shequjinghua" cellspacing="0" class="list_table">
+			      <tbody>
+			        <tr>
+						##$appServer.setTarget('/search/search.htm').addQueryData('searchtype','news').addQueryData('searchcate',$orgDto.newsType.newsType)
+			          <td class="list_table_header list_table_header_shequjinghua"><a target="_blank" href="${appServer}/search/news/$!{orgDto.newsType.newsType}.htm" title="$!{orgDto.newsType.typeName}" ><img src="images/more.gif" border=0/></a></td>
+			        </tr>
+			        <tr>
+			        <td class="list_table_content list_table_content_shequjinghua">
+				        <ul class="content_list">
+						 #foreach($news in $orgDto.list)
+							<li><a target="_blank" href="${homeMoudle}/yynews/${news.newsId}.htm"  title="$news.newsTitle">$stringUtils.abbreviate($news.newsTitle,22)</a></li>
+						 #end
+						</ul>			
+			        </td>
+			        </tr>
+			      </tbody>
+			    </table>
+          </td>
+          <td>
+              <!-- 16, 妈咪宝贝 -->
+				<table id="mamibaobei" cellspacing="0" class="list_table">
+			      <tbody>
+			        <tr>
+					##$appServer.setTarget('/search/search.htm').addQueryData('searchtype','news').addQueryData('searchcate',$mamaDto.newsType.newsType)
+			          <td class="list_table_header list_table_header_mamibaobei"><a target="_blank" href="${appServer}/search/news/$!{mamaDto.newsType.newsType}.htm" title="$!{mamaDto.newsType.typeName}" ><img src="images/more.gif" border=0/></a></td>
+			        </tr>
+			        <tr>
+			        <td class="list_table_content list_table_content_mamibaobei">
+				        <ul class="content_list">
+						  #foreach($news in $mamaDto.list)
+							<li><a target="_blank" href="${homeMoudle}/yynews/${news.newsId}.htm"  title="$news.newsTitle">$stringUtils.abbreviate($news.newsTitle,22)</a></li>
+						  #end
+						</ul>			
+			        </td>
+			        </tr>
+			      </tbody>
+			    </table>
+          </td>
+          <td>
+              <!-- 17, 交易安全 -->
+				<table id="safe" cellspacing="0" class="list_table">
+			      <tbody>
+			        <tr>
+					##$appServer.setTarget('/search/search.htm').addQueryData('searchtype','news').addQueryData('searchcate',$tradeSafeDto.newsType.newsType)
+			          <td class="list_table_header list_table_header_safe"><a target="_blank" href="${appServer}/search/news/$!{tradeSafeDto.newsType.newsType}.htm" title="$!{tradeSafeDto.newsType.typeName}" ><img src="images/more.gif" border=0/></a></td>
+			        </tr>
+			        <tr>
+			        <td class="list_table_content list_table_content_safe">
+				        <ul class="content_list">
+						  #foreach($news in $tradeSafeDto.list)
+							<li><a target="_blank" href="${homeMoudle}/yynews/${news.newsId}.htm"  title="$news.newsTitle">$stringUtils.abbreviate($news.newsTitle,22)</a></li>
+						  #end
+						</ul>			
+			        </td>
+			        </tr>
+			      </tbody>
+			    </table>
+          </td>
+        </tr> 
+</table>

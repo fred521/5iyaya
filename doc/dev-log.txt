@@ -1,0 +1,102 @@
+
+bug management system:  http://www.xsnmpx.com:2040/shang/login
+pleas login with your cvs user
+
+alan:增加所有的domain，增加数据库配置，增加数据库脚本和初始化sql语句，初始化用户名和密码均为system
+
+表修改：
+alter table adm_user rename to admin_user;
+drop sequence seq_adm_user;
+create sequence SEQ_ADMIN_USER;
+
+2007-05-31 alah modify
+修改单元测试基类，使其配置同正式环境的bean做成一致，这样可以避免同一个bean
+需要在发布环境和测试环境都配置的尴尬
+增加短信发送表和序列，见create.sql末尾
+
+2007-05-31 daodao add
+增加了queryBase类，后台查询应该用的着，另外增加了ResultBase,大家想用的话可以一起用下。
+
+2007-06-02 alan add
+增加了文件上传和压缩的service，再service.upload目录下，本压缩采用jmagick第三方工具压缩
+所以需要安装extlib下的jmagick文件，安装完成后需要将jmagick.dll放置到系统的system32目录下
+如果需要在eclipse中调用压缩方法，在eclipse中调试上传和压缩，请设置window/preferences/my eclipse/applicaton server/tomcat/path
+中的append to lib path中增加system32路径和jmagick的安装路径即可。
+调用方式简单，可以参见springMvcTest工程中的文件上传
+
+增加DateUtils类,server.properties中增加了上传的路径配置
+
+2007-06-03
+增加商品分类的control
+增加首页相关页面的连接
+
+2007-06-03
+增加CheckCodeGenerator,用于生成六位手机校验码，现在可能还只有我一个人用的着，呵呵
+
+2007-06-03  增加一张定时最后执行时间表，目前给杨昊的建立索引用
+
+2007-06-05 
+cache的简单接口出现，非常简单的吧？大家如果有额外的要求，尽量的提。
+com.nonfamous.commom.cache.CompactCache
+by eyeieye    
+
+2007-06-08
+修改TimeProfile类，在一些没有外部Profile Task的情况下，调用beginTask不会产生异常，而是将此task作为一个profile允许
+by eyeieye
+
+2007-06-09
+再次修改TimeProfile，如果配置成log level 为info，则记录简要信息(主任务的执行时间)
+如果配置成debug，则详细记录每个vm渲染，每个service,dao调用的时间。
+÷by eyeieye
+
+
+2007-06-10 
+alter table goods_cat add  show_order number;
+alter table news_type add  show_order number;
+alter table market_type add  show_order number;
+alter table sms add  SEND_COUNT number;
+alter table COMMEND_CONTENT add  commend_status char(1);
+
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+新cvs环境
+server：xhis.vicp.net
+path：/cvsroot
+用户名对应关系，密码同你们的e文名，登陆名是你们的e文名
+alan	daiyq
+fish	shenyu
+daodao	sunzy
+swordfish	shengy
+victor	yangh
+alien 	yangxq
+fred	daizx
+jacky	gongl
+－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－－
+
+2007-06-11
+加了前台的登录，只影响了member下面的页面需要登录，登录名testSeller1,密码111111
+
+2007-06-15 add by daodao
+增加了省、市、区下拉列表的control，需要用的可以用
+
+
+2007－06－17 alan
+alter table search_key_word modify key_type varchar2(16);
+
+2007 -06 -23 shengyong
+${upServer}/$!shop.shopImg.s.jpg
+${upServer}/$!shop.shopImg.l.jpg  店铺
+
+2007-06-25 victor
+增加一个完全重建索引链接
+参数type为索引类型，分goods/shop/news/all四种，分别代表商品/店铺/资讯/全部
+url
+http://cktest.com:8080/search/rebuild.htm?type=goods
+http://cktest.com:8080/search/rebuild.htm?type=shop
+http://cktest.com:8080/search/rebuild.htm?type=news
+http://cktest.com:8080/search/rebuild.htm?type=all
+
+上线时考虑去除或移动到admin模块下
+
+
+
+

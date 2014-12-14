@@ -1,0 +1,346 @@
+<?xml version="1.0"  encoding="gb2312"?>
+
+<project name="5iyaya" basedir="." default="usage">
+	<property file="server.properties" />
+
+	<property name="name" value="5iyaya" />
+	<property name="root.dir" value=".." />
+	<property name="war.dir" value="${root.dir}/webroot" />
+	<property name="src.dir" value="${root.dir}/src" />
+	<property name="deploy.dir" value="${root.dir}/deploy" />
+	<property name="build.dir" value="${deploy.dir}/.classes" />
+	<property name="weblib.dir" value="${war.dir}/WEB-INF/lib" />
+	<property name="work.dir" value="${deploy.dir}/deploy" />
+	<property name="dist.dir" value="${deploy.dir}/dist" />
+	<property name="webclass.dir" value="${work.dir}/WEB-INF/classes" />
+	<property name="servlet.api" value="${root.dir}/extlib" />
+	<property name="dbscripts.dir" value="${root.dir}/db_script" />
+
+
+	<property name="cvsroot" value=" :pserver:bob:bob.123@maba.oicp.net:2401/YAYAREPO" />
+	<property name="cvscmd.update" value="update -d -P " />
+	<property name="dest.dir" value="../../5iyaya" />
+
+	<path id="master-classpath">
+		<fileset dir="${servlet.api}/">
+			<include name="servlet-api.jar" />
+		</fileset>
+		<fileset dir="${weblib.dir}/">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<target name="build-number" description="Increase build number">
+		<buildnumber file="./version.properties" />
+
+		<propertyfile file="./version.properties">
+			<entry key="build.date" operation="=" value="${build-date}" />
+			<entry key="build.date" type="date" operation="=" value="now" pattern="yyyy-MM-dd HH:mm:ss z"/>
+		</propertyfile>
+	</target>
+
+	<target name="cvs">
+		<echo message="================更新cvs代码==================" />
+		<cvs cvsRoot="${cvsroot}" command="${cvscmd.update}" dest="${dest.dir}" />
+		<echo message="================更新代码完成==================" />
+	</target>
+
+	<target name="usage">
+		<tstamp>
+			<format property="today" pattern="yyyy-MM-dd hh:mm:ss" />
+		</tstamp>
+		<echo message="${today}" />
+		<echo message="" />
+		<echo message="product bizyi website build file" />
+		<echo message="------------------------------------------------------" />
+		<echo message="" />
+		<echo message="Available targets are:" />
+		<echo message="" />
+		<echo message="clean    --> Clean output dirs" />
+		<echo message="build    --> Compile main Java sources and copy libraries" />
+		<echo message="deploy   --> Build the web application archive" />
+		<echo message="" />
+
+	</target>
+
+	<target name="showProperties">
+
+		<echo message="" />
+		<echo message="==========确认相关的系统配置是否正确=========" />
+		<echo message="" />
+		<echo message="---------------------数据库设置---------------------" />
+		<echo message="远程数据库配置：" />
+		<echo message="远程数据库驱动：${mysql.driverClassName}" />
+		<echo message="远程数据库地址：${mysql.url}" />
+		<echo message="远程数据库用户名：${mysql.username}" />
+		<echo message="远程数据库密码：${mysql.password}" />
+		<echo message="" />
+		<echo message="目标数据库配置：" />
+		<echo message="目标数据库驱动：${target.mysql.driverClassName}" />
+		<echo message="目标远程数据库地址：${target.mysql.url}" />
+		<echo message="目标远程数据库用户名：${target.mysql.username}" />
+		<echo message="目标远程数据库密码：${target.mysql.password}" />
+		<echo message="" />
+		<echo message="---------------------访问域名设置---------------------" />
+		<echo message="网站域名：${domain}" />
+		<echo message="网站访问协议：${appServer.protocol}" />
+		<echo message="网站访问域名：${appServer.host}" />
+		<echo message="网站访问端口：${appServer.port}" />
+		<echo message="网站访问服务器配置：${appServer.protocol}://${appServer.host}/${appServer.port}" />
+		<echo message="" />
+		<echo message="图片服务器配置：${imgServer.protocol}://${imgServer.host}/${imgServer.port}" />
+		<echo message="上传服务器配置：${upServer.protocol}://${upServer.host}/${upServer.port}" />
+		<echo message="" />
+		<echo message="---------------------索引文件设置---------------------" />
+		<echo message="商品索引文件：${search.good.indexfile}" />
+		<echo message="店铺索引文件：${search.shop.indexfile}" />
+		<echo message="会员索引文件：${search.member.indexfile}" />
+		<echo message="分类信息索引文件：${search.news.indexfile}" />
+		<echo message="" />
+		<echo message="---------------------文件上传设置---------------------" />
+		<echo message="上传文件保存路径：${upload.file.rootpath} " />
+		<echo message="上传文件大小限制：${upload.file.maxsize} byte" />
+		<echo message="" />
+
+	</target>
+	
+	<target name="exportDB" description="export DB structure from DB server">
+		<echo message="" />
+		<echo message="================导出数据库结构=================" />
+		<sql
+			driver="${mysql.driverClassName}"
+			url="${mysql.url}"
+			userid="${mysql.username}"
+		    password="${mysql.password}"
+			encoding="gb2312"
+		><![CDATA[
+			
+		]]></sql>
+		<echo message="================导出数据库结构完成=================" />
+	</target>
+	
+	<target name="initDBStructure" description="initial database structure by create tables, procedures and functions" >
+		<echo message="" />
+		<echo message="================创建数据库结构=================" />
+		<sql
+		    driver="${target.mysql.driverClassName}"
+		    url="${target.mysql.url}"
+		    userid="${target.mysql.username}"
+		    password="${target.mysql.password}"
+			print="true">
+			<transaction src="${dbscripts.dir}/5iyaya_mysql_structure_tables.sql" />
+		</sql>
+		
+		<sql
+			driver="${target.mysql.driverClassName}"
+			url="${target.mysql.url}"
+			userid="${target.mysql.username}"
+			password="${target.mysql.password}"
+			encoding="GB2312"
+			print="true"
+			delimiter="//">
+			<transaction src="${dbscripts.dir}/5iyaya_mysql_structure_procedures.sql" />
+			<transaction src="${dbscripts.dir}/5iyaya_mysql_structure_functions.sql" />
+		</sql>
+		<echo message="================创建数据库结构完成=================" />
+	</target>
+	
+	<target name="initDBData" description="initial database by insert initial data" >
+		<echo message="" />
+		<echo message="================安装数据库初始数据=================" />
+		<sql
+		    driver="${target.mysql.driverClassName}"
+		    url="${target.mysql.url}"
+		    userid="${target.mysql.username}"
+		    password="${target.mysql.password}"
+			print="true">
+			<transaction src="${dbscripts.dir}/5iyaya_mysql_data_init.sql" />
+		</sql>
+		<echo message="================安装数据库初始数据完成=================" />
+	</target>
+
+	<target name="clean" description="Clean output dirs (build, weblib, dist)">
+		<echo message="" />
+		<echo message="================删除临时文件=================" />
+		<delete dir="${build.dir}" />
+		<delete dir="${dist.dir}" />
+		<delete dir="${work.dir}" />
+		<delete file="${name}.war" />
+		<echo message="==================删除完成===================" />
+	</target>
+
+
+	<target name="build" description="Compile main source tree java files into class files, generate jar files">
+		<echo message="=================编译源程序==================" />
+		<mkdir dir="${build.dir}" />
+
+		<javac destdir="${build.dir}" debug="true" deprecation="false" optimize="false" failonerror="true">
+			<src path="${src.dir}" />
+			<classpath refid="master-classpath" />
+		</javac>
+		<copy todir="${build.dir}" preservelastmodified="true">
+			<fileset dir="${src.dir}">
+				<include name="**/*.xml" />
+			</fileset>
+		</copy>
+		<echo message="===============源程序编译完成================" />
+	</target>
+
+
+	<target name="vad">
+		<echo message="确认配置信息输入是否正确------------------------------" />
+		<input addproperty="test_success" defaultValue="1" message="如果信息配置正确请输入值1否则输入0，然后修改配置文件server.properties" />
+		<echo message="你的输入值=${test_success}" />
+		<condition property="tiger.value">
+			<and>
+				<equals arg1="${test_success}" arg2="1" />
+			</and>
+		</condition>
+	</target>
+
+	<target name="warfile" depends="showProperties" description="Build the web application archive">
+		<echo message="================系统开始打包=================" />
+		<mkdir dir="${dist.dir}" />
+		<mkdir dir="${work.dir}" />
+		<!-- copy all file -->
+		
+		<antcall target="compress" />
+		
+		<copy todir="${work.dir}/" preservelastmodified="true">
+			<fileset dir="${war.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		<!-- delete file="${work.dir}/WEB-INF/conf/bank_comm.properties" / -->
+		<!-- delete file="${work.dir}/WEB-INF/conf/server.properties" / -->
+		<delete file="${work.dir}/WEB-INF/conf/version.properties" />
+		<copy todir="${work.dir}/WEB-INF/conf/" preservelastmodified="false">
+			<fileset dir="${deploy.dir}">
+				<include name="bank_comm.properties" />
+				<include name="server.properties" />
+				<include name="version.properties" />
+			</fileset>
+		</copy>
+		<mkdir dir="${webclass.dir}/" />
+		<copy todir="${webclass.dir}/" preservelastmodified="true">
+			<fileset dir="${build.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		<war warfile="${dist.dir}/${name}.war" basedir="${work.dir}" webxml="${work.dir}/WEB-INF/web.xml">
+			<include name="*" />
+			<include name="images/**" />
+			<include name="admin/**" />
+			<include name="js/**" />
+			<include name="css/**" />
+			<include name="lib/**" />
+			<include name="upload/**" />
+			<include name="WEB-INF/*.*" />
+			<include name="WEB-INF/lib/**" />
+			<include name="WEB-INF/conf/**" />
+			<include name="WEB-INF/classes/**" />
+			<include name="WEB-INF/views/**" />
+			<include name="WEB-INF/bank/**" />
+			<include name="WEB-INF/cfg/**" />
+			<include name="WEB-INF/web.xml" />
+			<exclude name="**/.*" />
+		</war>
+		<echo message="/*********************************************/" />
+		<echo message="打包完成，请到${dist.dir}目录下获取${name}.war包" />
+		<echo message="如果相关的配置正确，可以直接将包发放置到tomcat的webroot目录下即可" />
+		<echo message="/*********************************************/" />
+	</target>
+
+	<target name="db_script" depends="" description="Copy needed db scripts">
+		<echo message="================复制数据库脚本=================" />
+		<mkdir dir="${dist.dir}/db_script" />
+		<!-- copy all file -->
+		<copy todir="${dist.dir}/db_script/" preservelastmodified="true">
+			<fileset dir="${root.dir}/db_script">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="tools" depends="" description="Copy needed tools">
+		<echo message="================复制支持工具=================" />
+		<mkdir dir="${dist.dir}/tools" />
+		<!-- copy all file -->
+		<copy todir="${dist.dir}/tools/" preservelastmodified="true">
+			<fileset dir="${root.dir}/tools">
+				<include name="jmagick.rar" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="copydocs" depends="db_script, tools" description="Copy all additional files to target folder">
+		<echo message="================复制其它文件=================" />
+
+		<copy todir="${dist.dir}" preservelastmodified="true">
+			<fileset dir="${deploy.dir}">
+				<include name="install.txt" />
+			</fileset>
+		</copy>
+	</target>
+	
+	 <target name="compress" >
+        <!-- 1, compress css files and javascripts for default.vm -->
+        <delete file="${war.dir}/css/main_all.css" />
+        <delete file="${war.dir}/css/main_min.css" />
+        <delete file="${war.dir}/lib/core_all.js"  />
+        <delete file="${war.dir}/lib/core_min.js"  />
+    	<delete file="${war.dir}/js/common_min.js" />
+    	<delete file="${war.dir}/js/common_gzip.js"/>
+    	    	
+    	
+        <concat destfile="${war.dir}/css/main_all.css" fixlastline="true" >
+			<fileset file="${war.dir}/css/main.css" />
+			<fileset file="${war.dir}/css/tabset.css" />
+			<fileset file="${war.dir}/css/jquerycluetip.css" />
+		</concat>	
+		<concat destfile="${war.dir}/lib/core_all.js" fixlastline="true" >
+			<fileset file="${war.dir}/lib/3rd/jquery.js" />
+			<fileset file="${war.dir}/lib/3rd/jquerycookie.js" />
+			<fileset file="${war.dir}/lib/3rd/jquerydimensions.js" />
+			<fileset file="${war.dir}/lib/3rd/jqueryhoverIntent.js" />
+			<fileset file="${war.dir}/lib/3rd/jquerycluetip.js" />
+			<fileset file="${war.dir}/lib/core.js" />
+			<fileset file="${war.dir}/lib/component/TabSet.js" />
+			<fileset file="${war.dir}/lib/component/Tooltip.js" />
+			<fileset file="${war.dir}/lib/component/Gallery.js" />
+		</concat>
+		<java jar="${root.dir}/yuicompressor-2.3.5.jar" fork="true" failonerror="true" maxmemory="128m">
+            <arg value="&quot;${war.dir}/css/main_all.css&quot; -o &quot;${war.dir}/css/main_min.css&quot;" />
+        </java> 
+		<java jar="${root.dir}/yuicompressor-2.3.5.jar" fork="true" failonerror="true" maxmemory="128m">
+            <arg value="&quot;${war.dir}/lib/core_all.js&quot; -o &quot;${war.dir}/lib/core_min.js&quot;" />
+        </java>   
+    	<java jar="${root.dir}/yuicompressor-2.3.5.jar" fork="true" failonerror="true" maxmemory="128m">
+            <arg value="&quot;${war.dir}/js/common.js&quot; -o &quot;${war.dir}/js/common_min.js&quot;" />
+        </java>       	    	
+    	<gzip src="${war.dir}/css/main_min.css" destfile="${war.dir}/css/main_gzip.css" />
+    	<gzip src="${war.dir}/lib/core_min.js"  destfile="${war.dir}/lib/core_gzip.js"  />   
+    	<gzip src="${war.dir}/js/common_min.js" destfile="${war.dir}/js/common_gzip.js" />  
+    	<checksum file="${war.dir}/css/main_gzip.css" forceOverwrite="yes" />
+    	<checksum file="${war.dir}/lib/core_gzip.js"  forceOverwrite="yes" />    
+    	
+    	<jar destfile="${war.dir}/WEB-INF/lib/5iyya.jar" basedir="${war.dir}/WEB-INF/classes" />
+    </target>
+
+	<target name="deploy" depends="clean,cvs,build,warfile" description="Clean,cvs, build,warfile" />
+
+	<target name="autodeploy" depends="clean,build,warfile,copydocs" description="Clean,build,warfile,copydocs" />
+
+	<target name="del" description="Clean output dirs (build, weblib, dist)">
+		<delete dir="${build.dir}" />
+		<delete dir="${work.dir}" />
+		<copy todir="." preservelastmodified="true">
+			<fileset dir="${dist.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		<delete dir="${dist.dir}" />
+	</target>
+
+	<target name="dep-tmp" depends="clean,cvs,build,warfile,del" description="Clean,build,warfile" />
+</project>

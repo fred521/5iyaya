@@ -1,0 +1,24 @@
+ <!-- 9, 商城圈 -->
+<div class="component.TabSet" id="businesses" css_prefix="category_pink_" switch_event="mouseenter" >
+  <a class="tabset_link_2" name="C" href="#samePageUL23" >团购平台</a>
+  <a class="tabset_link_2" name="A" href="#samePageUL21">商城圈</a>
+  <a class="tabset_link_2" name="B" href="#samePageUL22">商家信息</a>
+  
+</div> 
+    <ul id="samePageUL21" style="display:none" class="content_list content_list_numeric">
+	  #foreach($market in $marketList)
+			<li><label>#if($velocityCount<10)0#end$velocityCount</label><a href="${appServer}/search/shop/$!{market.marketType}.htm" target="_blank" title="$!market.marketName">$stringUtils.abbreviate($!market.marketName,18)</a></li>
+	  #end
+	</ul>
+	
+	<ul id="samePageUL22" style="display:none" class="content_list content_list_numeric">
+	  #foreach($shop in $shopList)
+			<li><label>#if($velocityCount<10)0#end$velocityCount</label><a href="${appServer}/shop/$!{shop.shopId}.htm"  title="$!shop.shopName" target="_blank">$stringUtils.abbreviate($!shop.shopName,18)</a></li>
+	  #end
+	</ul>
+	
+	<ul id="samePageUL23" style="display:none" class="content_list content_list_numeric">
+	  #foreach($goods in $groupBuyGoodsList)
+			<li><label>#if($velocityCount<10)0#end$velocityCount</label><a href="${appServer}/goods/$!{goods.goodsId}.htm"  title="$!goods.goodsName" target="_blank">$stringUtils.abbreviate($!goods.goodsName,18)</a></li>
+	  #end
+	</ul>

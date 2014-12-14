@@ -1,0 +1,65 @@
+<table border="0" width="100%" cellspacing="0" cellpadding="3" style="border: 1px solid #D5D5D5; background-color: #FAFAFA" bordercolor="#D5D5D5">
+			<tr>
+				<td colspan="2" height=5></td>
+			</tr>
+			<tr>
+				<td valign="top" style="padding-left:12px;">
+				<a href="${homeMoudle}/mynews/news_add_init.htm">
+				<img border="0" src="${imgServer}/images/index_new_64.gif" width="126" height="34"></a></td>
+				<td>
+				<img border="0" src="${imgServer}/images/whatpost_but.gif" width="63" height="17"><br>
+				<img border="0" src="${imgServer}/images/help_but.gif" width="63" height="18"></td>
+			</tr>
+			<tr>
+				<td valign="top" style="padding-left:12px;">
+				<a href="${homeMoudle}/mynews/news_member_list.htm">
+				<img border="0" src="${imgServer}/images/index_new_65.gif" width="126" height="34"></a></td>
+				<td>
+				<img border="0" src="${imgServer}/images/whatmgr_but.gif" width="63" height="17"><br>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" height=5></td>
+			</tr>
+		</table>
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" height="6">
+			<tr>
+				<td></td>
+			</tr>
+		</table>
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+			<tr>
+				<td width="23">
+				<img border="0" src="${imgServer}/images/left_2.gif" width="23" height="28"></td>
+				<td background="${imgServer}/images/left_3.gif" class="title1">
+				信息分类</td>
+				<td width="123">
+				<img border="0" src="${imgServer}/images/left_4_nomore.gif" width="123" height="28"></td>
+			</tr>
+		</table>
+		<table width="100%" cellspacing="0" cellpadding="0" id="table6" height="100" class="border1">
+			<tr>
+				<td align="center" style="padding-bottom:4px;">
+				<table border="0" width="100%" id="table7" cellspacing="0" cellpadding="4">
+					<tr>
+						<td align="center">
+						<a href="${homeMoudle.setTarget('/search/search.htm').addQueryData('searchtype','news').addQueryData('searchcate','10')}"><img border="0" src="${imgServer}/images/class_m1.gif"></a></td>
+						<td align="center">
+						<a href="${homeMoudle.setTarget('/search/search.htm').addQueryData('searchtype','news').addQueryData('searchcate','20')}"><img border="0" src="${imgServer}/images/class_m2.gif"></a></td>
+					</tr>
+					<tr>
+						<td align="center">
+						<a href="${homeMoudle.setTarget('/search/search.htm').addQueryData('searchtype','news').addQueryData('searchcate','30')}"><img border="0" src="${imgServer}/images/class_m3.gif"></a></td>
+						<td align="center">
+						<a href="${homeMoudle.setTarget('/search/search.htm').addQueryData('searchtype','news').addQueryData('searchcate','40')}"><img border="0" src="${imgServer}/images/class_m4.gif"></a></td>
+					</tr>
+					<tr>
+						<td align="center">
+						<a href="${homeMoudle.setTarget('/search/search.htm').addQueryData('searchtype','news').addQueryData('searchcate','70')}"><img border="0" src="${imgServer}/images/class_m5.gif"></a></td>
+						<td align="center">
+						<a href="${homeMoudle.setTarget('/search/search.htm').addQueryData('searchtype','news').addQueryData('searchcate','80')}"><img border="0" src="${imgServer}/images/class_m6.gif"></a></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+		</table>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="GROUPACTIVITY_SPACE">
+	<resultMap id="groupactivity" class="com.nonfamous.tang.domain.groupactivity">
+		<result property="goodsId" column="GOODS_ID"/>
+		<result property="realPrice" column="REAL_PRICE"/>
+		<result property="checkedNum" column="CHECKED_NUM"/>
+		<result property="orderStatus" column="ORDER_STATUS"/>
+		<result property="buyerId" column="BUYER_ID"/>
+		<result property="sellerId" column="SELLER_ID"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+	</resultMap>
+	
+	<resultMap id="goodsWholeInfo" class="com.nonfamous.tang.domain.groupactivity" extends="groupactivity">
+		<result property="goodsContent.content" column="CONTENT"/>
+	</resultMap>
+	
+	<insert id="groupactivity_insert" parameterClass="com.nonfamous.tang.domain.groupactivity">
+		INSERT INTO GOODS_BASE_INFO (
+				GOODS_ID,
+				REAL_PRICE,
+				CHECKED_NUM,
+				ORDER_STATUS,
+				BUYER_ID,
+				SELLER_ID,
+				CREATOR,
+				GMT_MODIFY,
+				MODIFIER,
+				GMT_CREATE,
+	                     )
+	             VALUES ( 
+				#goodsId#,
+				#realPrice#,
+				#checkedNum#,
+				#orderStatus#,
+				#buyerId#,
+				#sellerId#,
+				#creator#,
+				sysdate(),
+				#modifier#,
+				sysdate(),
+	                     )
+	</insert>
+	
+	<update id="groupactivity_update" parameterClass="com.nonfamous.tang.domain.groupactivity">
+		UPDATE GROUP_ACTIVITY t SET  
+			t.GMT_MODIFY = sysdate()
+			<isNotEmpty prepend="," property="realPrice"> t.REAL_PRICE = #realtPrice#</isNotEmpty>
+			<isNotEmpty prepend="," property="buyerId"> t.BUYER_ID = #buyerId#</isNotEmpty>
+			<isNotEmpty prepend="," property="buyerId"> t.SELLER_ID = #sellerId#</isNotEmpty>
+			<isNotEmpty prepend="," property="checkedNum"> t.CHECKED_NUM = #checkedNum#</isNotEmpty>
+			<isNotEmpty prepend="," property="gmtAbandon"> t.GMT_ABANDON = #gmtAbandon#</isNotEmpty>
+			<isNotEmpty prepend="," property="orderStatus"> t.ORDER_STATUS = #orderStatus#</isNotEmpty>
+			<isNotEmpty prepend="," property="modifier"> t.MODIFIER = #modifier#</isNotEmpty>
+		WHERE t.GOODS_ID = #goodsId#
+	</update>
+	
+	<select id="get_groupactivity_list_bydate" parameterClass="java.util.Date" resultMap="groupactivity">
+		SELECT 	*
+		FROM GROUP_ACTIVITY  t  
+		WHERE GMT_MODIFY &gt;#value#
+	</select>
+	<select id="get_groupactivity_list_by_sellerId" parameterClass="com.nonfamous.tang.dao.query.GroupActivityQuery" resultMap="groupactivity">
+		select b.* from GROUP_ACTIVITY b WHERE b.SELLER_ID = #sellerId# AND b.ORDER_STATUS=#orderStatus# 
+		ORDER BY b.GMT_MODIFY DESC 
+  		LIMIT #dbStartNo#, #dbEndNo# 
+	</select>
+	
+	
+		<select id="get_goods_base_info" parameterClass="java.lang.String" resultMap="groupactivity">
+		SELECT t.*
+			
+		FROM GROUP_ACTIVITY  t
+		WHERE t.GOODS_ID = #value#
+	</select>
+	
+	<update id="delete_groupactivity" parameterClass="java.util.Map">
+		UPDATE GROUP_ACTIVITY t SET t.ORDER_STATUS = #orderStatus#,
+			t.GMT_MODIFY = sysdate() 
+		  WHERE t.GOODS_ID = #goodsId#
+	</update>
+
+	
+	<select id="COUNT_GROUP_ACTIVITY_WITH_STATUS" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select count(*) as total from GROUP_ACTIVITY t where t.SELLER_ID = #sellerId# AND t.ORDER_STATUS=#orderStatus#
+	</select>
+	
+</sqlMap>

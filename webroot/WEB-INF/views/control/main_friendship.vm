@@ -1,0 +1,14 @@
+<div class="friendlink">
+	#foreach($url in $urlList)
+		#if($url.path)
+			<a href="$url.url" target="_blank"><img src="$!{upServer}/$url.path" /></a>
+		#end	
+	#end
+	<div class="text_link">
+	#foreach($url in $urlList)
+		#if(!$url.path)
+			<a href="$url.url" target="_blank">$url.title</a>
+		#end	
+	#end
+	</div>
+</div>

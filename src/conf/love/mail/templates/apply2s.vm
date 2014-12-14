@@ -1,0 +1,13 @@
+<table cellspacing="0" cellpadding="10" width="570" border="0">
+	<tbody>
+		<tr>
+			<td bgcolor="#ffffcc">
+				<strong>$!{username}</strong>想申请成为卖家<br>
+				<br>
+				<br>
+				会员名为：$!{username} <br>
+				电子邮件地址为：$!{email} <br>
+			</td>
+		</tr>
+	</tbody>
+</table>

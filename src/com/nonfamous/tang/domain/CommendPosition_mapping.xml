@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="COMMENDPOSITION_SPACE">
+	<resultMap id="commendposition" class="com.nonfamous.tang.domain.CommendPosition">
+		<result property="commendId" column="COMMEND_ID"/>
+		<result property="commendCode" column="COMMEND_CODE"/>
+		<result property="commendPage" column="COMMEND_PAGE"/>
+		<result property="commendName" column="COMMEND_NAME"/>
+		<result property="commendContentType" column="COMMEND_CONTENT_TYPE"/>
+		<result property="picWidth" column="PIC_WIDTH"/>
+		<result property="picHeight" column="PIC_HEIGHT"/>
+		<result property="textLength" column="TEXT_LENGTH"/>
+		<result property="picPath" column="PIC_PATH"/>
+		<result property="replaceText" column="REPLACE_TEXT"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+		<result property="positionOrder" column="POSITION_ORDER"/>
+		<result property="commendType" column="COMMEND_TYPE"/>
+	</resultMap>
+	
+	<insert id="commendposition_insert" parameterClass="com.nonfamous.tang.domain.CommendPosition">	    	
+		INSERT INTO COMMEND_POSITION (
+				COMMEND_ID,
+				COMMEND_CODE,
+				COMMEND_PAGE,
+				COMMEND_NAME,
+				COMMEND_CONTENT_TYPE,
+				PIC_WIDTH,
+				PIC_HEIGHT,
+				TEXT_LENGTH,
+				PIC_PATH,
+				REPLACE_TEXT,
+				GMT_CREATE,
+				CREATOR,
+				GMT_MODIFY,
+				MODIFIER,
+				POSITION_ORDER,
+				COMMEND_TYPE
+	                     )
+	             VALUES ( 
+				#commendId#,
+				#commendCode#,
+				#commendPage#,
+				#commendName#,
+				#commendContentType#,
+				#picWidth#,
+				#picHeight#,
+				#textLength#,
+				#picPath#,
+				#replaceText#,
+				sysdate(),
+				#creator#,
+				sysdate(),
+				#modifier#,
+				#positionOrder#,
+				#commendType#
+	                     )
+	</insert>
+	
+	<update id="commendposition_update" parameterClass="com.nonfamous.tang.domain.CommendPosition">
+		UPDATE COMMEND_POSITION t SET  			
+			t.COMMEND_NAME = #commendName#,
+			t.PIC_WIDTH = #picWidth#,
+			t.PIC_HEIGHT = #picHeight#,
+			t.TEXT_LENGTH = #textLength#,
+			t.PIC_PATH = #picPath#,
+			t.REPLACE_TEXT = #replaceText#,
+			t.GMT_MODIFY = sysdate(),
+			t.MODIFIER = #modifier#,
+			t.POSITION_ORDER = #positionOrder#
+		WHERE t.COMMEND_ID = #commendId#
+	</update>
+	
+	<select id="get_commendposition_by_commend_code" parameterClass="java.lang.String" resultMap="commendposition">
+		SELECT 
+			COMMEND_ID,
+			COMMEND_CODE,
+			COMMEND_PAGE,
+			COMMEND_NAME,
+			COMMEND_CONTENT_TYPE,
+			PIC_WIDTH,
+			PIC_HEIGHT,
+			TEXT_LENGTH,
+			PIC_PATH,
+			REPLACE_TEXT,
+			GMT_CREATE,
+			CREATOR,
+			GMT_MODIFY,
+			MODIFIER,
+			POSITION_ORDER,
+			COMMEND_TYPE
+		FROM COMMEND_POSITION  t  
+		WHERE t.COMMEND_CODE  = #value#
+	</select>
+	
+	<select id="get_commendposition_by_commend_id" parameterClass="java.lang.String" resultMap="commendposition">
+		SELECT 
+			COMMEND_ID,
+			COMMEND_CODE,
+			COMMEND_PAGE,
+			COMMEND_NAME,
+			COMMEND_CONTENT_TYPE,
+			PIC_WIDTH,
+			PIC_HEIGHT,
+			TEXT_LENGTH,
+			PIC_PATH,
+			REPLACE_TEXT,
+			GMT_CREATE,
+			CREATOR,
+			GMT_MODIFY,
+			MODIFIER,
+			POSITION_ORDER,
+			COMMEND_TYPE
+		FROM COMMEND_POSITION  t     
+		WHERE t.COMMEND_ID  = #value#
+	</select>
+	
+	<select id="get_commendposition_by_commend_page"  resultMap="commendposition">
+		select 
+			commend_id,
+			commend_code,
+			commend_page,
+			commend_name,
+			commend_content_type,
+			pic_width,
+			pic_height,
+			text_length,
+			pic_path,
+			replace_text,
+			gmt_create,
+			creator,
+			gmt_modify,
+			modifier,
+			position_order,
+			commend_type
+		from commend_position  t   
+		<isNotEmpty> where t.commend_page = #value# </isNotEmpty>	  
+ 
+	</select>
+	
+	<delete id="delete_commendposition" parameterClass="java.lang.String">
+		DELETE FROM COMMEND_POSITION  WHERE COMMEND_ID = #value#
+	</delete>
+	
+	
+	<select id="count_commend_positions" resultClass="java.lang.Integer" parameterClass="com.nonfamous.tang.dao.query.CommendPositionQuery">
+		select count(*) from commend_position t
+		<dynamic prepend=" where ">
+			<isNotEmpty prepend=" and " property="commendPage">t.commend_page = #commendPage#</isNotEmpty>	  
+		</dynamic>	
+  	</select>
+	
+	<select id="get_commend_positions" resultMap="commendposition" parameterClass="com.nonfamous.tang.dao.query.CommendPositionQuery">
+	select 	t.commend_id,
+			t.commend_code,
+			t.commend_page,
+			t.commend_name,
+			t.commend_content_type,
+			t.pic_width,
+			t.pic_height,
+			t.text_length,
+			t.pic_path,
+			t.replace_text,
+			t.gmt_create,
+			t.creator,
+			t.gmt_modify,
+			t.modifier,
+			t.position_order,
+			t.commend_type
+			from commend_position t 	
+			  <dynamic prepend=" where ">
+			  		<isNotEmpty prepend=" and " property="commendPage">t.commend_page = #commendPage#</isNotEmpty>	  
+			  </dynamic>	
+			  order by t.commend_page,t.commend_code,t.position_order LIMIT #dbStartNo#, #dbEndNo#
+  </select>
+</sqlMap>

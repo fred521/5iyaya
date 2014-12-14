@@ -1,0 +1,54 @@
+#set( $layout = "layout/admin/loginpage.vm" )
+<form name="login" action="${adminMoudle}/admin_session/login.htm" method="post" >
+ <TABLE cellSpacing=1 cellPadding="3" width="475px" align="center" bgColor="#666666" border="0">
+  <TBODY>
+  <TR>
+      <TD background="${imgServer}/images/contact_duixiang_bg1.gif" height="19">&nbsp;<b>Administrator Management System</b></TD>
+    </TR>
+   <tr>
+		<TD background="${imgServer}/images/banner02.gif" height="200px">&nbsp;</TD>
+	</tr>	
+  <TR>
+      <TD vAlign="top" bgColor="#ffffff" height="100px">
+      	<table border="0" width="98%" cellspacing="0" cellpadding="6">
+          #if( $error )
+		  <tr> 
+            <td width="100px">&nbsp;</td>
+			<td width="300px">
+            	#errorOut($error)
+            </td>
+          </tr>
+		  #end
+		  <tr> 
+            <td width="100px">User Name£º</td>
+            <td width="300px">
+            	<input type="text" name="admin_name" value="$!{inputName}" class="input4" />#errorOut($errorMessage)
+            </td>
+          </tr>
+          <tr> 
+            <td>Password£º</td>
+            <td>
+            	<input type="password" name="admin_pwd" class="input5" />#errorOut($pwdMessage)
+            </td>
+          </tr>
+          #if($checkCodeEnable)
+          <tr> 
+            <td>Ð£ÑéÂë£º</td>
+            <td>
+            	<input type="text" name="check_code" class="input5" />#errorOut($checkMessage)
+            	<img src="${appServer}/check_code" />
+            </td>
+          </tr>
+          #end
+          <tr> 
+            <td>&nbsp;</td>
+            <td>
+            	<input type="submit" name="sm" value=" Submit " class="input6"/>
+            </td>
+          </tr>
+         </table>
+        </TD>
+    </TR>
+  </TBODY>
+ </TABLE>
+</form>

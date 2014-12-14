@@ -1,0 +1,186 @@
+<SCRIPT language="javascript">
+    function showHide(objname){
+		var obj = document.getElementById(objname);
+        obj.style.display == "none" ? obj.style.display = "" : obj.style.display = "none";
+	}
+</SCRIPT>
+	<table border="0" width="100%" cellspacing="0" cellpadding="2" style="margin: 15px 0 0 0;">
+					<div style="background:url(${imgServer}/images/title_left.gif) height:23px;" class="panelTitle">
+							<h1>会员功能</h1>
+						</div>	
+						
+	</table>
+	<table border="0" width="100%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" id="table1">
+			<tr>
+				<td>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td style="padding:10 10 10 10;line-height:24px;"><span style="color:red">$cookyjar.get("loginName")</span>，您好，欢迎您进入我爱丫丫网会员中心。
+						<br>
+						<a href="$homeMoudle.setTarget('/member/index.htm')" class="good">[会员中心首页]</a>&nbsp;
+						##if($cookyjar.get("userRole")=='B')
+						##<a href="$homeMoudle.setTarget('/member/apply2s.htm')" class="good" onclick="return confirm('申请成为卖家吗?')";><font color='red'>[申请成为卖家]</font></a>
+						##end
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="#FFCCFF" height="22" style="font-weight:bold;font-size:12px;padding-left:12px;padding-top:2px;" onclick="javaScript:showHide('items0');">会员信息管理</td>
+					</tr>
+					<tr>
+						<td bgcolor="#FFFFFF" height="2" ></td>
+                    </tr>
+					<tr id=items0 >
+						<td style="padding:5 5 5 40;line-height:22px;">
+						<ul>
+							<li><a href="${homeMoudle}/member/modify.htm" class="good">修改会员信息</a> </li>
+							<!--<li><a href="member_moble.html" class="good">更换手机号码</a> </li>-->
+							<li><a href="${homeMoudle}/member/modifypwd.htm" class="good">修改密码</a> </li>
+							<li><a href="${homeMoudle}/myaddress/index.htm" class="good">地址管理</a></li>
+						</ul>
+						</td>
+					</tr>
+				</table>
+				#if($memberAuthToken.havePermissionByName("ShopEdit"))
+				<table border="0" width="100%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td bgcolor="#FFCCFF" height="22" style="font-weight:bold;font-size:12px;padding-left:12px;padding-top:2px;"  onclick="javaScript:showHide('items1');">店铺管理</td>
+					</tr>
+					<tr>
+						<td bgcolor="#FFFFFF" height="2" ></td>
+                    </tr>
+					<tr  id=items1 >
+					<td style="padding:5 5 5 40;line-height:22px;">
+						<ul>
+							<li><a href="${homeMoudle}/myshop/addNotes.htm" class="good">店铺公告管理</a> </li>
+							<li><a href="${homeMoudle}/myshop/updateShop.htm" class="good">修改店铺信息</a> </li>
+							<li><a href="${homeMoudle}/myshop/updateLogo.htm" class="good">上传店铺图片</a> </li>
+							<li><a href="${homeMoudle}/myvideo/uploadVideo.htm" class="good">上传店铺视频</a> </li>
+							<li><a href="${homeMoudle}/myvideo/recordVideo.htm" class="good">录制店铺视频</a> </li>
+							
+							<li>
+							    <a href="#" 
+							       class="good"
+							       onclick='window.open("${appServer}/myvideo/liveVideo.htm","publishLive","width=350,height=270,resizable=no");'
+							    >发布视频直播</a> 
+							</li>
+							
+							
+							
+							
+						</ul>
+						</td>
+					</tr>
+				</table>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td bgcolor="FFCCFF" height="22" style="font-weight:bold;font-size:12px;padding-left:12px;padding-top:2px;" onclick="javaScript:showHide('items2');">商品管理</td>
+					</tr>
+					<tr>
+						<td bgcolor="#FFFFFF" height="2" ></td>
+                    </tr>
+					<tr   id=items2 >
+						<td style="padding:5 5 5 40;line-height:22px;">
+						<ul>
+							<li><a href="${homeMoudle.setTarget('mygoods/add_init.htm')}" class="good">添加商品(批发/团购)</a> </li>
+							<li><a href="${homeMoudle.setTarget('mygoods/list_init.htm')}" class="good">商品列表</a> </li>
+							<li><a href="${homeMoudle.setTarget('mygoods/down_init.htm')}" class="good">下架商品</a> </li>
+						</ul>
+						</td>
+					</tr>
+				</table>
+				#end
+				#if($memberAuthToken.havePermissionByName("NewsEdit"))
+				<table border="0" width="100%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td bgcolor="FFCCFF" height="22" style="font-weight:bold;font-size:12px;padding-left:12px;padding-top:2px;" onclick="javaScript:showHide('items3');">分类信息管理</td>
+					</tr>
+					<tr>
+						<td bgcolor="#FFFFFF" height="2" ></td>
+                    </tr>
+					<tr   id=items3 >
+						<td style="padding:5 5 5 40;line-height:22px;">
+						<ul>
+							<li><a href="${homeMoudle.setTarget('mynews/news_add_init.htm')}" class="good">发布分类信息</a> </li>
+							<li><a href="${homeMoudle.setTarget('mynews/news_member_list.htm')}" class="good">分类信息列表</a> </li>
+						</ul>
+						</td>
+					</tr>
+				</table>
+				#end
+				#if($memberAuthToken.havePermissionByName("TradePay"))
+				<table border="0" width="100%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td bgcolor="FFCCFF" height="22" style="font-weight:bold;font-size:12px;padding-left:12px;padding-top:2px;" onclick="javaScript:showHide('items4');">订单管理</td>
+					</tr>
+					<tr>
+						<td bgcolor="#FFFFFF" height="2" ></td>
+                    </tr>
+					<tr   id=items4 >
+						<td style="padding:5 5 5 40;line-height:22px;">
+						<ul>
+							<li><a href="${homeMoudle.setTarget('tradecar/list.htm')}" class="good">我的采购单</a> </li>
+						
+							<li><a href="${homeMoudle.setTarget('order/list.htm')}" class="good">我的订单</a> </li>
+						</ul>
+						</td>
+					</tr>
+				</table>
+				
+				<table border="0" width="100%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td bgcolor="FFCCFF" height="22" style="font-weight:bold;font-size:12px;padding-left:12px;padding-top:2px;" onclick="javaScript:showHide('items5');">支付管理</td>
+					</tr>
+					<tr>
+						<td bgcolor="#FFFFFF" height="2" ></td>
+                    </tr>
+					<tr   id=items5 >
+						<td style="padding:5 5 5 40;line-height:22px;">
+						<ul>
+							<li><a href="${homeMoudle.setTarget('signshop/list.htm')}" class="good">签约店铺管理 </a> </li>
+							<li><a href="${homeMoudle.setTarget('tradepay/pay_list.htm')}" class="good">我的付款</a> </li>
+							<li><a href="${homeMoudle.setTarget('tradepay/receive_pay_list.htm')}" class="good">我的收款</a> </li>
+							<li><a href="${homeMoudle.setTarget('tradepay/quick_pay.htm')}" class="good">快速支付 </a> </li>
+						</ul>
+						</td>
+					</tr>
+				</table>
+				
+				<table border="0" width="100%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td bgcolor="FFCCFF" height="22" style="font-weight:bold;font-size:12px;padding-left:12px;padding-top:2px;" onclick="javaScript:showHide('items6');">丫丫应用</td>
+					</tr>
+					<tr>
+						<td bgcolor="#FFFFFF" height="2" ></td>
+                    </tr>
+					<tr id="items6">
+						<td style="padding:5 5 5 40;line-height:22px;">
+						<ul>
+							<li><a href="${homeMoudle}/uchome.htm" target="_blank" class="good">丫丫空间 </a> </li>
+							<li><a href="${homeMoudle}/bbs.htm" target="_blank" class="good">丫丫说论坛</a> </li>
+						</ul>
+						</td>
+					</tr>
+				</table>
+				#end
+				#*
+				<table border="0" width="100%" cellspacing="0" cellpadding="0">
+					<tr>
+						<td bgcolor="#ECECEC" height="22" style="font-weight:bold;font-size:12px;padding-left:12px;padding-top:2px;">留言管理</td>
+					</tr>
+					<tr>
+						<td style="padding:5 5 5 40;line-height:22px;">
+						<ul>
+							<li><a href="message_tome.html" class="good">我收到的留言</a> </li>
+							<li><a href="message_fromme.html" class="good">我回复的留言</a> </li>
+							<li><a href="message_send.html" class="good">发送留言</a> </li>
+						</ul>
+						</td>
+					</tr>
+				</table>
+				*#
+				</td>
+				<td>
+	
+				</td>
+			</tr>
+		</table>

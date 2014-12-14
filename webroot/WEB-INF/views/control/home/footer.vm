@@ -1,0 +1,49 @@
+     <table class="main_table">  
+        <tr>
+          <td colspan=8>
+              <!-- 19, 关于我爱丫丫 -->	
+				<ul class="footer1" id="footer1" >
+				  <li>
+				    <a href='#'>关于我爱丫丫</a>
+				    <a href='#'>合作伙伴</a>
+				    <a href='#'>诚征代理</a>
+				    <a href='#'>客户中心</a>
+				    <a href='#'>联系我们</a>
+				    <a href='#'>版权说明</a>
+				  </li>
+				</ul>
+          </td>
+        </tr> 
+		<tr>
+          <td colspan=8>
+              <!-- 19, 关于我爱丫丫 -->	
+				<ul class="footer1" id="footer1" >
+				  <li>
+				    <a href='#'>联系客服</a>
+				    <a href='tencent://message/?uin=619373550'>qq:619373550</a>
+				    <a href='tencent://message/?uin=1105277864'>qq:1105277864</a>
+				    <a href='#'>msn:5iyya.uk@gmail.com</a>
+				    <a href='#'></a>
+				    <a href='#'></a>
+				  </li>
+				</ul>
+          </td>
+        </tr> 
+        <tr>
+          <td colspan=4>
+              <!-- 20, 服务热线 -->	
+				<ul class="footer2" id="footer2" >
+					  ## 浙ICP备08007278号   
+					  服务热线： 0571-86799951
+				</ul>
+          </td>
+           <td colspan=4>
+              <!-- 20, 服务热线 -->	
+				<ul class="footer1" id="police" >
+					  <a href='http://cyberpolice.hangzhou.com.cn/'><img src="${imgServer}/images/pingping.gif" border="0"/></a>
+					  <a href='http://www.hangzhou.cyberpolice.cn/'><img src="${imgServer}/images/police_station.gif" border="0"/></a>
+					  <a href='http://cyberpolice.hangzhou.com.cn/'><img src="${imgServer}/images/anan.gif" border="0"/></a>
+				</ul>
+          </td>
+        </tr>
+    </table>  

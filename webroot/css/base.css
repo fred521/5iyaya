@@ -1,0 +1,56 @@
+TD {
+	FONT-SIZE: 12 px; LINE-HEIGHT: 1.5
+}
+table {
+	font-size: 12px;
+}
+BODY {
+	FONT-SIZE: 12 px; SCROLLBAR-SHADOW-COLOR: #deefc6; LINE-HEIGHT: 1.5; SCROLLBAR-ARROW-COLOR: #ffffff; SCROLLBAR-BASE-COLOR: #c0d586
+}
+A:link {
+	FONT-SIZE: 12 px; COLOR: #000000; TEXT-DECORATION: none
+}
+A:visited {
+	FONT-SIZE: 12 px; COLOR: #000000; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: red
+}
+INPUT {
+	FONT-SIZE: 12 px;BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid;padding-top:2px;
+}
+.np {
+	BORDER-RIGHT: medium none; BORDER-TOP: medium none; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none
+}
+.linerow {
+	BORDER-BOTTOM: #acacac 1px solid
+}
+.coolbg {
+	BORDER-RIGHT: #acacac 2px solid; BORDER-BOTTOM: #acacac 2px solid; BACKGROUND-COLOR: #e6e6e6
+}
+.coolbg2 {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid; HEIGHT: 18px; BACKGROUND-COLOR: #dfddd2
+}
+.ll {
+	BORDER-RIGHT: #acacac 2px solid; BORDER-BOTTOM: #acacac 2px solid; BACKGROUND-COLOR: #e6e6e6
+}
+.bline {
+	BORDER-BOTTOM: #bcbcbc 1px solid; BACKGROUND-COLOR: #ffffff
+}
+.bline2 {
+	BORDER-BOTTOM: #bcbcbc 1px solid
+}
+.px12{
+	FONT-SIZE: 12 px;
+}
+a.underline:link{
+	text-decoration: underline;
+}
+a.underline:visited{
+	text-decoration: underline;
+}
+.red {
+	COLOR: red
+}
+#bd, .bb-g, .bb-ga, .bb-gb, .bb-gc, .bb-gd {
+}

@@ -1,0 +1,64 @@
+<tr><td class="main_table_td_bottom" >
+		#foreach($commend in $index_top_video)
+			#if($velocityCount==1)
+			#set($videoCommend=$commend)
+			#set($commendText=$videoCommend.commendText)
+		#end
+		#end
+		<table id="video" cellspacing="0" class="list_table_video">
+	      <tbody>
+	        <tr>
+	          <td class="list_table_header_video">
+	            <span id="commendCompany" class="list_table_header_video1">$!commendText</span>	            
+	          </td>
+	        </tr>
+	        <tr>
+	          <td class="list_recommend_video">
+	            <ul>
+	              <li>
+	                <iframe 
+		    	      id="videoFrame"
+				      src="$!videoCommend.commendUrl&share=true&mp_width=365&mp_height=250" 
+				      width="365px" 
+				      height="250px" 
+				      marginwidth="0px" 
+				      marginheight="0" 
+				      scrolling="no" 
+				      border="0" 
+				      frameborder="0" 
+				      style="margin-top: 0px; border: 0px solid #F6F6F6;vAlign:top;">
+					</iframe>
+	              </li> 
+	              <li class="list_recommend_video_small" >
+								#foreach($commend in $index_top_video)
+									#if($velocityCount>1)
+	                <img src="$!commend.picUrl"  
+						 onclick="videoFrame.document.location.href='$!commend.commendUrl&share=true&mp_width=365&mp_height=250&mp_autostart=true';changeCommend('$!commend.commendText');" 
+						 title="$!commend.commendText"  
+						 rel="/22.html" 
+						 twidth="208" 
+						 class="tooltip"
+                         />
+									#end
+								#end
+	              </li>
+	            </ul>
+	          </td>
+	        </tr>
+	      </tbody>
+	    </table>
+</td></tr>
+<script>
+    jQuery(document).ready(function(){
+	    jQuery( "img.tooltip" ).each( function(i){
+                 this.title = ( this.title || '' ).split( ' ' )[1] || '' ;
+	    });		
+	});
+    function changeCommend(commend){
+        var shopId   = ( commend || '' ).split( ' ' )[0] || '' ;
+        var shopName = ( commend || '' ).split( ' ' )[1] || '' ;
+        var incHTML  = '<a href="/shop/' + shopId + '.htm" target="_blank" >' + shopName + '</a>' ;
+        document.getElementById("commendCompany").innerHTML = incHTML ;
+    }
+    changeCommend( document.getElementById("commendCompany").innerHTML  ) ;
+</script>

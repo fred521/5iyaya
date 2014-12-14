@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="GOODSPICTURE_SPACE">
+	<resultMap id="pictureinfo" class="com.nonfamous.tang.domain.PictureInfo">
+		<result property="id" column="ID"/>
+		<result property="goodsId" column="GOODS_ID"/>
+		<result property="status" column="STATUS"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="path" column="PATH"/>
+	</resultMap>
+	
+
+	<insert id="pictureinfo_insert" parameterClass="com.nonfamous.tang.domain.PictureInfo">
+		INSERT INTO PICTURE_INFO (
+				ID,
+				GOODS_ID,
+				STATUS,
+				GMT_MODIFY,
+				GMT_CREATE,
+				PATH
+	                     )
+	             VALUES ( 
+	            #id#,
+				#goodsId#,
+				#status#,
+				sysdate(),
+				sysdate(),
+				#path#
+	                     )
+	</insert>
+	
+	<update id="pictureinfo_update" parameterClass="com.nonfamous.tang.domain.PictureInfo">
+		UPDATE PICTURE_INFO t SET  
+			t.GMT_MODIFY = sysdate()
+			<isNotEmpty prepend="," property="goodsId"> t.GOODS_ID = #goodsId#</isNotEmpty>
+			<isNotEmpty prepend="," property="path"> t.PATH = #path#</isNotEmpty>
+			<isNotEmpty prepend="," property="status"> t.STATUS = #status#</isNotEmpty>
+		WHERE t.ID = #id#
+	</update>
+	
+	<update id="pictureinfo_delete" parameterClass="java.util.Map">
+		UPDATE PICTURE_INFO t SET t.STATUS = #status#,
+			t.GMT_MODIFY = sysdate() 
+		  WHERE t.ID = #id#
+	</update>
+	
+	<update id="pictureinfo_delete_by_goodsid" parameterClass="java.util.Map">
+		UPDATE PICTURE_INFO t SET t.STATUS = #goodsStatus#,
+			t.GMT_MODIFY = sysdate() 
+		  WHERE t.GOODS_ID = #goodsId#
+	</update>
+	
+	<select id="get_pictureinfo_list_by_goodsid" parameterClass="java.lang.String" resultMap="pictureinfo">
+		SELECT 
+		    t.ID,
+			t.GOODS_ID,
+			t.STATUS,
+			t.GMT_MODIFY,
+			t.GMT_CREATE,
+			t.PATH
+		FROM PICTURE_INFO  t
+		WHERE t.GOODS_ID = #value#
+	</select>
+	
+</sqlMap>

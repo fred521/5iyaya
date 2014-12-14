@@ -1,0 +1,25 @@
+验证码用过一次后就应该失效 （注册，登录）
+修改店铺，成功没有提示
+店铺上传logo的地方预览没有，尺寸不对提示没有，成功提示没有
+没登录下，搜索框中回车跳到登录页面
+商品detail页面，如果id不存在，或者商品已经下架，怎么处理？
+
+很多链接都没有加,比方说商品详情页面上对店铺的链接
+
+add by daodao
+ShopAction 里面308行和329行重复出现
+request.setAttribute("errorInfo", "您好找的店铺信息不存在，或已经删除");
+throw new Exception("您好找的店铺信息不存在，或已经删除");
+后面那句可以删除，直接返回某个ModelAndView就可以了
+
+GoodsAction 93，137行
+if (shop.getShopId() == null) {
+	throw new ServiceException("该会员没有店铺");
+}
+是错误的，首先shopId一般情况下是不会为空的，因为shop_id是不能为null,其次，即使要判断空，也应该判断if (shop == null)
+
+
+NewsMemmberAction，GoodsAction里面也有相同的问题
+
+
+search index build need optimize

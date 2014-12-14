@@ -1,0 +1,51 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=$!{page_encoding}">
+<title>我爱丫丫网 - 母婴产品批发  - 母婴产品团购 #if($page_title) - ${page_title} #end</title>
+<link rel="stylesheet" type="text/css" href="${appServer}/css/main.css">
+<script src="${appServer}/js/js1.js"></script>
+<script language="javascript" type="text/javascript" src="${appServer}/js/jquery-1.2.3.min.js"></script>
+
+<script type='text/javascript' src='${appServer}/lib/3rd/jquery.ifixpng.js'></script>
+
+</head>
+<style type="text/css">
+	td{
+	font-family: Tahoma, Arial, sans-serif;
+    font-size:12px;
+    font-style: normal;
+	color: #333333;
+	}
+	h1{
+	font-family: Tahoma, Arial, sans-serif;
+    font-size:18px;
+    font-style: normal;
+	color: #333333;
+	}
+	.hidden{
+		 display: none;
+	}
+	.show{
+	  display: block;
+	}
+</style>
+<body >
+<center>
+<!--head-->
+<!--head-->
+<table width="1024" align="center" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td ><div id="header">$control.setTemplate("home/header")</div></td>
+	</tr>
+</table>
+
+<div style="width:1024px;height:188px;">
+	<div style="width:200;float:left;margin-right:45px">$control.setTemplate("home/member/left")</div>
+	<div style="width:740;float:left">$screen_content</div>
+</div>
+
+##$control.setTemplate("home/footer")
+$control.setTemplate("home/main_footer")
+</body>
+</html>

@@ -1,0 +1,121 @@
+#set( $layout = "layout/home/main_default.vm" )
+#set($bulletinDto="")
+#foreach($key in $map.keySet())
+#if($key==95)
+	#set($bulletinDto=$map.get($key))
+#end
+#end
+
+
+<script type='text/javascript'>
+ jQuery().ready( function(){
+	      new window["component.TabSet"]( document.getElementById( "rental" ) );
+	  } );
+</script>
+<div id="main">
+    <div id="main_left" class="left">
+	   $control.get('main_goods_cat')
+	   <div class="brochure">
+		   <a href="#"><img alt="母婴儿直购目录第一册" src="images/brochure.jpg" width="238" height="159" onClick="window.open('${appServer}/magzine/5iyya200809.rar')" /></a>
+		</div>
+	<div id="cheapbar" style="margin-bottom:10px;">
+	       <div class="ico_3"> 
+		       <h2>零售专区</h2>
+		   </div>
+		   <div id="leftbar">
+		        $control.setTemplate('home/specialOfferPanel')
+		   </div>
+		   <div class="ico_4"></div>
+		   <div class="links">
+				$control.setTemplate('home/commendBrandPanel')
+		   </div>
+		   <div class="clear"></div>
+	 </div>
+	 		#set($brandDto="")
+		#set($shopDto="")
+		#set($marketDto="")
+#foreach($key in $otherMap.keySet())
+		#if($key==10)
+			#set($shopDto = $otherMap.get($key))
+		#end
+		#if($key==30)
+			#set($marketDto = $otherMap.get($key))
+		#end
+		#if($key==40)
+			#set($brandDto = $otherMap.get($key))
+		#end
+		
+#end
+	 $control.setTemplate('home/businessInfoPanel')
+    </div>
+	
+	<!-- left end -->
+	<div id="main_right" class="left">
+	     <div>
+		      <div id="banner">
+				  <div id="mpc">
+				      <div>
+			          <a href="#"><img src="images/banner.jpg" width="493" height="284" /></a>
+				      </div>
+				      <div style="display:none;">
+			          <a href="#"><img src="images/banner.jpg" width="493" height="284" /></a>
+				      </div>
+				  </div>
+				  <ul>
+					  <li class="cur">1</li>
+					  <li>2</li>
+				  </ul>
+			  </div>
+				$control.setTemplate('home/bulletin')
+		 </div>
+		 <!-- banner end -->
+		 <div class="main_box">
+		      <div class="ico_6">
+			       <h2>热销产品</h2>
+				   <p><a href="#">查看更多</a></p>
+			  </div>
+			  <div class="products_hot">
+			       <a class="left" href="#"><img src="images/hot.jpg" width="231" height="192" alt="热销产品" /></a>
+				   #set($commendGoods=$index_mid_goods)
+				   $control.setTemplate('home/recommendPanel')
+				   <div class="clear"></div>
+			  </div>
+			  <div class="ico_7"></div>
+		 </div>
+		 <!-- hot end -->
+		 <div class="show">
+		     <a href="#"><img alt]"第11届中国国际婴儿童用品展览会" src="images/show.jpg" /></a>
+		 </div>
+		 <div class="main_box">
+		      <div class="ico_8">
+			       <h2>热门推荐</h2>
+				   <p><a href="#">查看更多</a></p>
+			  </div>
+			  <div class="products_hot">
+			       <a class="left" href="#"><img src="images/remen.jpg" width="231" height="192" alt="热销产品" /></a>
+				   #set($commendGoods=$index_hotsale_goods)
+				   $control.setTemplate('home/recommendPanel')
+				   <div class="clear"></div>
+			  </div>
+			  <div class="ico_7"></div>
+		 </div>
+		 <!-- hot2 end -->
+		 <div class="main_box">
+		      <div class="ico_9">
+			       <h2>新品上市</h2>
+				   <p><a href="#">查看更多</a></p>
+			  </div>
+			  <div class="products_hot">
+			       <a class="left" href="#"><img src="images/xinpin.jpg" width="231" height="192" alt="热销产品" /></a>
+				   #set($commendGoods=$index_newarrival_goods)
+				   $control.setTemplate('home/recommendPanel')
+				   <div class="clear"></div>
+			  </div>
+			  <div class="ico_7"></div>
+		 </div>
+		 <!-- hot3 end -->
+		 <div class="clear">
+		 </div> 
+	</div>
+	<div class="clear"></div>
+</div>

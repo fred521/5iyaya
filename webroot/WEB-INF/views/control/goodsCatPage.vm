@@ -1,0 +1,26 @@
+				<!-- 2, 商品分类 -->
+				<table id="categories" cellspacing="0" class="list_table" >
+			      <tbody>
+			        <tr>
+			          <td class="list_table_header list_table_header_categories" />
+			        </tr>
+			        <tr>
+			        <td class="list_table_content list_table_content_categories">
+						#foreach($root in $rootCats)
+			            <ul class="list_table_content_categories_0$velocityCount" >
+							<a href="${appServer}/search/goods/$!{root.typeId}.htm" target="_blank" title="$!$root.typeName">
+								$root.typeName</a>
+							<li>
+							#foreach($cat in $goodsCats)
+								  #if("$cat.levels" == "2" && "$cat.parentId" == "$root.typeId")
+									##$homeMoudle.setTarget('/search/search.htm').addQueryData('searchcate',$cat.typeId).addQueryData('searchtype','good')
+								    <a href="${appServer}/search/goods/$!{cat.typeId}.htm" target="_blank" title="$!cat.typeName">$cat.typeName</a>
+								  #end
+							#end
+							</li>
+						</ul>
+						#end
+			        </td>
+			        </tr>
+			      </tbody>
+			    </table>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="gb2312"?>
+<formmset>
+	<form name="editURLs">
+		<field name="title">
+			<required-validator>
+				<message>链接标题不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="40">
+				<message>链接标题不能超过32个字符</message>
+			</length-validator>
+		</field>
+		<field name="url">
+			<required-validator>
+				<message>链接地址不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="128">
+				<message>链接地址不能超过128个字符</message>
+			</length-validator>
+		</field>
+		<field name="path"/>
+		<field name="id" />				
+	</form>
+</formmset>

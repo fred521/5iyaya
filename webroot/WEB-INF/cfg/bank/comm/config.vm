@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="${encoding}"?>
+<BOCOMB2C>	
+	<ApiURL>${cfg.apiURL}</ApiURL>
+	<OrderURL>${cfg.orderURL}</OrderURL>
+	<EnableLog>${cfg.enableLog}</EnableLog>
+	<LogPath>${resourceLoader.getResource($cfg.logPath).file}</LogPath>
+	<SettlementFilePath>${resourceLoader.getResource($cfg.settlementFilePath).file}</SettlementFilePath>
+	<MerchantCertFile>${resourceLoader.getResource($cfg.merchantCertFile).file}</MerchantCertFile>
+	<MerchantCertPassword>${cfg.merchantCertPassword}</MerchantCertPassword>
+	<RootCertFile>${resourceLoader.getResource($cfg.rootCertFile).file}</RootCertFile>
+</BOCOMB2C>

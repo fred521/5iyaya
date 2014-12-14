@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="GOODSBASEINFO_SPACE">
+	<resultMap id="goodsbaseinfo" class="com.nonfamous.tang.domain.GoodsBaseInfo">
+		<result property="goodsId" column="GOODS_ID"/>
+		<result property="shopId" column="SHOP_ID"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="goodsName" column="GOODS_NAME"/>
+		<result property="goodsCat" column="GOODS_CAT"/>
+		<result property="marketPrice" column="MARKET_PRICE"/>
+		<result property="batchPrice" column="BATCH_PRICE"/>
+		<result property="batchNum" column="BATCH_NUM"/>
+		<result property="groupNum" column="GROUP_NUM"/>
+		<result property="priceDes" column="PRICE_DES"/>
+		<result property="goodsNum" column="GOODS_NUM"/>
+		<result property="goodsPic" column="GOODS_PIC"/>
+		<result property="abandonDays" column="ABANDON_DAYS"/>
+		<result property="gmtAbandon" column="GMT_ABANDON"/>
+		<result property="goodsType" column="GOODS_TYPE"/>
+		<result property="goodsStatus" column="GOODS_STATUS"/>
+		<result property="viewCount" column="VIEW_COUNT"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="catPath" column="CAT_PATH"/>
+		<result property="colors" column="COLORS"/>
+		<result property="size" column="SIZE"/>
+		<result property="properties" column="PROPERTIES"/>
+	</resultMap>
+	
+	<resultMap id="goodsWholeInfo" class="com.nonfamous.tang.domain.GoodsBaseInfo" extends="goodsbaseinfo">
+		<result property="goodsContent.content" column="CONTENT"/>
+	</resultMap>
+	
+	<insert id="goodsbaseinfo_insert" parameterClass="com.nonfamous.tang.domain.GoodsBaseInfo">
+		INSERT INTO GOODS_BASE_INFO (
+				GOODS_ID,
+				SHOP_ID,
+				MEMBER_ID,
+				GOODS_NAME,
+				GOODS_CAT,
+				MARKET_PRICE,
+				BATCH_PRICE,
+				BATCH_NUM,
+				GROUP_NUM,
+				PRICE_DES,
+				GOODS_NUM,
+				GOODS_PIC,
+				ABANDON_DAYS,
+				GMT_ABANDON,
+				GOODS_TYPE,
+				GOODS_STATUS,
+				VIEW_COUNT,
+				CREATOR,
+				GMT_MODIFY,
+				MODIFIER,
+				GMT_CREATE,
+				CAT_PATH,
+				COLORS,
+				SIZE,
+				PROPERTIES
+	                     )
+	             VALUES ( 
+				#goodsId#,
+				#shopId#,
+				#memberId#,
+				#goodsName#,
+				#goodsCat#,
+				#marketPrice#,
+				#batchPrice#,
+				#batchNum#,
+				#groupNum#,
+				#priceDes#,
+				#goodsNum#,
+				#goodsPic#,
+				#abandonDays#,
+				ADDDATE(sysdate(),interval #abandonDays# day),
+				#goodsType#,
+				#goodsStatus#,
+				0,
+				#creator#,
+				sysdate(),
+				#modifier#,
+				sysdate(),
+				#catPath#,
+				#colors#,
+				#size#,
+				#properties#
+	                     )
+	</insert>
+	
+	<update id="goodsbaseinfo_update" parameterClass="com.nonfamous.tang.domain.GoodsBaseInfo">
+		UPDATE GOODS_BASE_INFO t SET  
+			t.GMT_MODIFY = sysdate()
+			<isNotEmpty prepend="," property="goodsName"> t.GOODS_NAME = #goodsName#</isNotEmpty>
+			<isNotEmpty prepend="," property="goodsCat"> t.GOODS_CAT = #goodsCat#</isNotEmpty>
+			<isNotEmpty prepend="," property="marketPrice"> t.MARKET_PRICE = #marketPrice#</isNotEmpty>
+			<isNotEmpty prepend="," property="batchPrice"> t.BATCH_PRICE = #batchPrice#</isNotEmpty>
+			<isNotEmpty prepend="," property="batchNum"> t.BATCH_NUM = #batchNum#</isNotEmpty>
+			<isNotEmpty prepend="," property="priceDes"> t.PRICE_DES = #priceDes#</isNotEmpty>
+			<isNotEmpty prepend="," property="goodsNum"> t.GOODS_NUM = #goodsNum#</isNotEmpty>
+			<isNotEmpty prepend="," property="goodsPic"> t.GOODS_PIC = #goodsPic#</isNotEmpty>
+			<isNotEmpty prepend="," property="abandonDays"> t.ABANDON_DAYS = #abandonDays#</isNotEmpty>
+			<isNotEmpty prepend="," property="gmtAbandon"> t.GMT_ABANDON = #gmtAbandon#</isNotEmpty>
+			<isNotEmpty prepend="," property="goodsStatus"> t.GOODS_STATUS = #goodsStatus#</isNotEmpty>
+			<isNotEmpty prepend="," property="modifier"> t.MODIFIER = #modifier#</isNotEmpty>
+			<isNotEmpty prepend="," property="catPath"> t.CAT_PATH = #catPath# </isNotEmpty>
+			<isNotEmpty prepend="," property="colors"> t.COLORS = #colors# </isNotEmpty>
+			<isNotEmpty prepend="," property="size"> t.SIZE = #size# </isNotEmpty>
+			<isNotEmpty prepend="," property="properties"> t.PROPERTIES = #properties# </isNotEmpty>
+			WHERE t.GOODS_ID = #goodsId#
+	</update>
+	
+	<update id="goodsbaseinfo_add_shelve" parameterClass="com.nonfamous.tang.domain.GoodsBaseInfo">
+		UPDATE GOODS_BASE_INFO t SET
+			 t.GMT_ABANDON = ADDDATE(sysdate(),interval #abandonDays# day),  
+			 t.GOODS_STATUS = #goodsStatus#,
+			  t.MODIFIER = #modifier#,
+			 t.GMT_MODIFY = sysdate()
+		WHERE t.GOODS_ID = #goodsId#
+	</update>
+	
+	<update id="goodsbaseinfo_down_shelve" parameterClass="com.nonfamous.tang.domain.GoodsBaseInfo">
+		UPDATE GOODS_BASE_INFO t SET  
+			 t.GMT_ABANDON = sysdate(),
+			 t.GOODS_STATUS = #goodsStatus#,
+			 t.MODIFIER = #modifier#,
+			t.GMT_MODIFY = sysdate()
+		WHERE t.GOODS_ID = #goodsId#
+	</update>
+	
+	
+	<select id="get_goodsbaseinfo_list_bydate" parameterClass="java.util.Date" resultMap="goodsbaseinfo">
+		SELECT 
+			GOODS_ID,
+			SHOP_ID,
+			MEMBER_ID,
+			GOODS_NAME,
+			GOODS_CAT,
+			MARKET_PRICE,
+			BATCH_PRICE,
+			BATCH_NUM,
+			GROUP_NUM,
+			PRICE_DES,
+			GOODS_NUM,
+			GOODS_PIC,
+			ABANDON_DAYS,
+			GMT_ABANDON,
+			GOODS_TYPE,
+			GOODS_STATUS,
+			VIEW_COUNT,
+			CREATOR,
+			GMT_MODIFY,
+			MODIFIER,
+			GMT_CREATE,
+			CAT_PATH,
+			COLORS,
+			SIZE,
+			PROPERTIES
+		FROM GOODS_BASE_INFO  t  
+		WHERE GMT_MODIFY &gt;#value#
+	</select>
+	<select id="get_goodsbaseinfo_list_by_memberId" parameterClass="com.nonfamous.tang.dao.query.GoodsQuery" resultMap="goodsbaseinfo">
+		select b.* from GOODS_BASE_INFO b WHERE b.MEMBER_ID = #memberId# AND b.GOODS_STATUS=#goodsStatus# 
+		ORDER BY b.GMT_MODIFY DESC 
+  		LIMIT #dbStartNo#, #dbEndNo# 
+	</select>
+	
+	<select id="get_goods_whole_info" parameterClass="java.lang.String" resultMap="goodsWholeInfo">
+		SELECT 
+			t.GOODS_ID,
+			t.SHOP_ID,
+			t.MEMBER_ID,
+			t.GOODS_NAME,
+			t.GOODS_CAT,
+			t.MARKET_PRICE,
+			t.BATCH_PRICE,
+			t.BATCH_NUM,
+			t.GROUP_NUM,
+			t.PRICE_DES,
+			t.GOODS_NUM,
+			t.GOODS_PIC,
+			t.ABANDON_DAYS,
+			t.GMT_ABANDON,
+			t.GOODS_TYPE,
+			t.GOODS_STATUS,
+			t.VIEW_COUNT,
+			t.CREATOR,
+			t.GMT_MODIFY,
+			t.MODIFIER,
+			t.GMT_CREATE,
+			t.CAT_PATH,
+			c.CONTENT,
+			t.COLORS,
+			t.SIZE,
+			t.PROPERTIES
+		FROM GOODS_BASE_INFO  t, GOODS_CONTENT c
+		WHERE t.GOODS_ID = c.GOODS_ID AND t.GOODS_ID = #value#
+	</select>
+	
+		<select id="get_goods_base_info" parameterClass="java.lang.String" resultMap="goodsbaseinfo">
+		SELECT 
+			t.GOODS_ID,
+			t.SHOP_ID,
+			t.MEMBER_ID,
+			t.GOODS_NAME,
+			t.GOODS_CAT,
+			t.MARKET_PRICE,
+			t.BATCH_PRICE,
+			t.BATCH_NUM,
+			t.GROUP_NUM,
+			t.PRICE_DES,
+			t.GOODS_NUM,
+			t.GOODS_PIC,
+			t.ABANDON_DAYS,
+			t.GMT_ABANDON,
+			t.GOODS_TYPE,
+			t.GOODS_STATUS,
+			t.VIEW_COUNT,
+			t.CREATOR,
+			t.GMT_MODIFY,
+			t.MODIFIER,
+			t.GMT_CREATE,
+			t.CAT_PATH,
+			t.COLORS,
+			t.SIZE,
+			t.PROPERTIES
+		FROM GOODS_BASE_INFO  t
+		WHERE t.GOODS_ID = #value#
+	</select>
+	
+	<update id="delete_goodsbaseinfo" parameterClass="java.util.Map">
+		UPDATE GOODS_BASE_INFO t SET t.GOODS_STATUS = #goodsStatus#,
+			t.GMT_MODIFY = sysdate() 
+		  WHERE t.GOODS_ID = #goodsId#
+	</update>
+	<update id="goodsgroupnum_update" parameterClass="java.util.Map">
+		UPDATE GOODS_BASE_INFO t SET t.GROUP_NUM = #num#,
+			t.GMT_MODIFY = sysdate() 
+		  WHERE t.GOODS_ID = #goodsId#
+	</update>
+
+	
+	<select id="COUNT_GOODS_WITH_STATUS" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select count(*) as total from GOODS_BASE_INFO t where t.MEMBER_ID = #memberId# AND t.GOODS_STATUS=#goodsStatus#
+	</select>
+	
+	<select id="COUNT_GOODS_IN_SHOP" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select count(*) as total from GOODS_BASE_INFO t where t.SHOP_ID = #shopId# AND t.GOODS_STATUS=#goodsStatus# 
+		<isNotEmpty prepend="" property="goodsType">AND t.GOODS_TYPE = #goodsType#</isNotEmpty>
+	</select>
+	
+	<select id="GET_GOODS_IN_SHOP" parameterClass="com.nonfamous.tang.dao.query.GoodsQuery" resultMap="goodsbaseinfo">
+		select b.* from GOODS_BASE_INFO b WHERE b.SHOP_ID = #shopId# AND b.GOODS_STATUS=#goodsStatus#
+		<isNotEmpty prepend="" property="goodsType">AND b.GOODS_TYPE = #goodsType#</isNotEmpty>  
+		<isNotEmpty prepend="" property="orderBy">ORDER BY b.BATCH_PRICE $orderBy$</isNotEmpty>
+		<isEmpty prepend="" property="orderBy">ORDER BY b.GMT_CREATE DESC</isEmpty>
+		LIMIT #dbStartNo#, #dbEndNo#
+	</select>
+	
+	<select id="COUNT_GOODS_FOR_INDEX" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		 select count(*) as total from GOODS_BASE_INFO t  force INDEX(idx_goods_modifydate) where t.GMT_MODIFY &gt;= #begin# AND t.GMT_MODIFY &lt; #end#
+	</select>
+	
+	<select id="get_GoodsList_For_Index" parameterClass="com.nonfamous.tang.dao.query.IndexGoodsQuery" resultMap="goodsWholeInfo">
+		     SELECT  						   
+		    								t.GOODS_ID,
+											t.SHOP_ID,
+											t.MEMBER_ID,
+											t.GOODS_NAME,
+											t.GOODS_CAT,
+											t.MARKET_PRICE,
+											t.BATCH_PRICE,
+											t.BATCH_NUM,
+											t.GROUP_NUM,
+											t.PRICE_DES,
+											t.GOODS_NUM,
+											t.GOODS_PIC,
+											t.ABANDON_DAYS,
+											t.GMT_ABANDON,
+											t.GOODS_TYPE,
+											t.GOODS_STATUS,
+											t.VIEW_COUNT,
+											t.CREATOR,
+											t.GMT_MODIFY,
+											t.MODIFIER,
+											t.GMT_CREATE,
+											t.CAT_PATH,
+											t.COLORS,
+											t.SIZE,
+				                               c.CONTENT,
+				                               t.PROPERTIES
+				                          FROM GOODS_BASE_INFO t force  INDEX( idx_goods_modifydate), goods_content c
+				                         WHERE t.GMT_MODIFY &gt;= #begin# AND t.GMT_MODIFY &lt; #end# 
+				                         AND   t.goods_id = c.goods_id
+				                         ORDER BY t.GMT_MODIFY ASC
+				                         LIMIT #dbStartNo#, #dbEndNo#
+	</select>
+	
+	<select id="get_goodscount_by_query_conditions" resultClass="java.lang.Integer"  parameterClass="com.nonfamous.tang.dao.query.GoodsQuery">
+		select count(1) as total 
+		  from GOODS_BASE_INFO t 
+		    <isNotNull property="memberSearchCondition" prepend=","> MEMBER m </isNotNull>
+		    <isNotNull property="shopSearchCondition" prepend=","> SHOP s </isNotNull>
+		where 1 = 1
+		    <isNotNull property="memberSearchCondition" prepend=" and "> t.MEMBER_ID = m.MEMBER_ID  </isNotNull>
+		    <isNotNull property="shopSearchCondition" prepend=" and "> t.SHOP_ID = s.SHOP_ID  </isNotNull>
+			<isNotNull property="goodsName" prepend=" AND "> t.GOODS_NAME = #goodsName#</isNotNull>
+			<isNotNull property="goodsCat" prepend=" AND "> t.GOODS_CAT = #goodsCat#</isNotNull>
+			<isNotNull property="catPath" prepend=" AND "> t.CAT_PATH = #catPath#</isNotNull>
+			<isNotNull property="loginId" prepend=" AND "> m.LOGIN_ID = #loginId#</isNotNull>
+			<isNotNull property="nick" prepend=" AND "> m.NICK = #nick#</isNotNull>
+			<isNotNull property="mobile" prepend=" AND "> m.MOBILE = #mobile#</isNotNull>
+			<isNotNull property="shopOwner" prepend=" AND "> s.shop_Owner = #shopOwner#</isNotNull>
+			<isNotNull property="shopId" prepend=" AND "> t.shop_id = #shopId#</isNotNull>
+			<isNotNull property="goodsStatusSet" prepend=" AND ">
+				<iterate  property="goodsStatusList" conjunction="OR" open="(" close=")"> t.GOODS_STATUS = #goodsStatusList[]# </iterate>
+			</isNotNull>
+			<isNotNull property="goodsTypeSet" prepend=" AND ">
+				<iterate  property="goodsTypeList" conjunction="OR" open="(" close=")"> t.GOODS_TYPE = #goodsTypeList[]# </iterate>
+			</isNotNull>
+	</select>
+	
+	<select id="get_goodslist_by_query_conditions" parameterClass="com.nonfamous.tang.dao.query.GoodsQuery" resultMap="goodsbaseinfo">
+       select g.* 
+		    from GOODS_BASE_INFO g 
+		    <isNotNull property="memberSearchCondition" prepend=","> MEMBER m </isNotNull>
+		    <isNotNull property="shopSearchCondition" prepend=","> SHOP s </isNotNull>
+		where 1 = 1
+		    <isNotNull property="memberSearchCondition" prepend=" and "> g.MEMBER_ID = m.MEMBER_ID  </isNotNull>
+		    <isNotNull property="shopSearchCondition" prepend=" and "> g.SHOP_ID = s.SHOP_ID  </isNotNull>
+			<isNotNull property="goodsName" prepend=" AND "> g.GOODS_NAME = #goodsName#</isNotNull>
+			<isNotNull property="goodsCat" prepend=" AND "> g.GOODS_CAT = #goodsCat#</isNotNull>
+			<isNotNull property="catPath" prepend=" AND "> g.CAT_PATH = #catPath#</isNotNull>
+			<isNotNull property="loginId" prepend=" AND "> m.LOGIN_ID = #loginId#</isNotNull>
+			<isNotNull property="nick" prepend=" AND "> m.NICK = #nick#</isNotNull>
+			<isNotNull property="mobile" prepend=" AND "> m.MOBILE = #mobile#</isNotNull>
+			<isNotNull property="shopOwner" prepend=" AND "> s.shop_Owner = #shopOwner#</isNotNull>
+			<isNotNull property="shopId" prepend=" AND "> g.shop_id = #shopId#</isNotNull>
+			<isNotNull property="goodsStatusSet" prepend=" AND ">
+				<iterate  property="goodsStatusList" conjunction="OR" open="(" close=")"> g.GOODS_STATUS = #goodsStatusList[]# </iterate>
+			</isNotNull>
+			<isNotNull property="goodsTypeSet" prepend=" AND ">
+				<iterate  property="goodsTypeList" conjunction="OR" open="(" close=")"> g.GOODS_TYPE = #goodsTypeList[]# </iterate>
+			</isNotNull>
+			<isEqual property="orderBy" prepend="" compareValue="orderByDate">
+				order by g.gmt_modify desc
+			</isEqual>
+			LIMIT #dbStartNo#, #dbEndNo#
+	</select>
+	
+	
+	<update id="UDPATE_VIEW_COUNT">
+		UPDATE GOODS_BASE_INFO t SET t.VIEW_COUNT = t.VIEW_COUNT + #value# ,t.GMT_MODIFY = sysdate()
+		  WHERE t.GOODS_ID = #key#
+	</update>
+	
+	<select id="getSysDate" resultClass="java.util.Date">
+		SELECT sysdate()
+	</select>
+	
+	<select id="GET_GOODS_BYIDS" resultMap="goodsbaseinfo">
+		SELECT 
+			t.GOODS_ID,
+			t.SHOP_ID,
+			t.MEMBER_ID,
+			t.GOODS_NAME,
+			t.GOODS_CAT,
+			t.MARKET_PRICE,
+			t.BATCH_PRICE,
+			t.BATCH_NUM,
+			t.GROUP_NUM,
+			t.PRICE_DES,
+			t.GOODS_NUM,
+			t.GOODS_PIC,
+			t.ABANDON_DAYS,
+			t.GMT_ABANDON,
+			t.GOODS_TYPE,
+			t.GOODS_STATUS,
+			t.VIEW_COUNT,
+			t.CREATOR,
+			t.GMT_MODIFY,
+			t.MODIFIER,
+			t.GMT_CREATE,
+			t.CAT_PATH,
+			t.COLORS,
+			t.SIZE,
+			t.PROPERTIES
+		FROM GOODS_BASE_INFO  t
+		WHERE t.GOODS_ID in  
+		<iterate property="ids" prepend=" " open="(" close=")" conjunction=","> #ids[]# </iterate>
+		  and t.GOODS_STATUS &lt;&gt; 'D'
+	</select>
+</sqlMap>

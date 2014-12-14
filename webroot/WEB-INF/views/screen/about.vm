@@ -1,0 +1,103 @@
+ <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=$!{page_encoding}">
+<title>我爱丫丫网</title>
+<link rel="stylesheet" type="text/css" href="${imgServer}/css/style.css">
+<script src="${imgServer}/js/js1.js"></script>
+</head>
+
+<body topmargin="0" leftmargin="0">
+<center>
+<!--head-->
+$control.setTemplate("home/top")
+<!--head-->
+<table width="950" cellspacing="0" cellpadding="0">
+	<tr>
+		<td bgcolor="#E2E2E2" height="1"></td>
+	</tr>
+	<tr>
+		<td height="30" align="right"><img border="0" src="${imgServer}/images/dianhua.gif" width="171" height="25"></td>
+	</tr>
+	<tr>
+		<td height="10"></td>
+	</tr>
+	<tr>
+		<td bgcolor="#EAD0B0" height="24" style="padding-left:20px;font-family:宋体;font-weight:bold;font-size:14px;padding-top:2px;">版本信息</td>
+	</tr>
+	 
+</table>
+<td width="15">&nbsp;</td>
+ 
+ <tr>
+		<td width="15">&nbsp;</td>
+		
+		<td width="920" align=center>
+			_Version $!{currentVersion} Build $!{buildNumber} $!{buildDate}_
+		</td>
+		<td width="15">&nbsp;</td>
+	</tr>
+ 
+	<tr>
+	<td width="15">&nbsp;</td>
+	</tr>
+  <table width="950" cellspacing="0" cellpadding="0">
+ 
+	<tr>
+		<td bgcolor="#EAD0B0" height="24" style="padding-left:20px;font-family:宋体;font-weight:bold;font-size:14px;padding-top:2px;">调试信息</td>
+	</tr>
+	 
+</table>
+ 
+	 
+ <table border="0" width="950" cellspacing="0" cellpadding="0">
+  <td width="15">&nbsp;</td>
+   <table border="1" width="75%" cellspacing="0" cellpadding="0">
+   <tr>
+      <td align="center""><strong>数据库当前时间</strong></td>
+      <td align="center""><strong>数据库有效商品数量</strong></td>
+      <td align="center""><strong>数据库店铺数量</strong></td>
+      <td align="center""><strong>数据库店主数量</strong></td>
+      <td align="center""><strong>数据库分类信息数量</strong></td>
+   </tr>
+   <tr>
+      <td align="center"">$!{date}</td>
+	  <td align="center"">$!{effectGoods}</td>
+	  <td align="center"">$!{shopCommendCount}</td>
+	  <td align="center"">$!{shopNameCount}</td>
+	  <td align="center"">$!{allNewsCount}</td>
+   </tr>
+   </table>
+   <td width="15">&nbsp;</td>
+   <table border="1" width="75%" cellspacing="0" cellpadding="0">
+   <tr>
+      <td align="center""><strong>索引商品最后更新时间</strong></td>
+      <td align="center""><strong>索引店铺最后更新时间</strong></td>
+      <td align="center""><strong>索引店主最后更新时间</strong></td>
+      <td align="center""><strong>索引分类信息最后更新时间</strong></td>
+      <td align="center""><strong>索引有效商品数量</strong></td>
+      <td align="center""><strong>索引店铺数量</strong></td>
+      <td align="center""><strong>索引店主数量</strong></td>
+      <td align="center""><strong>索引分类信息数量</strong></td>
+   </tr>
+   <tr>
+      <td align="center"">$!{dateGood}</td>
+      <td align="center"">$!{dateShop}</td>
+      <td align="center"">$!{dateShop}</td>
+      <td align="center"">$!{dateNews}</td>
+	  <td align="center"">$!{indexEffectGoods}</td>
+	  <td align="center"">$!{indexShopCommendCount}</td>
+	  <td align="center"">$!{indexShopNameCount}</td>
+	  <td align="center"">$!{indexAllNewsCount}</td>
+   </tr>
+   </table>
+   <td width="15">&nbsp;</td>
+ 
+</table>
+
+$control.setTemplate("home/buttom")
+<!--end-->
+</body>
+
+</html>
+ 
+ 

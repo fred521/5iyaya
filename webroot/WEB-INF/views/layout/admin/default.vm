@@ -1,0 +1,14 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN">
+<html>
+<head>
+<title>我爱丫丫后台管理</title>
+<meta http-equiv="content-type" content="text/html; charset=$!{page_encoding}">
+<style type="text/css" media="screen">
+	  @import url("${imgServer}/css/base.css");
+	  BODY {
+	SCROLLBAR-SHADOW-COLOR: #deefc6; SCROLLBAR-ARROW-COLOR: #ffffff; SCROLLBAR-BASE-COLOR: #c0d586
+}
+</style>
+</head>
+$screen_content
+</html>

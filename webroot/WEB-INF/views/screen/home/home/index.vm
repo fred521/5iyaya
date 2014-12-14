@@ -1,0 +1,108 @@
+#set( $layout = "layout/home/default.vm" )
+	#set($videoCommend="")
+		#set($lifeDto="")
+		#set($tradeSafeDto="")
+		#set($mamaDto="")
+		#set($orgDto="")
+		#set($bulletinDto="")
+		#set($serInfoDto="")
+        #foreach($key in $map.keySet())
+        	#if($key==91)
+				#set($lifeDto = $map.get($key))
+			#end
+			#if($key==92)
+				#set($mamaDto = $map.get($key))
+			#end
+			#if($key==93)
+				#set($tradeSafeDto = $map.get($key))
+			#end
+			#if($key==94)
+				#set($orgDto = $map.get($key))
+			#end
+			#if($key==95)
+				#set($bulletinDto=$map.get($key))
+			#end
+			#if($key==96)
+				#set($serInfoDto=$map.get($key))
+			#end
+		#end
+		#set($brandDto="")
+		#set($shopDto="")
+		#set($marketDto="")
+#foreach($key in $otherMap.keySet())
+		#if($key==10)
+			#set($shopDto = $otherMap.get($key))
+		#end
+		#if($key==30)
+			#set($marketDto = $otherMap.get($key))
+		#end
+		#if($key==40)
+			#set($brandDto = $otherMap.get($key))
+		#end
+		
+#end
+    <table class="main_table" >
+        <tr>
+          <td rowspan=5 class="main_table_td" >
+				$control.setTemplate('home/noticePanel')
+				$control.get('goods_cat')
+				<div class="seperator_1_3"></div>
+				<table id="service" cellspacing="0" class="list_table">
+			      <tbody>
+			        <tr>
+			        <td class="list_table_content list_table_content_service">
+			           <a href="http://www.bogooo.com.cn/main.asp" target="_blank"><img src="images/bg_wz.gif" style="border:0px"  /></a>
+			        </td>
+			        </tr>
+			      </tbody>
+			    </table>
+		  </td>
+		  <td class="main_table_td">
+                <!-- 4 最新消息 -->
+	            <div id="latestMessage">
+	            	   <marquee behavior="scroll" direction="left" align="right" width="478" height="15" scrollamount="5"  style="color:maroon;">
+	            	   	    <img src="${imgServer}/images/0113.gif"/>最新消息：我爱丫丫网新版即将出台，敬请期待！ 
+	            	   </marquee>
+	            	</div>
+          </td>
+		  <td rowspan=6 class="main_table_td" >
+			$control.setTemplate('home/groupsPurchase')
+			 	<!-- 10, 品牌客户推荐 -->
+				<table id="recommend" cellspacing="0" class="list_table_recommend">
+			      <tbody>
+			        <tr>
+			        <td class="list_table_content_recommend">
+				        <ul class="content_list">
+						  <li><img src="images/img_Contents.jpg" style="cursor:pointer;" onClick="window.open('${appServer}/magzine/5iyya200809.rar')"/></li>	
+						  <li><img src="images/banner_03.gif" style="cursor:pointer;" onClick="window.open('${appServer}/visitor/register.htm')"/></li>
+						  <li><img src="images/banner_04.gif" style="cursor:pointer;" onClick="window.open('${appServer}/visitor/register.htm')"/></li>
+						  <li><img src="images/banner_05.gif" style="cursor:pointer;"  onClick="window.open('${appServer}/webchat.html?username=首页客户&question=咨询','$!{good.goodsId}','width=700,height=535,left=300,top=100');"/></li>
+						</ul>			
+			        </td>
+			        </tr>
+			      </tbody>
+			    </table>
+				<div class="seperator_1_3"></div>
+				 <!-- 11, 婴博会图片 -->
+	            <a href='$appServer/home' target="_blank"><img id="banner_02" src="images/banner_02.gif" style="border:0px"/></a>
+				<div class="seperator_1_3"></div>
+				$control.setTemplate('home/businessInfoPanel')
+			</td>
+		</tr>
+			    $control.setTemplate('home/videoPanel')
+			    $control.setTemplate('home/commendPanel')
+        <tr><td class="main_table_td_bottom" colspan=2 >
+            <!-- 13, 中间图片 -->
+			<a href='http://www.5iyya.com/yynews/ff808081207e1bda01208da97d45005f.htm' target="_blank"><img id="banner_middle" src="images/banner_middle.gif" style="border:0px"/></a>
+        </td></tr>
+    </table>
+	$control.setTemplate('home/bottom')
+	
+    <script>    
+      jQuery().ready( function(){
+	      new window["component.TabSet"]( document.getElementById( "msg_board" ) );
+	      new window["component.TabSet"]( document.getElementById( "businesses" ) );
+	      new window["component.TabSet"]( document.getElementById( "rental" ) );
+	  } ); 
+    </script>	
+        

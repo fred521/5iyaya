@@ -1,0 +1,96 @@
+1. 安装环境要求
+
+数据库服务器：Windows 2000 Server (or above), Oracle 10g
+
+应用服务器：Windows 2000 Server (or above), Tomcat 5.0 (or above)
+
+2. 准备数据库服务器
+
+2.1 建立数据库用户（建议用户shang）
+
+2.2 在建立的数据库用户下，运行脚本<package-root>/db_script/create.sql建立所有的数据库对象
+
+2.3 在建立的数据库用户下，运行脚本<package-root>/db_script/init.sql初始化应用数据库
+
+3. 安装辅助工具（该辅助工具需要安装在应用服务器上）
+
+3.1 取得并解压缩文件<package-root>/tools/jmagick.rar
+
+3.2 运行其中的安装文件ImageMagick-5.5.6-i686-pc-windows.exe
+
+3.3 将其中的压缩文件jmagick-win-5.5.6.zip中的DLL文件拷贝至Windows系统目录System32下
+
+4. 准备应用服务器
+
+4.1 将发布包bizyi.war放置于Tomcat目录下的webapps目录中，如果需要以根目录的方式访问，请将解开后的文件内容全部copy到webapps/ROOT目录下
+
+4.2 重新启动Tomcat
+
+5. 修改配置文件
+
+5.1 在<app-root>/WEB-INF/conf/server.properties 文件中，修改以下项目为正确取值
+
+	oracle.driverClassName =oracle.jdbc.driver.OracleDriver
+	oracle.url             =jdbc:oracle:oci:@www.xsnmpx.com:1521:xe
+	oracle.username        = shang
+	oracle.password        = shang
+
+
+	domain=nonfamous.vicp.net            
+	#app server(application server)
+	appServer.protocol=http
+	appServer.host=nonfamous.vicp.net
+	appServer.port=8080            //端口设置为tomcat服务器端口    
+
+	#imgServer(image server)
+	imgServer.protocol=http
+	imgServer.host=nonfamous.vicp.net
+	imgServer.port=8080            //端口设置为tomcat服务器端口
+
+5.2 调整上传文件的存放位置
+
+    为避免每次重新部署应用清除以前上载的文件，或者希望另外配置服务器保存尚在文件以增加访问性能，需要调整上传文件的存放位置。注意存放位置必须是可以用http协议访问的。
+
+    上传文件的存放位置由以下配置决定。
+
+	upload.file.rootpath =${webapp.root}/upload
+
+    需要设置为文件绝对路径，比如：c:\tomcat\webapps\bizyi-upload
+
+    上传文件的访问位置由以下配置决定：
+
+	#upServer(upload server)
+	upServer.protocol=http
+	upServer.host=nonfamous.vicp.net
+	upServer.port=8080
+	upServer.path=/bizyi-upload
+
+    访问位置应该可以使用http协议访问到文件的存放位置。
+
+5.3 保存修改，重新启动Tomcat
+
+6. 系统安装完成
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+二期相关说明
+1、数据库安装：执行db_script文件夹中的phase2_create.sql
+2、根据数字证书的说明安装数字证书
+3、在<app-root>/WEB-INF/conf/bank_comm.properties 交通银行特殊文件中，修改以下项目为正确取值
+	交通银行api初始化连接，不需要修改
+	bank.comm.apiURL=https://ebanktest.95559.com.cn/corporbank/NsTrans
+	订单提交连接，真实系统与测试系统不同，此为测试
+	bank.comm.orderURL=https://61.172.242.228/netpay/MerPayB2C
+	是否记录银行日志
+	bank.comm.enableLog=true
+	银行日志目录
+	bank.comm.logPath=WEB-INF/log
+	对帐文件存放目录，目前还没有，今后结算上去后需要
+	bank.comm.settlementFilePath=WEB-INF/settlement
+	企业证书文件，需要今后将实际的商户证书替换掉
+	bank.comm.merchantCertFile=WEB-INF/bank/comm/301310063009501.PFX
+	证书密码
+	bank.comm.merchantCertPassword=12345678
+	服务器根证书路径，真实系统需要替换为真实证书，此为测试用
+	bank.comm.rootCertFile=WEB-INF/bank/comm/test_root.cer
+	商户号
+	bank.comm.merchantId=301310063009501

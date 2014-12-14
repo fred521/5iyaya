@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="TRADECAR_SPACE">
+	<resultMap id="tradecar"
+		class="com.nonfamous.tang.domain.trade.TradeCar">
+		<result property="id" column="ID" />
+		<result property="goodsId" column="GOODS_ID" />
+		<result property="shopId" column="SHOP_ID" />
+		<result property="owner" column="OWNER" />
+		<result property="gmtCreate" column="GMT_CREATE" />
+	</resultMap>
+	<resultMap id="tradeCarItem" class="com.nonfamous.tang.domain.trade.TradeCarItem">
+		<result property="tradeCar.id" column="ID" />
+		<result property="tradeCar.goodsId" column="GOODS_ID" />
+		<result property="goodsBaseInfo.goodsName" column="GOODS_NAME" />
+		<result property="goodsBaseInfo.batchPrice" column="BATCH_PRICE" />
+		<result property="tradeCar.shopId" column="SHOP_ID" />
+		<result property="tradeCar.owner" column="OWNER" />		
+		<result property="tradeCar.gmtCreate" column="GMT_CREATE" />	
+		<result property="shop.shopName" column="SHOP_NAME" />
+	</resultMap>
+	<resultMap id="tradeCarGoods" class="com.nonfamous.tang.domain.trade.TradeCarItem">
+		<result property="tradeCar.id" column="ID" />
+		<result property="tradeCar.goodsId" column="GOODS_ID" />
+		<result property="goodsBaseInfo.goodsName" column="GOODS_NAME" />
+		<result property="goodsBaseInfo.batchPrice" column="BATCH_PRICE" />
+		<result property="tradeCar.shopId" column="SHOP_ID" />
+		<result property="tradeCar.owner" column="OWNER" />		
+		<result property="tradeCar.gmtCreate" column="GMT_CREATE" />	
+	</resultMap>
+
+	<insert id="tradecar_insert"
+		parameterClass="com.nonfamous.tang.domain.trade.TradeCar">
+		INSERT INTO TRADE_CAR ( ID, GOODS_ID, SHOP_ID, OWNER, GMT_CREATE
+		) VALUES ( #id#, #goodsId#, #shopId#, #owner#, sysdate() )
+	</insert>
+
+	<update id="tradecar_update"
+		parameterClass="com.nonfamous.tang.domain.trade.TradeCar">
+		UPDATE TRADE_CAR t SET
+		<isNotEmpty prepend="" property="goodsId">
+			t.GOODS_ID = #goodsId#,
+		</isNotEmpty>
+		<isNotEmpty prepend="" property="shopId">
+			t.SHOP_ID = #shopId#
+		</isNotEmpty>
+		WHERE t.id = #id#
+	</update>
+
+	<select id="get_tradecar_list" parameterClass="java.util.Map"
+		resultMap="tradecar">
+		SELECT ID, GOODS_ID, SHOP_ID, OWNER, GMT_CREATE FROM TRADE_CAR t
+	</select>
+
+	<select id="get_tradecar" resultMap="tradecar">
+		SELECT ID, GOODS_ID, SHOP_ID, OWNER, GMT_CREATE FROM TRADE_CAR t
+		WHERE t.id = #value#
+	</select>
+	
+	<select id="get_tradecar_by_goods_id_with_owner" resultMap="tradecar">
+		SELECT ID, GOODS_ID, SHOP_ID, OWNER, GMT_CREATE FROM TRADE_CAR t force index( IDX_TRADE_CAR_OWNER)
+		WHERE t.owner=#owner# and t.GOODS_ID = #goodsId# 
+	</select>
+
+	<delete id="delete_tradecar" parameterClass="java.lang.Long">
+		DELETE FROM TRADE_CAR WHERE id = #value#
+	</delete>
+
+	<select id="count_by_shopid_owner" resultClass="java.lang.Integer">
+		SELECT COUNT(*) AS TOTAL FROM TRADE_CAR t force index( IDX_TRADE_CAR_OWNER)  WHERE t.owner=#owner# and t.SHOP_ID = #shopId# 
+	</select>
+	
+	<select id="get_goods_by_shopid_and_owner" resultMap="tradeCarGoods">
+		SELECT T.*,G.GOODS_NAME ,G.BATCH_PRICE FROM GOODS_BASE_INFO G ,TRADE_CAR T force index( IDX_TRADE_CAR_OWNER) 
+		WHERE t.owner=#owner# and T.SHOP_ID=#shopId# and  t.goods_id=g.goods_id
+	</select>
+	
+	
+	<select id="count_my_tradecar_items" resultClass="java.lang.Integer">
+		select count(*) from trade_car t force index( IDX_TRADE_CAR_OWNER) where  t.owner=#owner# 
+	</select>
+	
+	<select id="get_my_tradecar_paging" resultMap="tradeCarItem">
+		select t.*,g.goods_name ,g.batch_price ,s.shop_name from goods_base_info g ,trade_car t force index( IDX_TRADE_CAR_OWNER),shop s 
+					where t.owner=#owner#  and t.shop_id = s.shop_id 
+					  and t.goods_id=g.goods_id 
+					order by t.gmt_create desc
+		limit #dbStartNo#, #dbEndNo#	
+	</select>
+
+</sqlMap>

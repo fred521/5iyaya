@@ -1,0 +1,90 @@
+#set( $layout = "layout/admin/default.vm" )
+<BODY leftMargin=8 background="${imgServer}/images/adimn/allbg.gif" topMargin=8>
+<FORM name="formAdd" action="${adminMoudle}/admin_member/do_member_add.htm" method="post">	
+<TABLE cellSpacing=1 cellPadding=3 width="98%" align=center bgColor=#666666 border=0>
+  <TBODY>
+	<TR>
+		<TD background="${imgServer}/images/admin/tbg.gif" height=19><B>&nbsp;增加卖家</B></TD>
+	</TR>
+  <TR>
+    <TD vAlign=top bgColor=#ffffff height=200> 
+      <table border="0" width="98%" cellspacing="0" cellpadding="6">
+		  <tr> 
+            <td colspan="2" align="center"><span class="red">$!errorMessage</span></td>
+          </tr>
+          <tr> 
+            <td height="24" class="tx_title" colspan="2"><b>输入登录信息</b></td>
+          </tr>
+          <tr> 
+            <td width="150" height="17">用户名:</td>
+			<td><input name="loginId" type="text" value="$!form.getField('loginId').value" class="input3"><span class="red">*$!form.getField('loginId').message</span></td>
+          </tr>
+          <tr> 
+            <td height="18">密　码:</td>
+            <td><input name="loginPassword" type="password" #if($form) value="" #else value="000000" #end class="input3"><span class="red">*$!form.getField('loginPassword').message</span></td>
+          </tr>
+          <tr> 
+            <td height="35">手机号码:</td>
+            <td> <input name="mobile" type="text" value="$!form.getField('mobile').value" class="input3"><span class="red">$!form.getField('mobile').message</span></td>
+          </tr>
+          <tr> 
+            <td>E-mail:</td>
+            <td>
+				<input name="email" type="text" value="$!form.getField('email').value" class="input3"> 
+				<span class="red">$!form.getField('email').message</span>
+			</td>
+          </tr>
+          <tr> 
+            <td height="16" colspan="2"></td>
+          </tr>
+          <tr> 
+            <td height="24" class="tx_title" colspan="2"><b>输入个人资料</b></td>
+          </tr>
+          <tr> 
+            <td>真实姓名:</td>
+            <td><input name="name" type="text" value="$!form.getField('name').value" class="input3"> <span class="red">*$!form.getField('name').message</span></td>
+          </tr>
+          <tr> 
+            <td>性别:</td>
+            <td> 
+				<input type="radio" value="M" #if("$!form.getField('sex').value" == "M" || !$form.getField('sex').value)checked#end name="sex">男 
+				<input type="radio" value="F" #if("$!form.getField('sex').value" == "F")checked#end name="sex">女 </td>
+          </tr>
+          <tr> 
+            <td>会员昵称:</td>
+            <td><input name="nick" type="text" class="input3" value="$!form.getField('nick').value"><span class="red">$!form.getField('nick').message</span></td>
+          </tr>
+          <tr> 
+            <td>所在地区:</td>
+            <td>$control.get('prov_city').put("areaCode",$!form.getField('areaCode').value)</td>
+          </tr>
+          <tr> 
+            <td>详细地址:</td>
+            <td><input name="address" type="text" value="$!form.getField('address').value" class="input4"> <span class="red">*$!form.getField('address').message</span></td>
+          </tr>
+          <tr> 
+            <td>邮政编码:</td>
+            <td><input name="postCode" type="text" class="input5" #if($form) value="$!form.getField('postCode').value" #else value="215500" #end> <span class="red">*$!form.getField('postCode').message</span></td>
+          </tr>
+          <tr> 
+            <td>固定电话:</td>
+            <td><input name="phone" type="text" class="input3" value="$!form.getField('phone').value"><span class="red">$!form.getField('phone').message</span> </td>
+          </tr>
+          <tr> 
+            <td>　</td>
+            <td> 
+				<INPUT type="submit" value="添加会员"> &nbsp;&nbsp;
+				<INPUT type="reset" value="重置" onclick="history.go(0)">
+			</td>
+          </tr>
+          <tr> 
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </table>
+	</TD>
+  </TR>
+  </TBODY>
+</TABLE>
+</FORM>
+</BODY>

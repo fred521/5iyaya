@@ -1,0 +1,177 @@
+TD {
+	FONT-SIZE: 12px; LINE-HEIGHT: 22px; FONT-FAMILY: "Verdana"
+}
+INPUT {
+	FONT-SIZE: 12px
+}
+SELECT {
+	FONT-SIZE: 12px
+}
+.input1 {
+	BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; BORDER-LEFT: #999999 1px solid; WIDTH: 450px; BORDER-BOTTOM: #999999 1px solid; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff
+}
+.input2 {
+	BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; BORDER-LEFT: #999999 1px solid; WIDTH: 280px; BORDER-BOTTOM: #999999 1px solid; HEIGHT: 22px; BACKGROUND-COLOR: #ffffff
+}
+.input3 {
+	WIDTH: 180px; FONT-FAMILY: Verdana; HEIGHT: 24px
+}
+.input4 {
+	WIDTH: 280px; FONT-FAMILY: Verdana; HEIGHT: 24px
+}
+.input5 {
+	WIDTH: 80px; FONT-FAMILY: Verdana; HEIGHT: 24px
+}
+.input6 {
+	WIDTH: 70px; HEIGHT: 24px
+}
+.input7 {
+	WIDTH: 50px; HEIGHT: 24px
+}
+.input8 {
+	WIDTH: 280px; HEIGHT: 60px
+}
+.input9 {
+	WIDTH: 280px; HEIGHT: 130px
+}
+.input10 {
+	WIDTH: 147px; HEIGHT: 22px
+}
+.input11 {
+	WIDTH: 65px; HEIGHT: 22px
+}
+.input12 {
+	WIDTH: 40px; HEIGHT: 22px
+}
+.title1 {
+	PADDING-LEFT: 5px; FONT-WEIGHT: bold; PADDING-BOTTOM: 4px; COLOR: white
+}
+.border1 {
+	BORDER-RIGHT: #d6a366 1px solid; BORDER-LEFT: #d6a366 1px solid; BORDER-BOTTOM: #d6a366 1px solid
+}
+#content {
+	
+}
+#content A {
+	COLOR: #ff0000; TEXT-DECORATION: underline
+}
+A:link {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #000000; TEXT-DECORATION: underline
+}
+A.Big:link {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #ff6600; TEXT-DECORATION: underline
+}
+A.Big:visited {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #ff6600; TEXT-DECORATION: underline
+}
+A.Big:hover {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #ff3300; TEXT-DECORATION: none
+}
+A.blueB:link {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #000000; TEXT-DECORATION: none
+}
+A.blueB:visited {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #000000; TEXT-DECORATION: none
+}
+.marketprice {
+	COLOR: #999999; FONT-FAMILY: ??
+}
+.mallprice {
+	FONT-WEIGHT: bold; COLOR: #ff3300; FONT-FAMILY: ??
+}
+A.blueB:hover {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; COLOR: #ff9000; TEXT-DECORATION: underline
+}
+A.blue:link {
+	FONT-SIZE: 12px; COLOR: #7d5615; TEXT-DECORATION: none
+}
+A.blue:visited {
+	FONT-SIZE: 12px; COLOR: #7d5615; TEXT-DECORATION: none
+}
+A.blue:hover {
+	FONT-SIZE: 12px; COLOR: #dcaf6b; TEXT-DECORATION: underline
+}
+A.good:link {
+	FONT-SIZE: 12px; COLOR: #b4711f; TEXT-DECORATION: underline
+}
+A.good:visited {
+	FONT-SIZE: 12px; COLOR: #b4711f; TEXT-DECORATION: underline
+}
+A.good:hover {
+	FONT-SIZE: 12px; COLOR: #b4711f; TEXT-DECORATION: none
+}
+A.good1:link {
+	FONT-SIZE: 14px; COLOR: #b4711f; TEXT-DECORATION: underline
+}
+A.good1:visited {
+	FONT-SIZE: 14px; COLOR: #b4711f; TEXT-DECORATION: none
+}
+A.good1:hover {
+	FONT-SIZE: 14px; COLOR: #b4711f; TEXT-DECORATION: underline
+}
+A.good2:link {
+	FONT-SIZE: 12px; COLOR: #251a82; TEXT-DECORATION: underline
+}
+A.good2:visited {
+	FONT-SIZE: 12px; COLOR: #251a82; TEXT-DECORATION: underline
+}
+A.good2:hover {
+	FONT-SIZE: 12px; COLOR: #251a82; TEXT-DECORATION: none
+}
+A.gray:link {
+	FONT-SIZE: 12px; COLOR: #777777; TEXT-DECORATION: none
+}
+A.gray:visited {
+	FONT-SIZE: 12px; COLOR: #777777; TEXT-DECORATION: none
+}
+A.gray:hover {
+	FONT-SIZE: 12px; COLOR: #ff6600; TEXT-DECORATION: underline
+}
+A.white:link {
+	FONT-SIZE: 12px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.white:visited {
+	FONT-SIZE: 12px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+A.white:hover {
+	FONT-SIZE: 12px; COLOR: #624411; TEXT-DECORATION: underline
+}
+#MenuCity {
+	POSITION: relative
+}
+#MenuCityList {
+	BORDER-RIGHT: #aaa 1px solid; BORDER-TOP: #aaa 1px solid; DISPLAY: none; Z-INDEX: 100; BACKGROUND: #f6f6f6; BORDER-LEFT: #aaa 1px solid; WIDTH: 58px; BORDER-BOTTOM: #aaa 1px solid; POSITION: absolute
+}
+#MenuIframe {
+	DISPLAY: none; Z-INDEX: 50; POSITION: absolute
+}
+#ShopAnnounceContent {
+	FONT-SIZE: 12px; MARGIN: 1px 1px 0px 0px; POSITION: relative; HEIGHT: 30px
+}
+#ShopAnnounceContent MARQUEE {
+	LEFT: 5px; COLOR: #000000; TOP: 0px; HEIGHT: 30px
+}
+#ShopAnnounceContent A {
+	COLOR: #ff0000; TEXT-DECORATION: underline
+}
+.pagetb {
+	BORDER-RIGHT: #dddddd 1px solid; BORDER-TOP: #dddddd 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #dddddd 1px solid; COLOR: #b4711f; BORDER-BOTTOM: #dddddd 1px solid; FONT-FAMILY: Arial; HEIGHT: 20px; BACKGROUND-COLOR: #ffffff
+}
+.pagetb1 {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; WIDTH: 14px; FONT-FAMILY: Arial; HEIGHT: 20px
+}
+UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: square; TEXT-DECORATION: none
+}
+.tx_title {
+	FONT-SIZE: 12px; LINE-HEIGHT: 26px
+}
+.red {
+	COLOR: red
+}

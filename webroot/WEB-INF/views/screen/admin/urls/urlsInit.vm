@@ -1,0 +1,75 @@
+#set( $layout = "layout/admin/default.vm" )
+  <div class="sjq091">
+	<form name="addURLs">
+	<input type="hidden" name="id" value="$!id">
+	<div class="MyAccountContent" >
+          <dl>
+            <dt><b>您的友情链接信息</b></dt>
+            <dd>
+      <table>
+      <br/>
+      <tr>
+			<td align="center"><span><font color=Red><strong>$!infoShow</font></span></td>
+	    </tr>
+	  </table>
+      <table class="sjq104" width="90%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td>
+				<table border="1" width="100%" cellspacing="1" cellpadding="2" style="border-collapse: collapse" bordercolor="#E4E4E4" id="table1">
+				     <tr>
+						<td width="30%" align="center"><b>链接标题</b></td>
+						<td width="40%" align="center"><b>链接地址或图片</b></td>
+						<td width="10%" align="center"><b>编辑</b></td>
+						<td width="10%" align="center"><b>删除</b></td>
+					</tr>
+					#foreach($url in $urls)
+					<tr>
+						<td bgcolor="#FFFFFF" style="padding-left:6px;" align="center">$!url.title</td>
+						#if("$!url.url" != "")
+						<td bgcolor="#FFFFFF" style="padding-left:6px;" align="center">
+						    <div id="imagek">
+								#if($stringUtils.isNotBlank($!url.path))
+									<img id="img" border="0" src="${upServer}${url.path}" width="80" height="80">&nbsp;&nbsp;&nbsp;	   
+								#else
+									<img id="img" border="0" src="${imgServer}/images/showimg.gif" />&nbsp;&nbsp;&nbsp;
+								#end
+							</div>
+						</td>
+						#else
+						    <td bgcolor="#FFFFFF" style="padding-left:6px;" align="center">$!url.path</td>
+						#end
+						
+						<td bgcolor="#FFFFFF" align="center">
+						<a href="${adminMoudle.setTarget('urls/edit.htm')}?id=${url.id}">编辑</a></td>
+						<td bgcolor="#FFFFFF" align="center">
+						<a href="${adminMoudle.setTarget('urls/delete.htm')}?id=${url.id}" onClick="return confirmDelete()">删除</a></td>
+					</tr>					
+					#end
+				</table>
+
+				<table width="100%" border="0" align="left"cellspacing="0" cellpadding="0" bgcolor="F9EEF2">
+					<tr>
+						<td align="right">
+						<input type="button" value=" 添加新链接 " name="" style="width:120" class="input6" onclick="location.href='${adminMoudle.setTarget('urls/add.htm')}'">
+						</td>
+					</tr>
+				</table>
+			</td>	  
+		</tr>
+	  
+	  </table>
+            </dd>
+          </dl>
+        </div>
+
+    </form>
+    <br />
+  </div>
+	
+<script type="text/javascript">
+	function confirmDelete(){
+		flag=window.confirm("确定要删除吗?");  
+  		if(flag==true)return   true;  
+  		else   return   false;  
+	}
+</script>

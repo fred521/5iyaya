@@ -1,0 +1,433 @@
+#set( $layout = "layout/home/memberdefault.vm" )
+<script language="javascript">
+
+function showPic()
+{	
+  	document.all('imagek').innerHTML = "<img id=\"img\" border=\"0\"  />" ;
+ 	document.all('img').src = document.all('pic').value;
+	
+ 	if(document.all('img').width > 80 || document.all('img').height > 80){
+ 		document.all('img').width = 80;
+ 		document.all('img').height = 80;
+  	}
+}
+
+
+</script>
+<script language="javascript">
+function  Menu(theform,menuid) {
+
+var MenuClass,MenuLenArr,MenuArr,SubMenuArr,MenuIdArr
+//定义分隔符：splitchar1,splitchar2
+var splitchar1,splitchar2
+//定义临时数组,子数组,数组长度,
+var arr,subarr,arrlen
+
+MenuArr=new Array()
+MenuArrValue=new Array()
+MenuLenArr=new Array()
+SubMenuArr=new Array()
+SubMenuVal=new Array()
+MenuIdArr=new Array()
+MenuArr[1]="#foreach($cat in $rootCats)${cat.typeId}|||#end"
+MenuArr[2]="#foreach($topLevel in $rootCats)#foreach($cat in $topLevel.children)${topLevel.typeId}&&&$cat.typeName|||#end#end" 
+MenuArr[3]="#foreach($topLevel in $rootCats)#foreach($topcat in $topLevel.children)#foreach($cat in $topcat.children)${topcat.typeId}&&&$cat.typeName|||#end#end#end"  
+MenuArrValue[1]="#foreach($cat in $rootCats)${cat.typeId}|||#end"                   
+MenuArrValue[2]="#foreach($topLevel in $rootCats)#foreach($cat in $topLevel.children)${topLevel.typeId}&&&$cat.typeId|||#end#end" 
+MenuArrValue[3]="#foreach($topLevel in $rootCats)#foreach($topcat in $topLevel.children)#foreach($cat in $topcat.children)${topcat.typeId}&&&$cat.typeId|||#end#end#end"      
+MenuIdArr[1]="firstCat"
+MenuIdArr[2]="secondCat"
+MenuIdArr[3]="thirdCat"
+MenuClass=3  //3级菜单
+splitchar1="|||";
+splitchar2="&&&";
+/*---------------------------------------------------------------------------*\
+*                     3.生成数组　　　　　　　　　　　　　　　　　　　　　　 *
+/*---------------------------------------------------------------------------*/
+for(iii=1;iii<=MenuClass;iii++)
+{
+arr=MenuArr[iii].split(splitchar1);
+val=MenuArrValue[iii].split(splitchar1);
+len=arr.length;
+subarr=new Array()
+subval=new Array()
+for (i=0;i<len;i++)
+{
+  subarr[i]=arr[i].split(splitchar2);
+  subval[i]=val[i].split(splitchar2);
+}
+len=subarr.length;
+SubMenuArr[iii]=subarr
+SubMenuVal[iii]=subval 
+MenuLenArr[iii]=len
+}
+//============更改下级菜单======================
+var self,submenu,thislen,thisarr	
+//self本级菜单
+//submenu子菜单
+//theform:所在表单对象[type:object]
+//menuid:本级菜单级别ID，如1级菜单则为1
+	self=eval("document."+theform.name+"."+MenuIdArr[menuid])	
+	submenu=eval("document."+theform.name+"."+MenuIdArr[menuid+1])	
+	thislen=MenuLenArr[menuid+1]
+	thisarr=SubMenuArr[menuid+1]
+	thisval=SubMenuVal[menuid+1]
+	submenu.length=0
+	submenu.options.add(new Option( "-----请选择-----",""));     
+	  for  (i=0;i<thislen;i++)  
+	  { 
+	    if  (thisarr[i][0]  ==  self.value) 
+		{
+		 submenu.options.add(new Option(thisarr[i][1],  thisval[i][1]));    
+	    }    
+	  } 
+  	submenu.options[0].selected=true
+//============更改下级以下菜单==============
+var kkk
+for(kkk=menuid+2;kkk<=MenuClass;kkk++)
+	{		
+	submenu=eval("document."+theform.name+"."+MenuIdArr[kkk])	
+	submenu.length=0
+	submenu.options.add(new Option( "-----请选择-----",""));     	
+	submenu.options[0].selected=true
+	}
+}
+</script>
+
+<form name="addProduct" action="${homeMoudle}/mygoods/add.htm?type=T" method="post" encType="multipart/form-data">
+<td width="10" valign="top">　</td>
+		<td width="740" valign="top">
+		<table border="0" width="100%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				<table border="0" width="100%" cellspacing="0" cellpadding="2">
+					<tr>
+						<td bgcolor="#F0DEC8" style="font-weight:bold;font-size:14px;padding-left:8px;">团购商品管理</td>
+					</tr>
+				</table>
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+				<table cellSpacing="0" cellPadding="0" width="93%" align="center" border="0">
+					<tr>
+						<td align="right" width="19%" height="104"><img height="101" alt="" src="${imgServer}/images/member_15.gif" width="146"></td>
+						<td width="81%">
+						<table cellSpacing="0" cellPadding="0" width="98%" border="0">
+							<tr>
+								<td width="4%" bgColor="#efefef" height="74"></td>
+								<td style="font-size:14px;" width="96%" bgColor="#efefef">中国最大的批发市场在线电子商务平台</td>
+							</tr>
+						</table>
+						</td>
+					</tr>
+				</table>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td align="center"><font color="red">$!success</font></td>
+					</tr>
+				</table>
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="18">
+					<tr>
+						<td width="101">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">
+								添加/修改商品</td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td width="72">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="${homeMoudle.setTarget('mygoods/list_t_init.htm')}" style="text-decoration: none"><font color="#A1A1A1">商品列表</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td width="72">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="${homeMoudle.setTarget('mygoods/down_t_init.htm')}" style="text-decoration: none"><font color="#A1A1A1">下架商品</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td>&nbsp;　&nbsp;</td>
+					</tr>
+				</table>
+				<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<table cellSpacing="0" cellPadding="0" width="90%" align="center">
+							<tr>
+								<td align=center>
+									<table border="0" width="560" cellspacing="0" cellpadding="6">
+										<tr>
+											<td height="24" class="tx_title" colspan="2"><b>输入团购商品信息</b></td>
+										</tr>
+										<tr>
+											<td width="100">商品名称:</td>
+											<td width="460"><input value="$!form.getField("goodsName").value" name="goodsName" class="input4" maxlength="40">
+											<span class="red">*$!form.getField("goodsName").message</span>
+											</td>
+										</tr>
+										<tr>
+				<td>商品分类:</td>
+				<td>
+				<select name="firstCat" onChange="Menu(this.form,1);">
+				<option value="">请选择一级类目</option>
+				#foreach($cat in $rootCats)
+					<option value=${cat.typeId}>${cat.typeName}</option>
+				#end
+				</select>
+				
+				<select name="secondCat" id="select" onChange="Menu(this.form,2);">
+              <option value="" selected>-----请选择-----</option>
+            </select>
+				<select name="thirdCat" id="select2">
+              <option value="" selected>-----请选择-----</option>
+            </select>
+				<span class="red">*$!form.getField("firstCat").message $!form.getField("secondCat").message $!form.getField("thirdCat").message</span>
+				</td>
+			</tr>
+			<script>
+				#if($form)
+					#if($form.getField("firstCat"))
+					var fir = document.addProduct.firstCat;
+						for(var i = 0;i<fir.length;i++){
+							var op = fir.options[i];
+							if(op.value == "$form.getField("firstCat").value"){
+								op.selected = true;
+							}
+						}
+					Menu(addProduct,1);
+					#end
+                 #if($form.getField("secondCat"))
+                     var fir = document.addProduct.secondCat;
+						for(var i = 0;i<fir.length;i++){
+							var op = fir.options[i];
+							if(op.value == "$form.getField("secondCat").value"){
+								op.selected = true;
+							}
+						}
+					Menu(addProduct,2);
+                  #end
+                #if($form.getField("thirdCat"))
+                     var fir = document.addProduct.thirdCat;
+						for(var i = 0;i<fir.length;i++){
+							var op = fir.options[i];
+							if(op.value == "$form.getField("thirdCat").value"){
+								op.selected = true;
+							}
+						}
+                  #end 
+					
+					
+				#end
+			</script>
+										<tr>
+											<td>团购价:</td>
+											<td><input value="$!form.getField("batchPrice").value" name="batchPrice" class="input5">
+											<span class="red">*$!form.getField("batchPrice").message</span>
+											</td>
+										</tr>
+										<tr>
+											<td>市场价:</td>
+											<td><input value="$!form.getField("marketPrice").value" name="marketPrice" class="input5">
+											<span class="red">*$!form.getField("marketPrice").message</span>
+											</td>
+										</tr>										
+										<tr>
+											<td>团购人数:</td>
+											<td><input value="$!form.getField("batchNum").value" name="batchNum" class="input5">
+											<span class="red">*$!form.getField("batchNum").message</span>
+											</td>
+										</tr>
+										<tr>
+											<td>价格描述:</td>
+											<td><textarea rows="3" name="priceDes" cols="20" class="input8">$!form.getField("priceDes").value</textarea>
+											<br />
+											<span class="red">$!form.getField("priceDes").message</span>
+											</td>
+										</tr>
+										<tr>
+											<td>库存量:</td>
+											<td><input value="$!form.getField("goodsNum").value" name="goodsNum" class="input5">
+													<span class="red">$!form.getField("goodsNum").message</span>
+											</td>
+										</tr>
+										<tr>
+											<td width="100" height="35">图片显示区:</td>
+											<td width="460">
+												<div id="imagek">
+                                				#if($stringUtils.isNotBlank($form.getField("goodsPic").value))
+                                				<img id="img" border="0" src="${upServer}${form.getField('goodsPic').value}.s.jpg" width="80" height="80">&nbsp;&nbsp;&nbsp;
+                                				#else
+                                				<img id="img" border="0" src="${imgServer}/images/showimg.gif" />&nbsp;&nbsp;&nbsp;
+                                				#end
+                            				</div>
+											</td>
+										</tr>
+										<tr>
+											<td height="35">上传商品图片:</td>
+											<td>
+												<input type="file" name="goodsPic" id="pic" value="$!form.getField("goodsPic").value" class="input4" onChange="showPic()"/><span class="red">$!uploadGoodsError</span>
+											</td>
+											
+										</tr>
+										<tr>
+											<td>信息过期时间:</td>
+											<td>
+											<input id="A1" type="radio" value="10" name="abandonDays" #if(!$form) checked #elseif("$form.getField('abandonDays').value" == "10") checked #end />
+											<label style="CURSOR: hand" for="A1">
+											10天</label>
+											<input id="A2" type="radio" value="20" name="abandonDays" #if($form &&  "$form.getField('abandonDays').value" == "20") checked #end />
+											<label style="CURSOR: hand" for="A2">
+											20天</label>
+											<input id="A3" type="radio" value="30" name="abandonDays" #if($form && "$form.getField('abandonDays').value" == "30") checked #end />
+											<label style="CURSOR: hand" for="A3">
+											30天</label>
+											<input id="A4" type="radio" value="90" name="abandonDays" #if($form && "$form.getField('abandonDays').value" == "90") checked #end />
+											<label style="CURSOR: hand" for="A4">
+											90天</label> <span class="red">*</span>
+											</td>
+										</tr>
+										<tr>
+											<td>商品描述:</td>
+											<td><textarea name="content" style="width:100%;height:200">$!form.getField("content").value</textarea>
+											<span class="red">*$!form.getField("content").message</span>
+											</td>
+										</tr>
+										<tr>
+											<td>　</td>
+											<td>
+											<input type="submit" value=" 提&nbsp;&nbsp;交 " name="" class="input6"></td>
+										</tr>
+										<tr>
+											<td colspan="2">
+											<font color="#777777">
+											每个商品最多可上传3张图片<br>
+											请使用GIF、JPG格式的图片文件<br>
+											请确认您的图像大小为80像素×80像素<br>
+											请控制图片文件在40KB以下<br>
+											任何有违国家法律法规的图像将被拒绝<br> 
+											</font> 
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					  </td>
+					</tr>
+				</table>
+				<br>
+				</td>
+			</tr>
+		</table>
+		</td>
+</form>
+<script type="text/javascript">
+	var _formName = 'addProduct';
+	var _textName = 'content';
+	var _toolBarIconPath = '${imgServer}/images/editor';
+	var _debug = false;
+
+	var _maxCount = 4000;
+	var _postAction = 'preview.htm';
+
+    //语言
+    var _a_lang = new Array();
+    _a_lang['pic'] = '图片';
+    _a_lang['url'] = '地址';
+    _a_lang['viewe'] = '显示效果';
+    _a_lang['border'] = '边框粗细';
+    _a_lang['align'] = '对齐方式';
+    _a_lang['absmiddle'] = '绝对居中';
+    _a_lang['aleft'] = '居左';
+    _a_lang['aright'] = '居右';
+    _a_lang['atop'] = '顶部';
+    _a_lang['amiddle'] = '中部';
+    _a_lang['abottom'] = '底部';
+    _a_lang['absbottom'] = '绝对底部';
+    _a_lang['baseline'] = '基线';
+    _a_lang['submit'] = '确定';
+    _a_lang['cancle'] = '取消';
+    _a_lang['hlink'] = '超级链接';
+    _a_lang['other'] = '其他选项';
+    _a_lang['newwindow'] = '在新窗口打开';
+    _a_lang['ttop'] = '文本顶部';
+    
+    _a_lang['copy'] = '复制';
+    _a_lang['cut'] = '剪切';
+    _a_lang['pau'] = '粘贴';
+    _a_lang['del'] = '删除';
+    
+    _a_lang['bold'] = '粗体';
+    _a_lang['italic'] = '斜体';
+    _a_lang['underline'] = '下划线';
+    _a_lang['st'] = '中划线';
+    _a_lang['jl'] = '左对齐';
+    _a_lang['jc'] = '居中对齐';
+    _a_lang['jr'] = '右对齐';
+    
+    _a_lang['fcolor'] = '文字颜色';
+    _a_lang['bcolor'] = '文字背景颜色';
+    _a_lang['ilist'] = '编号';
+    _a_lang['itlist'] = '项目符号';
+    _a_lang['sup'] = '上标';
+    _a_lang['sub'] = '下标';
+    _a_lang['createlink'] = '插入链接';
+    _a_lang['unlink'] = '取消链接';
+    _a_lang['inserthr'] = '插入水平线';
+    _a_lang['insertimg'] = '插入/修改图片';
+    _a_lang['editsource'] = '编辑源文件';
+    _a_lang['preview'] = '预览';
+    _a_lang['usehtml'] = '使用编辑器编辑';
+    
+    _a_lang['font'] = '字体';
+    _a_lang['simsun'] = '宋体';
+    _a_lang['simhei'] = '黑体';
+    _a_lang['simkai'] = '楷体';
+    _a_lang['fangsong'] = '仿宋';
+    _a_lang['lishu'] = '隶书';
+    _a_lang['youyuan'] = '幼圆';
+    
+    _a_lang['fontsize'] = '字号';
+    _a_lang['fontsize_1'] = '一号';
+    _a_lang['fontsize_2'] = '二号';
+    _a_lang['fontsize_3'] = '三号';
+    _a_lang['fontsize_4'] = '四号';
+    _a_lang['fontsize_5'] = '五号';
+    _a_lang['fontsize_6'] = '六号';
+    _a_lang['fontsize_7'] = '七号';
+    
+    _a_lang['current'] = '当前';
+    _a_lang['word'] = '字';
+	_a_lang['char'] = '字符';
+
+    _a_lang['maxword'] = '最多';
+    
+    _a_lang['modify'] = '修改';
+    _a_lang['insert'] = '插入';
+
+	
+	</script>
+	<script type="text/javascript" src="${imgServer}/js/editor_multi_lang.js"></script>
+
+
+

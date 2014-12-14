@@ -1,0 +1,95 @@
+#set( $layout = "layout/admin/default.vm" )
+
+<SCRIPT language="javascript" src="${imgServer}/js/page.js"></SCRIPT>
+<script language="JavaScript">
+<!--
+
+function showfile()
+{
+	var filetype = document.getElementById("filetype");
+	filetype.style.display = filetype.style.display == "none"?"block":"none";
+}
+
+function setParentValue(memberId,shopName) {
+	opener.window.document.all.memberId.value = memberId;
+	#if("$!{type}" == "")
+    	if(opener.window.document.all.shopName != null) {
+    		opener.window.document.all.shopName.value = shopName;
+    	}
+	#else
+    	if(opener.window.document.all.nick != null) {
+    		opener.window.document.all.nick.value = shopName;
+    	}
+	#end
+	window.close();
+}
+//-->
+</script>
+
+<BODY leftMargin="8" background="${imgServer}/images/adimn/allbg.gif" topMargin="8">
+<FORM name="shopSearch" action="${adminMoudle}/admin_member/list_shop.htm" method="post">
+<input type="hidden" name="currentPage" value="$!search.currentPage" />
+<input type="hidden" name="type" value="#if("$!{type}" == "")$!request.getParameter('type')#else$!{type}#end"/>
+<TABLE cellSpacing="1" cellPadding="3" width="98%" align="center" bgColor=#666666 border=0>
+  <TBODY>
+  <TR>
+      <TD background="${imgServer}/images/admin/tbg.gif" height=19> <B>&nbsp;选择会员</B></TD>
+    </TR>
+  <TR>
+      <TD vAlign=top bgColor=#ffffff height=200>
+        <table width="98%" border="0" align="center" cellpadding="2" cellspacing="0">
+          <tr> 
+            <td align="right">快速搜索：</td>
+            <td>
+              <select class="px12" name="keyType">
+                <option value="shopName" #if("$!keyType" == "shopName")selected#end>店铺名称</option>
+                <option value="loginId" #if("$!keyType" == "loginId")selected#end>用户名</option>
+                <option value="nick" #if("$!keyType" == "nick")selected#end>会员昵称</option>
+                <option value="name" #if("$!keyType" == "name")selected#end>真实姓名</option>
+              </select>
+            </td>
+            <td><input id=keyword style="WIDTH: 200px" size=12 name="keyWord" value="$!keyWord"></td>
+            <td><img src="${imgServer}/images/admin/button_search.gif" border=0 name="imageField" align="absmiddle" onClick="document.shopSearch.submit();"></td>
+          </tr>
+        </table>
+        <table border="0" width="98%" cellspacing="0" cellpadding="0">
+			<tr>
+				<td height="6"></td>
+			</tr>
+		</table>
+		<div align="center">
+		<table border="1" width="94%" cellspacing="1" cellpadding="2" style="border-collapse: collapse">
+			<tr>
+				<td width="8%" align="center" bgcolor="#E6E6E6"><b>序号</b></td>
+				<td width="22%" align="center" bgcolor="#E6E6E6"><b>用户名</b></td>
+				<td width="16%" align="center" bgcolor="#E6E6E6"><b>会员昵称</b></td>
+				<td width="16%" align="center" bgcolor="#E6E6E6"><b>真实姓名</b></td>
+				<td width="38%" align="center" bgcolor="#E6E6E6"><b>店铺名称</b></td>
+			</tr>
+			#if($memberList)
+			#foreach($member in $memberList)
+			<tr onmouseover="this.style.backgroundColor='#F5F5F5';" onmouseout="this.style.backgroundColor='';" style="cursor:pointer;" onclick="setParentValue('$!member.memberId',#if("$!{type}" == "")'$!member.shop.shopName'#else'$!member.loginId'#end);">
+				<td align="center">$velocityCount</td>
+				<td align="center">$!member.loginId</td>
+				<td align="center">$!member.nick</td>
+				<td align="center">$!member.name</td>
+				<td align="center">$!member.shop.shopName</td>
+			</tr>
+			#end
+			<TR> 
+				<TD colSpan="5" align="middle" bgcolor="#f1fde3" height="24"> 
+					<script>
+						pageSlider($!search.totalPage,$!search.currentPage,$!search.totalItem,$!search.pageSize,'','shopSearch','currentPage','${imgServer}/images/admin');
+    				</script>
+				</TD>
+			</TR>
+			#end
+		</table>
+		</div>
+		</TD>
+    </TR>
+</TBODY>
+</TABLE>
+</FORM>
+</BODY>
+

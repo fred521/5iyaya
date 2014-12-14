@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+	<bean id="velocityConfigurer" class="com.nonfamous.commom.util.web.NofmsVelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF/views/,/WEB-INF/cfg" />
+		<property name="macroFile" value="macro.vm" />
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">${vm.encoding}</prop>
+				<prop key="output.encoding">${response.encoding}</prop>
+				<prop key="file.resource.loader.cache">false</prop>
+				<prop key="file.resource.loader.modificationCheckInterval">2</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="uploadService" class="com.nonfamous.tang.service.upload.pojo.POJOUploadService" init-method="init">
+		<property name="rootPath">
+			<value>${upload.file.rootpath}</value>
+		</property>
+		<property name="maxSize">
+			<value>${upload.file.maxsize}</value>
+		</property>
+	</bean>
+	
+	<bean id="smsDaemonService" class="com.nonfamous.tang.service.sms.pojo.POJOSmsDaemonService">
+		<property name="smsDAO">
+			<ref bean="smsDAO"/>
+		</property>
+		<property name="smsServer">
+			<value>${sms.server.ip}</value>
+		</property>
+		<property name="smsServerPort">
+			<value>${sms.server.port}</value>
+		</property>
+		<property name="smsAccessUser">
+			<value>${sms.access.user}</value>
+		</property>
+		<property name="smsAccessPwd">
+			<value>${sms.access.pwd}</value>
+		</property>
+		<property name="diffDate">
+			<value>-1</value>
+		</property>
+	</bean>
+</beans>

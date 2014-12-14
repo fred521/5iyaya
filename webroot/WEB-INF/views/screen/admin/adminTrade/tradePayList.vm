@@ -1,0 +1,182 @@
+#set( $layout = "layout/admin/default.vm" )
+<STYLE type=text/css>
+.rb {
+	BORDER-RIGHT: #666666 1px solid
+}
+.tb {
+	BORDER-TOP: #666666 1px solid
+}
+</STYLE>
+<script>
+function changePayStatus(payIdStr) {
+	if(confirm('确认要修改支付状态吗？')) {
+		document.formSearch.action = "${adminMoudle}/admin_pay/do_pay_status.htm";
+		document.formSearch.payId.value = payIdStr;
+		document.formSearch.submit();
+	}
+}
+function changeTransStatus(payIdStr) {
+	if(confirm('确认要修改转账状态吗？')) {
+		document.formSearch.action = "${adminMoudle}/admin_pay/do_trans_status.htm";
+		document.formSearch.payId.value = payIdStr;
+		document.formSearch.submit();
+	}
+}
+</script>
+<!-- calendar stylesheet -->
+<link rel="stylesheet" type="text/css" media="all" href="${imgServer}/js/jscalendar/calendar-win2k-cold-1.css" title="win2k-cold-1" />
+<!-- main calendar program -->
+<script type="text/javascript" src="${imgServer}/js/jscalendar/calendar_stripped.js"></script>
+<!-- language for the calendar -->
+<script type="text/javascript" src="${imgServer}/js/jscalendar/lang/cn_utf8.js"></script>
+<!-- the following script defines the Calendar.setup helper function, which makes
+adding a calendar a matter of 1 or 2 lines of code. -->
+<script type="text/javascript" src="${imgServer}/js/jscalendar/calendar-setup_stripped.js"></script>
+<SCRIPT language=javascript src="${imgServer}/js/page.js"></SCRIPT>
+<BODY leftMargin="8" background="${imgServer}/images/admin/allbg.gif" topMargin="16">
+<FORM name="formSearch" action="${adminMoudle}/admin_pay/pay_list.htm" method="post">
+<input type="hidden" name="currentPage" value="$!search.currentPage" />
+<input type="hidden" name="payId" value="" />
+<TABLE cellSpacing=1 cellPadding=0 width="98%" align=center border=0>
+	<tr>
+		<td align="center" colspan="7"><span class="red">$!errorMessage</span></td>
+	</tr>
+</TABLE>
+<TABLE cellSpacing=1 cellPadding=0 width="98%" align=center bgColor=#666666 border=0>
+  <TBODY>
+    <TR valign="top"> 
+      <TD height=24 colSpan="8"> 
+		<TABLE width=100% border=0 cellPadding=2 cellSpacing=0 background="${imgServer}/images/admin/tbg.gif">
+            <TBODY>
+              <TR> 
+                <TD width=160 height="24"><STRONG>&nbsp;支付流水查询</STRONG></TD>
+                <TD align=right>
+                <table border="0" width="70%" cellspacing="0" cellpadding="0">
+                    <tr>                      
+                      <td></td>
+                    </tr>
+                  </table>
+                </TD>
+              </TR>
+            </TBODY>
+        </TABLE>
+        <table width="100%" border="0" cellspacing="0" cellpadding="4">
+          <tr> 
+            <td bgcolor="#666666" height="1"></td>
+          </tr>
+          <tr>
+            <td bgcolor="#F7FEEF" align=right>
+			<table width="96%" border="0" cellspacing="0" cellpadding="5" height="71">
+                <tr> 
+                  <td width="10%">买家登录id:</td>
+                  <td width="25%"><INPUT style="WIDTH: 150px" size=12 name="buyLoginId" value="$!form.getField("buyLoginId").value"></td>
+                  <td width="10%">卖家登录id:</td>
+                  <td width="25%"><INPUT style="WIDTH: 150px" size=12 name="sellerLoginId" value="$!form.getField("sellerLoginId").value"></td>
+                  <td width="30%"></td>
+                </tr>
+                <tr> 
+                  <td width="10%">创建开始时间:</td>
+                  <td width="25%">
+					<input value="$!form.getField("startDate").value" name="startDate" class="input3" readonly=true id="A_starttime"><img border="0" id="f_trigger_s" src="${imgServer}/images/selectdate.gif" align=absmiddle>
+				  </td>
+                  <td width="10%">创建结束时间:</td>
+                  <td width="25%">
+					<input value="$!form.getField("endDate").value" name="endDate" class="input3" readonly=true  id="A_endtime"><img border="0" id="f_trigger_e" src="${imgServer}/images/selectdate.gif" align=absmiddle>
+				  </td>
+                  <td width="30%"></td>
+                </tr>
+				<script type="text/javascript">
+    				Calendar.setup({
+        				inputField     :    "A_starttime",     // id of the input field
+        				ifFormat       :    "%Y-%m-%d",      // format of the input field
+        				button         :    "f_trigger_s",  // trigger for the calendar (button ID)
+        				align          :    "br",           // alignment (defaults to "Bl")
+        				singleClick    :    true
+    				});
+				</script>
+				<script type="text/javascript">
+    				Calendar.setup({
+        				inputField     :    "A_endtime",     // id of the input field
+        				ifFormat       :    "%Y-%m-%d",      // format of the input field
+        				button         :    "f_trigger_e",  // trigger for the calendar (button ID)
+        				align          :    "br",           // alignment (defaults to "Bl")
+        				singleClick    :    true
+    				});
+				</script>
+				<tr> 
+                  <td width="10%"></td>
+                  <td width="25%">
+                   <INPUT class=np type=image src="${imgServer}/images/admin/button_search.gif" border=0 name=imageField0 onClick="document.formSearch.submit();">
+				  </td>
+                  <td width="10%">　</td>
+                  <td width="25%" align="right" style="padding-right:40px;"> </td>
+                  <td width="30%" align="right" style="padding-right:5px;"></td>
+                </tr>
+            </table>
+			</td>
+          </tr>
+        </table>
+	  </TD>
+    </TR>
+    <TR>
+		<TD width="5%" align="middle" bgcolor="#edf7d0" height="22"><b>ID</b></TD>
+		<TD width="20%" align="middle" bgcolor="#edf7d0"><b>支付店铺</b></TD>
+		<TD width="15%" align="middle" bgcolor="#edf7d0"><b>接收人</b></TD>
+		<TD width="10%" align="middle" bgcolor="#edf7d0"><b>支付金额</b></TD>
+		<TD width="20%" align="middle" bgcolor="#edf7d0"><b>支付时间</b></TD>
+		<TD width="10%" align="middle" bgcolor="#edf7d0"><b>支付状态</b></TD>
+		<TD width="10%" align="middle" bgcolor="#edf7d0"><b>转账状态</b></TD>
+		<TD align="middle" bgcolor="#edf7d0" width="10%"><b>操作</b></TD>
+    </TR>
+	#if($search.tradePayList)
+	#foreach($item in $search.tradePayList)
+	#set($itemNumber = (-1 + $velocityCount + $search.getPageFristItem()))
+	<TR onmousemove="javascript:this.bgColor='#F3F7EA';" onmouseout="javascript:this.bgColor='#FFFFFF';" align=middle bgColor=#ffffff> 
+      <TD height="30">$itemNumber</TD>
+      <TD>$!item.shopName</TD>
+      <TD>$!item.sellerName</TD>
+      <TD>$!item.getMoney($!item.payFee)</TD>
+      <TD>$dateUtils.simpleFormat($!item.payDate)</TD>
+	  <TD align=middle>
+		#if($item.payStatus == "I")
+			未支付
+		#elseif($item.payStatus == "S")
+			支付成功
+		#elseif($item.payStatus == "F")
+			支付失败
+		#end
+	  </TD>
+      <TD align=middle>
+		#if($item.transStatus == "I")
+			未转账
+		#elseif($item.transStatus == "S")
+			转账成功
+		#end
+	  </TD>
+	  <td align=middle>
+		#if($item.payStatus == "I" || $item.payStatus == "F")
+		<A href="#" onclick="changePayStatus('$!item.id');">[支付]</A> 
+		#end
+		#if($item.transStatus == "I")
+		<A href="#" onclick="changeTransStatus('$!item.id');">[转账]</A> 
+		#end
+	  </td>
+    </TR>
+	#end
+    <TR> 
+      <TD colSpan="8" align="middle" bgcolor="#f1fde3" height="24"> 
+		<script>
+			pageSlider($!search.totalPage,$!search.currentPage,$!search.totalItem,$!search.pageSize,'','formSearch','currentPage','${imgServer}/images/admin');
+    	</script>
+	  </TD>
+    </TR>
+	#else
+		<TR bgColor=#ffffff> 
+         <TD align=middle colspan="8">当前查询无记录</TD>
+        </TR>
+	#end
+  </TBODY>
+</TABLE>
+</FORM>
+</BODY>
+

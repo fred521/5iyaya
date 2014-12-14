@@ -1,0 +1,67 @@
+/Address.java/1.4/Mon May  4 05:17:36 2009//
+/Address_mapping.xml/1.4/Thu Apr 23 06:26:44 2009//
+/AdminLog.java/1.1/Fri Jul 11 00:47:01 2008//
+/AdminLog_mapping.xml/1.1/Fri Jul 11 00:46:59 2008//
+/AdminUser.java/1.1/Fri Jul 11 00:46:59 2008//
+/AdminUser_mapping.xml/1.1/Fri Jul 11 00:47:01 2008//
+/Buyer.java/1.1/Fri Jul 11 00:47:01 2008//
+/CommendContent.java/1.1/Fri Jul 11 00:47:00 2008//
+/CommendContent_mapping.xml/1.1/Fri Jul 11 00:47:02 2008//
+/CommendPosition.java/1.1/Fri Jul 11 00:46:59 2008//
+/CommendPosition_mapping.xml/1.1/Fri Jul 11 00:46:59 2008//
+/CompanyInfo_mapping.xml/1.1/Fri Jul 11 00:47:02 2008//
+/DB2INST1_USER_CENTER_SqlMap.xml/1.1/Sat Aug 15 10:05:25 2009//
+/GoodsBaseInfo.java/1.9/Sat Sep 12 05:12:58 2009//
+/GoodsBaseInfo_mapping.xml/1.10/Sat Sep 12 05:12:58 2009//
+/GoodsCat.java/1.2/Sat Nov 29 02:53:14 2008//
+/GoodsCat_mapping.xml/1.1/Fri Jul 11 00:46:59 2008//
+/GoodsContent.java/1.2/Sat Nov 29 02:53:14 2008//
+/GoodsContent_mapping.xml/1.1/Fri Jul 11 00:47:02 2008//
+/GoodsInformationVo.java/1.1/Fri Jul 11 00:47:02 2008//
+/GoodsProperty.java/1.1/Sat Mar  7 03:25:51 2009//
+/GoodsPropertyType.java/1.1/Sat Mar  7 03:25:51 2009//
+/GoodsProperty_mapping.xml/1.1/Sat Mar  7 03:25:51 2009//
+/Helper.java/1.2/Sun Sep 21 11:59:04 2008//
+/HelperType.java/1.1/Mon Sep 15 13:44:59 2008//
+/HelperType_mapping.xml/1.1/Mon Sep 15 13:44:59 2008//
+/Helper_mapping.xml/1.4/Tue Dec 16 13:46:16 2008//
+/MarketType.java/1.1/Fri Jul 11 00:46:59 2008//
+/MarketType_mapping.xml/1.1/Fri Jul 11 00:47:01 2008//
+/Member.java/1.1/Fri Jul 11 00:46:59 2008//
+/MemberList.java/1.1/Fri Jul 11 00:46:59 2008//
+/Member_mapping.xml/1.2/Sun Aug  2 02:08:15 2009//
+/MobileValidate.java/1.1/Fri Jul 11 00:47:02 2008//
+/MobileValidate_mapping.xml/1.1/Fri Jul 11 00:47:02 2008//
+/NewsBaseInfo.java/1.2/Sat Nov 29 02:53:14 2008//
+/NewsBaseInfo_mapping.xml/1.1/Fri Jul 11 00:46:59 2008//
+/NewsContent.java/1.2/Sat Nov 29 02:53:14 2008//
+/NewsContent_mapping.xml/1.1/Fri Jul 11 00:47:01 2008//
+/NewsType.java/1.2/Sat Nov 29 02:53:14 2008//
+/NewsType_mapping.xml/1.1/Fri Jul 11 00:47:01 2008//
+/PictureInfo.java/1.2/Thu Sep 11 13:39:05 2008//
+/PictureInfo_mapping.xml/1.3/Sat Dec 27 08:52:21 2008//
+/QuartzLog.java/1.1/Fri Jul 11 00:47:01 2008//
+/QuartzLog_mapping.xml/1.1/Fri Jul 11 00:46:59 2008//
+/RecordInformation.java/1.1/Fri Jul 11 00:47:00 2008//
+/SearchGoodsCat.java/1.1/Fri Jul 11 00:46:59 2008//
+/SearchGoodsResult.java/1.3/Sat Sep 12 05:12:58 2009//
+/SearchKeyWord.java/1.1/Fri Jul 11 00:47:00 2008//
+/SearchKeyWord_mapping.xml/1.1/Fri Jul 11 00:46:59 2008//
+/Seller.java/1.1/Fri Jul 11 00:47:01 2008//
+/Shop.java/1.2/Sat Apr 18 07:07:30 2009//
+/ShopCommend.java/1.1/Fri Jul 11 00:47:01 2008//
+/ShopCommend_mapping.xml/1.1/Fri Jul 11 00:46:59 2008//
+/Shop_mapping.xml/1.3/Sat Mar 21 06:37:44 2009//
+/Sms.java/1.1/Fri Jul 11 00:46:59 2008//
+/Sms_mapping.xml/1.1/Fri Jul 11 00:47:01 2008//
+/URL.java/1.2/Mon Jul  6 08:00:07 2009//
+/URL_mapping.xml/1.2/Mon Jul  6 08:00:07 2009//
+/USER_CENTER_mappping.xml/1.1/Sat Aug 15 10:05:25 2009//
+/UserCenter.java/1.1/Sat Aug 15 10:05:25 2009//
+D/base////
+D/group////
+D/mail////
+D/message////
+D/netpay////
+D/result////
+D/trade////

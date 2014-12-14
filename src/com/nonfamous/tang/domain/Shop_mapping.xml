@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="SHOP_SPACE">
+	<resultMap id="shop" class="com.nonfamous.tang.domain.Shop">
+		<result property="shopId" column="SHOP_ID"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="loginId" column="LOGIN_ID"/>
+		<result property="videoId" column="VIDEO_ID"/>
+		<result property="liveId" column="LIVE_ID"/>
+		<result property="shopName" column="SHOP_NAME"/>
+		<result property="shopOwner" column="SHOP_OWNER"/>
+		<result property="commodity" column="COMMODITY"/>
+		<result property="belongMarketId" column="BELONG_MARKET_ID"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="phone" column="PHONE"/>
+		<result property="bank" column="BANK"/>
+		<result property="bankAccount" column="BANK_ACCOUNT"/>
+		<result property="accountName" column="ACCOUNT_NAME"/>
+		<result property="goodsCount" column="GOODS_COUNT"/>
+		<result property="camera" column="CAMERA"/>
+		<result property="webPhone" column="WEB_PHONE"/>
+		<result property="logo" column="LOGO"/>
+		<result property="shopImg" column="SHOP_IMG"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+		<result property="gisAddress" column="GIS_ADDRESS"/>
+	</resultMap>
+	
+	<resultMap id="anotherShop" class="com.nonfamous.tang.domain.Shop">
+		<result property="shopId" column="SHOP_ID"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="loginId" column="LOGIN_ID"/>
+		<result property="videoId" column="VIDEO_ID"/>
+		<result property="liveId" column="LIVE_ID"/>
+		<result property="shopName" column="SHOP_NAME"/>
+		<result property="shopOwner" column="SHOP_OWNER"/>
+		<result property="commodity" column="COMMODITY"/>
+		<result property="belongMarketId" column="BELONG_MARKET_ID"/>
+		<result property="belongMarketName" column="MARKET_NAME"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="phone" column="PHONE"/>
+		<result property="bank" column="BANK"/>
+		<result property="bankAccount" column="BANK_ACCOUNT"/>
+		<result property="accountName" column="ACCOUNT_NAME"/>
+		<result property="goodsCount" column="GOODS_COUNT"/>
+		<result property="camera" column="CAMERA"/>
+		<result property="webPhone" column="WEB_PHONE"/>
+		<result property="logo" column="LOGO"/>
+		<result property="shopImg" column="SHOP_IMG"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+		<result property="gisAddress" column="GIS_ADDRESS"/>
+	</resultMap>
+	
+	
+	<resultMap id="shopcommend" class="com.nonfamous.tang.domain.ShopCommend">
+		<result property="shopId" column="SHOP_ID"/>
+		<result property="commend" column="COMMEND"/>
+	</resultMap>
+	
+	<resultMap id="shopfull" class="com.nonfamous.tang.domain.Shop">
+		<result property="shopId" column="SHOP_ID"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="loginId" column="LOGIN_ID"/>
+		<result property="videoId" column="VIDEO_ID"/>
+		<result property="liveId" column="LIVE_ID"/>
+		<result property="shopName" column="SHOP_NAME"/>
+		<result property="shopOwner" column="SHOP_OWNER"/>
+		<result property="commodity" column="COMMODITY"/>
+		<result property="belongMarketId" column="BELONG_MARKET_ID"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="phone" column="PHONE"/>
+		<result property="bank" column="BANK"/>
+		<result property="bankAccount" column="BANK_ACCOUNT"/>
+		<result property="accountName" column="ACCOUNT_NAME"/>
+		<result property="goodsCount" column="GOODS_COUNT"/>
+		<result property="camera" column="CAMERA"/>
+		<result property="webPhone" column="WEB_PHONE"/>
+		<result property="logo" column="LOGO"/>
+		<result property="shopImg" column="SHOP_IMG"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+		<result property="gisAddress" column="GIS_ADDRESS"/>
+		<result property="shopCommend.shopId" column="SHOPCOMMENT_ID"/>
+		<result property="shopCommend.commend" column="COMMEND"/>
+	</resultMap>
+	
+	<insert id="shop_insert" parameterClass="com.nonfamous.tang.domain.Shop">
+		INSERT INTO SHOP (
+				SHOP_ID,
+				MEMBER_ID,
+				LOGIN_ID,
+				VIDEO_ID,
+				LIVE_ID,
+				SHOP_NAME,
+				SHOP_OWNER,
+				COMMODITY,
+				BELONG_MARKET_ID,
+				ADDRESS,
+				PHONE,
+				BANK,
+				BANK_ACCOUNT,
+				ACCOUNT_NAME,
+				GOODS_COUNT,
+				CAMERA,
+				WEB_PHONE,
+				LOGO,
+				SHOP_IMG,
+				GMT_CREATE,
+				CREATOR,
+				GMT_MODIFY,
+				MODIFIER,
+				GIS_ADDRESS
+	                     )
+	             VALUES ( 
+				#shopId#,
+				#memberId#,
+				#loginId#,
+				#videoId#,
+				#liveId#,
+				#shopName#,
+				#shopOwner#,
+				#commodity#,
+				#belongMarketId#,
+				#address#,
+				#phone#,
+				#bank#,
+				#bankAccount#,
+				#accountName#,
+				0,
+				#camera#,
+				#webPhone#,
+				#logo#,
+				#shopImg#,
+				sysdate(),
+				#creator#,
+				sysdate(),
+				#modifier#,
+				#gisAddress#
+	                     )
+	</insert>
+	
+	<insert id="shopcommend_insert" parameterClass="com.nonfamous.tang.domain.ShopCommend">
+		INSERT INTO SHOP_COMMEND (
+				SHOP_ID,
+				COMMEND
+	                     )
+	             VALUES ( 
+				#shopId#,
+				#commend#
+	                     )
+	</insert>
+	
+	
+	<update id="shop_update" parameterClass="com.nonfamous.tang.domain.Shop">
+		UPDATE SHOP t SET  
+			<isNotEmpty prepend="" property="shopName"> t.SHOP_NAME = #shopName#,</isNotEmpty>
+			<isNotEmpty prepend="" property="shopOwner"> t.SHOP_OWNER = #shopOwner#,</isNotEmpty>
+			<isNotEmpty prepend="" property="commodity"> t.COMMODITY = #commodity#,</isNotEmpty>
+			<isNotEmpty prepend="" property="videoId"> t.VIDEO_ID = #videoId#,</isNotEmpty>
+			<isNotEmpty prepend="" property="liveId"> t.LIVE_ID = #liveId#,</isNotEmpty>
+			<isNotEmpty prepend="" property="belongMarketId"> t.BELONG_MARKET_ID = #belongMarketId#,</isNotEmpty>
+			<isNotEmpty prepend="" property="address"> t.ADDRESS = #address#,</isNotEmpty>
+			<isNotEmpty prepend="" property="phone"> t.PHONE = #phone#,</isNotEmpty>
+			<isNotEmpty prepend="" property="bank"> t.BANK = #bank#,</isNotEmpty>
+			<isNotEmpty prepend="" property="bankAccount"> t.BANK_ACCOUNT = #bankAccount#,</isNotEmpty>
+			<isNotEmpty prepend="" property="accountName"> t.ACCOUNT_NAME = #accountName#,</isNotEmpty>
+			<isNotEmpty prepend="" property="goodsCount"> t.GOODS_COUNT = #goodsCount#,</isNotEmpty>
+			<isNotEmpty prepend="" property="camera"> t.CAMERA = #camera#,</isNotEmpty>
+			<isNotEmpty prepend="" property="webPhone"> t.WEB_PHONE = #webPhone#,</isNotEmpty>
+			<isNotEmpty prepend="" property="logo"> t.LOGO = #logo#,</isNotEmpty>
+			<isNotEmpty prepend="" property="shopImg"> t.SHOP_IMG = #shopImg#,</isNotEmpty>
+			<isNotEmpty prepend="" property="creator"> t.CREATOR = #creator#,</isNotEmpty>
+			<isNotEmpty prepend="" property="modifier"> t.MODIFIER = #modifier#,</isNotEmpty>
+			<isNotEmpty prepend="" property="gisAddress"> t.GIS_ADDRESS = #gisAddress#, </isNotEmpty>
+			<isNotEmpty prepend="" property="videoId"> t.VIDEO_ID = #videoId#, </isNotEmpty>
+		    t.GMT_MODIFY = sysdate()
+		WHERE t.SHOP_ID = #shopId#
+	</update>
+	
+	<select id="get_shop_list" parameterClass="java.util.Map" resultMap="shopfull">
+		SELECT 
+			t.SHOP_ID,
+			t.MEMBER_ID,
+			t.LOGIN_ID,
+			t.VIDEO_ID,
+			t.LIVE_ID,
+			t.SHOP_NAME,
+			t.SHOP_OWNER,
+			t.COMMODITY,
+			t.BELONG_MARKET_ID,
+			t.ADDRESS,
+			t.PHONE,
+			t.BANK,
+			t.BANK_ACCOUNT,
+			t.ACCOUNT_NAME,
+			t.GOODS_COUNT,
+			t.CAMERA,
+			t.WEB_PHONE,
+			t.LOGO,
+			t.SHOP_IMG,
+			t.GMT_CREATE,
+			t.CREATOR,
+			t.GMT_MODIFY,
+			t.MODIFIER,
+			t.GIS_ADDRESS,
+			s.COMMEND,
+			s.SHOP_ID as SHOPCOMMENT_ID
+		FROM SHOP  t ,shop_commend s
+		where t.SHOP_ID = s.SHOP_ID
+	</select>
+	
+	<select id="get_shopfull_by_shop_id" resultMap="shopfull">
+		SELECT 
+			t.SHOP_ID,
+			t.MEMBER_ID,
+			t.LOGIN_ID,
+			t.VIDEO_ID,
+			t.LIVE_ID,
+			t.SHOP_NAME,
+			t.SHOP_OWNER,
+			t.COMMODITY,
+			t.BELONG_MARKET_ID,
+			t.ADDRESS,
+			t.PHONE,
+			t.BANK,
+			t.BANK_ACCOUNT,
+			t.ACCOUNT_NAME,
+			t.GOODS_COUNT,
+			t.CAMERA,
+			t.WEB_PHONE,
+			t.LOGO,
+			t.SHOP_IMG,
+			t.GMT_CREATE,
+			t.CREATOR,
+			t.GMT_MODIFY,
+			t.MODIFIER,
+			t.GIS_ADDRESS,
+			s.COMMEND,
+			s.SHOP_ID as SHOPCOMMENT_ID
+		FROM SHOP  t ,shop_commend s   
+		WHERE  t.SHOP_ID = s.SHOP_ID
+		  <isNotEmpty property="shopId" prepend=" and "> t.SHOP_ID = #shopId# </isNotEmpty>
+		  <isNotEmpty property="gisAddress" prepend=" and "> t.GIS_ADDRESS = #gisAddress# </isNotEmpty>
+	</select>
+	
+	<select id="get_shopfull_by_member_id" parameterClass="java.lang.String" resultMap="shopfull">
+		SELECT 
+			t.SHOP_ID,
+			t.MEMBER_ID,
+			t.LOGIN_ID,
+			t.VIDEO_ID,
+			t.LIVE_ID,
+			t.SHOP_NAME,
+			t.SHOP_OWNER,
+			t.COMMODITY,
+			t.BELONG_MARKET_ID,
+			t.ADDRESS,
+			t.PHONE,
+			t.BANK,
+			t.BANK_ACCOUNT,
+			t.ACCOUNT_NAME,
+			t.GOODS_COUNT,
+			t.CAMERA,
+			t.WEB_PHONE,
+			t.LOGO,
+			t.SHOP_IMG,
+			t.GMT_CREATE,
+			t.CREATOR,
+			t.GMT_MODIFY,
+			t.MODIFIER,
+			t.GIS_ADDRESS,
+			s.COMMEND,
+			s.SHOP_ID as SHOPCOMMENT_ID
+		FROM SHOP  t ,shop_commend s 
+		WHERE t.MEMBER_ID = #value# and t.SHOP_ID = s.SHOP_ID
+	</select>
+	
+	
+	<delete id="delete_shop" parameterClass="java.lang.String">
+		DELETE FROM SHOP  WHERE SHOP_ID = #value#
+	</delete>
+	
+	<update id="shopcommend_update" parameterClass="com.nonfamous.tang.domain.ShopCommend">
+		UPDATE SHOP_COMMEND t SET  
+			t.COMMEND = #commend#
+		WHERE t.SHOP_ID = #shopId#
+	</update>
+	<select id="get_shopcommend_list" parameterClass="java.util.Map" resultMap="shopcommend">
+		SELECT 
+			SHOP_ID,
+			COMMEND
+		FROM SHOP_COMMEND  t  
+	</select>
+	<select id="get_effectgoods_count" resultClass="java.lang.Integer">
+		SELECT 
+		    count(goods_status)
+	    FROM goods_base_info t,shop s
+	    WHERE t.shop_id = s.shop_id and t.goods_status='N'  
+	</select>
+	
+	<select id="get_shopcommend_count" resultClass="java.lang.Integer">
+		SELECT count(shop_name) FROM shop 
+	</select>
+	
+	<select id="get_shopname_count" resultClass="java.lang.Integer">
+		SELECT count(shop_owner) from shop
+	</select>
+	
+	<select id="get_allnews_count" resultClass="java.lang.Integer">
+		<![CDATA[select count(1) from News_Base_Info where news_status ='N'  ]]>
+	</select>
+	
+	<select id="get_shopcommend" parameterClass="java.lang.String" resultMap="shopcommend">
+		SELECT 
+			SHOP_ID,
+			COMMEND
+		FROM SHOP_COMMEND  t     
+		WHERE t.SHOP_ID = #value#
+	</select>
+	
+	<delete id="delete_shopcommend" parameterClass="java.lang.String">
+		DELETE FROM SHOP_COMMEND  WHERE SHOP_ID = #value#
+	</delete>
+	
+	<update id="shop_goods_count_add" parameterClass="java.lang.String">
+		UPDATE SHOP t SET  
+			t.GOODS_COUNT = ifnull(t.GOODS_COUNT,0) + 1
+		WHERE t.SHOP_ID = #value#
+	</update>
+	
+	<update id="shop_goods_count_delete" parameterClass="java.lang.String">
+		UPDATE SHOP t SET  
+			t.GOODS_COUNT = ifnull(t.GOODS_COUNT,0) - 1
+		WHERE t.SHOP_ID = #value#
+	</update>
+	
+	<select id="QUERY_SHOP_COUNT_FOR_INDEX" parameterClass="com.nonfamous.tang.dao.query.SearchMemberShopQuery" resultClass="java.lang.Integer">
+		select count(1) as total   FROM SHOP  t force  INDEX( idx_shop_modifydate) 
+		where t.GMT_MODIFY &gt;= #begin# AND t.GMT_MODIFY &lt; #end#
+	</select>
+	
+	<select id="QUERY_SHOP_LIST_FOR_INDEX" parameterClass="com.nonfamous.tang.dao.query.SearchMemberShopQuery" resultMap="anotherShop">
+	     SELECT 
+			                         t.SHOP_ID,
+			                         t.MEMBER_ID,
+			                         t.LOGIN_ID,
+			                         t.VIDEO_ID,
+			                         t.LIVE_ID,
+			                         t.SHOP_NAME,
+			                         t.SHOP_OWNER,
+			                         t.COMMODITY,
+			                         t.BELONG_MARKET_ID,
+                   			         m.MARKET_NAME,
+			                         t.ADDRESS,
+			                         t.PHONE,
+			                         t.BANK,
+			                         t.BANK_ACCOUNT,
+			                         t.ACCOUNT_NAME,
+			                         t.GOODS_COUNT,
+			                         t.CAMERA,
+			                         t.WEB_PHONE,
+			                         t.LOGO,
+			                         t.SHOP_IMG,
+			                         t.GMT_CREATE,
+			                         t.CREATOR,
+			                         t.GMT_MODIFY,
+			                         t.MODIFIER,
+			                         t.GIS_ADDRESS,
+			                         s.COMMEND, 
+			                         s.SHOP_ID as SHOPCOMMENT_ID
+			                          FROM SHOP t force  INDEX( idx_shop_modifydate), shop_commend s,MARKET_TYPE m
+			                         WHERE t.BELONG_MARKET_ID = m.MARKET_TYPE and t.GMT_MODIFY &gt;= #begin# AND t.GMT_MODIFY &lt; #end#
+			                         AND   t.SHOP_ID = s.SHOP_ID
+			                         ORDER BY t.GMT_MODIFY ASC
+			                         LIMIT #dbStartNo#, #dbEndNo#
+	</select>
+	
+	<select id="get_shopcommend_by_member_id" parameterClass="java.lang.String" resultMap="shopcommend">
+		SELECT 
+			s.COMMEND,
+			s.SHOP_ID
+		FROM SHOP  t ,shop_commend s 
+		WHERE t.MEMBER_ID = #value# and t.SHOP_ID = s.SHOP_ID
+	</select>
+	
+	<select id="get_shop_by_member_id" parameterClass="java.lang.String" resultMap="shop">
+		SELECT 
+			t.SHOP_ID,
+			t.MEMBER_ID,
+			t.LOGIN_ID,
+			t.VIDEO_ID,
+			t.LIVE_ID,
+			t.SHOP_NAME,
+			t.SHOP_OWNER,
+			t.COMMODITY,
+			t.BELONG_MARKET_ID,
+			t.ADDRESS,
+			t.PHONE,
+			t.BANK,
+			t.BANK_ACCOUNT,
+			t.ACCOUNT_NAME,
+			t.GOODS_COUNT,
+			t.CAMERA,
+			t.WEB_PHONE,
+			t.LOGO,
+			t.SHOP_IMG,
+			t.GMT_CREATE,
+			t.CREATOR,
+			t.GMT_MODIFY,
+			t.MODIFIER,
+			t.GIS_ADDRESS
+		FROM SHOP  t 
+		WHERE t.MEMBER_ID = #value# 
+	</select>
+	
+	<select id="get_shop_by_shop_id" parameterClass="java.lang.String" resultMap="shop">
+		SELECT 
+			t.SHOP_ID,
+			t.MEMBER_ID,
+			t.LOGIN_ID,
+			t.VIDEO_ID,
+			t.LIVE_ID,
+			t.SHOP_NAME,
+			t.SHOP_OWNER,
+			t.COMMODITY,
+			t.BELONG_MARKET_ID,
+			t.ADDRESS,
+			t.PHONE,
+			t.BANK,
+			t.BANK_ACCOUNT,
+			t.ACCOUNT_NAME,
+			t.GOODS_COUNT,
+			t.CAMERA,
+			t.WEB_PHONE,
+			t.LOGO,
+			t.SHOP_IMG,
+			t.GMT_CREATE,
+			t.CREATOR,
+			t.GMT_MODIFY,
+			t.MODIFIER,
+			t.GIS_ADDRESS
+		FROM SHOP  t 
+		WHERE t.SHOP_ID = #value#
+	</select>
+	
+	<select id="GET_QUERY_SHOP_COUNT_BY_QUERY_INFO" resultClass="java.lang.Integer">
+		select count(*) as total from shop t 
+		<dynamic prepend="where">
+			<isNotEmpty property="shopName" prepend="and"> t.shop_name like #blurShopName# </isNotEmpty>
+			<isEmpty property="shopName">
+				query forbiden
+			</isEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="GET_QUERY_SHOP_BY_QUERY_INFO" resultClass="com.nonfamous.tang.domain.Shop">
+				select t.shop_name as shopName,t.member_id as memberId from shop t 
+				<dynamic prepend="where">
+					<isNotEmpty property="shopName" prepend="and"> t.shop_name like #blurShopName# </isNotEmpty>
+					<isEmpty property="shopName">
+						query forbiden
+					</isEmpty>
+				</dynamic>
+				LIMIT #dbStartNo#, #dbEndNo#
+			
+	</select>
+	
+	<select id="GET_QUERY_SHOP_BY_MEMBER_INFO" resultClass="com.nonfamous.tang.domain.Shop">
+		select t.shop_name as shopName,t.member_id as memberId from shop t where t.member_id in
+		<iterate property="memberList" open="(" close=")" conjunction=",">
+				#memberList[].memberId#
+		</iterate>
+	</select>
+	
+	<select id="get_shop_by_gis_address" parameterClass="java.lang.String" resultMap="shop">
+		SELECT 
+			t.SHOP_ID,
+			t.MEMBER_ID,
+			t.LOGIN_ID,
+			t.VIDEO_ID,
+			t.LIVE_ID,
+			t.SHOP_NAME,
+			t.SHOP_OWNER,
+			t.COMMODITY,
+			t.BELONG_MARKET_ID,
+			t.ADDRESS,
+			t.PHONE,
+			t.BANK,
+			t.BANK_ACCOUNT,
+			t.ACCOUNT_NAME,
+			t.GOODS_COUNT,
+			t.CAMERA,
+			t.WEB_PHONE,
+			t.LOGO,
+			t.SHOP_IMG,
+			t.GMT_CREATE,
+			t.CREATOR,
+			t.GMT_MODIFY,
+			t.MODIFIER,
+			t.GIS_ADDRESS
+		FROM SHOP  t 
+		WHERE t.GIS_ADDRESS = #value# 
+	</select>
+	
+	<sql id="selectFromShop">
+		SELECT 
+			t.SHOP_ID,
+			t.MEMBER_ID,
+			t.LOGIN_ID,
+			t.VIDEO_ID,
+			t.LIVE_ID,
+			t.SHOP_NAME,
+			t.SHOP_OWNER,
+			t.COMMODITY,
+			t.BELONG_MARKET_ID,
+			t.ADDRESS,
+			t.PHONE,
+			t.BANK,
+			t.BANK_ACCOUNT,
+			t.ACCOUNT_NAME,
+			t.GOODS_COUNT,
+			t.CAMERA,
+			t.WEB_PHONE,
+			t.LOGO,
+			t.SHOP_IMG,
+			t.GMT_CREATE,
+			t.CREATOR,
+			t.GMT_MODIFY,
+			t.MODIFIER,
+			t.GIS_ADDRESS
+		FROM SHOP  t 
+	</sql>
+	
+	<select id="QUERY_SHOP_LIST_BY_IDS" parameterClass="java.util.Map" resultMap="shop">
+		<include refid="selectFromShop"/>
+		WHERE t.SHOP_ID IN 
+		  <iterate property="ids" prepend=" " open="(" close=")" conjunction=","> #ids[]# </iterate>
+	</select>
+	
+	<select id="getLatestShopList" parameterClass="java.util.Map" resultMap="shop">
+		<include refid="selectFromShop"/>
+		order by t.GMT_MODIFY desc
+		limit 10
+	</select>
+	
+	<select id="QUERY_SHOP_LIST_BY_MEMBER_IDS" parameterClass="java.util.Map" resultMap="shop">
+		SELECT * FROM SHOP  t WHERE t.member_id IN  <iterate property="ids" prepend=" " open="(" close=")" conjunction=","> #ids[]# </iterate>
+	</select>
+	<select id="getSysDate" resultClass="java.util.Date">
+		SELECT sysdate()
+	</select>
+</sqlMap>

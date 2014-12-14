@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="QUARTZLOG_SPACE">
+	<resultMap id="quartzlog" class="com.nonfamous.tang.domain.QuartzLog">
+		<result property="quartzType" column="QUARTZ_TYPE"/>
+		<result property="gmtExecute" column="GMT_EXECUTE"/>
+		<result property="quartzMemo" column="QUARTZ_MEMO"/>
+	</resultMap>
+	
+	<insert id="quartzlog_insert" parameterClass="com.nonfamous.tang.domain.QuartzLog">
+		INSERT INTO QUARTZ_LOG (
+				QUARTZ_TYPE,
+				GMT_EXECUTE,
+				QUARTZ_MEMO
+	                     )
+	             VALUES ( 
+				#quartzType#,
+				#gmtExecute#,
+				#quartzMemo#
+	                     )
+	</insert>
+	
+	<update id="update_QuartzLog" parameterClass="com.nonfamous.tang.domain.QuartzLog">
+		UPDATE QUARTZ_LOG t SET  
+			t.QUARTZ_TYPE = #quartzType#,
+			t.GMT_EXECUTE = #gmtExecute#,
+			t.QUARTZ_MEMO = #quartzMemo#
+		WHERE t.QUARTZ_TYPE = #quartzType#
+	</update>
+
+	<select id="get_QuartzLogByType" parameterClass="java.lang.String" resultMap="quartzlog">
+		SELECT 
+			QUARTZ_TYPE,
+			GMT_EXECUTE,
+			QUARTZ_MEMO
+		FROM QUARTZ_LOG  t     
+		WHERE t.QUARTZ_TYPE = #value#
+	</select>
+</sqlMap>

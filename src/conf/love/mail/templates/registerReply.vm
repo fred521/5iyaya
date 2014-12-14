@@ -1,0 +1,59 @@
+<html>
+<head>
+<title></title>
+<style>
+.content{
+	font-size:14px;
+	font-family:Arial;
+}
+</style>
+<head>
+<body style="text-align:center;">
+<span class="content">
+</br>
+<div align=right>
+<a on_click="return top.js.OpenExtLink(window,event,this)" href="http://home.5iyya.com" target="_blank">首页</a>| 
+<a on_click="return top.js.OpenExtLink(window,event,this)" href="http://home.5iyya.com/index.php?do=home" target="_blank">丫丫空间</a>| 
+<a on_click="return top.js.OpenExtLink(window,event,this)" href="http://bbs.5iyya.com/index.php" target="_blank">丫丫说</a>| 
+<a on_click="return top.js.OpenExtLink(window,event,this)" href="http://www.5iyya.com/helper/index.htm" target="_blank">丫丫空间</a>
+</div>
+<div align=left style=width:720;height:200; margin-left:auto;margin-right:auto;>
+<br>
+尊敬的<strong>${username}</strong>:<br><br>
+    欢迎您来到我爱丫丫网，您已成功注册会员！<br>
+    我爱丫丫网作为专业的母婴用品行业B2C集成平台，提供优质的厂家直供小额批发与团购渠道服务，让您放心、省心进货。<br>
+    凡是在平台上发布价格的厂家，都是通过平台三证审核，产品质量绝对保证。未发布价格的厂家目前只做展示。具体的批发要求只要参考各产品页面的描述就可以了。价格面议的商户属于暂时展示商户，不能交易。<br>
+    另外，我爱丫丫网平台隆重推出了“丫丫空间”<a on_click="return top.js.OpenExtLink(window,event,this)" href="http://home.5iyya.com" target="_blank">http://home.5iyya.com</a>、“丫丫说”论坛<a on_click="return top.js.OpenExtLink(window,event,this)" href="http://bbs.5iyya.com" target="_blank">http://bbs.5iyya.com</a>，买卖家互动的空间，给您回家的感觉，可登入会员中心体验！<br><br>
+
+                               点击这里<a on_click="return top.js.OpenExtLink(window,event,this)" href="http://www.5iyya.com/member/index.htm" target="_blank">http://www.5iyya.com/member/index.htm</a>（跳转到注册后的会员中心）<br><br>
+
+随时欢迎您的咨询和建议。<br><br>
+
+    价格低廉、质量保证、放心退换产品，心动不如行动，赶快登入平台订购吧！<br><br><br><br><br><br>
+    
+
+    
+
+
+[厂家联盟]单件、混批不再困难！<br>
+<a on_click="return top.js.OpenExtLink(window,event,this)" href="http://www.5iyya.com/yynews/ff808081207e1bda01208da97d45005f.htm" target="_blank">http://www.5iyya.com/yynews/ff808081207e1bda01208da97d45005f.htm</a><br><br>
+
+物流表<br>
+<a on_click="return top.js.OpenExtLink(window,event,this)" href="http://www.5iyya.com/html/wuliu.html" target="_blank">http://www.5iyya.com/html/wuliu.html</a><br><br>
+
+优惠政策<br>
+<a on_click="return top.js.OpenExtLink(window,event,this)" href="http://www.5iyya.com/yynews/ff8080811d2764ef011d522906661414.htm" target="_blank">http://www.5iyya.com/yynews/ff8080811d2764ef011d522906661414.htm</a>
+<br><br><br><br>
+
+
+详情可咨询我爱丫丫网客服人员<br><br>
+
+客服QQ：619373550   咨询电话：0571-86799951<br><br>
+
+客服在线时间：9：00----22：30<br>
+
+</br>
+</div>
+</span>
+</body>
+</html>

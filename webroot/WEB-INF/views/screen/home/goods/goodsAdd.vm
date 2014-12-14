@@ -1,0 +1,795 @@
+#set( $layout = "layout/home/memberdefault.vm" )
+<link href="${appServer}/js/uitabs/flora.tabs.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="${appServer}/js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="${appServer}/js/jquery-ui-personalized-1.5.3.packed.js"></script>
+
+<script type="text/javascript">
+		var customColorFlag = false;
+		var customSizeFlag = false;
+		var customAgeRangeFlag = false;
+		var customBrandFlag = false;
+		
+		var propertyUrl = '$appServer/mygoods/load_propertys.htm';
+        function showColorForm(){
+        	
+        	var colorFormContent = $('#colorFormContent').html();
+        	colorFormContent = jQuery.trim(colorFormContent);
+        	if(colorFormContent==''){
+        	
+			 var colorPropertys = jQuery.ajax({
+  			 						type: "POST",
+  								    url: propertyUrl,
+  			 						data: {'propertyId': ['1', "3"]},async: false
+  			 						}).responseText;
+  			 var userDefinedProperty = "";
+ 		     $('#colorFormContent').html(colorPropertys);
+  			 var allCheckBox = $("#ColorForm :input:checkbox");
+  			 allCheckBox.each(function(){
+  			 	$(this).bind('click',setCheckedColors);
+  			 });
+  			 
+  			 var allRadio = $("#colorFormContent :input:radio");
+  			 allRadio.each(function(){
+  			 	$(this).bind('click',setColor);
+  			 });	
+        	}
+        	evtSourceElementId = ($(this).attr('id'));
+        	if(customColorFlag == true&& evtSourceElementId=='colors')
+	        	return;
+	    	var selectedColors = $("#colors").val();
+	    	selectedColors = jQuery.trim(selectedColors);
+        	var colorCheckboxes = $("input:checkbox[@name='ColorName']");
+        	colorCheckboxes.each(function(){
+	    		$(this).attr("checked","");
+	    	});
+	    	$("#CustomColorName").attr("checked","");
+	   	    if(selectedColors!='') {
+	   	    	var isUserDefine = true;
+	    		colorArray = selectedColors.split(",");
+	    		colorCheckboxes.each(function(){
+	    			colorCheckboxValue = $(this).val();
+	    			for(var index = 0; index < colorArray.length; index++) {
+            			if(colorCheckboxValue == colorArray[index]){
+	    					$(this).attr("checked","true");
+	    					isUserDefine = false;
+	    				}
+        			}
+	    		});
+           	    
+           	    if(isUserDefine){
+           	    	$("#CustomColorName").attr("checked","true");
+           	    }
+	    	}
+            jQuery.blockUI({ message: $('#ColorForm'),css: { top: '10px',width:'auto','text-align':'left' }  , centerY: 0}); 
+       
+        }
+        
+        function setCheckedColors(){
+        	var colors = "";
+        	var colorCheckboxes = document.getElementsByName("ColorName");
+        	for(var index = 0; index < colorCheckboxes.length; index++) {
+            	if(colorCheckboxes[index].checked == true && colorCheckboxes[index].type != "radio") {
+                	colors += colorCheckboxes[index].value + ",";
+            	}
+            	if(colorCheckboxes[index].type == "radio") {
+                	colorCheckboxes[index].checked = false;
+            	}
+        	}
+        	$("#colors").val(colors.substring(0, colors.length - 1));
+        }
+        
+        function setColor(){
+        	
+        	var value = $(this).val();
+        	setColorValue(value);
+        }
+        function setColorValue(value){
+        	var colorCheckboxes = document.getElementsByName("ColorName");
+        	for(var index = 0; index < colorCheckboxes.length; index++) {
+            	if(colorCheckboxes[index].checked == true
+                  	&& colorCheckboxes[index].value != value) {
+                	colorCheckboxes[index].checked = false;
+            	}
+        	}
+        	$("#colors").val(value);
+        }
+        function customColor() {
+        	customColorFlag = true;
+        	
+        	$("#ColorName").each(function(){
+        		$(this).attr('checked',false);
+        	});
+        	$("#colors").focus();
+            hideForm();
+    	}
+		function setAgeRange(){
+			$("#ageRange").val($(this).val());
+		}
+		function customAgeRange(){
+			customAgeRangeFlag = true;
+			
+		}
+		function showAgeRangeForm(){
+			evtSourceElementId = ($(this).attr('id'));
+        	if(customAgeRangeFlag == true&& evtSourceElementId=='ageRange')
+	        	return;
+			var ageRangeFormContent = $('#ageRangeFormContent').html();
+			ageRangeFormContent = jQuery.trim(ageRangeFormContent);
+			if(ageRangeFormContent==''){
+				var ageRangeProperties = jQuery.ajax({
+											type:"POST",
+											url:propertyUrl,
+											data:{'propertyId':'9','columnLength':'6'},async: false
+											}).responseText;
+					
+				$('#ageRangeFormContent').html(ageRangeProperties);
+				var brandCb = $("#ageRangeFormContent input:radio");
+				brandCb.each(function(){
+					$(this).bind("click",setAgeRange);
+				});
+			}
+			jQuery.blockUI({ message: $('#AgeRangeForm'),css: { top: '10px',width:'auto','text-align':'left' }  , centerY: 0}); 
+		}
+		function setBrand(){
+			$("#brand").val($(this).val());
+		}
+		function customBrand(){
+			customBrandFlag = true;
+		}
+		function showBrandForm(){
+			evtSourceElementId = ($(this).attr('id'));
+        	if(customBrandFlag == true&& evtSourceElementId=='brand')
+	        	return;
+			var brandFormContent = $('#brandFormContent').html();
+			brandFormContent = jQuery.trim(brandFormContent);
+			if(brandFormContent==''){
+				var brandProperties = jQuery.ajax({
+											type:"POST",
+											url:propertyUrl,
+											data:{'propertyId':'8','columnLength':'6'},async: false
+											}).responseText;
+					
+				$('#brandFormContent').html(brandProperties);
+				var brandCb = $("#brandFormContent input:radio");
+				brandCb.each(function(){
+					$(this).bind("click",setBrand);
+				});
+			}
+			jQuery.blockUI({ message: $('#brandForm'),css: { top: '10px',width:'auto','text-align':'left' }  , centerY: 0}); 
+		}
+		
+        function showSizeForm(){
+        	var sizeFormContent = $('#sizeFormContent').html();
+        	sizeFormContent = jQuery.trim(sizeFormContent);
+        	if(sizeFormContent==''){
+        	
+			 	var sizePropertys = jQuery.ajax({
+  			 						type: "POST",
+  								    url: propertyUrl,
+  			 						data: {'propertyId': ['4', "7"],"columnLength":"6"},async: false
+  			 						}).responseText;
+  			 	var userDefinedProperty = "";
+ 		     	$('#sizeFormContent').html(sizePropertys);
+  			 	var allAlphaSize = $("input:checkbox[@name='AlphaSize']");
+  			 	allAlphaSize.each(function(){
+  			 		$(this).bind('click',setAlphaSize);
+  			 	});
+  			 
+  			 	var allNumberSize = $("input:checkbox[@name='NumberSize']");
+  			 	allNumberSize.each(function(){
+  			 		$(this).bind('click',setNumberSize);
+  			 	});	
+        	}
+        	evtSourceElementId = ($(this).attr('id'));
+        	if(customSizeFlag == true&& evtSourceElementId=='size')
+	        	return;
+	    	var sizeValue = $("#size").val();
+	    	var sizeArray;
+	    	var sizeCheckboxes;
+	    	sizeValue = jQuery.trim(sizeValue);
+	    	$("input:checkbox[@name='NumberSize']").each(function(){
+	    		$(this).attr("checked","");
+	    	});
+	    	$("input:checkbox[@name='AlphaSize']").each(function(){
+	    		$(this).attr("checked","");
+	    	});
+	    	if(sizeValue == '') {
+            	$("#CustomSize").attr("checked","");
+	    	} else {
+            	sizeArray = sizeValue.split(",");
+            	var isUserDefine = true;
+            	$("")
+	        	if(startsWith(sizeValue,"X") || startsWith(sizeValue,"S")
+	              || startsWith(sizeValue,"M") || startsWith(sizeValue,"L") 
+	              || startsWith(sizeValue,"J") || startsWith(sizeValue,"Q") ){
+                	sizeCheckboxes = document.getElementsByName("AlphaSize");
+                	for(var index = 0; index < sizeCheckboxes.length; index++) {
+                    	for(var valueIndex = 0; valueIndex < sizeArray.length; valueIndex++) {
+                        	if(sizeCheckboxes[index].value == sizeArray[valueIndex]) {
+                            	sizeCheckboxes[index].checked = true;
+                           
+                            	isUserDefine=false;
+                        	}
+                    	}
+                	}
+	        	} else if(startsWith(sizeValue,"1") || startsWith(sizeValue,"2")
+	                     || startsWith(sizeValue,"3") || startsWith(sizeValue,"4")){
+                	sizeCheckboxes = document.getElementsByName("NumberSize");
+                	for(var index = 0; index < sizeCheckboxes.length; index++) {
+                    	for(var valueIndex = 0; valueIndex < sizeArray.length; valueIndex++) {
+                        	if(sizeCheckboxes[index].value == sizeArray[valueIndex]) {
+                            	sizeCheckboxes[index].checked = true;
+                            	
+                            	isUserDefine=false;
+                        	}
+                  
+                    	}
+                	}
+	        	}
+	        	if(isUserDefine){
+	        		$("#CustomSize").attr("checked","true");
+	        	}else{
+	        		$("#CustomSize").attr("checked","");
+	        	}
+	    	}
+            jQuery.blockUI({ message: $('#SizeForm'),css: { top: '10px',width:'auto','text-align':'left' }  , centerY: 0}); 
+        }
+        
+	function setAlphaSize() {
+        var sizeValue = "";
+        var sizeCheckboxes = document.getElementsByName("AlphaSize");
+        for(var index = 0; index < sizeCheckboxes.length; index++) {
+            if(sizeCheckboxes[index].checked == true) {
+                sizeValue += sizeCheckboxes[index].value + ",";
+            }
+        }
+        $("#CustomSize").attr("checked","");
+        sizeCheckboxes = document.getElementsByName("NumberSize");
+        for(var index = 0; index < sizeCheckboxes.length; index++) {
+            sizeCheckboxes[index].checked = false;
+        }
+        $("#size").val(sizeValue.substring(0, sizeValue.length - 1));
+    }
+	function isBlank(str){
+		str = jQuery.trim(str);
+		if(str.length==0||str==''){
+			return true;
+		}
+		return false;
+	}
+	
+	function startsWith(str1,str2){
+		if(str1.indexOf(str2)==0){
+			return true;
+		}
+		return false;
+	}
+	function setNumberSize() {
+    	
+        var sizeValue = "";
+        var sizeCheckboxes = document.getElementsByName("NumberSize");
+        for(var index = 0; index < sizeCheckboxes.length; index++) {
+            if(sizeCheckboxes[index].checked == true) {
+                sizeValue += sizeCheckboxes[index].value + ",";
+            }
+        }
+        $("#CustomSize").attr("checked","");
+        sizeCheckboxes = document.getElementsByName("AlphaSize");
+        for(var index = 0; index < sizeCheckboxes.length; index++) {
+            sizeCheckboxes[index].checked = false;
+        }
+        $('#size').val(sizeValue.substring(0, sizeValue.length - 1));
+    }
+    function customSize() {
+        customSizeFlag = true;
+        $("#size").focus();
+        hideForm();
+    }
+    
+    function showCategoriesForm(){
+    	jQuery.blockUI({ message: $('#categoriesForm'),css: { top: '10px',width:'auto','text-align':'left' }  , centerY: 0}); 
+    }
+    function selectCategory(rootId, rootName, parentId, parentName, id, name, template) {
+        $("#topCategoryName").val(rootName);
+        $("#topCategoryId").val(rootId);
+        $("#subCategoryName").val(parentName);
+        $("#subCategoryId").val(parentId);
+        $("#endCategoryName").val(name);
+        $("#endCategoryId").val(id);
+        hideForm();
+    }
+        
+        function hideForm(){
+        	jQuery.unblockUI();
+        }
+        $(document).ready(function(){ 
+			$("#colorAnchor").bind("click",showColorForm);
+			$("#sizeAnchor").bind("click",showSizeForm);
+			$("#ageRangeAnchor").bind("click",showAgeRangeForm);
+			$("#ageRange").bind("click",showAgeRangeForm);
+			$("#brandAnchor").bind("click",showBrandForm);
+			$("#brand").bind("click",showBrandForm);
+			$("#colors").bind("click",showColorForm);
+			$("#size").bind("click",showSizeForm);
+			$("#categoriesForm > ul").tabs({ cache: true });
+			$("#categoriesAnchor").bind("click",showCategoriesForm);
+			
+			var goodsCodeVal = $("#goodsCode").val();
+			if(goodsCodeVal == ""){
+				//staffId, using a hard code Id first
+				$("#goodsCode").val(generateProductCode("842325"));
+			}
+		});
+        
+</script>
+
+
+<form name="addProduct" action="${homeMoudle}/mygoods/add.htm" method="post" encType="multipart/form-data">
+		<td width="10" valign="top">　  
+	    </td>
+		<td width="740" valign="top">
+			<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>丫丫宝贝管理</h1>
+			</div>
+		<table border="0" width="90%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+		<div class="roundCorner gray onlyBottom" style="width: 736px;">
+	    <p>   
+			<div align="center"><img src="${imgServer}/images/logo_copy.gif" align="absmiddle" /></div>
+	    </div>
+	    <p>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td align="center"><font color="red">$!success</font></td>
+					</tr>
+				</table>
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="18">
+					<tr>
+						<td width="101">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">
+								添加/修改商品</td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td width="72">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="${homeMoudle.setTarget('mygoods/list_init.htm')}" style="text-decoration: none"><font color="#A1A1A1">商品列表</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td width="72">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="${homeMoudle.setTarget('mygoods/down_init.htm')}" style="text-decoration: none"><font color="#A1A1A1">下架商品</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td>&nbsp;　&nbsp;</td>
+					</tr>
+				</table>
+				<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<table cellSpacing="0" cellPadding="0" width="90%" align="center">
+							<tr>
+								<td align=center>
+									<table border="0" width="560" cellspacing="0" cellpadding="6">
+										<tr>
+											<td height="24" class="tx_title" colspan="2"><b>选择商品信息发布方式</b></td>
+										</tr>
+										<tr>
+											<td height="24" class="tx_title" colspan="2">
+											<input type="radio" id="goodsTypeN" name="goodsTypeRadio" onclick="changeGoodsType('N');"/><b>批发</b> 
+													<input type="radio" id="goodsTypeT" name="goodsTypeRadio" onclick="changeGoodsType('T');"/><b>团购</b>
+													<input type="radio" id="goodsTypeM" name="goodsTypeRadio" onclick="changeGoodsType('M');"/><b>批发&amp;团购</b>
+													</td>
+										</tr>
+										<tr>
+														<td width="100">商品名称:</td>
+											<td width="460">
+											<input value="$!form.getField("goodsName").value" name="goodsName" class="input4" maxlength="40">
+											<span class="red">*$!form.getField("goodsName").message</span>
+											</td>
+										</tr>
+										<tr>
+				<td>商品分类:</td>
+				<td>
+				<select name="firstCat" id="firstCat" style='width:100px;'></select>
+				<select name="secondCat" id="secondCat" style='width:120px;'></select>
+				<select name="thirdCat" id="thirdCat" style='width:120px;'></select>
+				<span class="red">*$!form.getField("firstCat").message $!form.getField("secondCat").message $!form.getField("thirdCat").message</span>
+				</td>
+			</tr>
+			<input type="hidden" id="goodsType" name="goodsType" value="N"/>
+										<tr class="batchBuyTr">
+											<td><font color="red"><b>批发价:</b></font></td>
+											<td><input value="$!form.getField("batchPrice").value" name="batchPrice" class="input5">输入0表示价格面议
+											<span class="red">*$!form.getField("batchPrice").message</span>
+											</td>
+										</tr>
+										<tr class="batchBuyTr">
+											<td><font color="red"><b>起批量:</b></font></td>
+											<td><input value="$!form.getField("batchNum").value" name="batchNum" class="input5">
+											<span class="red">*$!form.getField("batchNum").message</span>
+											</td>
+										</tr>
+										<tr class="groupBuyTr hidden">
+											<td ><font color="red"><b>团购价:</b></font></td>
+											<td><input value="$!form.getField("groupPrice").value" name="groupPrice" class="input5">输入0表示价格面议
+											<span class="red">*$!form.getField("groupPrice").message</span>
+											</td>
+										</tr>
+										<tr class="groupBuyTr hidden">
+											<td><font color="red"><b>起团数:</b></font></td>
+											<td><input value="$!form.getField("groupDefaultNum").value" name="groupDefaultNum" class="input5">
+											<span class="red">*$!form.getField("groupDefaultNum").message</span>
+											</td>
+										</tr>
+										<tr>
+											<td><font color="blue"><b>市场价:</b></font></td>
+											<td><input value="$!form.getField("marketPrice").value" name="marketPrice" class="input5">输入0表示价格面议
+											<span class="red">*$!form.getField("marketPrice").message</span>
+											</td>
+										</tr>
+										<tr>
+											<td>选择尺寸:</td>
+											<td><input value="$!form.getField("size").value" name="size" id="size" class="input5">
+											<a id="sizeAnchor" href="javascript:void(0);" accesskey="M" tabindex="-1">选择尺码(<u>M</u>)</a>
+											##<span class="red">*$!form.getField("size").message</span>
+											</td>
+										</tr>
+										<tr>
+											<td>选择颜色:</td>
+											<td><input value="$!form.getField("colors").value" name="colors" id="colors" class="input5">
+											<a id="colorAnchor" href="javascript:void(0);" accesskey="Y" tabindex="-1">选择颜色(<u>Y</u>)</a>
+											##<span class="red">*$!form.getField("colors").message</span>
+											</td>
+										</tr>
+										<tr>
+											<td>适宜年龄段:</td>
+											<td><input value="$!form.getField("ageRange").value" name="ageRange" id="ageRange" class="input5">
+											<a id="ageRangeAnchor" href="javascript:void(0);" accesskey="Y" tabindex="-1">选择适宜年龄段</a>
+											##<span class="red">*$!form.getField("ageRange").message</span>
+											</td>
+										</tr>
+										<tr>
+											<td>选择品牌:</td>
+											<td><input value="$!form.getField("brand").value" name="brand" id="brand" class="input5">
+											<a id="brandAnchor" href="javascript:void(0);" accesskey="Y" tabindex="-1">选择品牌</a>
+											##<span class="red">*$!form.getField("brand").message</span>
+											</td>
+										</tr>
+										<tr>
+											<td>价格描述:</td>
+											<td><textarea rows="3" name="priceDes" cols="20" class="input8">$!form.getField("priceDes").value</textarea>
+											<br />
+											<span class="red">$!form.getField("priceDes").message</span>
+											</td>
+										</tr>
+										<tr>
+											<td>库存量:</td>
+											<td><input value="$!form.getField("goodsNum").value" name="goodsNum" class="input5">
+													<span class="red">$!form.getField("goodsNum").message</span>
+											</td>
+										</tr>
+										<tr>
+											<td width="100" height="35">图片显示区:</td>
+											<td width="460">
+												<div id="imagek">
+												#if($!goodsPics && $!goodsPics.size()>0)
+													#foreach($pi in $!goodsPics)
+														<img id="img" border="0" src="${upServer}${pi.path}.s.jpg" width="80" height="80">&nbsp;&nbsp;&nbsp;
+													#end
+                                				##if($stringUtils.isNotBlank($form.getField("goodsPic").value))
+                                				##<img id="img" border="0" src="${upServer}${form.getField('goodsPic').value}.s.jpg" width="80" height="80">&nbsp;&nbsp;&nbsp;
+                                				#else
+                                				<img id="img" border="0" src="${imgServer}/images/showimg.gif" />&nbsp;&nbsp;&nbsp;
+                                				#end
+                            					</div>
+											</td>
+										</tr>
+										<tr>
+											<td height="35">上传商品图片:</td>
+											<td> ##value="$!form.getField("goodsPic").value" onChange="showPic()"
+												<input type="file" name="goodsPic" id="pic"  class="input4"  /><span class="red">$!uploadGoodsError</span>
+											</td>
+											
+										</tr>
+										<tr>
+											<td>信息过期时间:</td>
+											<td>
+											<input id="A1" type="radio" value="10" name="abandonDays" #if(!$form) checked #elseif("$form.getField('abandonDays').value" == "10") checked #end />
+											<label style="CURSOR: hand" for="A1">
+											10天</label>
+											<input id="A2" type="radio" value="20" name="abandonDays" #if($form &&  "$form.getField('abandonDays').value" == "20") checked #end />
+											<label style="CURSOR: hand" for="A2">
+											20天</label>
+											<input id="A3" type="radio" value="30" name="abandonDays" #if($form && "$form.getField('abandonDays').value" == "30") checked #end />
+											<label style="CURSOR: hand" for="A3">
+											30天</label>
+											<input id="A4" type="radio" value="90" name="abandonDays" #if($form && "$form.getField('abandonDays').value" == "90") checked #end />
+											<label style="CURSOR: hand" for="A4">
+											90天</label> <span class="red">*</span>
+											</td>
+										</tr>
+										<tr>
+											<td>商品描述:</td>
+											<td><textarea name="content" style="width:100%;height:200">$!form.getField("content").value</textarea>
+											<span class="red">*$!form.getField("content").message</span>
+											</td>
+										</tr>
+										<tr>
+											<td>　</td>
+											<td>
+											<input type="submit" value=" 提&nbsp;&nbsp;交 " name="" class="input6"></td>
+										</tr>
+										<tr>
+											<td colspan="2">
+											<font color="#777777">
+											每个商品最多可上传3张图片<br>
+											请使用GIF、JPG格式的图片文件<br>
+											请确认您的图像大小为80像素×80像素<br>
+											请控制图片文件在40KB以下<br>
+											任何有违国家法律法规的图像将被拒绝<br> 
+											</font> 
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					  </td>
+					</tr>
+				</table>
+				<br>
+				</td>
+			</tr>
+		</table>
+		</td>
+</form>
+<script type="text/javascript" src="${imgServer}/js/jquery.MultiFile.js"></script>
+<script language="javascript" type="text/javascript" src="${imgServer}/lib/plugins/CascadeSelect.js"></script>
+<script language="javascript">
+function initializeGoodsCats(){
+		    var defaultSettings = {
+				         key: 'typeId',
+				         value: 'typeName',
+				         data: {},
+         				 url: '${homeMoudle}/listGoodsCategory.htm'
+			    };
+		    $(document).cascadeSelect(jQuery.extend({}, defaultSettings, {
+			         isRoot: true,
+         			target: '#firstCat',
+			         defaultOption : {typeId : '-1', typeName : '----一级类目----'},
+			         selectedOption : {typeId : '$!form.getField("firstCat").getValue()'}
+		    }));
+		
+		    $('#firstCat').cascadeSelect(jQuery.extend({}, defaultSettings, {
+			         target: '#secondCat',
+			         defaultOption : {typeId : '-1', typeName : '----二级类目----'},
+			         selectedOption : {typeId : '$!form.getField("secondCat").getValue()'}
+		    }));
+		    $('#secondCat').cascadeSelect(jQuery.extend({}, defaultSettings, {
+			         target: '#thirdCat',
+			         defaultOption : {typeId : '-1', typeName : '----三级类目----'},
+			         selectedOption : {typeId : '$!form.getField("thirdCat").getValue()'}
+		    }));
+		}
+
+function changeGoodsType(goodsTypeValue){
+				    if(goodsTypeValue=="T"){
+	    	    document.getElementById('goodsTypeT').checked = true;
+        document.getElementById('goodsType').value="T";
+        $('tr.batchBuyTr').hide();
+        $('tr.groupBuyTr').show();
+	    }
+	    else if(goodsTypeValue == 'M'){
+	        document.getElementById('goodsTypeM').checked = true;
+	    	    document.getElementById('goodsType').value = 'M';
+	    	    $('tr.batchBuyTr').show();
+        $('tr.groupBuyTr').show();
+	    }
+	    else/* default (goodsTypeValue=="N")*/{
+				    		    document.getElementById('goodsTypeN').checked = true;
+        document.getElementById('goodsType').value="N";
+        $('tr.batchBuyTr').show();
+        $('tr.groupBuyTr').hide();
+	    }
+}
+function showPic()
+{	
+  	document.all('imagek').innerHTML = "<img id=\"img\" border=\"0\"  />" ;
+ 	document.all('img').src = document.all('pic').value;
+	
+ 	if(document.all('img').width > 80 || document.all('img').height > 80){
+ 		document.all('img').width = 80;
+ 		document.all('img').height = 80;
+  	}
+}
+
+	$(document.body).ready(function(){
+			     initializeGoodsCats();
+			     changeGoodsType('$!form.getField("goodsType").getValue()');
+	});
+	
+	 $().ready(function() {  
+                $('#pic').MultiFile({  
+                  accept:'gif|jpg|png|jpeg|bmp', max:6, STRING: {  
+                   remove:'删除',  
+                   selected:'Selecionado: $file',  
+                   denied:'不支持上传该文件类型 $ext!'  
+                  }  
+                });  
+     });  
+</script>
+<div id="AgeRangeForm" style="display:none;cursor:default;">
+	<div id="ageRangeFormContent"></div>
+	<table cellspacing="2" cellpadding="3" class="font1">
+		<tr>
+			<td>
+		    		<input id="CustomAgeRangeForm" name="AgeRange" type="radio" onclick="customAgeRange();">自定义</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="button" value="关闭" onclick="hideForm()" class="submit1"/>
+			</td>
+		</tr>
+	</table>
+</div>
+<div id="brandForm" style="display:none;cursor:default;">
+	<div id="brandFormContent"></div>
+	<table cellspacing="2" cellpadding="3" class="font1">
+		<tr>
+			<td>
+		    		<input id="CustomBrandForm" name="brand" type="radio" onclick="customBrand();">自定义</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="button" value="关闭" onclick="hideForm()" class="submit1"/>
+			</td>
+		</tr>
+	</table>
+</div>
+<div  id="ColorForm" bgColor="white"  style="display:none; cursor: default;">
+		<div id="colorFormContent"></div>
+		<table cellspacing="2" cellpadding="3" class="font1">
+			<tr>
+				<td>
+		    		<input id="ColorName" name="ColorName" type="radio" value="图片色" onclick="setColorValue('图片色');">图片色</td>
+				<td>
+		    		<input id="CustomColorName" name="ColorName" type="radio" onclick="customColor();">自定义</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+		    		<input type="button" value="关闭(X)" onclick="hideForm()" class="submit1" accesskey="X">
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div id="SizeForm" bgColor="white" bgOpacity="0.6"  style="display:none; cursor: default;">
+		<div id="sizeFormContent"></div>
+		<table cellspacing="2" cellpadding="3" class="font1">
+			<tr>
+				<td colspan="6"><input id="CustomSize" name="CustomSize" type="radio" onclick="customSize();">自定义</td>
+			</tr>
+			<tr>
+				<td colspan="6" align="center"><input type="button" value="关闭"
+					onclick="hideForm()" class="submit1"></td>
+			</tr>
+		</table>
+	</div>
+
+
+<script type="text/javascript">
+	var _formName = 'addProduct';
+	var _textName = 'content';
+	var _toolBarIconPath = '${imgServer}/images/editor';
+	var _debug = false;
+
+	var _maxCount = 4000;
+	var _postAction = 'preview.htm';
+
+    //语言
+    var _a_lang = new Array();
+    _a_lang['pic'] = '图片';
+    _a_lang['url'] = '地址';
+    _a_lang['viewe'] = '显示效果';
+    _a_lang['border'] = '边框粗细';
+    _a_lang['align'] = '对齐方式';
+    _a_lang['absmiddle'] = '绝对居中';
+    _a_lang['aleft'] = '居左';
+    _a_lang['aright'] = '居右';
+    _a_lang['atop'] = '顶部';
+    _a_lang['amiddle'] = '中部';
+    _a_lang['abottom'] = '底部';
+    _a_lang['absbottom'] = '绝对底部';
+    _a_lang['baseline'] = '基线';
+    _a_lang['submit'] = '确定';
+    _a_lang['cancle'] = '取消';
+    _a_lang['hlink'] = '超级链接';
+    _a_lang['other'] = '其他选项';
+    _a_lang['newwindow'] = '在新窗口打开';
+    _a_lang['ttop'] = '文本顶部';
+    
+    _a_lang['copy'] = '复制';
+    _a_lang['cut'] = '剪切';
+    _a_lang['pau'] = '粘贴';
+    _a_lang['del'] = '删除';
+    
+    _a_lang['bold'] = '粗体';
+    _a_lang['italic'] = '斜体';
+    _a_lang['underline'] = '下划线';
+    _a_lang['st'] = '中划线';
+    _a_lang['jl'] = '左对齐';
+    _a_lang['jc'] = '居中对齐';
+    _a_lang['jr'] = '右对齐';
+    
+    _a_lang['fcolor'] = '文字颜色';
+    _a_lang['bcolor'] = '文字背景颜色';
+    _a_lang['ilist'] = '编号';
+    _a_lang['itlist'] = '项目符号';
+    _a_lang['sup'] = '上标';
+    _a_lang['sub'] = '下标';
+    _a_lang['createlink'] = '插入链接';
+    _a_lang['unlink'] = '取消链接';
+    _a_lang['inserthr'] = '插入水平线';
+    _a_lang['insertimg'] = '插入/修改图片';
+    _a_lang['editsource'] = '编辑源文件';
+    _a_lang['preview'] = '预览';
+    _a_lang['usehtml'] = '使用编辑器编辑';
+    
+    _a_lang['font'] = '字体';
+    _a_lang['simsun'] = '宋体';
+    _a_lang['simhei'] = '黑体';
+    _a_lang['simkai'] = '楷体';
+    _a_lang['fangsong'] = '仿宋';
+    _a_lang['lishu'] = '隶书';
+    _a_lang['youyuan'] = '幼圆';
+    
+    _a_lang['fontsize'] = '字号';
+    _a_lang['fontsize_1'] = '一号';
+    _a_lang['fontsize_2'] = '二号';
+    _a_lang['fontsize_3'] = '三号';
+    _a_lang['fontsize_4'] = '四号';
+    _a_lang['fontsize_5'] = '五号';
+    _a_lang['fontsize_6'] = '六号';
+    _a_lang['fontsize_7'] = '七号';
+    
+    _a_lang['current'] = '当前';
+    _a_lang['word'] = '字';
+	_a_lang['char'] = '字符';
+
+    _a_lang['maxword'] = '最多';
+    
+    _a_lang['modify'] = '修改';
+    _a_lang['insert'] = '插入';
+	
+		
+	</script>
+	<script type="text/javascript" src="${imgServer}/js/editor_multi_lang.js"></script>

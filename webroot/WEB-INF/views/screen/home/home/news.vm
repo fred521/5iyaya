@@ -1,0 +1,96 @@
+#set( $layout = "layout/home/default.vm" )
+<table border="0" width="950" cellspacing="0" cellpadding="0"  align="center">
+	<tr>
+		<td width="230" valign="top" >
+		$control.get('home/news/newsCommonLink')
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" height="6">
+			<tr>
+				<td></td>
+			</tr>
+		</table>
+		#if($news_left_commend&&$news_left_commend.size()>0)
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+			<tr>
+				<td width="23">
+				<img border="0" src="${imgServer}/images/left_2.gif" width="23" height="28"></td>
+				<td background="${imgServer}/images/left_3.gif" class="title1">
+				推荐信息</td>
+				<td width="123">
+				<img border="0" src="${imgServer}/images/left_4_nomore.gif" width="123" height="28"></td>
+			</tr>
+		</table>
+		<table width="100%" cellspacing="0" cellpadding="0" id="table6"  class="border1">
+			<tr>
+				<td style="padding-bottom:4px;padding-left:5px;">
+				<table width="100%" cellspacing="0" cellpadding="5" >
+			      <tr>
+				    <td>
+				    <table width="100%" cellspacing="0" cellpadding="1" valign="top">
+						#foreach($commend in $news_left_commend)	
+							<tr>
+								<td width="76%">·<a href="$!commend.commendUrl" class="blue" title="$!commend.commendText">$stringUtils.abbreviate($!commend.commendText,19)</a></td>
+							</tr>
+        				#end				           
+		              </table>
+				    </td>
+			      </tr>
+		        </table>
+				</td>
+			</tr>
+		</table>
+		#end
+		</td>
+		<td width="15"></td>
+		<td width="705" valign="top">
+			<table border="0" width="100%" cellspacing="0" cellpadding="0">		
+		#set($i=0)
+        #foreach($key in $map.keySet())
+        	#set($dto = $map.get($key))
+        	#if($i%2==0)
+             <tr>
+        	#end
+        	<td width="349" valign="top">
+        		<table border="0" width="100%" cellspacing="0" cellpadding="0" height="22" bgcolor="#E6C392">
+        			<tr>
+        				<td width="80" align=center  style="font-weight:bold;padding-top:3px;color:black;">$dto.newsType.typeName
+        				#set($newsTypeId=$dto.newsType.newsType)
+        				</td>
+        				<td align="right" style="padding-right:7px;font-family:宋体;padding-top:3px;"><a href="$appServer.setTarget('/search/search.htm').addQueryData('searchtype','news').addQueryData('searchcate',$dto.newsType.newsType)">更多>></a>
+        				</td>
+        			</tr>
+        		 </table>
+        		<table width="100%" cellspacing="0" border="0" cellpadding="5" style="border-left:1px solid #D6A366; border-right:1px solid #D6A366; border-bottom:1px solid #D6A366; " bordercolor="#FE8D00">
+        			<tr>
+        				<td>
+        					<table width="100%" cellspacing="0" cellpadding="1">
+        						#foreach($news in $dto.list)
+        							<tr>
+        								<td width="76%">·
+        									<a href="${homeMoudle}/news/${news.newsId}.htm" class="blue" title="$news.newsTitle">$stringUtils.abbreviate($news.newsTitle,22)
+        									</a>
+        								</td>
+        								<td width="23%">$!dateUtils.dtSimpleFormat($news.gmtCreate)
+        								</td>
+        							</tr>
+        						#end
+        					</table>
+        				</td>
+        			</tr>
+        		</table>
+        	</td>
+			#if($i%2==0)
+        	<td width="7" valign="top"></td>		
+			#end
+        	#if($velocityCount%2==0)
+        	</tr>
+			#*<table border="0" width="100%" cellspacing="0" cellpadding="0">
+        	 <tr><td height="6"></td></tr>
+        	</table>*#
+			<tr><td colspan="3" height="6"></td></tr>
+        	#end
+        	#set($i=$i+1)
+		#end
+		</table>
+	  </td>
+	</tr>
+</table>

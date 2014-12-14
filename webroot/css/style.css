@@ -1,0 +1,207 @@
+TD {font-size:11px;font-family: "Verdana";line-height:18px}
+input,select {font-size:12px;}
+.input1{border: 1px solid #999999; background-color: #FFFFFF;height:20px;width:450px;}
+.input2{border: 1px solid #999999; background-color: #FFFFFF;height:22px;width:280px;}
+.input3{height:24px;width:180px;font-family:Verdana}
+.input4{height:24px;width:280px;font-family:Verdana}
+.input5{height:24px;width:80px;font-family:Verdana}
+.input6{height:24px;width:70px;}
+.input7{height:24px;width:50px;}
+.input8{height:60px;width:280px;}
+.input9{height:130px;width:280px;}
+.input10{height:22px;width:147px;}
+.input11{height:22px;width:65px;}
+.input12{height:22px;width:40px;}
+.title1{color:white;font-weight:bold;padding-bottom:4px;padding-left:5px}
+.border1{border-left: 1px solid #D6A366; border-right: 1px solid #D6A366; border-bottom: 1px solid #D6A366}
+
+#content{}
+#content a{color: #ff0000;
+	text-decoration:  underline;}
+a:link {
+	color: #000000;
+	text-decoration:  none;
+}
+a:visited {
+	color: #000000;
+	text-decoration:  none;
+}
+a:hover {
+	color: #000000;
+	text-decoration: underline;
+}
+
+a:link.Big {
+	color: #FF6600;
+	font-weight:bold;
+	font-size:14px;
+	text-decoration:  underline
+}
+a:visited.Big {
+	color: #FF6600;font-weight:bold;
+	font-size:14px;
+	text-decoration:  underline;
+}
+a:hover.Big {
+	color: #FF3300;
+	font-weight:bold;
+	font-size:14px;
+	text-decoration: none
+}
+
+a:link.blueB {
+	color: #000000;
+	font-weight:bold;
+	font-size:14px;
+	text-decoration:  none
+}
+a:visited.blueB {
+	color: #000000;
+	font-weight:bold;
+	font-size:14px;
+	text-decoration:  none
+}
+.marketprice {
+    color: #999999;
+    font-family:ËÎÌו;
+}
+.mallprice {
+ 
+    color: #FF3300;
+    font-family:ËÎÌו; font-weight:bold
+}
+a:hover.blueB {
+	color: #FF9000;
+	font-weight:bold;
+	font-size:14px;
+	text-decoration: underline
+}
+
+a:link.blue {
+	color: #7D5615;
+	font-size:12px;
+	text-decoration:  none
+}
+a:visited.blue {
+	color: #7D5615;
+	font-size:12px;
+	text-decoration:  none
+}
+a:hover.blue {
+	color: #DCAF6B;
+	font-size:12px;
+	text-decoration: underline
+}
+
+a:link.good {
+	color: #B4711F;
+	font-size:12px;
+	text-decoration: underline
+}
+a:visited.good {
+	color: #B4711F;
+	font-size:12px;
+	text-decoration: underline
+}
+a:hover.good {
+	color: #B4711F;
+	font-size:12px;
+	text-decoration: none
+}
+a:link.good1 {
+	color: #B4711F;
+	font-size:14px;
+	text-decoration:underline
+	}
+a:visited.good1 {
+	color: #B4711F;
+	font-size:14px;
+	text-decoration:  none
+}
+a:hover.good1 {
+	color: #B4711F;
+	font-size:14px;
+	text-decoration: underline
+}
+a:link.good2 {
+	color: #251A82;
+	font-size:12px;
+	text-decoration:  underline
+}
+a:visited.good2 {
+	color: #251A82;
+	font-size:12px;
+	text-decoration:  underline
+}
+a:hover.good2 {
+	color: #251A82;
+	font-size:12px;
+	text-decoration: none
+}
+a:link.gray {
+	color: #777777;
+	font-size:12px;
+	text-decoration:  none
+}
+a:visited.gray {
+	color: #777777;
+	font-size:12px;
+	text-decoration:  none
+}
+a:hover.gray {
+	color: #FF6600;
+	font-size:12px;
+	text-decoration: underline
+}
+a:link.white {
+	color: #FFFFFF;
+	font-size:12px;
+	text-decoration:  none
+}
+a:visited.white {
+	color: #FFFFFF;
+	font-size:12px;
+	text-decoration:  none
+}
+a:hover.white {
+	color: #624411;
+	font-size:12px;
+	text-decoration: underline
+}
+#MenuCity {
+	POSITION: relative
+}
+#MenuCityList {
+	BORDER-RIGHT: #aaa 1px solid; BORDER-TOP: #aaa 1px solid; DISPLAY: none; Z-INDEX: 100; BACKGROUND: #f6f6f6; BORDER-LEFT: #aaa 1px solid; WIDTH: 58px; BORDER-BOTTOM: #aaa 1px solid; POSITION: absolute
+}
+#MenuIframe {
+	DISPLAY: none; Z-INDEX: 50; POSITION: absolute
+}
+#ShopAnnounceContent{
+	height:30px;
+	position:relative;
+	font-size:12px;
+	margin:1px 1px 0 0;
+}
+
+#ShopAnnounceContent marquee{
+	position:inherit;
+	top:0px;
+	left:5px;
+	height:30px;
+	color:#000000;
+}
+
+#ShopAnnounceContent a{color: #ff0000;
+	text-decoration:  underline;}
+.pagetb {
+   border: 1px solid #DDDDDD; background-color: #FFFFFF;height:20px; color:#B4711F;font-size:11px;font-family:Arial
+}
+.pagetb1 {
+   width:14px;height:20px;font-size:11px;font-family:Arial;font-weight:bold;
+}
+ul{margin:0;padding:0;list-style-type: square;text-decoration: none}
+.tx_title {
+   font-size:12px;line-height:26px;
+}
+.red {color:red}

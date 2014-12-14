@@ -1,0 +1,348 @@
+/**
+ * 5iyya.comm Global Css
+ *
+ * @version: 1.0
+ * @author: Frank Liu
+ * @email: tonyliu2005@gmail.com
+ */
+body,p,th,td,input,select,textarea{
+	font-family: "宋体";
+    font-size:12px;
+    font-style: normal;
+	color: #333333;
+}
+body{
+	margin:0;
+	padding:0 10px 0 10px;
+	text-align:center;
+	background-color:#FFF;
+}
+table{
+	text-align:left;
+}
+p{
+	margin:0;
+	padding:0;
+}
+hr{
+	border:#000000 0 solid;
+	border-top: #D1D7DC 1px solid;
+	height: 0;
+}
+img{
+	border:0;
+}
+form{
+	margin:0;
+	padding:0;
+}
+
+/*
+ * 定义默认的链接样式
+ * @overlay a
+ * @desc	仅仅是作为默认样式提供，可以在各自的实例中覆盖掉
+ */
+a:link, a:visited {
+	color:#888;
+	text-decoration:none;
+}
+
+a:hover, a:active {
+	color:#FF5500;
+	text-decoration:none;
+}
+
+/* =========================================class define =================================================*/
+.HeaderMenu{color: #e13581;font-size: 16px;font-family:Courier;vertical-align: middle;}
+.HeaderFunc{color: #e13581;}
+.HeaderLink{color: #e13581;}
+.emphasis{color: #FF0033;}
+.blue{color: blue;}
+.gray{color: gray;}
+.pink{color: pink;}
+.red {color: red;}
+
+.floatClear{clear: both}
+.floatLeft{float: left}
+.floatRight{float: right}
+
+/* slider view panel */
+.sliderView {  /**/
+    /*
+    height:  auto;  
+    width:   auto;  
+    */
+    padding: 0;  
+    margin:  0;  
+} 
+ 
+.sliderView img {  
+    padding: 0px;  
+    border:  1px solid #ccc;  
+    background-color: #eee;  
+    /*
+    width:  auto; 
+    height: auto; 
+    */
+    top:  0; 
+    left: 0 
+}
+
+/* 自动截取超出宽度的li元素 */
+ul li.panelContent{
+	width: 200px;
+	white-space:nowrap;
+    text-overflow:ellipsis; 
+    -o-text-overflow:ellipsis; 
+    overflow: hidden;	
+}
+
+.panelTitle{background:url(${imgServer}/images/title_left.gif) no-repeat; height:23px; }
+.panelTitle h1 {margin: 0 0 0 30px; font: bold 600 12pts/18pts 宋体;color: #FF69B4;}
+.title_font{font: normal 600 12px 宋体; }
+.content_font2{font: normal 300 12px 宋体;}
+p.more{
+	position:absolute;
+	top:0;
+	left:0;
+	margin:0;
+	padding:0;
+	text-align:right;
+}
+
+a:link.good {
+	color: #B4711F;
+	font-size:12px;
+	text-decoration: underline;
+}
+a:visited.good {
+	color: black;
+	font-size:12px;
+	text-decoration: underline;
+}
+a:hover.good {
+	color: #B4711F;
+	font-size:12px;
+	text-decoration: none;
+}
+
+/* ==========================================ID define ==================================================*/
+#header{
+	background: transparent url("../images/bg_head.jpg") no-repeat;
+}
+
+#header a:link, #header a:visited{color: #e13581}
+#header a:hover, #header a:active{color: #eea828; text-decoration: underline;}
+
+#header #headerNav{
+
+}
+
+#header #headerNav #headerLink{
+	margin/* top right bottom left*/: 10px 30px 0 0;
+	color: #e13581;
+}
+
+
+#header #headerNav #headerMenu{
+	font-size: 20px;
+	margin: 40px 30px 0 0;
+}
+
+#header #headerNav #headerFunc{
+	margin: 53px 5px 0 0;
+}
+
+#searchNav{
+	background: url("../images/bg_biaoti.jpg") no-repeat;
+}
+#searchNav a:link, #searchNav a:visited{color: white}
+#searchNav a:hover, #searchNav a:active{color: pink}
+
+#searchNav #searchBar{
+	margin: 0 0 0 30px;
+}
+
+#searchNav #searchBar #hotSearch{
+	font-weight: bold;
+	color: white;
+}
+
+#searchNav #searchBar #hotSearchKeywords{
+	color: white;
+}
+
+#searchNav #searchBar #searchButton{
+	background-color: white;
+}
+
+#searchNav #searchBar #advancedSearch, #searchNav #searchBar #useHelp{
+	color: white;
+}
+
+#mainPage_content{margin: 5px 0; height: 500px; border: 0px solid red;}
+#mainPage_content a:link, #mainPage_content a:visited{color: #888; text-decoration:none;}
+#mainPage_content a:hover, #mainPage_content a:active{color: #eea828;text-decoration:none;}
+#mainPage_content ul li{list-style: url("../images/hotsell_icon.gif"); color: #888888; font-size: 12px;}
+
+/*左边栏*/
+#mainPage_content_left{float: left; width: 252px; height: auto;}
+/* 公告栏*/
+#noticePanel{
+	height: 230px; 
+	word-wrap: break-word; 
+	text-overflow: ellipsis; 
+	border: 0px solid blue;
+}
+#noticePanel > ul li{
+	list-style:none;
+}
+/* 商业信息*/
+#businessInfoPanel{
+	height: 230px; 
+	word-wrap: break-word; 
+	text-overflow: ellipsis; 
+	border: 0px solid blue;
+}
+#businessInfoPanel > ul li{
+	list-style:none;
+}
+/*商品分类*/
+#prodCategoryPanel{height: 200px; border: 1px solid red; margin: 3px 0 0 0; }
+#prodCategoryPanel a:link, #prodCategoryPanel a:visited{color: #888; text-decoration:none;}
+#prodCategoryPanel a:hover, #prodCategoryPanel a:active{color: #eea828;text-decoration:none;}
+#prodCategoryPanel #prodCategoryPanel_title{height: 31px; width: 147px;}
+#prodCategoryPanel #prodCategoryPanel_content{margin: 3x 0 0 0; background-color: #E4F6FF/*#CCFFCC*/; }
+#suggestPanel{margin: 3px 0 0 0; height: 160px; vertical-align: middle; text-overflow: ellipsis; border: 0px solid blue; background-color: #E4F6FF/*#CCFFCC*/;}
+
+/*中间栏*/
+#mainPage_content_center{float: left; width: 475px; height: 500px; border: 0px dashed red; margin: 0 12px;}
+div#advertisementPanel{width: 475px; background:transparent url('../images/bg_roolbanner.jpg') no-repeat top; border:0px solid #ddd; height: 20px; color: red;}
+div#babySuppliesPanel{margin: 3px 0 0 0; width: 465px!important; width: 464px; height: 240px!important; height: 240px; border: 1px solid #eeeeee;}
+div#pregnantPanel{height: 228px; text-indent: 10px; text-overflow: ellipsis; background: url(../images/yfyp_title.gif) no-repeat center;}
+div#recommendedProdPanel{height:200px;margin: 8px 0 0 0; background-color: antiquewhite/*#CCFFCC*/;}
+div#recommendedProdPanel ul{list-style: none inside none;}
+div#recommendedShopsPanel{margin: 8px 0 0 0; height: 200px; background-color: antiquewhite/*#CCFFCC*/;}
+div#healthProdsPanel{height: 228px; text-indent: 8px; text-overflow: ellipsis; background: url(../images/bjyp_title.gif) no-repeat center;}
+div#healthProdsPanel div{margin-top: 36px;}
+
+
+/*右边栏*/
+#mainPage_content_right{float: right; width: 262px; height: auto;}
+div#yayaPlatformPanel{background-color: #E4F6FF/*#CCFFCC*/; height: 200px; border: 1px solid red; margin:3px 0 0 0;}
+div#yayaPlatformPanel a:link, div#yayaPlatformPanel a:visited{color: #888}
+div#yayaPlatformPanel a:hover, div#yayaPlatformPanel a:active{color: #eea828; text-decoration: underline;}
+#yayaPlatformPanel #yayaPlatformPanel_title{height: 31px; width: 147px;}
+#videoPanel{background-color: #E4F6FF/*#CCFFCC*/; height: 100px; border: 0px solid red; margin:3px 0 0 0;}
+
+/*团购信息*/
+#mainPage_content_right #groupsPurchasePanel{height: 240px; text-overflow: ellipsis;}
+#groupsPurchasePanel ul > li{list-style: none; color: #888888; font-size: 12px;}
+
+/* 团购首页*/
+#groupsPurchaseHomePage_top{clear: both; margin: 2px 0; height: 192px;}
+#groupsPurchaseHomePage_top .first{float: left; width: 180px; height: 192px; align: center; margin-left: 0px;}
+#groupsPurchaseHomePage_top .first ul{margin-left: 8px; list-style: none inside none;}
+#groupsPurchaseHomePage_top .first ul li{margin: 18px 0;}
+#groupsPurchaseHomePage_top .second{float: left; width: 297px; margin: 0 10px;}
+#groupsPurchaseHomePage_top .third{float: left; width: 139px;}
+#groupsPurchaseHomePage_top .third ul{margin: 0px 0;  height: 146px; list-style: url(../images/icon_num_01.gif) inside none;}
+#groupsPurchaseHomePage_top .forth{float: left; width: 139px; margin: 0 10px; }
+#groupsPurchaseHomePage_top .forth ul{margin: 0px 0; height: 146px; list-style: url(../images/icon_num_01.gif) inside none;}
+#groupsPurchaseHomePage_top .fifth{float: right; width: 218px; margin-right: 0px;}
+#groupsPurchaseHomePage_top .fifth .title{height: 43px; background: url(../images/tiltle_dele_list.gif) no-repeat;}
+#groupsPurchaseHomePage_top .fifth .title ul{margin: 28px 0; list-style: none inside none;}
+#groupsPurchaseHomePage_top .fifth .title ul li{margin: 0 9px !important; float: left;}
+#groupsPurchaseHomePage_top .fifth .title .focus{color: red;}
+#groupsPurchaseHomePage_top .fifth .roundCorner{clear: both;}
+#groupsPurchaseHomePage_top .fifth .roundCorner ul{margin: 0px 0px; height: 122px; list-style: url(../images/hotsell_icon.gif) outside square;}
+#groupsPurchaseHomePage_top .fifth .roundCorner ul li{margin-left: 18px;}
+/* 团购首页 推荐精品 */
+#groupsPurchaseHomePage_collectables{clear: both; margin: 5px 0; height: 212px;}
+#groupsPurchaseHomePage_collectables .first{float: left; width: 800px; border: 0px hotpink solid;}
+#groupsPurchaseHomePage_collectables .first .top{height: 52px;}
+#groupsPurchaseHomePage_collectables .first .top .first{float: left; width: 700px; border: 1px hotpink solid;}
+#groupsPurchaseHomePage_collectables .first .top .second{float: right; width: 60px;}
+#groupsPurchaseHomePage_collectables .first .bottom{clear: both; margin: 5px 0; height: 5px; border: 1px hotpink solid;}
+#groupsPurchaseHomePage_collectables .first .bottom .first{float: left;}
+#groupsPurchaseHomePage_collectables .first .bottom .second{float: left;}
+#groupsPurchaseHomePage_collectables .second{float: right; width: 218px;}
+#groupsPurchaseHomePage_collectables .second ul{list-style: url(../images/hotsell_icon.gif) outside square;}
+
+div#groupsPurchaseHomePage_category1{clear: both; }
+div#groupsPurchaseHomePage_category1 div.roundCorner{height: 180px;}
+div#groupsPurchaseHomePage_category1 .left {width: 496px; float: left;}
+div#groupsPurchaseHomePage_category1 .right {width: 496px; float: right;}
+div#groupsPurchaseHomePage_category2{clear: both; height: 120px;}
+div#groupsPurchaseHomePage_category2 div.roundCorner{height: 180px;}
+div#groupsPurchaseHomePage_category2 .left {width: 496px; float: left;}
+div#groupsPurchaseHomePage_category2 .right {width: 496px; float: right;}
+
+div#groupsPurchaseHomePage_helper{clear: both; margin: 5px 0;}
+div#groupsPurchaseHomePage_helper div.roundCorner{height: 120px; width: 234px;}
+div#groupsPurchaseHomePage_helper .helper_title{height: 27px;
+	padding-top: 5px;
+	text-align: center; font-size: 15px; font-weight: bold; vertical-align: bottom;
+	background: transparent url(../images/titile_help.gif) bottom right no-repeat;
+	}
+div#groupsPurchaseHomePage_helper .first{float: left; margin: 0 8px; width: 234px;}
+div#groupsPurchaseHomePage_helper .second{float: left; margin: 0 8px; width: 234px;}
+div#groupsPurchaseHomePage_helper .third{float: left; margin: 0 8px; width: 234px;}
+div#groupsPurchaseHomePage_helper .forth{float: right; margin: 0 8px; width: 234px;}
+
+/*婴儿主页*/
+#baby_content_left{float: left; width: 186px; height: auto;}
+#baby_content_center{float: left; margin: 5px 0; height: 200px;}
+#baby_content_center .first{float: left; width: 180px; height: 200px; align: center; margin-left: 0px;}
+#baby_content_center .second{float: left; width: 139px;height: 200px; margin: 0 12px;}
+#baby_content_center .second ul{margin: 0px 0;  height: 200px; list-style: url(../images/icon_num_01.gif) inside none;}
+#baby_content_right{float: right; width: 218px;  height: 200px; margin-right: 0px;}
+#baby_content_right .title{height: 43px; background: url(../images/hotsell_title.gif) no-repeat;}
+#baby_content_right .title ul{margin: 28px 0; list-style: none inside none;}
+#baby_content_right .title ul li{margin: 0 9px; float: left;}
+#baby_content_right .title .focus{color: red;}
+
+/*主页底端*/
+#mainPage_content_bottom{clear: both; height: 232px; border: 0px dashed blue; display: block; overflow: hidden;}
+#mainPage_content_bottom a:link, #mainPage_content_bottom a:visited{color: #888; text-decoration:none;}
+#mainPage_content_bottom a:hover, #mainPage_content_bottom a:active{color: #eea828;text-decoration:none;}
+#mainPage_content_bottom .panel_header{
+	width: 248px;
+	min-width: 248px; 
+	height: 27px; 
+	min-height: 27px;
+	font-size: 15px; 
+	text-indent: 5px;
+	vertical-align: text-bottom;
+	background:transparent url(../images/sp_title_add.gif)  bottom right no-repeat;
+}
+#mainPage_content_bottom .panel_header .more a:link, #mainPage_content_bottom .panel_header .more a:visited{color: white;}
+#mainPage_content_bottom .panel_header .more a:hover, #mainPage_content_bottom .panel_header .more a:active{color: #eea828; text-decoration: underline;}
+#mainPage_content_bottom .panel_header .title{float: left; width: 80px; color: #CCFFCC; font-weight: bold; margin-top: 5px; margin-left: 5px;}
+#mainPage_content_bottom .panel_header .more{float: right; width: 60px; margin-top: 5px; margin-right: 5px;}
+#mainPage_content_bottom .panel_content{overflow: hidden; clear: both; line-height: 20px; background-color: antiquewhite/*#CCFFCC*/;  height: 220px!important; height: 220px; color: #666666; border: 0px dashed blue;}
+#mainPage_content_bottom .panel_content ul > li{list-style: url("../images/hotsell_icon.gif"); color: #888888; font-size: 12px;}
+#mainPage_content_bottom .panel_content h5{text-align: center; background: url(../images/gespace_line.gif) no-repeat top center;}
+#mainPage_content_bottom .panel_content ul{margin-top: 5px; margin-left: 5px; }
+#mainPage_content_bottom .panel_content li{list-style: url(../images/hotsell_icon.gif) no-repeat;}
+#mainPage_content_bottom .panel_content hr{border:1px #cccccc dotted;}
+
+div#mainPage_content_bottom div#lifeSpacePanel{float: left; width: 248px!important; width: 248px; border: 0px dashed blue;}
+div#lifeSpacePanel .panel_content{background-color: antiquewhite/white/; }
+#lifeSpacePanel a:link, #lifeSpacePanel a:visited{color: #888; text-decoration: none;}
+#lifeSpacePanel  a:hover, #lifeSpacePanel  a:active{color: #eea828;text-decoration:none;}
+div#mainPage_content_bottom div#essenceOfCommunityPanel{float: left; height: 200px; margin: 0 3px; width: 248px !important; width: 248px; border: 0px dashed blue;}
+div#essenceOfCommunityPanel .panel_content{background-color: antiquewhite/white/; }
+#essenceOfCommunityPanel a:link, #essenceOfCommunityPanel a:visited{color: #888; text-decoration: none;}
+#essenceOfCommunityPanel a:hover, #essenceOfCommunityPanel a:active{color: #eea828;text-decoration:none;}
+div#mainPage_content_bottom div#mummyBabyPanel{float: left; width: 248px !important; width: 248px; height: 200px; border: 0px dashed blue;}
+div#mummyBabyPanel .panel_content{background-color: antiquewhite/white/; }
+#mummyBabyPanel a:link, #mummyBabyPanel a:visited{color: #888; text-decoration: none;}
+#mummyBabyPanel a:hover, #mummyBabyPanel a:active{color: #eea828;text-decoration:none;}
+div#mainPage_content_bottom div#transactionSecurityPanel{float: right; height: 200px; width: 248px !important; width: 248px; border: 0px dashed blue;}
+div#transactionSecurityPanel .panel_content{background-color: antiquewhite/white/; }
+#transactionSecurityPanel a:link, #transactionSecurityPanel a:visited{color: #888; text-decoration: none;}
+#transactionSecurityPanel a:hover, #transactionSecurityPanel a:active{color: #eea828;text-decoration:none;}
+
+/*页面底端*/
+#bottom{clear: both; height: auto; border: 0px dashed blue; margin: 3px 0 0 0;}

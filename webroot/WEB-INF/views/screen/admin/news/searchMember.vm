@@ -1,0 +1,85 @@
+#set( $layout = "layout/admin/default.vm" )
+<STYLE type=text/css>.rb {
+	BORDER-RIGHT: #666666 1px solid
+}
+.tb {
+	BORDER-TOP: #666666 1px solid
+}
+</STYLE>
+<script language="JavaScript">
+<!--
+function showfile()
+{
+	var filetype = document.getElementById("filetype");
+	filetype.style.display = filetype.style.display == "none"?"block":"none";
+}
+
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+}
+//-->
+</script>
+<BODY leftMargin=8 background="${imgServer}images/admin/allbg.gif" topMargin=8>
+<form name="searchMember" action="${adminMoudle}/news/news_add.htm?newsId=$!newsId" method="post" encType="multipart/form-data">
+<TABLE cellSpacing=1 cellPadding=3 width="98%" align=center bgColor=#666666 
+border=0>
+  <TBODY>
+  <TR>
+      <TD background="${imgServer}/images/admin/tbg.gif" height=19> <B>&nbsp;选择用户</B></TD>
+    </TR>
+  <TR>
+      <TD vAlign=top bgColor=#ffffff height=200>
+        <table width="98%" border="0" align="center" cellpadding="2" cellspacing="0">
+          <tr> 
+            <td align="right">快速搜索：</td>
+            <td>
+              <select class="px12" id="DropDownList2" name="searchType">
+                <option value="1">用户名</option>
+                <option value="2">会员昵称</option>
+                <option value="3">店铺名称</option>
+                <option value="4">真实姓名</option>
+              </select>
+            </td>
+            <td><input id=keyword style="WIDTH: 200px" size=12 name="searchName"></td>
+            <td><A href="search_member.htm"><img src="${imgServer}/images/admin/button_search.gif" border=0 name=imageField align=absmiddle></A></td>
+          </tr>
+        </table>
+        <table border="0" width="98%" cellspacing="0" cellpadding="0">
+			<tr>
+				<td height="6"></td>
+			</tr>
+		</table>
+		<div align="center">
+		<table border="1" width="94%" cellspacing="1" cellpadding="2" style="border-collapse: collapse">
+			<tr>
+				<td width="8%" align="center" bgcolor="#E6E6E6"><b>序号</b></td>
+				<td width="22%" align="center" bgcolor="#E6E6E6"><b>用户名</b></td>
+				<td width="16%" align="center" bgcolor="#E6E6E6"><b>会员昵称</b></td>
+				<td width="16%" align="center" bgcolor="#E6E6E6"><b>真实姓名</b></td>
+				<td width="38%" align="center" bgcolor="#E6E6E6"><b>店铺名称</b></td>
+			</tr>
+			<tr onmouseover="this.style.backgroundColor='#F5F5F5';" onmouseout="this.style.backgroundColor='';" style="cursor:pointer;" onclick="opener.window.document.all.userid.value='guanbin1122';window.close();">
+				<td align="center">1</td>
+				<td align="center">guanbin1122</td>
+				<td align="center">阿肚</td>
+				<td align="center">管斌</td>
+				<td align="center">国际服装城美丽美女装</td>
+			</tr>
+			<tr onmouseover="this.style.backgroundColor='#F5F5F5';" onmouseout="this.style.backgroundColor='';" style="cursor:pointer;" onclick="opener.window.document.all.userid.value='guanbin1122';window.close();">
+				<td align="center">2</td>
+				<td align="center">　</td>
+				<td align="center">　</td>
+				<td align="center">　</td>
+				<td align="center">　</td>
+			</tr>
+			<tr onmouseover="this.style.backgroundColor='#F5F5F5';" onmouseout="this.style.backgroundColor='';" style="cursor:pointer;" onclick="opener.window.document.all.userid.value='guanbin1122';window.close();">
+				<td align="center">3</td>
+				<td align="center">　</td>
+				<td align="center">　</td>
+				<td align="center">　</td>
+				<td align="center">　</td>
+			</tr>
+		</table>
+		</div>
+		</TD>
+    </TR></TBODY></TABLE><form></BODY>

@@ -1,0 +1,32 @@
+#foreach($propertyType in $propertyTypeList)
+
+<table cellspacing="2" cellpadding="3" class="font1">
+	<tr>
+		<th colspan="5" align="left">$!{propertyType.displayName}</th>
+	</tr>
+	#set($columnCount = $columnLength)
+	#if(!$columnCount)
+		#set($columnCount =4)
+	#end
+	#set($index = 0)
+	
+	#if($propertyType.valueType==$!propertyType.SINGLETYPE)
+		#set($inputType="radio")
+	#elseif($propertyType.valueType==$!propertyType.MULTITYPE)
+		#set($inputType="checkbox")
+	#end
+	
+	#foreach($property in $propertyType.propertys)
+		#if($index==0)
+			<tr>
+		#end
+				<td><input id="$!propertyType.name" name="$!propertyType.name" type="$inputType"
+				value="$!property.value" onclick="$!onClickMethodName()">$!property.value</td>
+				#set($index = $index +1)
+		#if($index==$columnCount)
+			#set($index=0)
+			</tr>
+		#end
+	#end
+</table>
+#end

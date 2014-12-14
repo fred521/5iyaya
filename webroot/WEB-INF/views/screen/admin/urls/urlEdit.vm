@@ -1,0 +1,107 @@
+#set( $layout = "layout/admin/default.vm" )
+<script type="text/javascript">
+	function showPicUpload(){
+	   var msg1=document.getElementById("upload");
+	   var msg2=document.getElementById("address");
+	   var msg3=document.getElementById("picdisplay");
+	   msg1.style.display="block";
+       //msg2.style.display="none";
+	   msg3.style.display="block";
+    }
+ 	function showAddress(){
+	   var msg1=document.getElementById("upload");
+	   var msg2=document.getElementById("address");
+	   var msg3=document.getElementById("picdisplay");
+	   msg1.style.display="none";
+       //msg2.style.display="block";
+	   msg3.style.display="none";
+    }
+	
+	function urlAdd(url){    
+		document.editURLs.action=url;
+		editURLs.submit();
+	}
+</script>
+
+  <div>
+  
+	<form name="editURLs" method="post" encType="multipart/form-data">
+	
+	<div class="MyAccountContent" >
+          <dl>
+            <dt><b>编辑友情链接信息</b></dt>
+            <dd>
+      <br/>
+      <table width="90%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td>
+				<table border="0" width="560" cellspacing="0" cellpadding="6">
+	    <tr>
+			<td align="center"><span class="red">$!infoShow</span></td>
+	    </tr>
+       <tr>
+        <td width="21%" align="right" nowrap>链接标题:</td>
+		<td width="51%" align="alignLeft" nowrap><input value="$!form.getField('title').value" name="title" >
+        <span class="red">*$!form.getField("title").message</span></td>
+      </tr>
+	  <tr>
+        <td width="21%" align="right" nowrap>链接地址:</td>
+		<td width="51%" align="alignLeft" nowrap><input value="$!form.getField('url').value" name="url" >
+        <span class="red">*$!form.getField("url").message</span></td>
+      </tr>
+	  <tr>
+		<td width="21%" align="right" nowrap>是否图片:</td>
+		<td width="51%" align="alignLeft" nowrap>
+		<input id="A1" type="radio" value="Y"  name="picFlag" onClick="showPicUpload();" #if("$!form.getField('picFlag').value" == "Y") checked #end>
+			<label style="CURSOR: hand" for="A1">是的</label>
+		<input id="A2" type="radio" value="N" name="picFlag" onClick="showAddress();" #if( "$!{form.getField('picFlag').value}" == "N" ) checked #end>
+			 <label style="CURSOR: hand" for="A2">否</label>
+		<span class="red">*$!form.getField("picFlag").message</span></td>
+	  </tr>
+	   <tr id="picdisplay" 
+		   #if($stringUtils.isNotBlank($form.getField("picFlag").value))
+				#if("$!form.getField('picFlag').value" == "N") 
+					style="display:none;" 
+				#else
+					style="display:block;"
+				#end
+			#else
+					style="display:none;"
+			#end
+		>
+	    <td width="21%" align="right" nowrap>图片显示区:</td>
+		<td width="51%" align="alignLeft" nowrap>
+       	<div id="imagek">
+			  #if($stringUtils.isNotBlank($form.getField("path").value))
+			   <img id="img" border="0" src="${upServer}${form.getField('path').value}" width="80" height="80">&nbsp;&nbsp;&nbsp;
+			  #else
+                <img id="img" border="0" src="${imgServer}/images/showimg.gif" />&nbsp;&nbsp;&nbsp;
+			  #end
+        </div>
+      </tr>
+      <div >
+	  <tr id="upload" style="display:none;">
+        <td width="21%" align="right" nowrap>上传图片:</td>
+		<td width="51%" align="alignLeft" nowrap><input type="file" name="pic" id="pic"  class="input4"  /><span class="red">$!uploadGoodsError</span>
+		</td>
+      </tr>
+      </div>
+	  <tr>
+			<input type="hidden" name="id" value="$!id">
+			<td width="21%" align="right">
+				<input type="submit" style="width:120" class="button" value="提  交" onclick="urlAdd('${adminMoudle}/urls/save.htm');"/></td>
+			<td width="51%" align="alignLeft">
+				<input type="submit" style="width:120" class="button" value="取  消" onclick="urlAdd('${adminMoudle}/urls/cancel.htm');"/></td>
+			</tr>
+	  </table>
+</td>	  
+</tr>
+	  
+			 </table>
+            </dd>
+          </dl>
+        </div>
+
+    </form>
+    <br />
+  </div>

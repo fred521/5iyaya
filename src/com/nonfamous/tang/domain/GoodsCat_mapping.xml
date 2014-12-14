@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="GOODSCAT_SPACE">
+	<resultMap id="goodscat" class="com.nonfamous.tang.domain.GoodsCat">
+		<result property="typeId" column="TYPE_ID"/>
+		<result property="typeName" column="TYPE_NAME"/>
+		<result property="levels" column="LEVELS"/>
+		<result property="parentId" column="PARENT_ID"/>
+		<result property="showOrder" column="SHOW_ORDER"/>
+	</resultMap>
+	
+	<insert id="goodscat_insert" parameterClass="com.nonfamous.tang.domain.GoodsCat">
+		INSERT INTO GOODS_CAT (
+				TYPE_ID,
+				TYPE_NAME,
+				LEVELS,
+				PARENT_ID,
+				SHOW_ORDER
+	                     )
+	             VALUES ( 
+				#typeId#,
+				#typeName#,
+				#levels#,
+				#parentId#,
+				#showOrder#
+	                     )
+	</insert>
+	
+	<update id="goodscat_update" parameterClass="com.nonfamous.tang.domain.GoodsCat">
+		UPDATE GOODS_CAT t SET  
+			<isNotEmpty prepend="" property="typeId"> t.TYPE_ID = #typeId#,</isNotEmpty>
+			<isNotEmpty prepend="" property="typeName"> t.TYPE_NAME = #typeName#,</isNotEmpty>
+			<isNotEmpty prepend="" property="levels"> t.LEVELS = #levels#,</isNotEmpty>
+			<isNotEmpty prepend="" property="parentId"> t.PARENT_ID = #parentId# </isNotEmpty>
+		WHERE t.TYPE_ID = #typeId#
+	</update>
+	
+	<select id="get_goodscat_list" parameterClass="java.util.Map" resultMap="goodscat">
+		SELECT 
+			TYPE_ID,
+			TYPE_NAME,
+			LEVELS,
+			PARENT_ID,
+			SHOW_ORDER
+		FROM GOODS_CAT  t  
+		  ORDER BY t.SHOW_ORDER ,TYPE_ID
+	</select>
+	
+	<select id="get_goodscat" parameterClass="java.lang.String" resultMap="goodscat">
+		SELECT 
+			TYPE_ID,
+			TYPE_NAME,
+			LEVELS,
+			PARENT_ID,
+			SHOW_ORDER
+		FROM GOODS_CAT  t     
+		WHERE t.TYPE_ID =  #value#
+	</select>
+	
+	<delete id="delete_goodscat" parameterClass="java.lang.String">
+		DELETE FROM GOODS_CAT  WHERE TYPE_ID  = #value#
+	</delete>
+</sqlMap>

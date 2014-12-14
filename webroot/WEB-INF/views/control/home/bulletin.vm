@@ -1,0 +1,16 @@
+			  <div class="news">
+			       <div class="ico_5">
+				       <h2>丫丫动态</h2>
+				   </div>
+					    <ul class="news_text">
+							#foreach($news in $bulletinDto.list)
+								#if($velocityCount<6)
+						    <li><a href="${homeMoudle}/yynews/${news.newsId}.htm" title="$news.newsTitle">$stringUtils.abbreviate($news.newsTitle,16)</a></li>
+								#end
+							#end
+						 </ul>
+					<a href="${homeMoudle}/visitor/register.htm"><img src="images/login.jpg" /></a>
+					<a href="${homeMoudle}/visitor/register.htm"><img src="images/shop.jpg" /></a>
+					<a href="#"><img src="images/contact_online.jpg" onClick="window.open('${appServer}/webchat.html?username=首页客户&question=咨询','$!{good.goodsId}','width=700,height=535,left=300,top=100');"/></a>
+			  </div>
+			 <div class="clear"></div> 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig
+PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+<settings cacheModelsEnabled="true" enhancementEnabled="false" lazyLoadingEnabled="false" maxRequests="3000" maxSessions="3000" maxTransactions="3000" useStatementNamespaces="true"/>
+    <sqlMap resource="com/nonfamous/tang/domain/AdminUser_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/CommendContent_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/CommendPosition_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/GoodsBaseInfo_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/GoodsCat_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/GoodsContent_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/PictureInfo_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/MarketType_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/Member_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/MobileValidate_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/NewsBaseInfo_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/NewsContent_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/NewsType_mapping.xml"/>
+	<sqlMap resource="com/nonfamous/tang/domain/Helper_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/HelperType_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/SearchKeyWord_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/Shop_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/ShopCommend_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/Sms_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/Address_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/QuartzLog_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/AdminLog_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/trade/SignShop_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/trade/TradeCar_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/trade/TradeCarShop_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/trade/TradeOrder_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/trade/TradeOrderItem_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/trade/TradeOrderLog_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/trade/TradeOrderNote_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/trade/TradePay_mapping.xml"/>
+    <sqlMap resource="com/nonfamous/tang/domain/GoodsProperty_mapping.xml"/>
+	<sqlMap resource="com/nonfamous/tang/domain/URL_mapping.xml"/>
+	<sqlMap resource="com/nonfamous/tang/domain/DB2INST1_USER_CENTER_SqlMap.xml"/>
+</sqlMapConfig>

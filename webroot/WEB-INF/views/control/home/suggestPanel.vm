@@ -1,0 +1,4 @@
+<div id="suggestPanel" class="sliderView">
+	<img src="${imgServer}/images/banner2.gif" width="100%" height="180">
+	<img src="${imgServer}/images/banner4.jpg" width="100%" height="180">
+</div>

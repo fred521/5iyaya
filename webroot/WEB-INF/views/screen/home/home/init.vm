@@ -1,0 +1,150 @@
+#set( $layout = "layout/home/login.vm" )
+$!synLogoutCode ##单点登出同步
+<table width="950" cellspacing="0" cellpadding="0">
+	<tr>
+		<td bgcolor="#E2E2E2" height="1"></td>
+	</tr>
+	<tr>
+		<td height="10"></td>
+	</tr>
+	<tr>
+		<td height="30"><img src="${imgServer}/images/login_title.jpg"></td>
+		##<td bgcolor="#EAD0B0" height="24" style="padding-left:20px;font-family:宋体;font-weight:bold;font-size:14px;padding-top:2px;">会员登录</td>
+	</tr>
+</table>
+<form name="login" action="$homeMoudle.setTarget('/visitor/login.htm')" method="post">
+<table width="950" cellspacing="0" cellpadding="0" height="281">
+	<tr>
+		<td align="center" align="top" height="281">
+		<br>
+				<table cellSpacing="0" cellPadding="3" width="680">
+					<tr>
+						<td height="59" width="280" valign="top">
+						<table border="1" width="100%" id="table1" style="border-collapse: collapse" bordercolor="#CCCCCC">
+							<tr>
+								<td background="${imgServer}/images/bg_login_tit.gif" height="28" style="padding-left:10px;font-weight:bold;font-size:14px;">会员登录</td>
+							</tr>
+							<tr>
+								<td bgcolor="#FCFCFC">
+								<table width="95%" align="center" border="0">
+									<tr>
+										<td colspan="2"><font color="red">$!form.getField('loginId').message$!form.getField('password').message$!errorMessage</font></td>
+									</tr>
+									<tr>
+										<td noWrap width="80" height="22"><strong>会员帐号:</strong></td>
+										<td width="234"><input class="input_22" style="WIDTH: 150px" size="16" name="loginId" value="$!form.getField('loginId').value"></td>
+									</tr>
+									<tr>
+										<td height="22"><strong>会员密码: </strong></td>
+										<td><input class="input_22" style="WIDTH: 150px" type="password" size="16" name="password"></td>
+									</tr>
+									<tr>
+										<td height="22">　</td>
+										<td>
+										<input type="submit" value=" 登录 ">
+										<input type="hidden" name="gotoUrl" value="$!gotoUrl">
+										</td>
+									</tr>
+									<tr>
+										<td vAlign="center" height="32">　</td>
+										<td vAlign="center" noWrap height="32">
+										<input type="checkbox" CHECKED value="Y" name="isSave">在此计算机上保存我的信息</td>
+									</tr>
+									<tr>
+										<td height="22">　</td>
+										<td>
+										<a class="blue_12" href="$homeMoudle.setTarget('/visitor/findPassword.htm')" class="blue">
+										<font color="#AB732E"><u>找回密码</u></font></a>
+										</td>
+									</tr>
+								</table>
+						      </td>
+							</tr>
+						</table>
+						<table border="0" width="100%" id="table1" style="border-collapse: collapse" bordercolor="#CCCCCC">
+							<tr>
+								<td height="10"></td>
+							</tr>
+						</table>
+						<table border="1" width="100%" id="table1" style="border-collapse: collapse" bordercolor="#CCCCCC">
+							<tr>
+								<td background="${imgServer}/images/bg_login_tit.gif" height="28" style="padding-left:10px;font-weight:bold;font-size:14px;">常见问题</td>
+							</tr>
+							<tr>
+								<td bgcolor="#FCFCFC">
+								<table width="95%" align="center" border="0">
+									<tr>
+										<td height="20">注册我爱丫丫网用户是免费的吗？</td>
+									</tr>
+									<tr>
+										<td height="20">怎样发布信息？</td>
+									</tr>
+									<tr>
+										<td height="20">如何才能获得反馈？</td>
+									</tr>
+									<tr>
+										<td height="20">如何管理自己发布的信息？</td>
+									</tr>
+									<tr>
+										<td height="20">如何上传图片?</td>
+									</tr>
+									<tr>
+										<td height="20">如何管理自己发布的信息？</td>
+									</tr>
+								</table>
+						      </td>
+							</tr>
+						</table>
+						</td>
+						<td width="30" valign="top"></td>
+						<td width="370" valign="top">
+						<table border="0" width="100%" id="table1" style="border-collapse: collapse" bordercolor="#CCCCCC" height="348">
+							<tr>
+								<td background="${imgServer}/images/reg_title.gif" height="40" style="padding-left:10px;font-weight:bold;font-size:14px;"></td>
+							</tr>
+							<tr>
+								<td bgcolor="#FCFCFC" align="center">
+								<table cellSpacing="0" cellPadding="0" width="90%" border="0" id="table2">
+									<tr>
+										<td vAlign="top" width="16%" align="center"><img height="52" src="${imgServer}/images/ico_1.gif" width="38"></td>
+										<td class="height_20"><b><font color="#AB732E">海量商品任你选</font></b><br>
+										专业的母婴行业可视化电子商务平台，每天新增数万条在线销售商品！</td>
+									</tr>
+									<tr>
+										<td>　</td>
+										<td>　</td>
+									</tr>
+									<tr>
+										<td vAlign="top" align="center"><img height="52" src="${imgServer}/images/ico_2.gif" width="38"></td>
+										<td><b><font color="#AB732E">信息真实诚信</font></b><br>
+										独有的短信验证，及客服团队24小时运转确保商品信息诚信真实有效！ 
+										</td>
+									</tr>
+									<tr>
+										<td>　</td>
+										<td>　</td>
+									</tr>
+									<tr>
+										<td vAlign="top" align="center"><img height="52" src="${imgServer}/images/ico_3.gif" width="38"></td>
+										<td><b><font color="#AB732E">信息发布完全免费</font></b><br>
+										发布分类信息完全免费,让你省钱省心！平均每条发布的信息可获得获得5条电话反馈！ 
+										</td>
+									</tr>
+								</table>
+								<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table3" height="71">
+									<tr>
+										<td align="center" valign="bottom">
+										<a href="$homeMoudle.setTarget('/visitor/register.htm')">
+										<img border="0" src="${imgServer}/images/btn_sign.gif" width="163" height="46"></a></td>
+									</tr>
+								</table>
+						      </td>
+							</tr>
+						</table>
+						</td>
+					</tr>
+				</table>		
+		</td>
+	</tr>
+</table>
+</form>

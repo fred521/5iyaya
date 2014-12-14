@@ -1,0 +1,23 @@
+ <!-- 12, 品牌招商 -->
+<div class="component.TabSet" id="rental" css_prefix="category_blue_" switch_event="mouseenter" >
+  <a class="tabset_link_3" name="A" href="#samePageUL4">品牌招商</a>
+  <a class="tabset_link_3" name="B" href="#samePageUL5">商铺招租</a>
+  <a class="tabset_link_3" name="C" href="#samePageUL6" >市场招商</a>
+</div> 
+    <ul id="samePageUL4" style="display:none" class="content_list">
+	  #foreach($news in $brandDto.list)
+		<li class="panelContent"><a target="_blank" href="${homeMoudle}/yynews/${news.newsId}.htm"  title="$news.newsTitle">$stringUtils.abbreviate($news.newsTitle,18)</a></li>
+	  #end
+	</ul>
+	
+	<ul id="samePageUL5" style="display:none" class="content_list">
+	  #foreach($news in $shopDto.list)
+		<li style="height:18px;"><a target="_blank" href="${homeMoudle}/yynews/${news.newsId}.htm"  title="$news.newsTitle">$stringUtils.abbreviate($news.newsTitle,18)</a></li>
+	  #end
+	</ul>
+	
+	<ul id="samePageUL6" style="display:none" class="content_list">
+	  #foreach($news in $marketDto.list)
+		<li style="height:18px;"><a target="_blank" href="${homeMoudle}/yynews/${news.newsId}.htm"  title="$news.newsTitle">$stringUtils.abbreviate($news.newsTitle,18)</a></li>
+	  #end	
+	</ul>

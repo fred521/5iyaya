@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://toolkit.alibaba-inc.com/dtd/spring/spring-beans.dtd">
+<beans>
+	<bean id="remover" class="com.nonfamous.commom.util.html.remover.HtmlRemover">
+		<property name="acceptElements">
+			<set>
+				<value>img,src,width,height,border,vspace,hspace</value>
+				<value>div,align</value>
+				<value>em</value>
+				<value>u</value>
+				<value>p</value>
+				<value>ul</value>
+				<value>li</value>
+				<value>ol</value>
+				<value>br</value>
+				<value>sub</value>
+				<value>sup</value>
+				<value>strong</value>
+				<value>
+					table,align,valign,title,border,width,height,cellpadding,cellspacing,blockquote,sub,sup
+				</value>
+				<value>tbody</value>
+				<value>thead</value>
+				<value>tfoot</value>
+				<value>tr,colspan,rowspan</value>
+				<value>td,colspan,rowspan</value>
+			</set>
+		</property>
+		<property name="removeElements">
+			<set>
+				<value>script</value>
+				<value>a</value>
+				<value>textarea</value>
+				<value>style</value>
+				<value>input</value>
+				<value>iframe</value>
+				<value>frame</value>
+				<value>script</value>
+				<value>textarea</value>
+				<value>input</value>
+				<value>pre</value>
+				<value>button</value>
+			</set>
+		</property>
+		<property name="attributeMatchers">
+			<set>
+				<value>
+					img,src,^http://[a-z0-9]+\.bizyi\.com.*$
+				</value>
+			</set>
+		</property>
+	</bean>
+</beans>

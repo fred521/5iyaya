@@ -1,0 +1,12 @@
+[
+#set($i = 0)
+#foreach($cat in $goodsCats)
+   	 	{
+   	 			   "typeId" : "$cat.typeId",
+   	 			   "typeName" : "$cat.typeName"
+   	 		}
+   	 		#set($i = $i+1)
+   	 #if($i < $goodsCats.size())
+   	 ,
+   	 #end
+#end]

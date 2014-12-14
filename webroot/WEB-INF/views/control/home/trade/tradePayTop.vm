@@ -1,0 +1,75 @@
+	<table border="0" width="90%" cellspacing="0" cellpadding="0" height="18">
+		<tr>
+			<td width="96">		
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					#if("$menuIndex" == "1")
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;"><a href="${homeMoudle}/signshop/list.htm" >签约店铺列表</a> </td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+					#else
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+					<a href="${homeMoudle.setTarget('signshop/signshop_add.htm')}" style="text-decoration: none"><font color="#A1A1A1">签约店铺列表</font></a></td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+					#end
+				</tr>
+			</table>
+			
+			</td>
+			<td width="72">			
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					#if("$menuIndex" == "2")
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">我的付款 </td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+					#else
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+					<a href="${homeMoudle.setTarget('tradepay/pay_list.htm')}" style="text-decoration: none"><font color="#A1A1A1">我的付款</font></a></td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+					#end
+				</tr>
+			</table>
+			
+			</td>
+			
+			<td width="72">			
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					#if("$menuIndex" == "4")
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">我的收款 </td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+					#else
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+					<a href="${homeMoudle.setTarget('tradepay/receive_pay_list.htm')}" style="text-decoration: none"><font color="#A1A1A1">我的收款</font></a></td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+					#end
+				</tr>
+			</table>
+			
+			</td>
+			
+			<td width="72">			
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					#if("$menuIndex" == "3")
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">快速支付 </td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+					#else
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+					<a href="${homeMoudle.setTarget('tradepay/quick_pay.htm')}" style="text-decoration: none"><font color="#A1A1A1">快速支付</font></a></td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+					#end
+				</tr>
+			</table>
+			
+			</td>
+			<td>&nbsp;　&nbsp;</td>
+		</tr>
+	</table>

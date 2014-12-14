@@ -1,0 +1,75 @@
+#set( $layout = "layout/home/memberdefault.vm" )
+<td width="10" valign="top"></td>
+	<td width="740" valign="top">
+					<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>银行支付</h1>
+			</div>
+		<table border="0" width="90%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+		<div class="roundCorner gray onlyBottom" style="width: 736px;">
+	    <p>   
+			<div align="center"><img src="${imgServer}/images/logo_copy.gif" align="absmiddle" /></div>
+	    </div>
+	    <p>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td align="center"><span class="red">$!errorMessage</span></td>
+					</tr>
+				</table>
+				$control.setTemplate("home/trade/payTop").put("menuIndex","1")
+				<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<form name="selectBankForm" method="post" action="$homeMoudle.setTarget('/pay/e_bank_payment.htm')">
+						<table cellSpacing="0" cellPadding="0" width="90%" align="center">
+							<tr>
+								<td align=center>
+									<table border="0" width="560" cellspacing="0" cellpadding="6">
+										<tr>
+											<td height="24" class="tx_title" colspan="2"><b>银行选择</b></td>
+										</tr>
+										<tr><input type="hidden" name="orderid" value="$!order.orderNo">
+											<td width="100">支付店铺:</td>
+											<td width="460">$!order.shopName</td>
+										</tr>
+										<tr>
+											<td width="100">支付金额:</td>
+											<td width="460">$!order.getMoney($!order.payFee) 元</td>
+										</tr>
+										<tr>
+											<td width="100">可选银行:</td>
+											<td width="460">
+												<input type="radio" name="bank_name"  id="COMM" value="COMM" checked/>
+                                                <label for="COMM"> <a href=#linebank onClick="document.getElementById('COMM').checked=true;"><img src="${imgServer}/images/icon_comm.gif"  alt="交通银行" border="0" /></a> </label>
+											</td>
+										</tr>
+										<tr>
+											<td width="100"></td>
+											<td width="460"><input type="submit" value=" 下 一 步 " class="input6"></td>
+										</tr>
+										
+									</table>
+								</td>
+							</tr>
+						</table>
+						</form>
+					  </td>
+					</tr>
+				</table>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="6">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+				<br>
+				</td>
+			</tr>
+		</table>
+	</td>

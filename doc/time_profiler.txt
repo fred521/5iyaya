@@ -1,0 +1,36 @@
+TimeProfiler提供了分析运行时整个http请求的动态执行过程各个主要步骤的消耗时间。
+在web.xml中配置：
+	<filter>
+        <filter-name>performanceMonitor</filter-name>
+        <filter-class>com.nonfamous.commom.util.web.filter.PerformanceMonitorFilter</filter-class>
+        <init-param>
+            <param-name>threshold</param-name>
+            <param-value>1</param-value>
+        </init-param>
+    </filter>
+其中，threshold 指的时打印出详细信息的临界值(毫秒为单位)，大于这个时间的执行将被记录，小于的则忽略。
+
+在applicationContext.xml中配置：
+	<bean id="profilerInterceptor" class="com.nonfamous.commom.util.profiler.MethodProfileInterceptor">
+	</bean>
+	
+	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+	  <property name="beanNames"><value>*Service,*DAO</value></property>
+	  <property name="interceptorNames">
+	    <list>
+	      <value>profilerInterceptor</value>
+	    </list>
+	  </property>
+	</bean>
+提供了对service，dao类的方法执行计时。
+
+在web-main.xml中配置
+	<bean id="viewResolver" class="com.nonfamous.commom.util.profiler.ProfileVelocityLayoutViewResolver">
+		<property name="exposeSpringMacroHelpers" value="false" />
+		<property name="toolboxConfigLocation" value="WEB-INF/conf/vm-toolbox.xml" />
+		<property name="prefix" value="screen/" />
+		<property name="suffix" value=".vm" />
+		<property name="layoutUrl" value="layout/default.vm" />
+	</bean>
+替换VelocityLayoutViewResolver，提供增强过的ProfileVelocityLayoutView.class，计时在ProfileVelocityLayoutView中实现，
+目前只计算screen+layout整体的时间

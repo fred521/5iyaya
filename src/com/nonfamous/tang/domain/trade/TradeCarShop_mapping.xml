@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="TRADECARSHOP_SPACE">
+	<resultMap id="tradecarshop" class="com.nonfamous.tang.domain.trade.TradeCarShop">
+		<result property="shopId" column="SHOP_ID"/>
+		<result property="owner" column="OWNER"/>
+	</resultMap>
+	
+	<resultMap id="tradecarshopExt" class="com.nonfamous.tang.domain.trade.TradeCarShopExt">
+		<result property="shopId" column="SHOP_ID"/>
+		<result property="owner" column="OWNER"/>
+		<result property="shopName" column="SHOP_NAME"/>
+	</resultMap>
+	
+	<insert id="tradecarshop_insert" parameterClass="com.nonfamous.tang.domain.trade.TradeCarShop">
+		INSERT INTO TRADE_CAR_SHOP (
+				SHOP_ID,
+				OWNER
+	                     )
+	             VALUES ( 
+				#shopId#,
+				#owner#
+	                     )
+	</insert>
+	
+	
+	<select id="get_tradecarshop_list_by_owner" parameterClass="java.lang.String" resultMap="tradecarshopExt">
+		SELECT t.*, s.shop_name from trade_car_shop  t force index( IDX_TRADE_CAR_SHOP_OWNER),shop s  
+		   where t.owner=#value# and t.shop_id = s.shop_id
+	</select>
+	
+	<select id="get_by_owner_and_shopid"  resultMap="tradecarshop">
+		SELECT * FROM TRADE_CAR_SHOP t force index( IDX_TRADE_CAR_SHOP_OWNER)  WHERE t.owner = #owner# and t.shop_Id = #shopId# 
+	</select>
+		
+	
+	<delete id="delete_tradecarshop" parameterClass="com.nonfamous.tang.domain.trade.TradeCarShop">
+		DELETE FROM TRADE_CAR_SHOP  WHERE  owner = #owner# and shop_Id = #shopId#
+	</delete>
+</sqlMap>

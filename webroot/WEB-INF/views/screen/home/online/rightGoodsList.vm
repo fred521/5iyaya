@@ -1,0 +1,52 @@
+#set( $layout = "layout/home/blank.vm" )
+<html>
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=$!{page_encoding}">
+<title>店主商品</title>
+<link rel="stylesheet" type="text/css" href="${imgServer}/css/style.css">
+</head>
+<body topmargin="0" leftmargin="0">
+<table border="0" width="168" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>
+		<map name="FPMap0">
+		<area href="$appServer.setTarget('/chat/chat_user_info.htm').addQueryData('member_id',$request.getParameter("member_id"))" shape="rect" coords="3, 4, 83, 24" onFocus="this.blur()">
+		</map>
+		<img border="0" src="${imgServer}/images/contact_right_top1.gif" width="168" height="25" usemap="#FPMap0"></td>
+	</tr>
+</table>
+
+<table border="0" width="168" height="323" cellspacing="0" cellpadding="0" background="${imgServer}/images/contact_right_top_bg2.gif">
+	<tr>
+		<td align="center" valign="center">
+		打造中......
+		#*
+		<table border="0" width="100%" cellspacing="0" cellpadding="8">
+			<tr>
+				<td align="center">
+				<img border="0" src="../images/brand9.gif" width="96" height="33"></td>
+			</tr>
+			<tr>
+				<td>王一飞 (店主)</td>
+			</tr>
+			<tr>
+				<td>意大利金利莱斯<br><a href="../3d/store.html" target=_blank class="good2">东方市场2楼256号</a></td>
+			</tr>
+			<tr>
+				<td>主营:333女装、牛仔裤、女鞋 666666</td>
+			</tr>
+			<tr>
+				<td>商品数量:1978</td>
+			</tr>
+			<tr>
+				<td>开店时间:2005-09-14</td>
+			</tr>
+		</table>
+		*#
+		</td>
+	</tr>
+</table>
+
+</body>
+</html>

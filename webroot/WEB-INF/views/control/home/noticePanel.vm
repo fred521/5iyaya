@@ -1,0 +1,29 @@
+<div class="component.TabSet" id="msg_board" css_prefix="category_pink_" switch_event="mouseenter" >
+  <a class="tabset_link_2" name="A" href="#samePageUL1">公告栏</a>
+  <a class="tabset_link_2" name="B" href="#samePageUL2">丫丫联盟</a>
+  <a class="tabset_link_2" name="C" href="#samePageUL3" >服务向导</a>
+  </div> 
+    <ul id="samePageUL1" style="display:none" class="content_list">
+	  #foreach($news in $bulletinDto.list)
+			<li class="panelContent"><a target="_blank" href="${homeMoudle}/yynews/${news.newsId}.htm"  title="$news.newsTitle">$stringUtils.abbreviate($news.newsTitle,20)</a></li>
+	  #end
+	</ul>
+	
+	
+	<ul id="samePageUL2" style="display:none" class="content_list">
+	 <li style="height:18px;"><a target="_blank"  target="_blank"  href="http://expo.cncta.org">婴童行业协会</a></li>
+	 <li style="height:18px;"><a target="_blank"  href="http://www.toysfair.com.cn">义乌玩具博览会</a></li>
+     <li style="height:18px;"><a target="_blank"  href="http://www.sztoys.com">深圳市玩具行业协会</a></li>
+     <li style="height:18px;"><a target="_blank"  href="http://www.toy-cta.org">中国玩具协会</a></li>
+	 <li style="height:18px;"><a target="_blank"  href="http://www.garment.org.cn">中国服装协会</a></li>
+	 <li style="height:18px;"><a target="_blank"  href="http://www1.chc.org.cn">中国保健品协会 </a></li>
+	 <li style="height:18px;"><a target="_blank"  href="http://www.greenfood.org.cn">中国绿色食品协会</a></li>
+	 <li style="height:18px;"><a target="_blank"  href="http://www.montessori-china.org">中国蒙台梭利协会</a></li>
+	</ul>
+	
+	<ul id="samePageUL3" style="display:none" class="content_list">
+	  #foreach($news in $serInfoDto.list)
+		<li style="height:18px;"><a target="_blank" href="${homeMoudle}/yynews/${news.newsId}.htm"  title="$news.newsTitle">$stringUtils.abbreviate($news.newsTitle,20)</a></li>
+	  #end
+	  ##<li style='margin:0px 10px 0px 0px;' ><img src='images/' ></img></li>
+	</ul>

@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+        <meta http-equiv="Content-Style-Type" content="text/css">
+        <meta http-equiv="Content-Script-Type" content="text/javascript">
+		<title>jQuery UI Tabs / Test</title>
+		<link rel="stylesheet" href="ui.tabs.css" type="text/css" media="print, projection, screen">
+		<script src="jquery-1.2.1.pack.js" type="text/javascript"></script>
+        <script src="ui.tabs.js" type="text/javascript"></script>
+		<script src="../roundcorner/roundCorner.js" type="text/javascript"></script>
+		<script src="../addRoundCorner.js" type="text/javascript"></script>
+        <script type="text/javascript">
+			$(document).ready(function(){
+				$("#groupsPurchasePanel > ul").tabs().parent().css("width", "290px");
+				addRoundCorner();
+			});
+		</script>
+		
+	</head>
+	<body>
+		<div id="groupsPurchasePanel" class="roundCorner onlyBottom">
+			<ul>
+				<li><a href="#groupsPurchasePanel_content"><span>团购平台</span></a></li>
+				<li><a href="#Panel2_content"><span>商家信息</span></a></li>
+				<li><a href="#Panel3_content"><span>最佳人气商家</span></a></li>
+			</ul>
+			<div id="groupsPurchasePanel_content">
+				<ul>
+					<li>LPA减肥片 特价295元/5盒</li>
+					<li>美洋胶原蛋白 赠保鲜盒</li>
+					<li>蓝莓胶原蛋白 买2赠1?</li>
+					<li>LPA减肥片 特价295元/5盒</li>
+					<li>美洋胶原蛋白 赠保鲜盒</li>
+					<li>蓝莓胶原蛋白 买2赠1?</li>
+					<li>LPA减肥片 特价295元/5盒</li>
+					<li>美洋胶原蛋白 赠保鲜盒</li>
+					<li>蓝莓胶原蛋白 买2赠1?</li>
+				</ul>
+				<div align="right">
+					<img src="${imgServer}/images/more_icon.gif" alt="More..."/>
+				</div>
+			</div>
+			<div id="Panel2_content">
+				<ul>
+					<li>商家信息</li>
+				</ul>
+				<div align="right">
+					<img src="${imgServer}/images/more_icon.gif" alt="More..."/>
+				</div>
+			</div>
+			<div id="Panel3_content">
+				<ul>
+					<li>最佳人气商家</li>
+				</ul>
+				<div align="right">
+					<img src="${imgServer}/images/more_icon.gif" alt="More..."/>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

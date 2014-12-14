@@ -1,0 +1,57 @@
+<table border="0" width="100%" cellspacing="0" cellpadding="0" height="26" bgcolor="#E6C392">
+			<tr>
+				<td width="106" align=center valign="bottom">
+				<table border="0" width="80" cellspacing="0" cellpadding="0" height="21" bgcolor="#FFFFFF">
+					<tr>
+						<td align="center" style="font-size:14px;font-weight:bold;padding-top:2px;color:black;"><b>市场分类</b></td>
+					</tr>
+				</table>
+				</td>
+				<td width="486" align="right" style="padding-right:7px;">
+				　</td>
+			</tr>
+		</table>
+		<table width="100%" cellspacing="0" cellpadding="4" style="border-left:1px solid #D6A366; border-right:1px solid #D6A366; border-bottom:1px solid #D6A366; " bordercolor="#FE8D00" id="table4" height="148">
+			<tr>
+				<td align=center valign="top">
+					
+				<table border="0" width="100%" cellspacing="0" cellpadding="3">
+					#set($rootCount = 1)
+					#foreach($shops in $marketShops)
+					#if($rootCount%4 == 1)
+					<tr>
+					#end
+						<td width="25%" valign="top">
+						<table border="0" width="100%" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="6">
+								<img border="0" src="${imgServer}/images/title_brown_left.jpg" width="6" height="21"></td>
+								<td background="${imgServer}/images/title_brown_bg.jpg" style="padding-top:3px;padding-left:6px;"><b><a href="${homeMoudle}/search/search.htm?marketType=$!shops.marketId&searchtype=shop">$!shops.marketName</a></b></td>
+								<td width="6">
+								<img border="0" src="${imgServer}/images/title_brown_right.jpg" width="6" height="21"></td>
+							</tr>
+						</table>
+					    <table border="0" width="100%" cellspacing="0" cellpadding="3">
+							<tr>
+								<td bgcolor="#FCF8F1" colspan="3">
+								<table border="0" width="100%" cellspacing="0">
+									#foreach($shop in $shops.marketShop)
+			                      <tr>
+				                    <td>·<a href="${homeMoudle}/shop/$!{shop.shopId}.htm" target="_blank" title="$!{shop.shopName}">$stringUtils.abbreviate($!{shop.shopName},15)</a></td>
+			                      </tr>
+			                      #end
+		                        </table>
+								</td>
+							</tr>
+						</table>
+						</td>
+					#if($rootCount%4 == 0)
+					</tr>
+					#end
+					#set($rootCount = $rootCount + 1)
+					#end
+					
+				</table>
+				</td>
+			</tr>
+		</table>

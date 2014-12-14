@@ -1,0 +1,387 @@
+.bbp-custom-t2 .bb-c {
+	FLOAT: left
+}
+.bbp-custom-t2 #bb-main {
+	FLOAT: right; MARGIN-LEFT: -25em; WIDTH: 100%
+}
+.bbp-custom-t2 #bb-main .bb-c {
+	FLOAT: none; WIDTH: auto
+}
+.bbp-custom-t2 .bb-c {
+	WIDTH: 18.76em
+}
+.bbp-custom-t2 #bb-main .bb-c {
+	MARGIN-LEFT: 19.76em
+}
+.bbp-custom-t3 .bb-c {
+	FLOAT: left
+}
+.bbp-custom-t3 #bb-main {
+	FLOAT: right; MARGIN-LEFT: -25em; WIDTH: 100%
+}
+.bbp-custom-t3 #bb-main .bb-c {
+	FLOAT: none; WIDTH: auto
+}
+.bbp-custom-t3 .bb-c {
+	WIDTH: 19.51em
+}
+.bbp-custom-t3 #bb-main .bb-c {
+	MARGIN-LEFT: 19.51em
+}
+.help-search {
+	MARGIN-TOP: 1em; BACKGROUND: url(../../images/help/help_bg1.gif) #1d6cb7 repeat-x; ZOOM: 1; POSITION: relative
+}
+.help-search A {
+	TEXT-DECORATION: none
+}
+.help-search A:hover {
+	TEXT-DECORATION: underline
+}
+.help-search .form {
+	PADDING-RIGHT: 1.4em; PADDING-LEFT: 1.4em; BACKGROUND: url(../../images/help/help_bg2.gif) no-repeat 18px center; PADDING-BOTTOM: 1.4em; PADDING-TOP: 1.4em
+}
+.help-search .form P {
+	FONT-SIZE: 93%; MARGIN-LEFT: 25em; COLOR: #fff
+}
+.help-search .form P A {
+	COLOR: #fff; TEXT-DECORATION: underline
+}
+.help-search .tl {
+	BACKGROUND: url(../../images/help/help_bg3.gif) no-repeat; OVERFLOW: hidden; WIDTH: 5px; POSITION: absolute; HEIGHT: 5px
+}
+.help-search .tr {
+	BACKGROUND: url(../../images/help/help_bg3.gif) no-repeat; OVERFLOW: hidden; WIDTH: 5px; POSITION: absolute; HEIGHT: 5px
+}
+.help-search .bl {
+	BACKGROUND: url(../../images/help/help_bg3.gif) no-repeat; OVERFLOW: hidden; WIDTH: 5px; POSITION: absolute; HEIGHT: 5px
+}
+.help-search .br {
+	BACKGROUND: url(../../images/help/help_bg3.gif) no-repeat; OVERFLOW: hidden; WIDTH: 5px; POSITION: absolute; HEIGHT: 5px
+}
+.help-search .tl {
+	LEFT: 0px; TOP: 0px
+}
+.help-search .tr {
+	BACKGROUND-POSITION: 0px -5px; RIGHT: 0px; TOP: 0px
+}
+.help-search .bl {
+	BACKGROUND-POSITION: 0px -10px; LEFT: 0px; BOTTOM: -1px
+}
+.help-search .br {
+	BACKGROUND-POSITION: 0px -15px; RIGHT: 0px; BOTTOM: -1px
+}
+.help-nav {
+	PADDING-RIGHT: 1em; PADDING-LEFT: 1em; FONT-SIZE: 93%; PADDING-BOTTOM: 0px; MARGIN: 0.8em 0px; PADDING-TOP: 0px
+}
+.help-guide {
+	BACKGROUND: url(../../images/help/help_mantle.gif) no-repeat; POSITION: relative; HEIGHT: 176px
+}
+.help-guide H3 {
+	TEXT-INDENT: -9999px
+}
+.help-guide A {
+	FONT-WEIGHT: bold; FONT-SIZE: 108%; COLOR: #fff; POSITION: absolute
+}
+.help-guide A:hover {
+	COLOR: #fff
+}
+.help-guide A.s1 {
+	FONT-SIZE: 122%; LEFT: 55px; COLOR: #2da505; TOP: 37px
+}
+.help-guide A.s1:hover {
+	COLOR: #2da505
+}
+.help-guide A.s2 {
+	LEFT: 135px; TOP: 40px
+}
+.help-guide A.s3 {
+	LEFT: 250px; TOP: 40px
+}
+.help-guide A.s4 {
+	LEFT: 350px; TOP: 40px
+}
+.help-guide A.s5 {
+	LEFT: 454px; TOP: 40px
+}
+.help-guide A.s6 {
+	FONT-SIZE: 122%; LEFT: 55px; COLOR: #eb8500; TOP: 89px
+}
+.help-guide A.s6:hover {
+	COLOR: #eb8500
+}
+.help-guide A.s7 {
+	LEFT: 135px; TOP: 92px
+}
+.help-guide A.s8 {
+	LEFT: 242px; TOP: 92px
+}
+.help-guide A.s9 {
+	LEFT: 350px; TOP: 92px
+}
+.help-guide A.s10 {
+	LEFT: 454px; TOP: 92px
+}
+.help-category {
+	MARGIN: 1.5em 2em
+}
+.help-category .hd {
+	BORDER-TOP: #fff 1px solid
+}
+.help-category .hd H3 {
+	PADDING-RIGHT: 0.8em; PADDING-LEFT: 0.8em; FONT-WEIGHT: bold; FONT-SIZE: 108%; PADDING-BOTTOM: 0.2em; COLOR: #0075a9; PADDING-TOP: 0.2em
+}
+
+
+.help-category .bd {
+	PADDING-RIGHT: 1em; PADDING-LEFT: 1em; FONT-SIZE: 108%; PADDING-BOTTOM: 1em; PADDING-TOP: 0px
+}
+.help-category .bd H3 {
+	PADDING-LEFT: 12px; FONT-WEIGHT: bold; BACKGROUND: url(../../images/help/help_bg7.gif) no-repeat 0px center
+}
+.help-category .bd P {
+	MARGIN: 0.5em 0px 0px 12px; LINE-HEIGHT: 1.8
+}
+.help-category .bd LI {
+	FLOAT: left; 
+}
+
+.itembox {
+	PADDING-RIGHT: 1.5em; PADDING-LEFT: 1.5em; PADDING-BOTTOM: 1em; MARGIN: 0.5em 0px 1em; PADDING-TOP: 1em; ZOOM: 1; POSITION: relative
+}
+.itembox .tl {
+	BACKGROUND: url(../../images/help/help_bg_co2.gif) no-repeat; OVERFLOW: hidden; WIDTH: 5px; POSITION: absolute; HEIGHT: 5px
+}
+.itembox .tr {
+	BACKGROUND: url(../../images/help/help_bg_co2.gif) no-repeat; OVERFLOW: hidden; WIDTH: 5px; POSITION: absolute; HEIGHT: 5px
+}
+.itembox .bl {
+	BACKGROUND: url(../../images/help/help_bg_co2.gif) no-repeat; OVERFLOW: hidden; WIDTH: 5px; POSITION: absolute; HEIGHT: 5px
+}
+.itembox .br {
+	BACKGROUND: url(../../images/help/help_bg_co2.gif) no-repeat; OVERFLOW: hidden; WIDTH: 5px; POSITION: absolute; HEIGHT: 5px
+}
+.itembox .tl {
+	LEFT: 0px; TOP: 0px
+}
+.itembox .tr {
+	BACKGROUND-POSITION: 0px -5px; RIGHT: 0px; TOP: 0px
+}
+.itembox .bl {
+	BACKGROUND-POSITION: 0px -10px; LEFT: 0px; BOTTOM: -1px
+}
+.itembox .br {
+	BACKGROUND-POSITION: 0px -15px; RIGHT: 0px; BOTTOM: -1px
+}
+.itembox-zebra {
+	BACKGROUND: #f1f6de
+}
+.help-mod1 {
+	MARGIN-BOTTOM: 0.8em
+}
+.help-mod1 .hd {
+	BACKGROUND: url(../../images/help/bg_help_bar1.gif) no-repeat right top; ZOOM: 1
+}
+.help-mod1 .hd H3 {
+	PADDING-RIGHT: 0.8em; PADDING-LEFT: 0.8em; FONT-WEIGHT: bold; FONT-SIZE: 108%; BACKGROUND: url(images/help/bg_help_bar1.gif) no-repeat left top; FLOAT: left; PADDING-BOTTOM: 0.2em; COLOR: #0075a9; PADDING-TOP: 0.2em
+}
+.help-mod1 .hd:unknown {
+	CLEAR: both; DISPLAY: block; VISIBILITY: hidden; HEIGHT: 0px; content: ''
+}
+.help-mod2 {
+	BORDER-RIGHT: #84cedd 1px solid; BORDER-TOP: #84cedd 1px solid; MARGIN-BOTTOM: 0.8em; BORDER-LEFT: #84cedd 1px solid; BORDER-BOTTOM: #84cedd 1px solid; ZOOM: 1; POSITION: relative
+}
+.help-mod2 .bd {
+	
+}
+.help-mod2 .tl {
+	BACKGROUND: url(../../images/help/help_bg_co1.gif) no-repeat; OVERFLOW: hidden; WIDTH: 6px; POSITION: absolute; HEIGHT: 6px
+}
+.help-mod2 .tr {
+	BACKGROUND: url(../../images/help/help_bg_co1.gif) no-repeat; OVERFLOW: hidden; WIDTH: 6px; POSITION: absolute; HEIGHT: 6px
+}
+.help-mod2 .bl {
+	BACKGROUND: url(../../images/help/help_bg_co1.gif) no-repeat; OVERFLOW: hidden; WIDTH: 6px; POSITION: absolute; HEIGHT: 6px
+}
+.help-mod2 .br {
+	BACKGROUND: url(../../images/help/help_bg_co1.gif) no-repeat; OVERFLOW: hidden; WIDTH: 6px; POSITION: absolute; HEIGHT: 6px
+}
+.help-mod2 .tl {
+	LEFT: -1px; TOP: -1px
+}
+.help-mod2 .tr {
+	BACKGROUND-POSITION: 0px -6px; RIGHT: -1px; TOP: -1px
+}
+.help-mod2 .bl {
+	BACKGROUND-POSITION: 0px -12px; LEFT: -1px; BOTTOM: -2px
+}
+.help-mod2 .br {
+	BACKGROUND-POSITION: 0px -18px; RIGHT: -1px; BOTTOM: -2px
+}
+.help-ul1 {
+	MARGIN: 1em
+}
+.help-ul1 LI {
+	MARGIN-TOP: 0.3em; PADDING-LEFT: 10px; FONT-SIZE: 108%; BACKGROUND: url(images/help/bg_dot_g8.gif) no-repeat 0px center; ZOOM: 1
+}
+.help-ul1 LI.first {
+	MARGIN-TOP: 0px
+}
+.help-ul2 {
+	MARGIN: 1em
+}
+.help-ul2 LI {
+	MARGIN-TOP: 0.4em; PADDING-LEFT: 18px; FONT-SIZE: 108%; BACKGROUND: url(images/help/help_bg9.gif) no-repeat 0px 0.35em; ZOOM: 1
+}
+.help-ul2 LI.first {
+	MARGIN-TOP: 0px
+}
+.help-container {
+	BORDER-RIGHT: #bebebe 1px solid; PADDING-RIGHT: 1.5em; BORDER-TOP: #bebebe 1px solid; PADDING-LEFT: 1.5em; MIN-HEIGHT: 45em; BACKGROUND: url(images/help/help_bg10.gif) #fff repeat-x; PADDING-BOTTOM: 1em; BORDER-LEFT: #bebebe 1px solid; PADDING-TOP: 1em; BORDER-BOTTOM: #bebebe 1px solid; HEIGHT: 45em
+}
+.help-container-iframe {
+	TEXT-ALIGN: left
+}
+.help-container-iframe .hd H3 {
+	FONT-WEIGHT: bold; FONT-SIZE: 108%
+}
+.help-container-iframe .bd {
+	FONT-SIZE: 14px; MARGIN: 1em; LINE-HEIGHT: 1.6
+}
+.my-menu {
+	FONT-SIZE: 108%
+}
+.my-menu A {
+	TEXT-DECORATION: underline
+}
+.my-menu H3 {
+	FONT-WEIGHT: bold
+}
+.my-menu H3 A {
+	COLOR: #000; TEXT-DECORATION: none
+}
+.my-menu LI {
+	PADDING-LEFT: 2em; LINE-HEIGHT: 1.7
+}
+.my-menu DIV.selected {
+	BORDER-RIGHT: #bebebe 0px solid; PADDING-RIGHT: 0px; BORDER-TOP: #bebebe 1px solid; PADDING-LEFT: 0px; BACKGROUND: #eee; PADDING-BOTTOM: 0.5em; BORDER-LEFT: #bebebe 1px solid; PADDING-TOP: 0.5em; BORDER-BOTTOM: #bebebe 1px solid
+}
+.my-menu LI.selected {
+	FONT-WEIGHT: bold; BACKGROUND: url(../../images/help/bg_mynav_selected.gif) repeat-x 50% top; COLOR: #fff; LINE-HEIGHT: 2.17em; POSITION: relative; HEIGHT: 2.17em
+}
+.my-menu LI.selected .l {
+	BACKGROUND: url(../../images/help/bg_mynav_l.gif) no-repeat; LEFT: -2px; WIDTH: 2px; POSITION: absolute; TOP: 0px; HEIGHT: 29px
+}
+.my-menu LI.selected .r {
+	RIGHT: -9px; BACKGROUND: url(../../images/help/bg_mynav_r.gif) no-repeat; WIDTH: 9px; POSITION: absolute; TOP: 0px; HEIGHT: 29px
+}
+.my-menu LI.selected A {
+	COLOR: #fff; TEXT-DECORATION: none
+}
+.my-menu-group {
+	MARGIN-BOTTOM: 0.8em
+}
+.my-menu-group H3 {
+	MARGIN: 0px 0px 0.2em 0.5em
+}
+.my-menu-group H3 A {
+	PADDING-LEFT: 1em; BACKGROUND: url(../../images/help/bg_arr1_close.gif) no-repeat left 50%
+}
+.my-menu-group UL {
+	DISPLAY: none
+}
+.my-menu-group-open H3 A {
+	PADDING-LEFT: 1em; BACKGROUND: url(../../images/help/bg_arr1_open.gif) no-repeat left 50%
+}
+.my-menu-group-open UL {
+	DISPLAY: block
+}
+.help_form {
+	PADDING-RIGHT: 5em; BORDER-TOP: #bebebe 1px solid; PADDING-LEFT: 5em; PADDING-BOTTOM: 1.5em; PADDING-TOP: 1.5em
+}
+.help_form .remind {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 90px; BACKGROUND: url(../../images/help/bg_help_1.gif) no-repeat; PADDING-BOTTOM: 5px; COLOR: #004986; LINE-HEIGHT: 1.6; PADDING-TOP: 5px
+}
+.help_form .remind H3 {
+	FONT-WEIGHT: bold; FONT-SIZE: 108%
+}
+.help_form .remind P {
+	FONT-SIZE: 93%; MARGIN-LEFT: 2.2em
+}
+.help_form .form {
+	PADDING-RIGHT: 3em; MARGIN-TOP: 1.5em; PADDING-LEFT: 3em; BACKGROUND: #eee; PADDING-BOTTOM: 2em; COLOR: #666; PADDING-TOP: 2em
+}
+.help_form .form LI {
+	MARGIN-BOTTOM: 1.2em; ZOOM: 1
+}
+.help_form .form LI:unknown {
+	CLEAR: both; DISPLAY: block; VISIBILITY: hidden; HEIGHT: 0px; content: ""
+}
+.help_form .form .k {
+	FONT-WEIGHT: bold; FONT-SIZE: 108%; FLOAT: left; WIDTH: 7em; TEXT-ALIGN: right
+}
+.help_form .form .v {
+	FLOAT: left
+}
+.help_form .form EM {
+	MARGIN-TOP: 0.2em; DISPLAY: block; FONT-SIZE: 93%
+}
+.help_form .form LI.submit {
+	TEXT-ALIGN: center
+}
+.help_form .form LI.submit BUTTON {
+	PADDING-RIGHT: 1.5em; PADDING-LEFT: 1.5em; FONT-SIZE: 108%; PADDING-BOTTOM: 0.1em; MARGIN-RIGHT: 1em; PADDING-TOP: 0.1em
+}
+.help_form .form LI.verify IMG {
+	MARGIN: 0px 0.5em; VERTICAL-ALIGN: top
+}
+.help_form .form .s1 {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; FONT-SIZE: 108%; PADDING-BOTTOM: 3px; WIDTH: 40em; PADDING-TOP: 3px
+}
+.help_form .form .s2 {
+	PADDING-RIGHT: 1px; PADDING-LEFT: 1px; FONT-SIZE: 108%; PADDING-BOTTOM: 3px; WIDTH: 40em; PADDING-TOP: 3px; HEIGHT: 10em
+}
+.help_form .form A.uploadimg {
+	BORDER-RIGHT: #d65600 1px solid; PADDING-RIGHT: 1em; BORDER-TOP: #d65600 1px solid; DISPLAY: inline-block; PADDING-LEFT: 1em; FONT-SIZE: 12px; BACKGROUND: url(images/help/bg_help_upload.gif) #e96300 repeat-x; PADDING-BOTTOM: 0.25em; MARGIN: 0.2em 0px; BORDER-LEFT: #d65600 1px solid; COLOR: #fff; PADDING-TOP: 0.25em; BORDER-BOTTOM: #d65600 1px solid; TEXT-DECORATION: none
+}
+.help-misc-s1 {
+	PADDING-RIGHT: 1em; PADDING-LEFT: 1em; FONT-SIZE: 108%; PADDING-BOTTOM: 0.5em; PADDING-TOP: 0.5em
+}
+.help-misc-s1 A {
+	PADDING-LEFT: 20px; BACKGROUND: url(../../images/help/help_bg4.gif) no-repeat 0px center; ZOOM: 1
+}
+.help-misc-s2 {
+	PADDING-RIGHT: 1.2em; BORDER-TOP: #e3e3e3 1px solid; PADDING-LEFT: 1.2em; FONT-SIZE: 93%; PADDING-BOTTOM: 1.2em; LINE-HEIGHT: 1.6; PADDING-TOP: 1.2em
+}
+.help-misc-s2 A {
+	FONT-SIZE: 14px
+}
+.help-misc-s3 {
+	MARGIN-RIGHT: 0.8em
+}
+.cont {
+	PADDING-RIGHT: 1.5em; PADDING-LEFT: 1.5em; FONT-SIZE: 14px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+H1 {
+	FONT-WEIGHT: bold; FONT-SIZE: 20px; MARGIN: 0px 0px 1em 2.5em; FONT-FAMILY: "Microsoft YaHei","Microsoft JhengHei",arial
+}
+.list {
+	FONT-SIZE: 108%
+}
+.list UL {
+	MARGIN-LEFT: 3.5em
+}
+.list LI {
+	PADDING-LEFT: 12px; BACKGROUND: url(../../images/help/bg_bullet4.gif) no-repeat 0px center; MARGIN-BOTTOM: 0.5em
+}
+.list .global-page {
+	FONT-SIZE: 12px; MARGIN: 2em 0px 4em 5em
+}
+.richtext {
+	FONT-SIZE: 108%; WIDTH: auto; LINE-HEIGHT: 1.6
+}
+.richtext P {
+	MARGIN-BOTTOM: 1em
+}
+.content {
+	MARGIN: 1em 1.8em; COLOR: #535353
+}

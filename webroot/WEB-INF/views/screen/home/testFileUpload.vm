@@ -1,0 +1,13 @@
+<form action="/upload_result.htm" method="post" encType="multipart/form-data">
+ 商品图片<input type="file" name="f1"><br>
+ 店铺图片<input type="file" name="f2"><br>
+  <input type="submit" value="Upload image">
+</form>
+商品图片${f1}
+原始图片：<img src="${imgServer}/images/${f1}"/> </br>
+中图片：<img src="${imgServer}/images/${f1}.l.jpg"/> </br>
+最小图片：<img src="${imgServer}/images/${f1}.s.jpg"/> </br>
+
+店铺图片
+原始图片：<img src="${imgServer}/images/${f2}"/> </br>
+中图片：<img src="${imgServer}/images/${f2}.l.jpg"/> </br>

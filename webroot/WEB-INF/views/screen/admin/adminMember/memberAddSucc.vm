@@ -1,0 +1,17 @@
+#set( $layout = "layout/admin/default.vm" )
+<BODY leftMargin=8 background="${imgServer}/images/adimn/allbg.gif" topMargin=8>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<TABLE cellSpacing=1 cellPadding=3 width="40%" align="center" bgColor=#666666 border=0>
+  <TR>
+    <TD vAlign="top" bgColor="#ffffff" align＝"center"> 
+	  <b><span class="red">新增卖家会员成功</span></b><br/>
+	  可以选择继续为其 &nbsp;<a href="${adminMoudle}/admin_user/shop_edit.htm?memberId=$!memberId""><span class="red">添加店铺信息</span></a> &nbsp; 或者返回 &nbsp; <a href="${adminMoudle}/admin_member/seller_list.htm"><span class="red">卖家会员列表</span></a></b>
+	</TD>
+  </TR>
+</TABLE>
+</BODY>

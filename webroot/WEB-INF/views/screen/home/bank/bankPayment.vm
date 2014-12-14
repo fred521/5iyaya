@@ -1,0 +1,114 @@
+#set( $layout = "layout/home/memberdefault.vm" )
+<script type="text/javascript">
+   function pay() {
+      var objDiv = document.getElementById('submit_info');
+      objDiv.innerText = '将会在新窗口中打开网上银行页面';
+	  objDiv = document.getElementById('submit_pay');
+	  objDiv.style.display = 'none';
+      setTimeout("callBack()",3000);
+    }
+   function callBack(){
+      if (confirm("银行支付已经成功！")){
+	      window.location.href = '${appServer}/order/list.htm';
+	  }else{
+		  var objDiv = document.getElementById('submit_info');
+      	  objDiv.innerText = '您可以从新支付';
+	      objDiv = document.getElementById('submit_pay');
+	      objDiv.style.display = '';
+	  }
+   }
+</script>
+<td width="10" valign="top"></td>
+	<td width="740" valign="top">
+					<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>银行支付</h1>
+			</div>
+		<table border="0" width="90%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+		<div class="roundCorner gray onlyBottom" style="width: 736px;">
+	    <p>   
+			<div align="center"><img src="${imgServer}/images/logo_copy.gif" align="absmiddle" /></div>
+	    </div>
+	    <p>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td align="center"><span class="red">$!errorMessage</span></td>
+					</tr>
+				</table>
+				$control.setTemplate("home/trade/payTop").put("menuIndex","2")
+				<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<form name="formPay" method="post" action="$!orderURL" target="_blank" onsubmit="return pay();">
+							<input type="hidden" name="interfaceVersion" value="$!bankData.interfaceVersion">
+                            <input type="hidden" name="merID" value="$!bankData.merID">
+                            <input type="hidden" name="orderid" value="$!bankData.orderid">
+                            <input type="hidden" name="orderDate" value="$!bankData.orderDate">
+                            <input type="hidden" name="orderTime" value="$!bankData.orderTime">
+                            <input type="hidden" name="tranType" value="$!bankData.tranType">
+                            <input type="hidden" name="amount" value="$!bankData.amount">
+                            <input type="hidden" name="curType" value="$!bankData.curType">
+                            <input type="hidden" name="orderContent" value="$!bankData.orderContent">
+                            <input type="hidden" name="orderMono" value="$!bankData.orderMono">
+                            <input type="hidden" name="phdFlag" value="$!bankData.phdFlag">
+                            <input type="hidden" name="notifyType" value="$!bankData.notifyType">
+                            <input type="hidden" name="merURL" value="$!bankData.merURL">
+                            <input type="hidden" name="goodsURL" value="$!bankData.goodsURL">
+                            <input type="hidden" name="jumpSeconds" value="$!bankData.jumpSeconds">
+                            <input type="hidden" name="payBatchNo" value="$!bankData.payBatchNo">
+                            <input type="hidden" name="proxyMerName" value="$!bankData.proxyMerName">
+                            <input type="hidden" name="proxyMerType" value="$!bankData.proxyMerType">
+                            <input type="hidden" name="proxyMerCredentials" value="$!bankData.proxyMerCredentials">
+                            <input type="hidden" name="netType" value="$!bankData.netType">
+                            <input type="hidden" name="merSignMsg" value="$!sign">
+								
+						<table cellSpacing="0" cellPadding="0" width="90%" align="center">
+							<tr>
+								<td align=center>
+									<table border="0" width="560" cellspacing="0" cellpadding="6">
+										<tr>
+											<td height="24" class="tx_title" colspan="2"><b>支付确认</b></td>
+										</tr>
+										<tr>
+											<td width="100">支付金额:</td>
+											<td width="460">$!order.getMoney($!order.payFee) 元</td>
+										</tr>
+										<tr>
+											<td width="100">所选银行:</td>
+											<td width="460">
+                                                <img src="${imgServer}/images/icon_comm.gif"  alt="交通银行" border="0" />
+											</td>
+										</tr>
+										<tr>
+											<td width="100"></td>
+											<td width="460">
+												<div id="submit_pay"><input type="submit" value=" 去 网 上 支 付 "></div>
+												<div id="submit_info"></div>
+                                            </td>
+										</tr>
+										
+									</table>
+								</td>
+							</tr>
+						</table>
+						</form>
+					  </td>
+					</tr>
+				</table>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="6">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+				<br>
+				</td>
+			</tr>
+		</table>
+	</td>

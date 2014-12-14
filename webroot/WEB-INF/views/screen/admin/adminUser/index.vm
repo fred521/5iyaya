@@ -1,0 +1,8 @@
+#set( $layout = "layout/admin/default.vm" )
+<META content="MSHTML 6.00.2900.2912" name=GENERATOR>
+<FRAMESET border=0 frameSpacing=0 rows=55,* frameBorder=no cols=*>
+<FRAME name=topFrame src="${adminMoudle}/admin_user/top.htm" scrolling=no>
+<FRAMESET border=0 name=btFrame frameSpacing=0 frameBorder=NO cols=152,*>
+<FRAME name=menu src="${adminMoudle}/admin_user/menu.htm" scrolling=yes>
+<FRAME name=main src="${adminMoudle}/admin_user/body.htm" scrolling=yes>
+</FRAMESET></FRAMESET><noframes></noframes>

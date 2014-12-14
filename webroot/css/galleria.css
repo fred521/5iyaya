@@ -1,0 +1,98 @@
+.gallery {
+  list-style-type: none;	
+  margin         : 0px   ;
+  text-align     : center;
+  padding        : 3px 0px 0px 10px ;
+  width          : 355px;
+  height         : 282px;
+  border         : 1px solid #CDCDCD ;
+}
+
+.gallery img {
+    /*width  : 270px ;*/
+    height : 210px ;
+    border : 1px solid #CCC ;
+}
+
+.gallery li {
+	display:block;
+	overflow:hidden;
+	float  : left           ;
+	padding: 0px 3px 0px 5px;
+	margin : 5px 0px 0px 0px;
+	cursor : pointer        ;
+}
+.gallery li img {
+	display:block;
+	width  : 83px ;
+    height : 62px ;	
+	opacity: 0.3 ;
+	filter : alpha(opacity = 30);
+}
+
+.gallery li.nav {
+	width     : 30px ;
+    height    : 62px ;	
+}
+
+.gallery li.left_on {
+	background: transparent url(../images/gallery/video_icon_on_left.gif) no-repeat 0 0 ;
+	background-position:right;
+}
+.gallery li.right_on {
+	background: transparent url(../images/gallery/video_icon_on_right.gif) no-repeat 0 0 ;
+	background-position:left;
+}
+.gallery li.left_off {
+	background: transparent url(../images/gallery/video_icon_off_left.gif) no-repeat 0 0 ;
+	background-position:right;
+}
+.gallery li.right_off {
+	background: transparent url(../images/gallery/video_icon_off_right.jpg) no-repeat 0 0 ;
+	background-position:left;
+}
+
+.video_image_title {
+  list-style-type: none  ;	
+  margin         : 0px   ;
+  padding        : 3px 0px 0px 10px ;
+  width          : 355px;
+  border         : 1px solid #CDCDCD ;
+  height         : 30px ;
+  text-align     : center;
+  vertical-align : middle;
+  background     : transparent url(../images/gallery/video_icon_title.gif) repeat-x 0 0 ;
+}
+
+.video_image_title li{
+	display : block  ;
+	overflow: hidden ;
+	float   : left   ;
+	width   : 170px  ;
+	height  : 25px   ;
+	font-size:		12px  ;
+	font-family:    ËÎÌו  ; 
+	font-weight:    bold  ;
+	color      :    white ;
+	text-align :    bottom;
+	padding    :    7px 0px 0px 0px;
+	cursor     :    pointer;
+	background: transparent url(../images/gallery/video_back_off.gif) no-repeat 0 0 ;
+	background-position:center;
+}
+
+.video_image_title li.line-right {
+	border-right: 1px solid #B0AEAF;
+}
+.video_image_title li.line-left {
+	border-left: 1px solid #F9F9F9;
+}
+
+.video_image_title li.on {
+	background: transparent url(../images/gallery/video_back_on.gif) no-repeat 0 0 ;
+	background-position:center;
+}
+
+.gallery.video {
+	padding-top: 15px;
+}

@@ -1,0 +1,375 @@
+#set( $layout = "layout/home/viewGoodsDefault.vm" )
+<link rel="stylesheet" href="${appServer}/css/jqzoom.css" type="text/css" media="screen">
+<style type="text/css">
+	body
+    {
+    	font-family:Arial, Helvetica, sans-serif;
+    	font-size: 11px;
+    	color: #666666;
+    }
+
+	#slideShow1
+    {
+    	width: 260px;
+    	height: 200px;
+    	border: 1px solid #ccc;
+    	padding: 10px;
+    	background-color: #fff;
+    	margin: 10px;
+    }
+	.pagelinks a
+    {
+    	font-weight: bold;
+    	color: #666;
+    }
+    .pagelinks a.activeSlide
+    {
+    	color: #f90;
+    }
+	/* this is for IE so the prev/next links can be hovered*/
+    .nextSlide,.prevSlide
+    {
+    	background-image: url(${appServer}/images/slide_spacer.gif);
+    }
+    .nextSlide:hover
+    {
+    	background-image: url(${appServer}/images/nextslide.jpg);
+    	background-repeat: no-repeat;
+    	background-position: right bottom;
+    }
+    .prevSlide:hover
+    {
+    	background-image: url(${appServer}/images/prevslide.jpg);
+    	background-repeat: no-repeat;
+    	background-position: left bottom;
+    }
+ </style>
+<script type='text/javascript' src='${appServer}/js/iutil.js'></script>
+<script type='text/javascript' src='${appServer}/js/islideshow.js'></script>
+<script type='text/javascript' src='${appServer}/js/jquery.jqzoom.min.js'></script>
+<script language="javascript" type="text/javascript">
+    function showLocation() {
+	    window.open('${homeMoudle}/shop/showLocation.htm','','location=0,scrollbars=0,resizable=0,height=400,width=420,top=300,left=600')
+	}
+
+	jQuery(document).ready(
+    	function()
+    	{
+    		jQuery.slideshow(
+    			{
+    				container : 'slideShow1',
+    				loader: '${appServer}/images/slideshow_loader.gif',
+    				linksPosition: 'bottom',
+    				linksClass: 'pagelinks',
+    				linksSeparator : ' | ',
+    				fadeDuration : 400,
+    				activeLinkClass: 'activeSlide',
+    				nextslideClass: 'nextSlide',
+    				prevslideClass: 'prevSlide',
+    				captionPosition: 'bottom',
+    				captionClass: 'slideCaption',
+    				autoplay: 5
+    			}
+    		);
+			jQuery("#magnifier").click(
+				function() {
+					var src = jQuery("#slideShow1 > .slideshowHolder > img").eq(0).attr('src');
+					var src = src.substring(0,src.length-6);
+					window.open(src);
+				}
+			);
+    	}
+	);
+</script>
+<table width="950" cellspacing="1" cellpadding="0" height="30">
+	<tr>
+		<td background="${imgServer}/images/sreach_conbg.gif" align="center">
+		<table border="0" width="100%" cellspacing="0" cellpadding="3">
+			<tr>
+				<td>
+					<a href="${appServer}" class="gray">首页</a> <span style="font-family:宋体">>></span>
+					<a href="${appServer}/goods.htm" class="gray">分类商品</a> <span style="font-family:宋体">>></span>
+					#foreach($catalog in $cats)
+					   <a href="$homeMoudle.setTarget('/search/search.htm').addQueryData('searchcate',$catalog.typeId).addQueryData('searchtype','good')" class="gray">$!{catalog.typeName}</a>   <span style="font-family:宋体">>></span>
+					#end
+					$!goods.goodsName
+				</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+</table>
+<table border="0" width="986" cellspacing="0" cellpadding="0">
+	<tr>
+		<td align="left" height="36"><b style="font-size:14px;">#if($!goods.goodsType.equals("T"))团 购#else 批 发#end</b></td><td align="left" height="36"><b style="font-size:14px;">$!goods.goodsName</b></td>
+	</tr>
+	<tr>
+		<td align="center" bgcolor="#D6D6D6" height="1" colspan="2"></td>
+	</tr>
+	<tr>
+		<td align="center" height="8" colspan="2"></td>
+	</tr>
+</table>
+<div style="display:block;width:990;">
+	<div style="float:left;width:300px;margin-right:10px;">
+	#if($!{goods.goodsPic})
+		<div id="slideShow1">
+		#if($goods.pictures && $goods.pictures.size()>0 )
+			#foreach($picpath in $goods.pictures)
+				<img src="${upServer}${picpath.path}.l.jpg" jqimg="${upServer}${picpath.path}">
+			#end
+		#else
+			<img border="0" src="${upServer}${goods.goodsPic}.l.jpg" jqimg="${upServer}${picpath.path}" >
+		#end
+		</div>
+		<a id="magnifier" href="javascript:void(0)">
+		<img height="20" width="18" border="0" alt="点击放大图片" src="${imgServer}/images/zoomin.gif"/>
+		放大图片
+		</a>
+	#else
+			<img border="0" src="${imgServer}/images/showimg.gif" width="210" height="188">
+	#end
+	</div>
+	<div style="float:left;width:400px;margin-right:10px;">
+		<table border="0" width="361" cellspacing="0" cellpadding="0" id="table2">
+			<tr>
+				<td width="69" height="24">市场价:</td>
+				<td width="104"><font style="color:#FF6600;font-size:12px;font-weight:bold;">$!{marketPrice}</font> 元</td>
+			</tr>
+			<tr>
+				<td background="${imgServer}/images/line_bg.gif" width="361" colspan="4" height="1"></td>
+			</tr>
+			<tr>
+				<td width="69" height="24">#if($!goods.goodsType.equals("T"))团 购 价:#else 批 发 价:#end</td>
+				#if($goodsPrice.equals("0.00"))
+				<td width="104"><font style="color:#FF6600;font-size:12px;font-weight:bold;">面议</font> </td>
+				#else
+				<td width="104"><font style="color:#FF6600;font-size:12px;font-weight:bold;">$!{goodsPrice}</font> 元</td>
+				#end
+				<td width="69">#if($!goods.goodsType.equals("T"))起 团 数:#else 起 批 量:#end</td>
+				<td width="119"><font style="color:#FF6600;font-size:12px;font-weight:bold;">$!{goods.batchNum}</font> 件</td>
+			</tr>
+			<tr>
+				<td background="${imgServer}/images/line_bg.gif" width="361" colspan="4" height="1"></td>
+			</tr>
+			#if($!goods.size&&!$!goods.size.equals(""))
+			<tr>
+				<td width="69" height="24">尺寸:</td>
+				<td width="104"><font style="color:#FF6600;font-size:12px;font-weight:bold;">$!goods.size</font></td>
+			</tr>
+			<tr>
+				<td background="${imgServer}/images/line_bg.gif" width="361" colspan="4" height="1"></td>
+			</tr>
+			#end
+			#if($!goods.colors&&!$!goods.colors.equals(""))
+			<tr>
+				<td width="69" height="24">颜色:</td>
+				<td width="104"><font style="color:#FF6600;font-size:12px;font-weight:bold;">$!goods.colors</font></td>
+			</tr>
+			<tr>
+				<td background="${imgServer}/images/line_bg.gif" width="361" colspan="4" height="1"></td>
+			</tr>
+			#end
+			<tr>
+				<td width="361" height="88" colspan="4" align="center" valign="bottom" style="padding-bottom:3px;">
+				<a href="${homeMoudle.setTarget('tradecar/addCar.htm')}?gid=$!{goods.goodsId}">
+				<img border="0" src="${imgServer}/images/btn_torder.gif" width="163" height="46"></a>&nbsp;<br><a href="${appServer}/shop/${shop.shopId}.htm" class="gray">实体店铺，多家单位联合认证，诚信度更高！</a>
+				</td>
+			</tr>
+			<tr>
+				<td background="${imgServer}/images/line_bg.gif" width="361" colspan="4" height="1"></td>
+			</tr>
+			<tr>
+				<td width="69" height="30">剩余时间:</td>
+				<td width="292" colspan="3">$!remainDay天$!remainHour小时$!remainMin分钟$!remainSec秒</td>
+			</tr>
+			<tr>
+				<td background="${imgServer}/images/line_bg.gif" width="361" colspan="4" height="1"></td>
+			</tr>
+			<tr>
+				<td width="69" height="30">商品总量:</td>
+				<td width="292" colspan="3">$!goods.goodsNum 件</td>
+			</tr>
+			<tr>
+				<td background="${imgServer}/images/line_bg.gif" width="361" colspan="4" height="1"></td>
+			</tr>
+			<tr>
+				<td width="69" height="30">浏 览 量:</td>
+				<td width="292" colspan="3">$!goods.viewCount 次</td>
+			</tr>
+			<tr>
+				<td background="${imgServer}/images/line_bg.gif" width="361" colspan="4" height="1"></td>
+			</tr>
+		</table>
+	</div>
+	<div style="float:right;width:260px;">
+		<table border="0" width="260" cellspacing="0" cellpadding="0" style="border: 1px solid #D8D8D8; background-color: #F8F8F8" height="239">
+			<tr>
+				<td height="24" bgcolor="#EDEDED" style="font-size:14px;font-weight:bold;padding-left:10px;">卖家信息</td>
+			</tr>
+			<tr>
+				<td height="1" bgcolor="#D8D8D8"></td>
+			</tr>
+			<tr>
+				<td align="center">
+				<table border="0" width="88%" cellspacing="0" cellpadding="2" id="table3">
+					<tr>
+						<td width="65">店铺名称:</td>
+						<td width="154"><a href="${appServer}/shop/${shop.shopId}.htm" class="gray">$!shop.shopName</a></td>
+					</tr>
+					<tr>
+						<td width="65">店主姓名:</td>
+						<td width="154">
+						##$!shop.shopOwner
+						</td>
+					</tr>
+					#if($member.nick)
+					<tr>
+						<td width="65">店主昵称:</td>
+						<td width="154">
+						##$member.nick
+						</td>
+					</tr>
+					#end
+					<tr>
+						<td width="65">　</td>
+						<td width="154">
+			        <img border="0" src="${imgServer}/images/icon_contact.gif" style="cursor:pointer;"
+			        onclick="contactSeller('$!{shop.loginId}','$esc.javascript($!{shop.shopOwner})', '$!{goods.goodsId}', '$esc.javascript($!{goods.goodsName})');"
+			        ></td>
+					</tr>
+					<tr>
+						<td width="65">店铺位置:</td>
+						<td width="154">
+						##$!member.address
+						<img border="0" src="${imgServer}/images/icon_Show_location.gif" style="cursor:pointer;" onClick="showLocation();">
+						<input type="hidden" value="$!shop.gisAddress" id="location"/>
+						<input type="hidden" value="$!shop.videoId" id="videoId"/>
+						</td>
+					</tr>
+					##if(${shop.gisAddress})
+					##<tr>
+						##<td width="65">　</td>
+						##<td width="154">
+						##<img border="0" src="${imgServer}/images/dot_this.gif" align=absmiddle>
+						##<a class="good" href="${gisServer}/shopapi/?id=$!{shop.gisAddress}" target="_blank">点击进入三维商城</a></td>
+					##</tr>
+					###end
+					<tr>
+						<td width="65">开店时间：</td>
+						<td width="154">${dateUtils.dtSimpleFormat($goods.gmtCreate)} </td>
+					</tr>
+					##<tr>
+						##<td width="65">固定电话:</td>
+						##<td width="154">$!member.phone</td>
+					##</tr>
+					##<tr>
+						##<td width="65">手机号码:</td>
+						##<td width="154">$!member.mobile</td>
+					##</tr>
+					<tr>
+						<td width="219" colspan="2" align="center" height="40">
+						<a href="${appServer}/shop/${shop.shopId}.htm"><img border="0" src="${imgServer}/images/info_btn_shop_big.gif" width="125" height="29"></a></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+			</table>
+	</div>
+</div>
+
+<table border="0" width="990" cellspacing="0" cellpadding="0"  height="40">
+	<tr>
+		<td valign="bottom">
+		<img border="0" src="${imgServer}/images/info_1.gif" style="margin-right:1px;"></td>
+	</tr>
+</table>
+<table border="0" width="985" cellspacing="0" cellpadding="0" style="background:url(${imgServer}/images/gb_gd_8.gif) repeat-x;">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+<table border="0" width="986" cellspacing="0" cellpadding="10" height="1" style="border: 1px solid #FF74B8;">
+	<tr>
+		<td>
+		<div align="center">
+			<table border="0" width="92%" cellspacing="0" cellpadding="0" id="table4">
+				<tr>
+					<td style="word-break: break-all" id="content">
+						#foreach($picpath in $goods.pictures)
+							<img src="${upServer}${picpath.path}" />
+						#end
+						<br/>
+						$!goods.getGoodsContent().getContent()
+					</td>
+				</tr>
+				#if($query.orderItems.size()>0)
+				<tr>
+					<td style="word-break: break-all" id="content">
+						#if($!goods.goodsType=="T")
+							<table border="1" width="100%" cellspacing="1" cellpadding="2" style="border-collapse: collapse" bordercolor="#E4E4E4" id="table1">
+												<tr>
+													<td width="10%" align="center"><b>编号</b></td>
+													<td width="35%" align="center"><b>订单内容</b></td>
+													<td width="10%" align="center"><b>出价</b></td>
+													<td width="10%" align="center"><b>预订数量</b></td>
+													<td width="10%" align="center"><b>总价</b></td>
+													<td width="20%" align="center"><b>状态</b></td>
+												</tr>
+												#foreach($order in $query.orderItems)
+												#set($orderCount = ($velocityCount+$query.getPageFristItem()))
+												#set($orderCount = $orderCount - 1)
+												<tr>
+													<td bgcolor="#FFFFFF" align="center"><b>$orderCount</b></td>
+													<td bgcolor="#FFFFFF" style="padding-left:6px;">
+														<a href="${homeMoudle}/order/detail.htm?id=$!{order.orderNo}" class="good">$!{order.orderDate} 会员$!{order.buyerLoginId}向本店铺的订单</a>
+													</td>
+													<td align="center">$!{priceUtils.fenToYuanString($!order.batchPrice)}</td>
+													<td align="center">$!order.totalNum</td>
+													<td align="center">$!{priceUtils.fenToYuanString($!order.totalFree)}</td>
+													<td bgcolor="#FFFFFF" align=center>订单状态：
+														#if($order.orderStatus=='WAIT_SELLER_CONFIRM')
+															<font color="#FF3300">等待卖家确认</font>
+														#elseif($order.orderStatus=='WAIT_BUYER_CONFIRM')
+															<font color="#0000FF">等待买家确认</font>
+														#elseif($order.orderStatus=='ORDER_CLOSE')
+															<font color="#0099FF">已经作废</font>
+														#elseif($order.orderStauts=='ORDER_SUCCESS')
+															<font color="#ff00FF">已经交易成功</font>
+														#elseif($order.orderStatus=='WAIT_PAY')
+															<font color="#9900cc">双方已确认</font>
+														#elseif($order.orderStatus=='SHIPPING')
+															<font color="#9900cc">转交易金成功</font>
+														#end
+													</td>
+
+
+												</tr>
+												#end
+											</table>
+						#end
+						<table border="0" width="100%" cellspacing="0" cellpadding="0" height="6">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+				#if($query.orderItems.size() > 0)
+				${control.get('goodsDetailPageSlider')}
+				#end
+					</td>
+				</tr>
+				#end
+			</table>
+		</div>
+		</td>
+	</tr>
+</table>
+<script language="javascript" type="text/javascript">
+	function contactSeller(sellerId,owner, goodsId, goodsName){
+		    var webchatUrl = "${appServer}/webchat.html?workgroup="+sellerId+"&username=" + owner +
+		    	      "的客户&question=" + goodsName +
+		    	      "&link=${appServer}/goods/" + goodsId + ".htm";
+		    var options = "width=700,height=535,left=300,top=100";
+		    window.open(webchatUrl, '客服', options);
+	}
+</script>

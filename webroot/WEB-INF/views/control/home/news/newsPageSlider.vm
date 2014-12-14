@@ -1,0 +1,53 @@
+<script language="javascript" type="text/javascript">
+//<![CDATA[ 
+    function goToPage(page){
+    	document.newsPage.current.value = page;
+    	document.newsPage.submit();
+    }
+    function viewPage(){
+    	var cpage = document.newsPage.sumto.value;
+    	goToPage(cpage);
+    }
+    function submitToPage(){
+    	if(window.event.keyCode==13){
+    		viewPage();
+    	}
+    }
+    
+//]]>
+</script>
+<table border="0" cellspacing="0" cellpadding="2" >
+	<form name="newsPage" action="${homeMoudle}/mynews/news_member_list.htm" method="post">
+<input type="hidden" name="current" value="${sliderCurrent}" />
+<input type="hidden" name="newsStatus" value="$!{query.newsStatus}"/>
+	<tr>
+	#foreach($grid in $grids)
+		#if($grid == 0)
+		<td align="center" width="12">...</td>
+		#elseif($grid == $sliderCurrent)
+		<td align="center" class="pagetb1" width="14">${grid}</td>
+		#else
+		<td width="20">
+		<table border="0" width="100%" cellspacing="0" cellpadding="0">
+			<tr>
+				<td align=center class="pagetb"><a href="javascript:void(0)" onClick="goToPage('${grid}')">${grid}</a></td>
+			</tr>
+		</table>
+		</td>
+		#end
+	#end
+		<td width="6"></td>
+		#if($sliderCurrent != $sliderTotal )
+		<td width="52" onClick="goToPage('${sliderNext}')"><img border="0" src="${imgServer}/images/btn_next.gif" width="52" height="18"></td>
+		#end
+		<td width="100" align=right>
+			µ½µÚ<input id="Page" size="3" name="sumto" onKeyDown="submitToPage()">Ò³
+        </td>
+		<td width="42"> 
+			<img border="0" src="${imgServer}/images/btn_jump.gif" width="42" height="18" onClick="viewPage()" />
+		</td>
+		
+	</tr>
+	</form>
+</table>
+

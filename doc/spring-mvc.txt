@@ -1,0 +1,16 @@
+服务器端重定向：forward 如：return new ModelAndView("forward:a_new_view.htm");
+客户端重定向：redirect 如： return new ModelAndView("redirect:a_new_view.htm");
+
+spring 自带的control大多从WebContentGenerator继承下来，也就有了WebContentGenerator.applyCacheSeconds 方法的能力，
+用来控制clinet 浏览器对页面的cache.比如：
+	<bean name="adminIndex" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" value="admin/adminUser/index" />
+	</bean>
+会导致客户端cache整个page，除非f5强制刷新，不会再访问服务器。配置改成如下后，则客户端不再缓存：
+	<bean name="adminIndex" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" value="admin/adminUser/index" />
+		<property name="cacheSeconds" value="0" />
+	</bean>
+cacheSeconds > 0 ：表示希望页面在client被cache的时间为cacheSeconds 秒
+cacheSeconds = 0： 客户端不能cache页面
+cacheSeconds < 0: 不做特殊处理，这时大多数浏览器都会选择cache页面

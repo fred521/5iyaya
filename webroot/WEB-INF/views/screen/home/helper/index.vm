@@ -1,0 +1,72 @@
+#set( $layout = "layout/home/helper/default.vm" )
+<style type="text/css">#doc3{FONT: 12px arial,helvetica,sans-serif;}</style>
+
+<DIV class=bbp-custom-t2 id=doc3><DIV id=hd><DIV id=bd>
+      
+      <DIV class="help-search">
+		<SPAN class=tl></SPAN>
+		<SPAN class=tr></SPAN>
+		<SPAN class=bl></SPAN>
+		<SPAN class=br></SPAN>
+	  </DIV>
+	  
+	  <DIV class=help-nav><A href="http://www.5iyya.com/">我爱丫丫</A>&nbsp;&nbsp;&gt;&nbsp;&nbsp;帮助中心</DIV>
+
+	  <DIV id=bb-main>	    
+	    <!-- bb-c start -->
+		<DIV class=bb-c>		    
+		    <!-- help-guide -->
+		    <!-- help-category -->
+			<DIV class=help-category>
+			  <DIV class=hd><H3>帮助分类</H3></DIV>
+			  
+			  #foreach($helperType in $helperTypeList )
+			  <DIV class=bd>
+			    <DIV class="itembox #if($velocityCount%2==1) itembox-zebra #end "><SPAN class=tl></SPAN><SPAN class=tr></SPAN>
+			      <UL class=cls>
+			        <LI>
+					  <H3><A href="#" target=_blank>$!helperType.typeName</A></H3>
+					  <P>
+					  #foreach($helper in $helperMap.get($helperType.helperType))
+				        #if($velocityCount!=1)&nbsp;&nbsp;|&nbsp;&nbsp;#end
+				        <A href="${appServer}/helper/detail.htm?id=$!helper.helperId" alt="$!helper.helperTitle" title="$!helper.helperTitle" target=_blank>$stringUtils.abbreviate($!helper.helperTitle,30)</A>
+				      #end 
+				      
+					  </P>
+					</LI>
+			      </UL>
+			      <SPAN class=bl></SPAN><SPAN class=br></SPAN>
+			    </DIV>
+			  </DIV>
+			  #end
+ 			  
+			</DIV>
+			
+		</DIV><!-- bb-c end -->		
+	</DIV><!-- bb-main end -->	
+    
+    <DIV class=bb-c>
+		#foreach($helperType in $helperTypeList )    
+		<DIV class=help-mod1>
+		  <DIV class="hd">
+		  <H3>$!helperType.typeName</H3></DIV>
+		  <DIV class=bd>
+		    <UL class=help-ul1>
+		      #foreach($helper in $helperMap.get($helperType.helperType))
+		      <LI class=first><A href="${appServer}/helper/detail.htm?id=$!helper.helperId" alt="$!helper.helperTitle" title="$!helper.helperTitle" target=_blank>$stringUtils.abbreviate($!helper.helperTitle,15)</A></LI>
+		      #end           
+		    </UL>
+		  </DIV>
+		</DIV>
+		#end
+		<SPAN class=bl></SPAN><SPAN class=br></SPAN>
+		
+    </DIV>
+
+	</DIV>
+
+	</DIV>
+</DIV>
+ 
+
+

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="HELPERTYPE_SPACE">
+	<resultMap id="helpertype" class="com.nonfamous.tang.domain.HelperType">
+		<result property="helperType" column="HELPER_TYPE"/>
+		<result property="typeName" column="TYPE_NAME"/>
+		<result property="showOrder" column="SHOW_ORDER"/>
+	</resultMap>
+	
+	<insert id="add_helper_type" parameterClass="com.nonfamous.tang.domain.HelperType">
+		INSERT INTO HELPER_TYPE (
+				HELPER_TYPE,
+				TYPE_NAME,
+				SHOW_ORDER
+	                     )
+	             VALUES ( 
+				#helperType#,
+				#typeName#,
+				#showOrder#
+	                     )
+	</insert>
+	
+	<update id="update_helper_type" parameterClass="com.nonfamous.tang.domain.HelperType">
+		UPDATE HELPER_TYPE t SET  
+			<isNotEmpty prepend="" property="helperType"> t.HELPER_TYPE = #helperType#,</isNotEmpty>
+			<isNotEmpty prepend="" property="typeName"> t.TYPE_NAME = #typeName# </isNotEmpty>
+		WHERE t.HELPER_TYPE = #helperType#
+	</update>
+	
+	<select id="get_helper_type_list" parameterClass="java.util.Map" resultMap="helpertype">
+		SELECT 
+			HELPER_TYPE,
+			TYPE_NAME,
+			SHOW_ORDER 
+		FROM HELPER_TYPE  t  
+		  ORDER BY t.SHOW_ORDER 
+	</select>
+	<select id="get_yy_helper_type_list" parameterClass="java.util.Map" resultMap="helpertype">
+		SELECT 
+			HELPER_TYPE,
+			TYPE_NAME,
+			SHOW_ORDER 
+		FROM HELPER_TYPE  t
+		  ORDER BY t.SHOW_ORDER 
+	</select>
+	
+	<select id="get_helper_type" parameterClass="java.lang.String" resultMap="helpertype">
+		SELECT 
+			HELPER_TYPE,
+			TYPE_NAME,
+			SHOW_ORDER 
+		FROM HELPER_TYPE  t     
+		WHERE t.HELPER_TYPE = #value#
+	</select>
+	
+	<select id="get_helper_type_name" parameterClass="java.lang.String" resultClass="java.lang.String">
+		SELECT 
+			TYPE_NAME
+		FROM HELPER_TYPE  t     
+		WHERE t.TYPE_NAME = #value#
+	</select>
+	
+	<delete id="delete_helper_type" parameterClass="java.lang.String">
+		DELETE FROM HELPER_TYPE  WHERE HELPER_TYPE = #value#
+	</delete>
+</sqlMap>

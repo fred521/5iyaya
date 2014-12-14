@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="ADDRESS_SPACE">
+	<resultMap id="address" class="com.nonfamous.tang.domain.Address">
+		<result property="addressId" column="ADDRESS_ID"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="consignee" column="CONSIGNEE"/>
+		<result property="streetAddress" column="STREET_ADDRESS"/>
+		<result property="areaCode" column="AREA_CODE"/>
+		<result property="phone" column="PHONE"/>
+		<result property="mobile" column="MOBILE"/>
+		<result property="status" column="STATUS"/>
+		<result property="postCode" column="POST_CODE"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+	</resultMap>
+	
+	<insert id="insert_address" parameterClass="com.nonfamous.tang.domain.Address">
+		INSERT INTO ADDRESS (
+				ADDRESS_ID,
+				MEMBER_ID,
+				CONSIGNEE,
+				STREET_ADDRESS,
+				AREA_CODE,
+				PHONE,
+				MOBILE,
+				STATUS,
+				POST_CODE,
+				GMT_CREATE,
+				GMT_MODIFY,
+				MODIFIER
+	                     )
+	             VALUES ( 
+				#addressId#,
+				#memberId#,
+				#consignee#,
+				#streetAddress#,
+				#areaCode#,
+				#phone#,
+				#mobile#,
+				#status#,
+				#postCode#,
+				sysdate(),
+				sysdate(),
+				#modifier#
+	                     )
+	</insert>
+	
+	<update id="update_address" parameterClass="com.nonfamous.tang.domain.Address">
+		UPDATE ADDRESS t SET  
+			<isNotEmpty prepend="" property="consignee"> t.CONSIGNEE = #consignee#,</isNotEmpty>
+			<isNotEmpty prepend="" property="streetAddress"> t.STREET_ADDRESS = #streetAddress#,</isNotEmpty>
+			<isNotEmpty prepend="" property="areaCode"> t.AREA_CODE = #areaCode#,</isNotEmpty>
+			<isNotEmpty prepend="" property="phone"> t.PHONE = #phone#,</isNotEmpty>
+			<isNotEmpty prepend="" property="mobile"> t.MOBILE = #mobile#,</isNotEmpty>
+			<isNotEmpty prepend="" property="status"> t.STATUS = #status#,</isNotEmpty>
+			<isNotEmpty prepend="" property="postCode"> t.POST_CODE = #postCode#,</isNotEmpty>
+			<isNotEmpty prepend="" property="modifier"> t.MODIFIER = #modifier#,</isNotEmpty>
+			t.GMT_MODIFY = sysdate() 
+		WHERE t.ADDRESS_ID = #addressId#
+	</update>
+	
+	<select id="get_address_by_id" parameterClass="java.lang.String" resultMap="address">
+		SELECT 
+			ADDRESS_ID,
+			MEMBER_ID,
+			CONSIGNEE,
+			STREET_ADDRESS,
+			AREA_CODE,
+			PHONE,
+			MOBILE,
+			STATUS,
+			POST_CODE,
+			GMT_CREATE,
+			GMT_MODIFY,
+			MODIFIER
+		FROM ADDRESS  t     
+		WHERE t.ADDRESS_ID = #value#
+	</select>
+	
+	<select id="get_address_by_member_id" parameterClass="java.lang.String" resultMap="address">
+		SELECT 
+			ADDRESS_ID,
+			MEMBER_ID,
+			CONSIGNEE,
+			STREET_ADDRESS,
+			AREA_CODE,
+			PHONE,
+			MOBILE,
+			STATUS,
+			POST_CODE,
+			GMT_CREATE,
+			GMT_MODIFY,
+			MODIFIER
+		FROM ADDRESS  t     
+		WHERE t.MEMBER_ID = #value# and t.STATUS &lt;> 'D'
+	</select>
+	
+	<select id="get_address_count_by_member_id" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+		SELECT count(ADDRESS_ID)
+		FROM ADDRESS  t     
+		WHERE t.MEMBER_ID = #value# and t.STATUS &lt;> 'D'
+	</select>
+	
+	<delete id="delete_address" parameterClass="java.lang.String">
+		UPDATE ADDRESS set STATUS = 'D' WHERE ADDRESS_ID = #value#
+	</delete>
+	
+	<delete id="delete_addresses_by_member_id" parameterClass="java.lang.String">
+		DELETE FROM ADDRESS  WHERE MEMBER_ID = #value#
+	</delete>
+	
+</sqlMap>

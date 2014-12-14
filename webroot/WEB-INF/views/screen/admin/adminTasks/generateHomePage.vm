@@ -1,0 +1,30 @@
+#set( $layout = "layout/admin/default.vm" )
+<body>
+	<div >
+		<fieldset>
+			<legend>
+				首页静态页面生成
+			</legend>
+			<table>
+				<tr>
+					<th>最后更新</th>
+					<td>$!{dateUtils.frontFullChineseDate($lastModified)}</td>
+				</tr>
+				<tr>
+					<th>首页URL</th>
+					<td>$!{homePageUrl}</td>
+				</tr>
+				<tr>
+					<th>静态页面存储地址</th>
+					<td>$!{filePath}</td>
+				</tr>
+				<tr>
+					<th>文件编码</th>
+					<td>$!{charSet}</td>
+				</tr>
+            </table>
+			<hr>
+			<div align="right"><a href="${appServer}/admin/admin_tasks/generateHomePage.htm"/>生成</a>
+        </fieldset>
+	</div>
+</body>

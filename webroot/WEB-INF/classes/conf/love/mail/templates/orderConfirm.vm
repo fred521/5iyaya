@@ -1,0 +1,31 @@
+<html>
+<head>
+<title></title>
+<style>
+.content{
+	font-size:14px;
+	font-family:Arial;
+}
+</style>
+<head>
+<body>
+<span class="content">
+</br>
+尊敬的<strong>${username}</strong>:<br><br>
+    您的订单：<strong>${orderNumber}</strong> (卖家确认库存之后）已生效，客服人员已将产品库存情况留言，请登入会员中心查看。<br><br>
+点击这里<a on_click="return top.js.OpenExtLink(window,event,this)" href="http://www.5iyya.com/order/list.htm" target="_blank">http://www.5iyya.com/order/list.htm</a>（跳转到会员中心的订购单页面）。<br><br>
+此外，若确认订单，请根据平台内的指示跳转支付宝支付。<br><br>
+
+感谢您对我爱丫丫网的支持，我们愿以最优质的服务于您，欢迎您下次订购！<br><br>
+
+
+详情可咨询我爱丫丫网客服人员<br><br>
+
+客服QQ：619373550   咨询电话：0571-86799951<br><br>
+
+客服在线时间：9：00----22：30<br><br>
+
+</br>
+</span>
+</body>
+</html>

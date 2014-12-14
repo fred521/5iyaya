@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="DB2INST1_USER_CENTER" >
+  <resultMap id="ibatorgenerated_BaseResultMap" class="com.nonfamous.tang.domain.UserCenter" >
+    <result column="VERIFY_CODE" property="verifyCode" jdbcType="VARCHAR" />
+    <result column="FK_MEMBER" property="fkMember" jdbcType="VARCHAR" />
+    <result column="MEMBER_TYPE" property="memberType" jdbcType="CHAR" />
+    <result column="REQUEST_IP" property="requestIp" jdbcType="VARCHAR" />
+    <result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <select id="ibatorgenerated_selectByPrimaryKey" resultMap="ibatorgenerated_BaseResultMap" parameterClass="com.nonfamous.tang.domain.UserCenter" >
+    select VERIFY_CODE, FK_MEMBER, MEMBER_TYPE, REQUEST_IP, GMT_CREATE
+    from USER_CENTER
+    where VERIFY_CODE = #verifyCode:VARCHAR#
+  </select>
+  <delete id="ibatorgenerated_deleteByPrimaryKey" parameterClass="com.nonfamous.tang.domain.UserCenter" >
+    delete from USER_CENTER
+    where VERIFY_CODE = #verifyCode:VARCHAR#
+  </delete>
+  <insert id="ibatorgenerated_insert" parameterClass="com.nonfamous.tang.domain.UserCenter" >
+    insert into USER_CENTER (VERIFY_CODE, FK_MEMBER, MEMBER_TYPE, REQUEST_IP, GMT_CREATE)
+    values (#verifyCode:VARCHAR#, #fkMember:VARCHAR#, #memberType:CHAR#, #requestIp:VARCHAR#,
+      sysdate())
+  </insert>
+   <delete id="deleteByMember" parameterClass="com.nonfamous.tang.domain.UserCenter" >
+    delete from USER_CENTER
+    where FK_MEMBER = #fkMember#
+  </delete>
+   <select id="selectByMember" resultMap="ibatorgenerated_BaseResultMap" parameterClass="com.nonfamous.tang.domain.UserCenter" >
+    select VERIFY_CODE, FK_MEMBER, MEMBER_TYPE, REQUEST_IP, GMT_CREATE
+    from USER_CENTER
+    where FK_MEMBER = #fkMember#
+    order by GMT_CREATE desc
+  </select>
+  <select id="selectLastRequest" resultMap="ibatorgenerated_BaseResultMap" parameterClass="com.nonfamous.tang.domain.UserCenter" >
+
+    select VERIFY_CODE, FK_MEMBER, MEMBER_TYPE, REQUEST_IP, GMT_CREATE
+    from USER_CENTER
+    where FK_MEMBER = #fkMember#
+    order by GMT_CREATE desc
+     LIMIT 1
+  </select>
+</sqlMap>

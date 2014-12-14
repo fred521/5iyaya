@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="GOODSPROPERTY_SPACE">
+	<resultMap id="goodsTypePropertys" class="com.nonfamous.tang.domain.GoodsPropertyType" groupBy="id">
+		<result property="id" column="TYPE_ID"/>
+		<result property="name" column="NAME"/>
+		<result property="displayName" column="DISPLAY_NAME"/>
+		<result property="valueType" column="VALUE_TYPE"/>
+		<result property="propertys" resultMap="GOODSPROPERTY_SPACE.goodsProperty"/>
+	</resultMap>
+	
+	<resultMap id="goodsProperty" class="com.nonfamous.tang.domain.GoodsProperty">
+		<result property="id" column="ID"/>
+		<result property="value" column="VALUE"/>
+	</resultMap>
+	
+	<resultMap id="goodsWholeProperty" class="com.nonfamous.tang.domain.GoodsProperty" extends="goodsProperty">
+		<result property="goodsPropertyType.id" column="TYPE_ID"/>
+		<result property="goodsPropertyType.name" column="NAME"/>
+		<result property="goodsPropertyType.displayName" column="DISPLAY_NAME"/>
+		<result property="goodsPropertyType.valueType" column="VALUE_TYPE"/>
+	</resultMap>
+	
+	<select id="get_goods_whole_property_by_type_id" parameterClass="java.lang.Integer" resultMap="goodsWholeProperty">
+		SELECT p.id as ID,
+		p.value as VALUE,
+		t.id as TYPE_ID,
+		t.NAME as NAME,
+		t.DISPLAY_NAME as DISPLAY_NAME,
+		t.VALUE_TYPE as VALUE_TYPE
+		FROM GOODS_PROPERTY p inner join GOODS_PROPERTY_TYPE t on p.FK_TYPE = t.ID and t.ID=#value#  
+	</select>
+	
+	<select id="get_goods_whole_property_by_type_name" parameterClass="java.lang.String" resultMap="goodsWholeProperty">
+		SELECT p.id as ID,
+		p.value as VALUE,
+		t.id as TYPE_ID,
+		t.NAME as NAME,
+		t.DISPLAY_NAME as DISPLAY_NAME,
+		t.VALUE_TYPE as VALUE_TYPE
+		FROM GOODS_PROPERTY p inner join GOODS_PROPERTY_TYPE t on p.FK_TYPE = t.ID and t.NAME=#value#  
+	</select>
+	
+	<select id="get_goods_propertys_by_type_id" parameterClass="java.lang.Integer" resultMap="goodsTypePropertys">
+		SELECT p.id as ID,
+		p.value as VALUE,
+		t.id as TYPE_ID,
+		t.NAME as NAME,
+		t.DISPLAY_NAME as DISPLAY_NAME,
+		t.VALUE_TYPE as VALUE_TYPE
+		FROM  GOODS_PROPERTY_TYPE t left join GOODS_PROPERTY p  on p.FK_TYPE = t.ID and t.ID=#value#  
+	</select>
+	
+	
+	<select id="get_goods_propertys_by_type_id_list" parameterClass="java.util.Map" resultMap="goodsTypePropertys">
+		SELECT p.id as ID,
+		p.value as VALUE,
+		t.id as TYPE_ID,
+		t.NAME as NAME,
+		t.DISPLAY_NAME as DISPLAY_NAME,
+		t.VALUE_TYPE as VALUE_TYPE
+		FROM  GOODS_PROPERTY_TYPE t inner join GOODS_PROPERTY p  on p.FK_TYPE = t.ID
+		<isNotNull property="idList" prepend=" AND ">
+        	<iterate  property="idList" conjunction="OR" open="(" close=")"> t.ID = #idList[]# </iterate>
+        </isNotNull>
+	</select>
+</sqlMap>

@@ -1,0 +1,124 @@
+#set( $layout = "layout/admin/default.vm" )
+<BODY leftMargin=8 background="${imgServer}/images/admin/allbg.gif" topMargin=16>
+<form name="positionAdd"  action="${adminMoudle}/commend_position/pos_modify.htm" method="post" encType="multipart/form-data">
+<input type="hidden" name="commendId" #if($commendPosition.commendId) value="$!commendPosition.commendId" #else value="$commendId" #end>
+<TABLE cellSpacing=1 cellPadding=3 width="98%" align=center bgColor=#666666 border=0>
+  <TBODY>
+  <TR>
+      <TD background="${imgServer}/images/admin/tbg.gif" height=19>&nbsp;<b>添加/修改推荐位置管理</b></TD>
+    </TR>
+  <TR>
+      <TD vAlign=top bgColor=#ffffff height=200> <table border="0" width="98%" cellspacing="0" cellpadding="6">
+          
+          
+          <tr> 
+            <td width="100">位置名称:</td>
+            <td width="460"><input name="commendName" class="input4" size="29" value="$!form.getField("commendName").value">
+				<span> <font color=red>*&nbsp;</font></span></td>
+          </tr>
+          <tr> 
+            <td width="100">推荐识别码:</td>
+			<td>$!commendPosition.commendCode</td>
+            ##<td width="460"><input name="commendCode" class="input4" size="29" value="$!form.getField("commendCode").value"> 
+			##<span> <font color=red>*&nbsp;$!form.getField("commendCode").message</font></span></td>
+          </tr>
+		  <tr> 
+            <td>推荐类型:</td>			
+            <td>#showCommendType($commendPosition.commendType)</td>				
+          </tr>	
+          <tr> 
+            <td>所属栏目:</td>
+            <td>
+                #showCommendPosition($commendPosition.commendPage)				
+			</TD>
+		  </tr>				
+          
+          <script>
+		  function showPic()
+            {	
+              	document.all('imagek').innerHTML = "<img id=\"img\" border=\"0\"  />" ;
+             	document.all('img').src = document.all('pic').value;            
+            }
+          function changeselect(){
+          if (document.all.selectview.value==1){
+          document.all.TR1.style.display="";
+          document.all.TR2.style.display="";
+          document.all.TR3.style.display="";
+		  document.all.TR33.style.display="";
+          document.all.TR4.style.display="";
+          }
+          if (document.all.selectview.value==2){
+          document.all.TR1.style.display="";
+          document.all.TR2.style.display="none";
+          document.all.TR3.style.display="";
+		  document.all.TR33.style.display="";
+          document.all.TR4.style.display="none";
+          }
+          if (document.all.selectview.value==3){
+          document.all.TR1.style.display="none";
+          document.all.TR2.style.display="";
+          document.all.TR3.style.display="none";
+		  document.all.TR33.style.display="none";
+          document.all.TR4.style.display="";
+          }
+          }
+          </script>
+          <tr> 
+            <td width="100">显示形式:</td>
+			<input type="hidden" name="selectview" value="$!commendPosition.commendContentType">
+            <td width="460">
+				#showCommendContentType($commendPosition.commendContentType)				
+			</TD>
+		  </tr>				
+          
+          <tr ID="TR1" #if("$commendPosition.commendContentType"=="3") style="display:none" #end> 
+            <td width="100">图片大小:</td>
+            <td width="460">
+            长度:<input name="picHeight" value="$!form.getField('picHeight').value" style="width:50" size="29"> px;&nbsp;
+            宽度:<input name="picWidth" value="$!form.getField('picWidth').value" style="width:50" size="29"> px
+            <span> <font color=red>$!form.getField('picHeight').message &nbsp;$!form.getField('picWidth').message</font></span></td>
+          </tr>
+          <tr ID="TR2" #if("$commendPosition.commendContentType"=="2") style="display:none" #end> 
+            <td width="100">文字长度:</td>
+            <td width="460"><input name="textLength" value="$!form.getField('textLength').value" style="width:50" size="29"> 字符
+			<span> <font color=red>$!form.getField('textLength').message</font></span></td>
+          </tr>
+          <tr ID="TR33" #if("$commendPosition.commendContentType"=="3") style="display:none" #end> 
+            <td width="100">图片预览:</td>
+            <td width="460">
+				<div id="imagek">
+				#if($commendPosition.picPath)
+				<img id="img" border="0" src="${upServer}/${commendPosition.picPath}.n.jpg">&nbsp;&nbsp;&nbsp;
+				#else
+				<img id="img" border="0" src="${imgServer}/images/showimg.gif" />&nbsp;&nbsp;&nbsp;
+				#end
+				</div>
+			</td>
+          </tr>
+		  <tr ID="TR3" #if("$commendPosition.commendContentType"=="3") style="display:none" #end> 
+            <td width="100">替代图片:</td>
+            <td width="460"><input type="file" name="replacePic" size="29" onChange="showPic()">
+			<span> <font color=red>$!form.getField('replacePic').message</font></span></td>
+          </tr>
+		  
+          <tr ID="TR4" #if("$commendPosition.commendContentType"=="2") style="display:none" #end> 
+            <td width="100">替代文字:</td>
+            <td width="460"><input name="replaceText" value="$!form.getField('replaceText').value" class="input4" size="29">
+			<span> <font color=red>$!form.getField('replaceText').message</font></span></td>
+          </tr>
+           <tr> 
+            <td width="100">位置顺序</td>
+            <td width="460"><input name="positionOrder" value="$!form.getField("positionOrder").value" class="input4" size="29">
+			<span class="red"><font color=red>$!form.getField("positionOrder").message</font></span>
+			</td>
+          </tr>
+          <tr> 
+            <td>　</td>
+            <td> <INPUT type=submit value=提交 name=submit > &nbsp;&nbsp; <INPUT type=reset value=重置 name=reset></td>
+          </tr>
+          <tr> 
+            <td colspan="2">　</td>
+          </tr>
+        </table>        
+      </TD>
+</TR></TBODY></TABLE></form></BODY>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="MOBILEVALIDATE_SPACE">
+	<resultMap id="mobilevalidate" class="com.nonfamous.tang.domain.MobileValidate">
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="phone" column="PHONE"/>
+		<result property="validateCode" column="VALIDATE_CODE"/>
+	</resultMap>
+	
+	<insert id="MOBILE_VALIDATE_INSER" parameterClass="com.nonfamous.tang.domain.MobileValidate">
+		INSERT INTO MOBILE_VALIDATE (
+			MEMBER_ID,
+			PHONE,
+			VALIDATE_CODE
+	   	) VALUES( 
+			#memberId#,
+			#phone#,
+			#validateCode#
+	    )
+	</insert>
+	
+	<update id="MOBILEVALIDATE_UPDATE" parameterClass="com.nonfamous.tang.domain.MobileValidate">
+		UPDATE MOBILE_VALIDATE t SET  
+			<isNotEmpty property="phone"> t.PHONE = #phone#,</isNotEmpty>
+			<isNotEmpty property="validateCode"> t.VALIDATE_CODE = #validateCode# </isNotEmpty>
+		WHERE t.MEMBER_ID = #memberId#
+	</update>
+	
+	<select id="GET_MOBILEVALIDATE_BY_MEMBERID" resultMap="mobilevalidate">
+		SELECT * FROM MOBILE_VALIDATE  t WHERE t.MEMBER_ID = #memberId#
+	</select>
+	
+	<delete id="DELETE_MOBILEVALIDATE_BY_MEMBERID">
+		DELETE FROM MOBILE_VALIDATE  WHERE MEMBER_ID = #memberId#
+	</delete>
+</sqlMap>

@@ -1,0 +1,109 @@
+#set( $layout = "layout/home/viewDefault.vm" )
+<table width="950" cellspacing="1" cellpadding="0" height="30">
+	<tr>
+		<td background="${imgServer}/images/sreach_conbg.gif" align="center">
+		<table border="0" width="100%" cellspacing="0" cellpadding="3">
+			<tr>
+				<td><a href="${appServer}">首页</a> <span style="font-family:宋体">>></span> 
+				<a href="${appServer}/news.htm">分类信息 </a><span style="font-family:宋体">>></span> 
+				<a href="$homeMoudle.setTarget('/search/search.htm').addQueryData('searchcate',$!{dto.newsType.newsType}).addQueryData('searchtype','news')">$!dto.newsType.typeName</a> <span style="font-family:宋体">>></span> 信息详情</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+</table>
+<table border="0" width="950" cellspacing="0" cellpadding="0" height="306">
+	<tr>
+		<td width="650" valign="top">
+		<table border="0" width="100%" cellspacing="0" cellpadding="2">
+			<tr>
+				<td bgcolor="#F3F3F3" style="font-size:14px;font-weight:bold;padding-left:20px;color: #0000A0" height="30">
+				<font color="#B4711F">$!news.newsTitle</font></td>
+			</tr>
+			<tr>
+				<td style="color: #797979;padding-left:20px;" height="26">发布时间:${dateUtils.frontFullChineseDate($!news.gmtCreate)}      #*信息编号：$!news.newsId*#</td>
+			</tr>
+			<tr>
+				<td height="10"></td>
+			</tr>
+			<tr>
+				<td style="font-size:14px;padding-left:20px;word-break: break-all"  id="content">  $!news.content.content </td>
+			</tr>
+			<tr>
+				<td height="10"></td>
+			</tr>
+			<tr>
+				<td style="padding-left:20px;"><b>联系电话</b>:&nbsp;$!news.phone&nbsp;&nbsp;#*<img border="0" src="${imgServer}/images/voip3.gif" align=absmiddle style="cursor:pointer" onClick=window.open("${imgServer}/contact/duanxin.html","发送短信","width=542,height=429,left=300,top=100")>*#</td>
+			</tr>
+			<tr>
+				<td style="padding-left:20px;"><b>电子邮箱</b>:&nbsp;$!member.email</td>
+			</tr>
+			<tr>
+				<td height="10"><hr size="1" color="#CCCCCC"></td>
+			</tr>
+			</table>
+		</td>
+		<td width="40" valign="top">　</td>
+		<td width="260" valign="top">
+		<table border="0" width="260" cellspacing="0" cellpadding="0" style="border: 1px solid #E6C392; background-color: #FCF8F1" height="105">
+			<tr>
+				<td height="24" bgcolor="#E6C392" style="font-size:14px;font-weight:bold;padding-left:10px;">发布人信息</td>
+			</tr>
+			<tr>
+				<td height="1" bgcolor="#E6C392"></td>
+			</tr>
+			<tr>
+				<td align="center" height="78">
+				<table border="0" width="88%" cellspacing="0" cellpadding="2">
+					<tr>
+						<td width="65">会员昵称：</td>
+						<td width="154">$!news.nick</td>
+					</tr>
+					<tr>
+						<td width="65">　</td>
+						<td width="154">
+						<img border="0" src="${imgServer}/images/btn_contact.gif" style="cursor:pointer;" ></td>
+					</tr>
+					<tr>
+						<td width="65">注册时间：</td>
+						<td width="154">${dateUtils.dtSimpleFormat($!member.gmtRegister)} </td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+		
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" height="8" id="table1">
+			<tr>
+				<td>　</td>
+			</tr>
+		</table>
+		
+		<table border="0" width="260" cellspacing="0" cellpadding="0" style="border: 1px solid #E6C392; background-color: #FCF8F1" >
+			<tr>
+				<td height="24" bgcolor="#EBCFA9" style="font-size:14px;font-weight:bold;padding-left:10px;">相关信息</td>
+			</tr>
+			<tr>
+				<td height="1" bgcolor="#E6C392"></td>
+			</tr>
+			<tr>
+				<td align="center">
+				<table border="0" width="94%" cellspacing="0" cellpadding="5">
+					<tr>
+						<td>
+						<table width="100%" cellspacing="0" cellpadding="1">
+ #foreach($news in $dto.list)
+ #set($newsTypeId=$dto.newsType.newsType)
+ <tr>
+   <td width="76%"><a href="${homeMoudle}/news/${news.newsId}.htm" class="blue">$news.newsTitle</a></td>
+  </tr>
+ #end       
+</table></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+</table>

@@ -1,0 +1,144 @@
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="TRADEPAY_SPACE">
+	<resultMap id="TRADEPAY" class="com.nonfamous.tang.domain.trade.TradePay">
+		<result property="id" column="ID"/>
+		<result property="orderNo" column="ORDER_NO"/>
+		<result property="buyerName" column="BUYER_NAME"/>
+		<result property="sellerName" column="SELLER_NAME"/>
+		<result property="buyerAccount" column="BUYER_ACCOUNT"/>
+		<result property="buyerBank" column="BUYER_BANK"/>
+		<result property="sellerAccount" column="SELLER_ACCOUNT"/>
+		<result property="sellerBank" column="SELLER_BANK"/>
+		<result property="buyerId" column="BUYER_ID"/>
+		<result property="sellerId" column="SELLER_ID"/>
+		<result property="payFee" column="PAY_FEE"/>
+		<result property="payStatus" column="PAY_STATUS"/>
+		<result property="transStatus" column="TRANS_STATUS"/>
+		<result property="payDate" column="PAY_DATE"/>
+		<result property="bankNo" column="BANK_NO"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="transDate" column="TRANS_DATE"/>
+		<result property="paySuccessDate" column="PAY_SUCCESS_DATE"/>
+		<result property="payBank" column="PAY_BANK"/>
+	</resultMap>
+	
+	<insert id="TRADEPAY_INSERT" parameterClass="com.nonfamous.tang.domain.trade.TradePay">	
+		INSERT INTO TRADE_PAY (
+				ID,
+				ORDER_NO,
+				BUYER_NAME,
+				SELLER_NAME,
+				BUYER_ACCOUNT,
+				BUYER_BANK,
+				SELLER_ACCOUNT,
+				SELLER_BANK,
+				BUYER_ID,
+				SELLER_ID,
+				PAY_FEE,
+				PAY_STATUS,
+				TRANS_STATUS,
+				PAY_DATE,
+				BANK_NO,
+				CREATOR,
+				GMT_MODIFY,
+				MODIFIER,
+				GMT_CREATE,
+				TRANS_DATE,
+				PAY_SUCCESS_DATE
+				) 
+				VALUES( 
+				#id#,
+				#orderNo#,
+				#buyerName#,
+				#sellerName#,
+				#buyerAccount#,
+				#buyerBank#,
+				#sellerAccount#,
+				#sellerBank#,
+				#buyerId#,
+				#sellerId#,
+				#payFee#,
+				#payStatus#,
+				#transStatus#,
+				sysdate(),
+				#bankNo#,
+				#creator#,
+				sysdate(),
+				#modifier#,
+				sysdate(),
+				#transDate#,
+				#paySuccessDate#)
+	</insert>
+	
+	<update id="TRADEPAY_UPDATE_BY_ID" parameterClass="com.nonfamous.tang.domain.trade.TradePay">
+		UPDATE TRADE_PAY t SET   
+			<isNotEmpty property="buyerName"> t.BUYER_NAME = #buyerName#,</isNotEmpty>
+			<isNotEmpty property="sellerName"> t.SELLER_NAME = #sellerName#,</isNotEmpty>
+			<isNotEmpty property="buyerAccount"> t.BUYER_ACCOUNT = #buyerAccount#,</isNotEmpty>
+			<isNotEmpty property="buyerBank"> t.BUYER_BANK = #buyerBank#,</isNotEmpty>
+			<isNotEmpty property="sellerAccount"> t.SELLER_ACCOUNT = #sellerAccount#,</isNotEmpty>
+			<isNotEmpty property="sellerBank"> t.SELLER_BANK = #sellerBank#,</isNotEmpty>
+			<isNotEmpty property="buyerId"> t.BUYER_ID = #buyerId#,</isNotEmpty>
+			<isNotEmpty property="sellerId"> t.SELLER_ID = #sellerId#,</isNotEmpty>
+			<isNotEmpty property="payFee"> t.PAY_FEE = #payFee#,</isNotEmpty>
+			<isNotEmpty property="payStatus"> t.PAY_STATUS = #payStatus#,</isNotEmpty>
+			<isNotEmpty property="transStatus"> t.TRANS_STATUS = #transStatus#,</isNotEmpty>
+			<isNotEmpty property="payDate"> t.PAY_DATE = #payDate#,</isNotEmpty>
+			<isNotEmpty property="bankNo"> t.BANK_NO = #bankNo#,</isNotEmpty>
+			<isNotEmpty property="payBank"> t.PAY_BANK = #payBank#,</isNotEmpty>
+			<isNotEmpty property="gmtModify"> t.GMT_MODIFY = #gmtModify#,</isNotEmpty>
+			<isNotEmpty property="modifier"> t.MODIFIER = #modifier#</isNotEmpty>
+		WHERE t.id = #id#
+	</update>
+	
+	<update id="TRADEPAY_UPDATE_PAY_STATUS_BY_ID" >
+		update trade_pay t set 
+		   <isEqual property="payStatus" compareValue="S">t.pay_success_date = sysdate(),</isEqual>
+		   <isNotEmpty property="payBank" prepend=""> t.pay_bank=#payBank# ,</isNotEmpty>
+		   <isNotEmpty property="serialNo" prepend=""> t.BANK_NO=#serialNo# ,</isNotEmpty>
+		    t.pay_status=#payStatus#, t.gmt_modify = sysdate(), t.modifier = #modifier# 
+		where t.id=#id#
+	</update>
+	
+	<update id="TRADEPAY_UPDATE_TRANS_STATUS_BY_ID" >
+		update trade_pay t set t.trans_status=#transStatus#,t.trans_date = sysdate(),t.gmt_modify = sysdate(),t.modifier = #modifier# where t.id=#id#
+	</update>
+	
+	<update id="TRADEPAY_UPDATE_PAY_DATE_BY_ID" >
+		update trade_pay t set t.pay_date = sysdate(),t.gmt_modify = sysdate(),t.modifier = #modifier# where t.id=#id#
+	</update>
+	
+	<select id="QUERY_TRADEPAY_LIST" parameterClass="com.nonfamous.tang.dao.query.TradePayQuery" resultMap="TRADEPAY">
+			SELECT t.* FROM TRADE_PAY  t
+				<dynamic prepend="where">
+					<isNotEmpty property="buyId" prepend="and"> t.BUYER_ID = #buyId# </isNotEmpty>
+					<isNotEmpty property="sellerId" prepend="and"> t.SELLER_ID = #sellerId# </isNotEmpty>
+					<isNotEmpty property="startDate" prepend="and"> t.GMT_CREATE &gt;=#startDate#</isNotEmpty>
+					<isNotEmpty property="endDate" prepend="and"> t.GMT_CREATE &lt;#addEndDate#</isNotEmpty>
+				</dynamic>
+				order by t.PAY_DATE desc
+				LIMIT #dbStartNo#, #dbEndNo#
+	</select>
+	
+	<select id="QUERY_TRADEPAY_COUNT" parameterClass="com.nonfamous.tang.dao.query.TradePayQuery" resultClass="java.lang.Integer">
+		select count(*) as total
+		FROM TRADE_PAY  t
+		<dynamic prepend="where">
+			<isNotEmpty property="buyId" prepend="and"> t.BUYER_ID = #buyId# </isNotEmpty>
+			<isNotEmpty property="sellerId" prepend="and"> t.SELLER_ID = #sellerId# </isNotEmpty>
+			<isNotEmpty property="startDate" prepend="and"> t.GMT_CREATE &gt;=#startDate#</isNotEmpty>
+			<isNotEmpty property="endDate" prepend="and"> t.GMT_CREATE &lt;#addEndDate#</isNotEmpty>		
+		</dynamic>
+	</select>
+	
+	<select id="GET_TRADEPAY_BY_ID" resultMap="TRADEPAY">
+		SELECT * FROM TRADE_PAY t WHERE t.id = #id#
+	</select>
+	
+	<select id="GET_TRADEPAY_BY_TRADE_ORDER_NO" resultMap="TRADEPAY">
+		SELECT * FROM TRADE_PAY t WHERE t.ORDER_NO = #tradeOrderNo#
+	</select>
+</sqlMap>

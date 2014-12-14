@@ -1,0 +1,185 @@
+#set( $layout = "layout/home/default.vm" )
+<script language="javascript" type="text/javascript">
+	$(document).ready(function(){
+		addRoundCorner('hotpink');
+	});
+</script>
+<div id="mainPage_content">
+	<div id="baby_content_left">
+		$control.get('goods_cat').put("catType","婴儿用品")
+	</div>
+	<div id="baby_content_center">
+		
+		<div class='first'>
+			<img src="${imgServer}/images/banner_01.jpg" alt="婴儿图片"/>
+		</div>
+	
+		<div class='second'>
+			<div><img src="${imgServer}/images/imf-express_title.gif" alt="信息速递"/></div>
+			<div class="roundCorner gray onlyBottom">
+			<ul>
+				<li>丫丫亲子论坛成立</li>
+				<li>育婴方法大讨论</li>
+				<li>婴儿用品商店销售规则</li>
+				<li>挑选奶粉看我的</li>
+				<li>育婴方法大讨论</li>
+			</ul>
+			<div align="right">
+        		<img src="${imgServer}/images/more_icon.gif" alt="More..."/>
+        	</div>
+			</div>
+		</div>
+	</div>
+	<div id="baby_content_right">
+		<div class='title'>
+			<ul>
+				<li class='focus'>奶粉</li>
+				<li>喂养用品</li>
+				<li>服装鞋帽</li>
+				<li>玩具</li>
+			</ul>
+		</div>
+		<div class="roundCorner gray onlyBottom">
+			<ul>
+				<li>丫丫亲子论坛成立</li>
+				<li>育婴方法大讨论</li>
+				<li>婴儿用品商店销售规则</li>
+				<li>挑选奶粉看我的</li>
+				<li>育婴方法大讨论</li>
+			</ul>
+			<div align="right">
+        		<img src="${imgServer}/images/more_icon.gif" alt="More..."/>
+        	</div>
+		</div>
+	</div>
+	</div>
+</div>
+<table border="0" width="950" cellspacing="0" cellpadding="0" height="554">
+	<tr>
+		<td width="180" valign="top" height="554">
+		#if($goods_fresh_goods||$goods_pic_commend)
+		
+		#if($goods_fresh_goods && $goods_fresh_goods.size()>0)
+		<table border="0" width="100%" cellspacing="0" cellpadding="3" style="border: 1px solid #D5D5D5; background-color: #FAFAFA" bordercolor="#D5D5D5" id="table1">
+			<tr>
+				<td align=center valign="top">
+				
+				<table border="0" width="172" cellspacing="0" cellpadding="0" height="24">
+					<tr>
+						<td width="20" bgcolor="#FFFFFF">
+						<img border="0" src="../images/game_btn_9.gif" width="20" height="20"></td>
+						<td style="padding-top:3px;" bgcolor="#FFFFFF"><font color="#CC3300"><b><a class="blueB">最新上架商品</a></b></font></td>
+					</tr>
+				</table>
+				<table border="0" width="172" cellspacing="0" cellpadding="0">
+					<tr>
+						<td height="1" background="../images/line_bg.gif"></td>
+					</tr>
+					<tr>
+						<td height="6"></td>
+					</tr>
+					<tr>
+						<td>
+						<table border="0" width="100%" cellspacing="0" cellpadding="1">
+							<tr>
+								<td align=center>
+								<table border="0" width="96%" cellspacing="0">
+									#foreach($commend in $goods_fresh_goods)	
+        								<tr>
+											<td><a href="$!commend.commendUrl" title="$!commend.commendText">$stringUtils.abbreviate($!commend.commendText,15)</a></td>
+										</tr>
+        							#end	
+		                        </table>
+								</td>
+							</tr>
+						</table>
+						</td>
+					</tr>
+				</table>
+				
+				</td>
+			</tr>
+		</table>
+		#end
+		#if($goods_pic_commend&&$goods_pic_commend.size()>0)
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table7">
+			#foreach($commend in $goods_pic_commend)					
+                <tr>
+					<td height="8"></td>
+                </tr>
+                <tr>
+					<td><a href="$!commend.commendUrl" >
+					#if($commend.picPath)
+					<img border="0" src="${upServer}/$!{commend.picPath}.n.jpg" width="178" height="49" style="border: 1px solid #D5D5D5">
+					#else
+				    <img border="0" src="$commend.picUrl" width="178" height="49" style="border: 1px solid #D5D5D5">
+					#end
+					</a>
+					</td>
+                </tr>
+			#end				
+		</table>
+		#end
+		
+		#end
+		</td>
+		<td width="10" height="554"></td>
+		<td width="760" valign="top" height="554">
+		#if($goods_mid_goods&&$goods_mid_goods.size() >0)
+		<table border="0" width="760" cellspacing="0" cellpadding="2" id="table11">
+			<tr>
+				#foreach($commend in $goods_mid_goods)	
+					#if($velocityCount <= 8)
+						#if($velocityCount <= 3 )
+						<td align="left" width="92">
+						#elseif($velocityCount >= 6 )
+						<td align="right" width="92">	
+						#else
+						<td align="center" width="92">	
+						#end
+							#if($commend.picPath)
+							<img border="0" src="${upServer}/$!{commend.picPath}.n.jpg" width="80" height="80" style="border: 1px solid #D9D9D9">
+							#else
+							<img border="0" src="$commend.picUrl" width="80" height="80" style="border: 1px solid #D9D9D9">
+							#end
+						</td>
+					#end
+				#end				
+			</tr>
+			<tr>
+				#foreach($commend in $goods_mid_goods)	
+					#if($velocityCount <= 8)
+    					<td align="center" valign="top"><a href="$commend.commendUrl" style="line-height:normal;">$stringUtils.abbreviate($!commend.commendText,16)
+    							#if($!commend.batchNum)
+    								<br><span class="marketprice">起批量$!commend.batchNum</span>
+    							#end
+    							#if($!priceUtils.fenToYuanString($!commend.batchPrice).equals("0.00"))
+    								<br><span class="mallprice">￥ 面议</span>
+							    #else
+    								<br><span class="mallprice">￥ $!priceUtils.fenToYuanString($!commend.batchPrice)</span>
+    							#end
+    					</a></td>							
+					#end
+				#end				
+			</tr>
+			<tr>
+				<td width="92"></td>	
+				<td width="92"></td>
+				<td width="92"></td>
+				<td width="92"></td>
+				<td width="92"></td>
+				<td width="92"></td>
+				<td width="92"></td>
+				<td width="92"></td>
+			</tr>
+		</table>		
+		#end
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" height="8">
+			<tr>
+				<td></td>
+			</tr>
+		</table>
+		##$control.get('market_shop')
+		</td>
+	</tr>
+</table>

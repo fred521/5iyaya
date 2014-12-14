@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="gb2312"?>
+<formmset>
+	<form name="login">
+		<field name="userId">
+			<required-validator>
+				<message>用户id不能为空</message>
+			</required-validator>
+		</field>
+		<field name="password">
+			<required-validator>
+				<message>密码不能为空</message>
+			</required-validator>
+			<length-validator min="10" max="100">
+				<message>密码不能小于10个字符，大于100个字符</message>
+			</length-validator>
+		</field>
+		<field name="email">
+			<regexp-validator pattern="[_\\-a-zA-Z0-9.]+@([_\\-a-zA-Z0-9]+\\.)+[a-zA-Z0-9]{2,3}">
+				<message>email不正确</message>
+			</regexp-validator>
+		</field>
+	</form>
+</formmset>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="GB18030"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="TradeOrder">
+	<resultMap id="order" class="com.nonfamous.tang.domain.trade.TradeOrder">
+		<result property="orderNo" column="ORDER_NO"/>
+		<result property="shopId" column="SHOP_ID"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="shopName" column="SHOP_NAME"/>
+		<result property="payFee" column="PAY_FEE"/>
+		<result property="status" column="STATUS"/>
+		<result property="orderDate" column="ORDER_DATE"/>
+		<result property="buyerId" column="BUYER_ID"/>
+		<result property="sellerId" column="SELLER_ID"/>
+		<result property="orderType" column="ORDER_TYPE"/>
+		<result property="memo" column="MEMO"/>
+		<result property="buyerLoginId" column="BUYER_LOGIN_ID"/>
+		<result property="sellerLoginId" column="SELLER_LOGIN_ID"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="logisticsFee" column="logistics_fee"/>
+	</resultMap>
+	
+	<select id="get_next_order_no" resultClass="int">
+		select nextval('trade_order_sequence');
+	</select>
+	
+	<insert id="insert_new_order" parameterClass="com.nonfamous.tang.domain.trade.TradeOrder">
+		INSERT INTO TRADE_ORDER (
+				ORDER_NO,
+				SHOP_ID,
+				ADDRESS,
+				SHOP_NAME,
+				PAY_FEE,
+				STATUS,
+				ORDER_DATE,
+				BUYER_ID,
+				SELLER_ID,
+				ORDER_TYPE,
+				MEMO,
+				BUYER_LOGIN_ID,
+				SELLER_LOGIN_ID,
+				CREATOR,
+				GMT_MODIFY,
+				MODIFIER,
+				GMT_CREATE
+	                     )
+	             VALUES ( 
+				#orderNo#,
+				#shopId#,
+				#address#,
+				#shopName#,
+				#payFee#,
+				#status#,
+				#orderDate#,
+				#buyerId#,
+				#sellerId#,
+				#orderType#,
+				#memo#,
+				#buyerLoginId#,
+				#sellerLoginId#,
+				#creator#,
+				sysdate(),
+				#modifier#,
+				sysdate()
+	                     )
+	</insert>
+	
+	<update id="tradeorder_update_status" parameterClass="com.nonfamous.tang.domain.trade.TradeOrder">
+		UPDATE TRADE_ORDER t SET
+			t.STATUS = #status#,
+			t.GMT_MODIFY = sysdate(),
+			t.MODIFIER = #modifier#
+		WHERE t.ORDER_NO = #orderNo#
+	</update>
+
+	<update id="tradeorder_confirm" parameterClass="com.nonfamous.tang.domain.trade.TradeOrder">
+		UPDATE TRADE_ORDER t SET
+			t.STATUS = #status#,
+		    t.ADDRESS = #address#,
+			t.GMT_MODIFY = sysdate(),
+			t.MODIFIER = #modifier#
+		WHERE t.ORDER_NO = #orderNo#
+	</update>
+	
+	<update id="tradeorder_update_status_and_payfree" parameterClass="com.nonfamous.tang.domain.trade.TradeOrder">
+		UPDATE TRADE_ORDER t SET
+			t.PAY_FEE = #payFee#,
+		    t.ADDRESS = #address#,
+			t.STATUS = #status#,
+			t.GMT_MODIFY = sysdate(),
+			t.MODIFIER = #modifier#,
+			t.logistics_fee =#logisticsFee#
+		WHERE t.ORDER_NO = #orderNo#
+	</update>
+	
+	<select id="get_order_number_by_query" resultClass="java.lang.Integer">
+		select count(*) as total
+		FROM TRADE_ORDER  t
+		WHERE 1=1 
+			<!-- �1�71�1�77�1�71�1�77�1�71�1�77�1�7�0�41�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�70�1�78�1�71�1�77�1�70�1�75�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�70�1�72�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�79�1�71�1�77�1�70�1�73�1�71�1�77�1�71�1�77�1�70�1�78�1�70�1�70 -->
+			<isEqual property="searchStatus" compareValue="0">
+			   and	t.BUYER_ID = #memberId# or (t.SELLER_ID = #memberId# and t.STATUS != 'ORDER_INIT')
+			</isEqual>
+			<!-- �1�70�1�75�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�70�1�72�1�71�1�77�1�71�1�77 -->
+			<isEqual property="searchStatus" compareValue="1">
+			  and	( t.BUYER_ID = #memberId# or t.SELLER_ID = #memberId# ) and t.STATUS = 'WAIT_PAY'
+			</isEqual>
+			<!-- �1�71�1�77�1�70�1�79�1�71�1�77�1�70�1�79�1�71�1�77�1�70�1�72�1�71�1�77�1�71�1�77 -->
+			<isEqual property="searchStatus" compareValue="2">
+			and	(t.BUYER_ID = #memberId# and t.STATUS = 'WAIT_SELLER_CONFIRM' ) or
+				(t.SELLER_ID = #memberId# and t.STATUS = 'WAIT_BUYER_CONFIRM' )
+			</isEqual>
+			<!-- �1�71�1�77�1�70�1�79�1�71�1�77�1�71�1�77�1�70�1�71�1�71�1�77�1�70�1�72�1�71�1�77�1�71�1�77 -->
+			<isEqual property="searchStatus" compareValue="3">
+			and	(t.BUYER_ID = #memberId# and t.STATUS in ( 'WAIT_BUYER_CONFIRM' , 'ORDER_INIT' ) ) or
+				(t.SELLER_ID = #memberId# and t.STATUS = 'WAIT_SELLER_CONFIRM' )
+			</isEqual>
+			<!-- �1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77 -->
+			<isEqual property="searchStatus" compareValue="4">
+			and	( t.BUYER_ID = #memberId# or t.SELLER_ID = #memberId# ) and t.STATUS = 'ORDER_CLOSE'
+			</isEqual>
+			<!--�1�71�1�77�1�70�1�79�1�71�1�77�1�71�1�77�1�71�1�77�1�70�1�71�1�71�1�77�1�71�1�77-->
+			<isEqual property="searchStatus" compareValue="5">
+			and	t.BUYER_ID = #memberId#  and t.STATUS = 'WAIT_PAY'
+			</isEqual>
+	</select>
+	
+	<select id="get_order_by_query" resultMap="order">
+		select  t.* FROM TRADE_ORDER  t WHERE 1=1 
+					<!-- �1�71�1�77�1�71�1�77�1�71�1�77�1�7�0�41�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�70�1�78�1�71�1�77�1�70�1�75�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�70�1�72�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�79�1�71�1�77�1�70�1�73�1�71�1�77�1�71�1�77�1�70�1�78�1�70�1�70 -->
+					<isEqual property="searchStatus" compareValue="0">
+					and	t.BUYER_ID = #memberId# or (t.SELLER_ID = #memberId# and t.STATUS != 'ORDER_INIT')
+					</isEqual>
+					<!-- �1�70�1�75�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�70�1�72�1�71�1�77�1�71�1�77 -->
+					<isEqual property="searchStatus" compareValue="1">
+					and	( t.BUYER_ID = #memberId# or t.SELLER_ID = #memberId# ) and t.STATUS = 'WAIT_PAY'
+					</isEqual>
+					<!-- �1�71�1�77�1�70�1�79�1�71�1�77�1�70�1�79�1�71�1�77�1�70�1�72�1�71�1�77�1�71�1�77 -->
+					<isEqual property="searchStatus" compareValue="2">
+					and	(t.BUYER_ID = #memberId# and t.STATUS = 'WAIT_SELLER_CONFIRM' ) or
+						(t.SELLER_ID = #memberId# and t.STATUS = 'WAIT_BUYER_CONFIRM' )
+					</isEqual>
+					<!-- �1�71�1�77�1�70�1�79�1�71�1�77�1�71�1�77�1�70�1�71�1�71�1�77�1�70�1�72�1�71�1�77�1�71�1�77 -->
+					<isEqual property="searchStatus" compareValue="3">
+					and	(t.BUYER_ID = #memberId# and t.STATUS in ( 'WAIT_BUYER_CONFIRM' , 'ORDER_INIT' ) ) or
+						(t.SELLER_ID = #memberId# and t.STATUS = 'WAIT_SELLER_CONFIRM' )
+					</isEqual>
+					<!-- �1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77�1�71�1�77 -->
+					<isEqual property="searchStatus" compareValue="4">
+					and	( t.BUYER_ID = #memberId# or t.SELLER_ID = #memberId# ) and t.STATUS = 'ORDER_CLOSE'
+					</isEqual>
+					<!--�1�71�1�77�1�70�1�79�1�71�1�77�1�71�1�77�1�71�1�77�1�70�1�71�1�71�1�77�1�71�1�77-->
+					<isEqual property="searchStatus" compareValue="5">
+					and	t.BUYER_ID = #memberId#  and t.STATUS = 'WAIT_PAY'
+					</isEqual>
+					ORDER BY t.GMT_CREATE desc
+			LIMIT #dbStartNo#, #dbEndNo#
+	</select>
+	
+	<select id="get_tradeorder" parameterClass="java.lang.String" resultMap="order">
+		SELECT 
+			ORDER_NO,
+			SHOP_ID,
+			ADDRESS,
+			SHOP_NAME,
+			PAY_FEE,
+			STATUS,
+			ORDER_DATE,
+			BUYER_ID,
+			SELLER_ID,
+			ORDER_TYPE,
+			MEMO,
+			BUYER_LOGIN_ID,
+			SELLER_LOGIN_ID,
+			CREATOR,
+			GMT_MODIFY,
+			MODIFIER,
+			GMT_CREATE,
+			logistics_fee
+		FROM TRADE_ORDER  t     
+		WHERE t.ORDER_NO = #value#
+	</select>
+
+	<select id="tradeorder_count_unpay_order" resultClass="java.lang.Integer">
+			select count(*)
+			FROM TRADE_ORDER  t
+			WHERE t.BUYER_ID = #value# and t.STATUS = 'WAIT_PAY'
+	</select>
+
+	<select id="tradeorder_count_unsettled_order" resultClass="java.lang.Integer">
+			select sum(t_d) from (
+			(select count(*) as t_d
+			FROM TRADE_ORDER  t
+			WHERE
+				t.BUYER_ID = #value# and t.STATUS in ( 'WAIT_BUYER_CONFIRM' , 'ORDER_INIT' ) ) 
+			UNION 
+			(select count(*) as t_d
+			FROM TRADE_ORDER  t1
+			WHERE
+				t1.SELLER_ID = #value# and t1.STATUS = 'WAIT_SELLER_CONFIRM' )
+				)  B
+	</select>
+</sqlMap>

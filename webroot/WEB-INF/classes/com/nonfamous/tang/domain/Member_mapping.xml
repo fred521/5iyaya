@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="MEMBER_SPACE">
+	<resultMap id="member" class="com.nonfamous.tang.domain.Member">
+		<result property="lastLoginIp" column="LAST_LOGIN_IP"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="nick" column="NICK"/>
+		<result property="loginPassword" column="LOGIN_PASSWORD"/>
+		<result property="mobile" column="MOBILE"/>
+		<result property="email" column="EMAIL"/>
+		<result property="name" column="NAME"/>
+		<result property="memberType" column="MEMBER_TYPE"/>
+		<result property="sex" column="SEX"/>
+		<result property="areaCode" column="AREA_CODE"/>
+		<result property="phone" column="PHONE"/>
+		<result property="postCode" column="POST_CODE"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="status" column="STATUS"/>
+		<result property="phoneValidate" column="PHONE_VALIDATE"/>
+		<result property="gmtRegister" column="GMT_REGISTER"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+		<result property="gmtLastLogin" column="GMT_LAST_LOGIN"/>
+		<result property="loginCount" column="LOGIN_COUNT" nullValue="0"/>
+		<result property="loginId" column="LOGIN_ID"/>
+		<result property="registerIp" column="REGISTER_IP"/>
+	</resultMap>
+	<resultMap id="memberList" class="com.nonfamous.tang.domain.MemberList">
+		<result property="lastLoginIp" column="LAST_LOGIN_IP"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="nick" column="NICK"/>
+		<result property="loginPassword" column="LOGIN_PASSWORD"/>
+		<result property="mobile" column="MOBILE"/>
+		<result property="email" column="EMAIL"/>
+		<result property="name" column="NAME"/>
+		<result property="memberType" column="MEMBER_TYPE"/>
+		<result property="sex" column="SEX"/>
+		<result property="areaCode" column="AREA_CODE"/>
+		<result property="phone" column="PHONE"/>
+		<result property="postCode" column="POST_CODE"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="status" column="STATUS"/>
+		<result property="phoneValidate" column="PHONE_VALIDATE"/>
+		<result property="gmtRegister" column="GMT_REGISTER"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+		<result property="gmtLastLogin" column="GMT_LAST_LOGIN"/>
+		<result property="loginCount" column="LOGIN_COUNT"/>
+		<result property="loginId" column="LOGIN_ID"/>
+		<result property="registerIp" column="REGISTER_IP"/>
+		<!-- shop info start -->
+		<result property="shop.shopId" column="SHOP_ID"/>
+		<result property="shop.shopName" column="SHOP_NAME"/>
+		<result property="shop.shopOwner" column="SHOP_OWNER"/>
+		<result property="shop.commodity" column="COMMODITY"/>
+		<result property="shop.belongMarketId" column="BELONG_MARKET_ID"/>
+		<result property="shop.address" column="SADD"/>
+		<result property="shop.phone" column="SPHONE"/>
+		<result property="shop.bank" column="BANK"/>
+		<result property="shop.bankAccount" column="BANK_ACCOUNT"/>
+		<result property="shop.accountName" column="ACCOUNT_NAME"/>
+		<result property="shop.goodsCount" column="GOODS_COUNT"/>
+		<result property="shop.camera" column="CAMERA"/>
+		<result property="shop.webPhone" column="WEB_PHONE"/>
+		<result property="shop.logo" column="LOGO"/>
+		<result property="shop.shopImg" column="SHOP_IMG"/>
+		<result property="shop.gisAddress" column="GIS_ADDRESS"/>
+	</resultMap>
+	
+	<insert id="MEMBER_INSERT" parameterClass="com.nonfamous.tang.domain.Member">
+		INSERT INTO MEMBER (
+				LAST_LOGIN_IP,
+				MEMBER_ID,
+				NICK,
+				LOGIN_PASSWORD,
+				MOBILE,
+				EMAIL,
+				NAME,
+				MEMBER_TYPE,
+				SEX,
+				AREA_CODE,
+				PHONE,
+				POST_CODE,
+				ADDRESS,
+				STATUS,
+				PHONE_VALIDATE,
+				GMT_REGISTER,
+				GMT_CREATE,
+				CREATOR,
+				GMT_MODIFY,
+				MODIFIER,
+				GMT_LAST_LOGIN,
+				LOGIN_COUNT,
+				LOGIN_ID,
+				REGISTER_IP
+			) VALUES ( 
+				#lastLoginIp#,
+				#memberId#,
+				#nick#,
+				#loginPassword#,
+				#mobile#,
+				#email#,
+				#name#,
+				#memberType#,
+				#sex#,
+				#areaCode#,
+				#phone#,
+				#postCode#,
+				#address#,
+				#status#,
+				#phoneValidate#,
+				sysdate(),
+				sysdate(),
+				#creator#,
+				sysdate(),
+				#modifier#,
+				<isEqual property="loginCount" compareValue="1">
+				sysdate(),
+				</isEqual>
+				<isNotEqual property="loginCount" compareValue="1">
+				#gmtLastLogin#,
+				</isNotEqual>
+				#loginCount#,
+				#loginId#,
+				#registerIp#
+			)
+	</insert>
+	
+	<update id="MEMBER_UPDATE_INFO" parameterClass="com.nonfamous.tang.domain.Member">
+		UPDATE MEMBER t SET  
+			<isNotEmpty property="lastLoginIp"> t.LAST_LOGIN_IP = #lastLoginIp#,</isNotEmpty>
+			<isNotEmpty property="nick"> t.NICK = #nick#,</isNotEmpty>
+			<isNotEmpty property="loginPassword"> t.LOGIN_PASSWORD = #loginPassword#,</isNotEmpty>
+			<isNotEmpty property="mobile"> t.MOBILE = #mobile#,</isNotEmpty>
+			<isNotEmpty property="phoneValidate"> t.phone_validate = #phoneValidate#,</isNotEmpty>
+			<isNotEmpty property="email"> t.EMAIL = #email#,</isNotEmpty>
+			<isNotEmpty property="name"> t.NAME = #name#,</isNotEmpty>
+			<isNotEmpty property="sex"> t.SEX = #sex#,</isNotEmpty>
+			<isNotEmpty property="areaCode"> t.AREA_CODE = #areaCode#,</isNotEmpty>
+			<isNotEmpty property="phone"> t.PHONE = #phone#,</isNotEmpty>
+			<isNotEmpty property="postCode"> t.POST_CODE = #postCode#,</isNotEmpty>
+			<isNotEmpty property="address"> t.ADDRESS = #address#,</isNotEmpty>
+			<isNotEmpty property="modifier"> t.MODIFIER = #modifier#,</isNotEmpty>
+			t.GMT_MODIFY = sysdate()
+		WHERE t.MEMBER_ID = #memberId#
+	</update>
+	
+	<update id="MEMBER_UPDATE_LOGIN_INFO">
+		update member t set t.LAST_LOGIN_IP = #lastLoginIp#,t.GMT_MODIFY = sysdate(),t.MODIFIER = #modifier#,t.GMT_LAST_LOGIN = sysdate(),t.LOGIN_COUNT = t.LOGIN_COUNT+1 where t.MEMBER_ID = #memberId#
+	</update>
+	
+	<update id="MEMBER_UPDATE_MOBILE_VALIDATE_STATUS">
+		update member t set t.GMT_MODIFY = sysdate(),t.MODIFIER = #modifier#,t.PHONE_VALIDATE = #phoneValidate# where t.MEMBER_ID = #memberId#
+	</update>
+	
+	<update id="MEMBER_UPDATE_STATUS">
+		update member t set t.GMT_MODIFY = sysdate(),t.MODIFIER = #modifier#,t.STATUS = #status# where t.MEMBER_ID = #memberId#
+	</update>
+	
+	<update id="MEMBER_UPDATE_PASSWORD">
+		update member t set t.GMT_MODIFY = sysdate(),t.MODIFIER = #modifier#,t.LOGIN_PASSWORD = #loginPassword# where t.MEMBER_ID = #memberId#
+	</update>
+	
+	<select id="QUERY_MEMBER_COUNT" resultClass="java.lang.Integer">
+		select count(*) as total
+		FROM MEMBER  t
+			<isEqual property="hasShopQuery" compareValue="Y">
+			left join shop s on s.member_id = t.member_id
+			</isEqual>  
+			<dynamic prepend="where">
+				<isEqual property="hasShopQuery" compareValue="Y">
+					<isNotEmpty property="shopName" prepend="and"> s.shop_name like #blurShopName# </isNotEmpty>
+					<isNotEmpty property="shopOwner" prepend="and"> s.shop_owner like #blurShopOwner# </isNotEmpty>
+					<isNotEmpty property="belongMarketId" prepend="and"> s.BELONG_MARKET_ID = #belongMarketId# </isNotEmpty>
+				</isEqual>
+				<isNotEmpty property="memberType" prepend="and"> t.member_type = #memberType# </isNotEmpty>
+				<isNotEmpty property="loginId" prepend="and"> t.login_id like #blurLoginId# </isNotEmpty>
+				<isNotEmpty property="realName" prepend="and"> t.name like #blurRealName# </isNotEmpty>
+				<isNotEmpty property="nick" prepend="and"> t.nick like #blurNick# </isNotEmpty>
+				<isNotEmpty property="mobile" prepend="and"> t.mobile like #blurMobile# </isNotEmpty>
+				<isNotEmpty property="area" prepend="and"> t.area_code = #area# </isNotEmpty>
+				<isNotEmpty property="phoneValidate" prepend="and"> t.phone_validate = #phoneValidate# </isNotEmpty>
+				<isNotEmpty property="sex" prepend="and"> t.sex = #sex# </isNotEmpty>
+			</dynamic>
+	</select>
+	
+	<select id="QUERY_MEMBER_LIST_BUYER" parameterClass="com.nonfamous.tang.dao.query.MemberQuery" resultMap="member">
+		select * from MEMBER  t
+      		 
+				<dynamic prepend="where">
+					<isNotEmpty property="memberType" prepend="and"> t.member_type = #memberType# </isNotEmpty>
+					<isNotEmpty property="loginId" prepend="and"> t.login_id like #blurLoginId# </isNotEmpty>
+					<isNotEmpty property="realName" prepend="and"> t.name like #blurRealName# </isNotEmpty>
+					<isNotEmpty property="nick" prepend="and"> t.nick like #blurNick# </isNotEmpty>
+					<isNotEmpty property="mobile" prepend="and"> t.mobile like #blurMobile# </isNotEmpty>
+					<isNotEmpty property="area" prepend="and"> t.area_code = #area# </isNotEmpty>
+					<isNotEmpty property="phoneValidate" prepend="and"> t.phone_validate = #phoneValidate# </isNotEmpty>
+					<isNotEmpty property="sex" prepend="and"> t.sex = #sex# </isNotEmpty>
+				</dynamic>
+		limit #dbStartNo#, #dbEndNo#
+	</select>
+	
+	<select id="QUERY_MEMBER_LIST_SELLER" parameterClass="com.nonfamous.tang.dao.query.MemberQuery" resultMap="memberList">
+					SELECT t.* ,
+						s.SHOP_ID,
+                       	s.shop_name,
+                       	s.shop_owner,
+                       	s.commodity,
+                       	s.belong_market_id,
+                       	s.address as sadd,
+                       	s.phone as sphone,
+                       	s.bank,
+                       	s.bank_account,
+                       	s.account_name,
+                       	s.goods_count,
+                       	s.camera,
+                       	s.web_phone,
+                      	s.logo,
+                       	s.shop_img,
+                       	s.gis_address
+					FROM MEMBER  t left join shop s on s.member_id = t.member_id
+				<dynamic prepend="where">
+					<isNotEmpty property="shopName" prepend="and"> s.shop_name like #blurShopName# </isNotEmpty>
+					<isNotEmpty property="shopOwner" prepend="and"> s.shop_owner like #blurShopOwner# </isNotEmpty>
+					<isNotEmpty property="belongMarketId" prepend="and"> s.BELONG_MARKET_ID = #belongMarketId# </isNotEmpty>
+					<isNotEmpty property="memberType" prepend="and"> t.member_type = #memberType# </isNotEmpty>
+					<isNotEmpty property="loginId" prepend="and"> t.login_id like #blurLoginId# </isNotEmpty>
+					<isNotEmpty property="realName" prepend="and"> t.name like #blurRealName# </isNotEmpty>
+					<isNotEmpty property="nick" prepend="and"> t.nick like #blurNick# </isNotEmpty>
+					<isNotEmpty property="mobile" prepend="and"> t.mobile like #blurMobile# </isNotEmpty>
+					<isNotEmpty property="area" prepend="and"> t.area_code = #area# </isNotEmpty>
+					<isNotEmpty property="phoneValidate" prepend="and"> t.phone_validate = #phoneValidate# </isNotEmpty>
+					<isNotEmpty property="sex" prepend="and"> t.sex = #sex# </isNotEmpty>
+				</dynamic>
+		LIMIT  #dbStartNo#,  #dbEndNo#
+	</select>
+	
+	<select id="GET_MEMBER_BY_ID" resultMap="member">
+		SELECT * FROM MEMBER t WHERE t.MEMBER_ID = #memberId#
+	</select>
+	
+	<select id="COUNT_SAME_MEMBER" resultClass="java.lang.Integer">
+		select count(*) as total from member t 
+		where 
+			t.login_id = #loginId# 
+			and t.status &lt;> 'D'
+			<isNotEmpty property="memberId" prepend="and"> t.member_id &lt;> #memberId# </isNotEmpty>
+	</select>
+	
+	<select id="COUNT_SAME_MOBILE" resultClass="java.lang.Integer">
+		select count(*) as total from member t 
+		where 
+			t.mobile = #mobile# 
+			and t.status &lt;> 'D'
+			<isNotEmpty property="memberId" prepend="and"> t.member_id &lt;> #memberId# </isNotEmpty>
+	</select>
+	
+	<select id="GET_MEMBER_BY_LOGIN_ID" parameterClass="java.lang.String" resultMap="member">
+		SELECT * FROM MEMBER t WHERE t.LOGIN_ID = #loginId#
+	</select>
+	
+	<select id="GET_QUERY_MEMBER_COUNT_BY_QUERY_INFO" resultClass="java.lang.Integer">
+		select count(*) as total from member t
+		<dynamic prepend="where">
+			<isNotEmpty property="loginId" prepend="and"> t.login_id like #blurLoginId# </isNotEmpty>
+			<isNotEmpty property="realName" prepend="and"> t.name like #blurRealName# </isNotEmpty>
+			<isNotEmpty property="nick" prepend="and"> t.nick like #blurNick# </isNotEmpty>
+			<isNotEmpty property="memberType" prepend="and"> t.MEMBER_TYPE = #memberType# </isNotEmpty>
+			<isNotEmpty property="email" prepend="and"> t.EMAIL = #email# </isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="GET_QUERY_MEMBER_BY_QUERY_INFO" resultClass="com.nonfamous.tang.domain.MemberList">
+		select t.member_id as memberId,t.login_id as loginId,t.name,t.nick,t.login_password as loginPassword from member t
+				<dynamic prepend="where">
+					<isNotEmpty property="loginId" prepend="and"> t.login_id like #blurLoginId# </isNotEmpty>
+					<isNotEmpty property="realName" prepend="and"> t.name like #blurRealName# </isNotEmpty>
+					<isNotEmpty property="nick" prepend="and"> t.nick like #blurNick# </isNotEmpty>
+					<isNotEmpty property="memberType" prepend="and"> t.MEMBER_TYPE = #memberType# </isNotEmpty>
+					<isNotEmpty property="email" prepend="and"> t.EMAIL = #email# </isNotEmpty>
+				</dynamic>
+			LIMIT #dbStartNo#,
+	     #dbEndNo#
+	</select>
+	
+	<select id="GET_QUERY_MEMBER_BY_SHOP_INFO" resultClass="com.nonfamous.tang.domain.MemberList">
+		select t.member_id as memberId,t.login_id as loginId,t.name,t.nick from member t 
+		where 
+			t.member_id in 
+			<iterate property="memberIds" open="(" close=")" conjunction=",">
+				#memberIds[]#
+			</iterate>
+	</select>
+	
+	<select id="GET_QUERY_MEMBER_BY_MEMBER_IDS" resultMap="member">
+		select t.* from member t 
+		where 
+			t.member_id in
+			<iterate property="memberIds" open="(" close=")" conjunction=",">
+				#memberIds[]#
+			</iterate>
+	</select>
+	
+	<delete id="DELETE_MEMBER_BY_ID">
+		delete from member t where t.member_id = #memberId#
+	</delete>
+</sqlMap>

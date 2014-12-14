@@ -1,0 +1,113 @@
+<table border="0" width="90%" cellspacing="0" cellpadding="0" height="18">
+	<tr>
+	<!--	#if($memberAuthToken.havePermissionByName("MemberActive"))
+		<td width="72">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					#if("$menuIndex" == "1")
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">
+						激活用户
+					</td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+					#else
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+						<a href="${homeMoudle}/member/active.htm" style="text-decoration: none">
+							<font color="#A1A1A1">激活用户</font>
+						</a>
+					</td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+					#end
+				</tr>
+			</table>
+		</td>
+	#end
+	-->
+		<td width="96">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					#if("$menuIndex" == "2")
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">
+						修改会员信息
+					</td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+					#else
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+						<a href="${homeMoudle}/member/modify.htm" style="text-decoration: none">
+							<font color="#A1A1A1">修改会员信息</font>
+						</a>
+					</td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+					#end
+				</tr>
+			</table>
+		</td>
+		#*<td width="96">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					#if($menuIndex == "3")
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">
+						更换手机号码
+					</td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+					#else
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+						<a href="member_moble.html" style="text-decoration: none">
+							<font color="#A1A1A1">更换手机号码</font>
+						</a>
+					</td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+					#end
+				</tr>
+			</table>
+		</td>*#
+		<td width="72">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					#if("$menuIndex" == "4")
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">
+						修改密码
+					</td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+					#else
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+						<a href="${homeMoudle}/member/modifypwd.htm" style="text-decoration: none">
+							<font color="#A1A1A1">修改密码</font>
+						</a>
+					</td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+					#end
+				</tr>
+			</table>
+		</td>
+		<td width="96">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					#if("$menuIndex" == "5")
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">
+						地址管理
+					</td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+					#else
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+						<a href="${homeMoudle}/myaddress/index.htm" style="text-decoration: none">
+							<font color="#A1A1A1">地址管理</font>
+						</a>
+					</td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+					#end
+				</tr>
+			</table>
+		</td>
+		<td>&nbsp;　&nbsp;</td>
+	</tr>
+</table>

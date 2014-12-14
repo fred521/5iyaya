@@ -1,0 +1,28 @@
+#set( $layout = "layout/admin/default.vm" )
+<BODY bgColor=#ffffff leftMargin=0 topMargin=0>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width="28%" background="${imgServer}/images/admin/index_bg.gif" height=55><IMG height=50 src="${imgServer}/images/web_logo.gif" width=183 border=0></A></TD>
+          <TD vAlign=bottom align=right width="72%" background="${imgServer}/images/admin/index_bg.gif">
+            <TABLE cellSpacing=0 cellPadding=0 border=0>
+                  <TBODY>
+                    <TR> 
+                      <TD><a href="${adminMoudle}/admin_session/logout.htm" ><img height=46 src="${imgServer}/images/admin/i-exit.gif" width=89 border=0></a></TD>
+                      <TD width=50>¡¡</TD>
+                    </TR>
+                  </TBODY>
+            </TABLE>
+          </TD>
+        </TR>
+        </TBODY>
+      </TABLE>
+    </TD>
+  </TR>
+  </TBODY>
+</TABLE>
+</body>

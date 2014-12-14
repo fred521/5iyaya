@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>WEB-INF/conf/server.properties</value>
+				<value>WEB-INF/conf/version.properties</value>
+				<value>WEB-INF/conf/pay.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!-- ========================= VIEW DEFINITIONS ========================= -->
+
+	<bean id="controlToolConfigure" class="com.nonfamous.commom.util.web.control.ControlToolConfigure">
+		<property name="sameContext" value="true" />
+		<property name="prefix" value="control/" />
+		<property name="suffix" value=".vm" />
+	</bean>
+
+	<bean id="viewResolver" class="com.nonfamous.commom.util.profiler.ProfileVelocityLayoutViewResolver">
+		<!-- 使用Spring 对 Velocity宏命令的支持  -->
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="toolboxConfigLocation" value="WEB-INF/conf/vm-toolbox.xml" />
+		<property name="prefix" value="screen/" />
+		<property name="suffix" value=".vm" />
+		<property name="layoutUrl" value="layout/default.vm" />
+	</bean>
+
+	<!-- 文件上传解析-->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="${request.encoding}" />
+	</bean>
+
+	<!-- ========================= DEFINITIONS OF Interceptor ========================= -->
+	<bean id="cookyjarInterceptor" class="com.nonfamous.commom.util.web.cookyjar.CookyjarInterceptor">
+		<property name="cookieConfigures">
+			<list>
+				<bean class="com.nonfamous.commom.util.web.cookyjar.CookieConfigure">
+					<property name="name" value="adminUserId" />
+					<property name="clientName" value="aui" />
+					<property name="path" value="/admin" />
+					<property name="lifeTime" value="-1" />
+					<property name="encrypt" value="true" />
+					<property name="domain" value="${domain}" />
+					<property name="randomChar" value="4" />
+				</bean>
+				<bean class="com.nonfamous.commom.util.web.cookyjar.CookieConfigure">
+					<property name="name" value="checkCode" />
+					<property name="clientName" value="cco" />
+					<property name="path" value="/" />
+					<property name="lifeTime" value="1800" /> <!-- 1800秒,半小时-->
+					<property name="encrypt" value="false" />
+					<property name="domain" value="${domain}" />
+				</bean>
+				<bean class="com.nonfamous.commom.util.web.cookyjar.CookieConfigure">
+					<property name="name" value="memberId" />
+					<property name="clientName" value="ccid" />
+					<property name="path" value="/" />
+					<property name="lifeTime" value="-1" />
+					<property name="encrypt" value="true" />
+					<property name="domain" value="${domain}" />
+					<property name="randomChar" value="5" />
+				</bean>
+				<bean class="com.nonfamous.commom.util.web.cookyjar.CookieConfigure">
+					<property name="name" value="loginName" />
+					<property name="clientName" value="lname" />
+					<property name="path" value="/" />
+					<property name="lifeTime" value="-1" />
+					<property name="encrypt" value="false" />
+					<property name="domain" value="${domain}" />
+				</bean>
+				<bean class="com.nonfamous.commom.util.web.cookyjar.CookieConfigure">
+					<property name="name" value="memberSaveLoginInfo" />
+					<property name="clientName" value="sl" />
+					<property name="path" value="/" />
+					<property name="lifeTime" value="25920000" />
+					<property name="encrypt" value="yes" />
+					<property name="domain" value="${domain}" />
+				</bean>
+				<bean class="com.nonfamous.commom.util.web.cookyjar.CookieConfigure">
+					<property name="name" value="memberPermissions" />
+					<property name="clientName" value="mp" />
+					<property name="path" value="/" />
+					<property name="lifeTime" value="-1" />
+					<property name="encrypt" value="true" />
+					<property name="domain" value="${domain}" />
+					<property name="randomChar" value="5" />
+				</bean>
+				<bean class="com.nonfamous.commom.util.web.cookyjar.CookieConfigure">
+					<property name="name" value="userRole" />
+					<property name="clientName" value="rname" />
+					<property name="path" value="/" />
+					<property name="lifeTime" value="1800" /> <!-- 1800秒,半小时-->
+					<property name="encrypt" value="true" />
+					<property name="domain" value="${domain}" />
+					<property name="randomChar" value="5" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 校验框架bean配置-->
+	<bean id="formFactory" class="com.nonfamous.commom.form.DefaultFormFactory">
+		<property name="formFiles">
+			<list>
+				<value>WEB-INF/conf/form/form.xml</value>
+				<value>WEB-INF/conf/form/commend-form.xml</value>
+				<value>WEB-INF/conf/form/goods-form.xml</value>
+				<value>WEB-INF/conf/form/member-form.xml</value>
+				<value>WEB-INF/conf/form/shop-form.xml</value>
+				<value>WEB-INF/conf/form/news-form.xml</value>
+				<value>WEB-INF/conf/form/helper-form.xml</value>
+				<value>WEB-INF/conf/form/address2-form.xml</value>
+				<value>WEB-INF/conf/form/address-form.xml</value>
+				<value>WEB-INF/conf/form/yynews-form.xml</value>
+				<value>WEB-INF/conf/form/urls-form.xml</value>
+				<value>WEB-INF/conf/form/trade-form.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="requestEncoding" class="com.nonfamous.commom.util.web.interceptor.RequestEncoding">
+		<property name="encoding" value="${request.encoding}" />
+	</bean>
+	<bean id="gbkRequestEncoding" class="com.nonfamous.commom.util.web.interceptor.RequestEncoding">
+		<property name="encoding" value="${request.gbk.encoding}" />
+	</bean>
+	
+	<bean id="responseEncoding" class="com.nonfamous.commom.util.web.interceptor.ResponseEncoding">
+		<property name="encoding" value="${response.encoding}" />
+	</bean>
+	<bean id="gbkResponseEncoding" class="com.nonfamous.commom.util.web.interceptor.ResponseEncoding">
+		<property name="encoding" value="${request.gbk.encoding}" />
+	</bean>
+	
+	<bean id="formFactoryInterceptor" class="com.nonfamous.commom.util.web.interceptor.FormFactoryInterceptor">
+		<property name="formFactory">
+			<ref bean="formFactory" />
+		</property>
+	</bean>
+
+	<!-- 缺省的url-bean映射方式 -->
+	<bean id="defaultHandlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="requestEncoding" />
+				<ref bean="responseEncoding" />
+				<ref bean="cookyjarInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 缺省的web层异常处理 -->
+	<bean class="com.nonfamous.tang.web.common.ExceptionResolver">
+		<property name="errorView" value="errorPage" />
+		<property name="adminPath" value="/admin/" />
+		<property name="adminErrorView" value="admin/errorPage" />
+	</bean>
+
+	<!-- 服务器配置，用在mv-toolbox.xml 中-->
+	<bean id="appServer" class="com.nonfamous.commom.util.web.URLConfig">
+		<property name="protocol" value="${appServer.protocol}" />
+		<property name="host" value="${appServer.host}" />
+		<property name="port" value="${appServer.port}" />
+		<property name="contextPathSensitive" value="true" />
+	</bean>
+	
+	<bean id="imgServer" class="com.nonfamous.commom.util.web.URLConfig">
+		<property name="protocol" value="${imgServer.protocol}" />
+		<property name="host" value="${imgServer.host}" />
+		<property name="port" value="${imgServer.port}" />
+		<property name="contextPathSensitive" value="true" />
+	</bean>
+	
+	<bean id="upServer" class="com.nonfamous.commom.util.web.URLConfig">
+		<property name="protocol" value="${upServer.protocol}" />
+		<property name="host" value="${upServer.host}" />
+		<property name="port" value="${upServer.port}" />
+		<property name="path" value="${upServer.path}" />
+		<property name="contextPathSensitive" value="false" />
+	</bean>
+	<bean id="gisServer" class="com.nonfamous.commom.util.web.URLConfig">
+		<property name="protocol" value="${gisServer.protocol}" />
+		<property name="host" value="${gisServer.host}" />
+		<property name="port" value="${gisServer.port}" />
+		<property name="contextPathSensitive" value="false" />
+	</bean>
+	
+	<bean id="adminMoudle" class="com.nonfamous.commom.util.web.URLConfig" parent="appServer">
+		<property name="path" value="/admin" />
+	</bean>
+	
+	<bean id="homeMoudle" class="com.nonfamous.commom.util.web.URLConfig" parent="appServer">
+		<property name="path" value="/" />
+	</bean>
+
+	<!-- 校验码，配置比较特殊-->
+	<bean id="checkCodeHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="cookyjarInterceptor" />
+			</list>
+		</property>
+		<property name="urlMap">
+			<map>
+				<entry key="/check_code" value-ref="checkCodeImage" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="checkCodeImage" class="com.nonfamous.commom.util.web.checkcode.CheckCodeImageProducer"></bean>
+	
+
+    <!--
+    <bean name="/upload.htm" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="cacheSeconds" value="0" />
+		<property name="viewName" value="home/testFileUpload" />
+	</bean>
+	<bean name="/upload_result.htm" class="com.nonfamous.tang.web.home.TestFileUpload">
+		<property name="uploadService">
+			<ref bean="uploadService" />
+		</property>
+	</bean>
+	-->
+	
+	<bean name="/about.htm" class="com.nonfamous.tang.web.About">
+		<property name="currentVersion" value="${build.version}" />
+		<property name="buildNumber" value="${build.number}" />
+		<property name="buildDate" value="${build.date}" />
+		<property name="goodsService" ref="goodsService" />
+		<property name="shopService" ref="shopService" />
+		<property name="memberShopIndexService" ref="memberShopIndexService" />
+		<property name="goodsIndexService" ref="goodsIndexService" />
+		<property name="newsIndexService" ref="newsIndexService" />
+		<property name="indexFilePathGood" value="${search.good.indexfile}" />
+		<property name="indexFilePathShop" value="${search.shop.indexfile}" />
+		<property name="indexFilePathNews" value="${search.news.indexfile}" />
+	</bean>
+	
+	<!-- char -->
+	<bean name="/chat_top.htm" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="cacheSeconds" value="0" />
+		<property name="viewName" value="home/online/top" />
+	</bean>
+	<!-- 各个模块的配置文件-->
+	<import resource="adminMoudle.xml" />
+	<import resource="homeMoudle.xml" />
+	<import resource="memberPermission.xml" />
+	<import resource="tradeModule.xml" />
+</beans>

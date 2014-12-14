@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<project default="compress" basedir="." >
+
+    <target name="compress" >
+        <!-- 1, compress css files and javascripts for default.vm -->
+        <delete file="webroot/css/main_all.css" />
+        <delete file="webroot/css/main_min.css" />
+        <delete file="webroot/lib/core_all.js"  />
+        <delete file="webroot/lib/core_min.js"  />
+    	<delete file="webroot/js/common_min.js" />
+    	<delete file="webroot/js/common_gzip.js"/>
+    	    	
+    	
+        <concat destfile="webroot/css/main_all.css" fixlastline="true" >
+			<fileset file="webroot/css/main.css" />
+			<fileset file="webroot/css/tabset.css" />
+			<fileset file="webroot/css/jquerycluetip.css" />
+		</concat>	
+		<concat destfile="webroot/lib/core_all.js" fixlastline="true" >
+			<fileset file="webroot/lib/3rd/jquery.js" />
+			<fileset file="webroot/lib/3rd/jquerycookie.js" />
+			<fileset file="webroot/lib/3rd/jquerydimensions.js" />
+			<fileset file="webroot/lib/3rd/jqueryhoverIntent.js" />
+			<fileset file="webroot/lib/3rd/jquerycluetip.js" />
+			<fileset file="webroot/lib/core.js" />
+			<fileset file="webroot/lib/component/TabSet.js" />
+			<fileset file="webroot/lib/component/Tooltip.js" />
+			<fileset file="webroot/lib/component/Gallery.js" />
+		</concat>
+		<java jar="yuicompressor-2.3.5.jar" fork="true" failonerror="true" maxmemory="128m">
+            <arg value="&quot;webroot/css/main_all.css&quot; -o &quot;webroot/css/main_min.css&quot;" />
+        </java> 
+		<java jar="yuicompressor-2.3.5.jar" fork="true" failonerror="true" maxmemory="128m">
+            <arg value="&quot;webroot/lib/core_all.js&quot; -o &quot;webroot/lib/core_min.js&quot;" />
+        </java>   
+    	<java jar="yuicompressor-2.3.5.jar" fork="true" failonerror="true" maxmemory="128m">
+            <arg value="&quot;webroot/js/common.js&quot; -o &quot;webroot/js/common_min.js&quot;" />
+        </java>       	    	
+    	<gzip src="webroot/css/main_min.css" destfile="webroot/css/main_gzip.css" />
+    	<gzip src="webroot/lib/core_min.js"  destfile="webroot/lib/core_gzip.js"  />   
+    	<gzip src="webroot/js/common_min.js" destfile="webroot/js/common_gzip.js" />  
+    	<checksum file="webroot/css/main_gzip.css" forceOverwrite="yes" />
+    	<checksum file="webroot/lib/core_gzip.js"  forceOverwrite="yes" />    
+    	
+    	<jar destfile="webroot/WEB-INF/lib/5iyya.jar" basedir="webroot/WEB-INF/classes" />
+    </target>
+</project>

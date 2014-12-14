@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	 <property name="triggers">
+	   <list>
+	     <ref bean="cronUpdateGoodsIndexerTrigger"/>
+	     <ref bean="cronUpdateMemberShopIndexerTrigger"/>
+	     <ref bean="cronUpdateNewsIndexerTrigger"/>
+	     <!-- <ref bean="cronSmsDaemonServiceTrigger"/>-->
+	   </list>
+	   </property>
+	</bean>
+	<bean id="cronUpdateGoodsIndex" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+			<property name="targetObject"><ref bean="goodsIndexService"/></property>
+			<property name="targetMethod"><value>updateGoodsIndex</value></property>
+	</bean>
+	<bean id="cronUpdateGoodsIndexerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+			<property name="jobDetail"><ref bean="cronUpdateGoodsIndex"/></property>
+			<property name="cronExpression"><value>0 */7 * * * ?</value></property>
+	</bean>
+	<bean id="cronUpdateMemberShopIndex" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+			<property name="targetObject"><ref bean="memberShopIndexService"/></property>
+			<property name="targetMethod"><value>updateMemberShopIndex</value></property>
+	</bean>
+	<bean id="cronUpdateMemberShopIndexerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+			<property name="jobDetail"><ref bean="cronUpdateMemberShopIndex"/></property>
+			<property name="cronExpression"><value>0 */9 * * * ?</value></property>
+	</bean>
+	<bean id="cronUpdateNewsIndex" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+			<property name="targetObject"><ref bean="newsIndexService"/></property>
+			<property name="targetMethod"><value>updateNewsIndex</value></property>
+	</bean>
+	<bean id="cronUpdateNewsIndexerTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+			<property name="jobDetail"><ref bean="cronUpdateNewsIndex"/></property>
+			<property name="cronExpression"><value>0 */11 * * * ?</value></property>
+	</bean>
+	
+	<!-- sms quartz service-->
+	<bean id="cronSmsDaemonJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+			<property name="targetObject"><ref bean="smsDaemonService"/></property>
+			<property name="targetMethod"><value>daemonSendSms</value></property>
+	</bean>
+	<bean id="cronSmsDaemonServiceTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+			<property name="jobDetail"><ref bean="cronSmsDaemonJob"/></property>
+			<property name="cronExpression"><value>0 */1 * * * ?</value></property>
+	</bean>
+</beans>

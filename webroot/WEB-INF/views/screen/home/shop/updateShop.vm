@@ -1,0 +1,238 @@
+#set( $layout = "layout/home/memberdefault.vm" )	
+
+<script type="text/javascript">
+//<![CDATA[
+	    
+	 function openEditLocation() {
+	     document.getElementById('clearMap').style.display="";
+	     window.open('${homeMoudle}/shop/editLocation.htm','','location=0,scrollbars=0,resizable=0,height=400,width=420,top=300,left=600');
+	 }	
+//]]>
+</script>
+<td width="10" valign="top">　</td>
+<td width="740" valign="top">
+	<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>丫丫店铺管理</h1>
+	   </div>
+		<table border="0" width="90%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+			<div class="roundCorner gray onlyBottom" style="width: 736px;">
+	    <p>   
+	   <div align="center"><img src="${imgServer}/images/logo_copy.gif" align="absmiddle" /></div>
+	   </div>
+	   <p>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td align="center"><font color="red">$!success $!error</font></td>
+					</tr>
+				</table>
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="18">
+					<tr>
+						<td width="96">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="${homeMoudle}/myshop/addNotes.htm" style="text-decoration: none"><font color="#A1A1A1">店铺公告管理</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td width="96">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">
+								修改店铺信息</td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td width="96">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="${homeMoudle}/myshop/updateLogo.htm" style="text-decoration: none"><font color="#A1A1A1">上传店铺图片</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td width="96">
+							<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="${homeMoudle}/shop/detail.htm?id=$!shopId" style="text-decoration: none" target="_blank"><font color="#A1A1A1">查看我的店铺</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						<!--
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="shop_category.html" style="text-decoration: none"><font color="#A1A1A1">店铺商品类目</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						-->
+						</td>
+						<td>&nbsp;　&nbsp;</td>
+					</tr>
+				</table>
+				
+				<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+					<form name="updateShop"  action="${homeMoudle}/myshop/saveShop.htm" method="post">
+					<input type="hidden" name="shopId" value="$!shopId">
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<table cellSpacing="0" cellPadding="0" width="90%" align="center">
+							<tr>
+								<td align=center>
+									<table border="0" width="560" cellspacing="0" cellpadding="6">
+										<tr>
+											<td height="24" class="tx_title" colspan="2"><b>输入商铺信息</b></td>
+										</tr>
+										<tr>
+											<td width="100">商铺名称:</td>
+											<td width="460"><input value="$!form.getField("shopName").value" name="shopName" class="input4">
+											<span class="red">*$!form.getField("shopName").message</span></td>
+										</tr>
+										<tr>
+											<td width="100">主营商品:</td>
+											<td width="460"><input value="$!form.getField("commodity").value" name="commodity" class="input4">
+											<span class="red">*$!form.getField("commodity").message</span>
+											多个主营商品以";"分隔
+											</td>
+										</tr>
+										<tr>
+											<td>店主姓名:</td>
+											<td><input value="$!form.getField("shopOwner").value" name="shopOwner" class="input5">
+											<span class="red">*$!form.getField("shopOwner").message</span></td>
+										</tr>
+										<tr>
+											<td>所在市场:</td>
+											<td>
+											<select id="belongMarketId" name="belongMarketId">
+												#foreach($market in $marketType)
+											<option value="$market.marketType" #if($!form.getField("belongMarketId").value=="$market.marketType") selected #end>$market.marketName
+											</option>
+											#end
+											</select>
+											</td>
+										</tr>
+										<tr>
+											<td>店铺位置:</td>
+											<td><input value="$!form.getField("address").value" name="address" class="input4">
+											<span class="red">*$!form.getField("address").message</span>
+											</td>
+									    </tr>
+									    <tr>
+									    	<td></td>
+									    	<td>
+									    	<img border="0" valign="bottom" src="${imgServer}/images/icon_qi.gif"/>
+											<a href="javascript:void(0);" onclick="openEditLocation();"><span id="emarked" style="color:red">点此标注</span></a>
+											<input id="mapposition" type="hidden" value="$!form.getField("gisAddress").value" name="gisAddress" type="hidden"/>
+											<a id="clearMap" style="display: none;color:red" onclick="document.getElementById('mapposition').value='';document.getElementById('clearMap').style.display='none';" href="#">清除标注</a>
+											<span class="gray"> 标注后，店铺将定位到电子地图上。</span>
+											</td>
+										</tr>
+										<tr>
+											<td>店内固话:</td>
+											<td><input value="$!form.getField("phone").value" name="phone" class="input3">
+											<span class="red">$!form.getField("phone").message</span></td>
+										</tr>
+										<tr>
+											<td colspan="2" height="20"></td>
+										</tr>
+										<tr>
+											<td>开户银行:</td>
+											<td>
+												#selectBankType("bank" "$!form.getField('bank').value")
+											</td>
+										</tr>
+										<tr>
+											<td>银行帐号:</td>
+											<td>
+											<input class="input4" name="bankAccount" size="20" value="$!form.getField("bankAccount").value">
+											<span class="red">$!form.getField("bankAccount").message</span></td>
+										</tr>
+										<tr>
+											<td>开 户 人:</td>
+											<td>
+											<input name="accountName" class="input5" size="20" value="$!form.getField("accountName").value">
+											<span class="red">$!form.getField("accountName").message</span></td>
+										</tr>
+										<tr>
+											<td colspan="2" height="20"></td>
+										</tr>
+										<!--
+										<tr>
+											<td>网络摄像头:</td>
+											<td><font color="#777777">[暂不支持]</font>
+											&nbsp;&nbsp;<a href="../other/help.html" target=_blank>查看网络摄像头介绍</a>
+											</td>
+										</tr>
+										<tr>
+											<td>　</td>
+											<td><img border="0" src="${imgServer}/images/icon1.gif" align=absmiddle>
+											<a href="member_buyvideo.html" class="good">购买网络摄像头服务</a></td>
+										</tr>
+										
+										<tr>
+											<td>Web800:</td>
+											<td><font color="#777777">[暂不支持]</font>
+											&nbsp;&nbsp;<a href="../other/help.html" target=_blank>查看Web800介绍</a>
+											</td>
+										</tr>
+										<tr>
+											<td>　</td>
+											<td><img border="0" src="${imgServer}/images/icon1.gif" align=absmiddle>
+											<a href="member_buyweb800.html" class="good">购买Web800服务</a></td>
+										</tr>
+										-->
+										<tr>
+											<td>　</td>
+											<td>
+											<img src="${imgServer}/images/btm_Submitted.gif" onClick="document.updateShop.submit();"><br>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+											<font color="#777777">
+											每个店铺最多可上传3张店铺形象图片<br>
+											请使用GIF、JPG格式的图片文件<br>
+											请确认您的图像大小为80像素×80像素<br>
+											请控制图片文件在40KB以下<br>
+											任何有违国家法律法规的图像将被拒绝<br> 
+																</font> 
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					  </td>
+					</tr>
+					</form>
+				</table>
+				
+				<br>
+				</td>
+			</tr>
+		</table>
+		</td>

@@ -1,0 +1,1474 @@
+/*==============================================================*/
+/* DBMS name:      ORACLE Version 10g                           */
+/* Created on:     2007-9-11 23:36:40                           */
+/* Bizyi ver:      1.0.a3                                       */
+/*==============================================================*/
+
+
+drop table ADMIN_LOG cascade constraints;
+
+drop table admin_user cascade constraints;
+
+drop index IDX_COMMEND_START_ENDDATE;
+
+drop table commend_content cascade constraints;
+
+drop table commend_position cascade constraints;
+
+drop index IDX_GOODS_MODIFYDATE;
+
+drop index IDX_GOODS_SHOP_ID;
+
+drop index IDX_GOODS_MEMBER_ID;
+
+drop table goods_base_info cascade constraints;
+
+drop table goods_cat cascade constraints;
+
+drop table goods_content cascade constraints;
+
+drop table market_type cascade constraints;
+
+drop index IDX_MEMBER_LOGIN_ID;
+
+drop table member cascade constraints;
+
+drop table mobile_validate cascade constraints;
+
+drop index IDX_NEWS_MODIFYDATE;
+
+drop index IDX_NEWS_MEMBER_ID;
+
+drop table news_base_info cascade constraints;
+
+drop table news_content cascade constraints;
+
+drop table news_type cascade constraints;
+
+drop table quartz_log cascade constraints;
+
+drop index Idx_key_type;
+
+drop table search_key_word cascade constraints;
+
+drop index IDX_SHOP_MODIFYDATE;
+
+drop index IDX_SHOP_MEMBER_ID;
+
+drop table shop cascade constraints;
+
+drop table shop_commend cascade constraints;
+
+drop index IDX_SMS_MODIFYDATE;
+
+drop table sms cascade constraints;
+
+drop sequence SEQ_ADMIN_LOG;
+
+drop sequence SEQ_ADMIN_USER;
+
+drop sequence seq_commend_content;
+
+drop sequence seq_commend_position;
+
+drop sequence seq_search_key_word;
+
+drop sequence seq_sms;
+
+create sequence SEQ_ADMIN_LOG;
+
+create sequence SEQ_ADMIN_USER;
+
+create sequence seq_commend_content;
+
+create sequence seq_commend_position;
+
+create sequence seq_search_key_word;
+
+create sequence seq_sms;
+
+/*==============================================================*/
+/* Table: ADMIN_LOG                                             */
+/*==============================================================*/
+create table ADMIN_LOG  (
+   ID                   number                          not null,
+   ADMIN_USER_ID        number,
+   ACTION               varchar2(255),
+   GMT_CREATE           date,
+   ACTION_IP            varchar2(128),
+   PARAMETER0           varchar2(4000),
+   PARAMETER1           varchar2(4000),
+   PARAMETER2           varchar2(4000),
+   PARAMETER3           varchar2(4000),
+   PARAMETER4           varchar2(4000),
+   constraint PK_ADMIN_LOG primary key (ID)
+);
+
+/*==============================================================*/
+/* Table: admin_user                                            */
+/*==============================================================*/
+create table admin_user  (
+   user_id              number                          not null,
+   login_name           varchar2(20),
+   login_password       varchar2(32),
+   user_status          char(1),
+   phone                varchar2(32),
+   gmt_create           date,
+   creator              varchar2(32),
+   gmt_modify           date,
+   modifier             varchar2(32),
+   constraint PK_ADMIN_USER primary key (user_id)
+);
+
+comment on table admin_user is
+'管理员信息表';
+
+comment on column admin_user.user_id is
+'管理员编号';
+
+comment on column admin_user.login_name is
+'管理员登陆名称';
+
+comment on column admin_user.login_password is
+'管理员登陆密码';
+
+comment on column admin_user.user_status is
+'管理员状态:N正常、P禁用';
+
+comment on column admin_user.phone is
+'联系电话';
+
+comment on column admin_user.gmt_create is
+'创建时间';
+
+comment on column admin_user.creator is
+'创建人';
+
+comment on column admin_user.gmt_modify is
+'最后修改时间';
+
+comment on column admin_user.modifier is
+'最后修改人';
+
+/*==============================================================*/
+/* Table: commend_content                                       */
+/*==============================================================*/
+create table commend_content  (
+   content_id           number                          not null,
+   commend_position_id  number                          not null,
+   commend_type         number(1)                       not null,
+   commend_text         varchar2(128)                   not null,
+   pic_path             varchar2(128),
+   pic_url              varchar2(128),
+   batch_num            number,
+   batch_price          number(11),
+   commend_status       char(1),
+   commend_url          varchar2(128),
+   commend_desc         varchar2(128),
+   gmt_start            date                            not null,
+   gmt_end              date                            not null,
+   gmt_create           date,
+   creator              varchar2(32),
+   gmt_modify           date,
+   modifier             varchar2(32),
+   constraint PK_COMMEND_CONTENT primary key (content_id)
+);
+
+comment on table commend_content is
+'推荐信息表';
+
+comment on column commend_content.content_id is
+'推荐内容编号';
+
+comment on column commend_content.commend_position_id is
+'所属推荐位置编号';
+
+comment on column commend_content.commend_type is
+'推荐类型：1、商品、2、店铺、3、咨询信息';
+
+comment on column commend_content.commend_text is
+'推荐文字';
+
+comment on column commend_content.pic_path is
+'推荐图片路径、如果图片url为空，则需要用这个地址替换图片地址';
+
+comment on column commend_content.pic_url is
+'推荐图片url';
+
+comment on column commend_content.batch_num is
+'起批数量';
+
+comment on column commend_content.batch_price is
+'起批价格，控制到分';
+
+comment on column commend_content.commend_status is
+'推荐内容状态:N正常、D删除、取消C';
+
+comment on column commend_content.commend_url is
+'推荐信息url';
+
+comment on column commend_content.commend_desc is
+'推荐说明';
+
+comment on column commend_content.gmt_start is
+'推荐开始日期';
+
+comment on column commend_content.gmt_end is
+'推荐截至日期';
+
+comment on column commend_content.gmt_create is
+'创建时间';
+
+comment on column commend_content.creator is
+'创建人';
+
+comment on column commend_content.gmt_modify is
+'最后修改时间';
+
+comment on column commend_content.modifier is
+'最后修改人';
+
+/*==============================================================*/
+/* Index: IDX_COMMEND_START_ENDDATE                             */
+/*==============================================================*/
+create index IDX_COMMEND_START_ENDDATE on commend_content (
+   gmt_end ASC,
+   gmt_start ASC
+);
+
+/*==============================================================*/
+/* Table: commend_position                                      */
+/*==============================================================*/
+create table commend_position  (
+   commend_id           number                          not null,
+   commend_code         varchar2(32)                    not null,
+   position_order       number                          not null,
+   commend_type         char(1)                         not null,
+   commend_page         number(2)                       not null,
+   commend_name         varchar2(128)                   not null,
+   commend_content_type char(1)                         not null,
+   pic_width            number,
+   pic_height           number,
+   text_length          number,
+   pic_path             varchar2(128),
+   replace_text         varchar2(128),
+   gmt_create           date,
+   creator              varchar2(32),
+   gmt_modify           date,
+   modifier             varchar2(32),
+   constraint PK_COMMEND_POSITION primary key (commend_id),
+   constraint AK_COMMEND_POSITION unique (commend_code, position_order)
+);
+
+comment on table commend_position is
+'推荐位置表';
+
+comment on column commend_position.commend_id is
+'推荐位置编号';
+
+comment on column commend_position.commend_code is
+'推荐位置识别码：只能用数字或名称，一旦建立，则不能修改';
+
+comment on column commend_position.position_order is
+'位置顺序';
+
+comment on column commend_position.commend_type is
+'1:商品推荐,2:店铺推荐,3:分类信息推荐';
+
+comment on column commend_position.commend_page is
+'所属推荐页面：0：首页1：咨询页面、2：商品页面、3：三维首页';
+
+comment on column commend_position.commend_name is
+'推荐位置名称';
+
+comment on column commend_position.commend_content_type is
+'推荐内容类型：1、图片与文字、2、光图片、3、光文字';
+
+comment on column commend_position.pic_width is
+'图片宽度';
+
+comment on column commend_position.pic_height is
+'图片高度';
+
+comment on column commend_position.text_length is
+'文字长度';
+
+comment on column commend_position.pic_path is
+'替换图片路径';
+
+comment on column commend_position.replace_text is
+'替换文字';
+
+comment on column commend_position.gmt_create is
+'创建时间';
+
+comment on column commend_position.creator is
+'创建人';
+
+comment on column commend_position.gmt_modify is
+'最后修改时间';
+
+comment on column commend_position.modifier is
+'最后修改人';
+
+/*==============================================================*/
+/* Table: goods_base_info                                       */
+/*==============================================================*/
+create table goods_base_info  (
+   goods_id             varchar2(32)                    not null,
+   shop_id              varchar2(32)                    not null,
+   member_id            varchar2(32),
+   goods_name           varchar2(128),
+   goods_cat            varchar2(3),
+   batch_price          number(11),
+   batch_num            number,
+   price_des            varchar2(128),
+   goods_num            number,
+   goods_pic            varchar2(128),
+   abandon_days         number,
+   gmt_abandon          date,
+   goods_status         char(1),
+   view_count           number,
+   creator              varchar2(32),
+   gmt_modify           date,
+   modifier             varchar2(32),
+   gmt_create           date,
+   cat_path             varchar2(32),
+   constraint PK_GOODS_BASE_INFO primary key (goods_id)
+);
+
+comment on table goods_base_info is
+'商品基础表';
+
+comment on column goods_base_info.goods_id is
+'商品编号';
+
+comment on column goods_base_info.shop_id is
+'店铺编号';
+
+comment on column goods_base_info.member_id is
+'会员编号';
+
+comment on column goods_base_info.goods_name is
+'商品名称';
+
+comment on column goods_base_info.goods_cat is
+'商品目前为2级分类，本字段存储到二级分类：如一级分类为001，则二级分类为001001 or 001002 ，当需要根据一级分类查询时，需要获取所有的二级分类进行查询';
+
+comment on column goods_base_info.batch_price is
+'商品批发价格，价格到分';
+
+comment on column goods_base_info.batch_num is
+'商品起批数量';
+
+comment on column goods_base_info.price_des is
+'价格描述';
+
+comment on column goods_base_info.goods_num is
+'商品库存量';
+
+comment on column goods_base_info.goods_pic is
+'商品图片路径';
+
+comment on column goods_base_info.abandon_days is
+'商品过期天数';
+
+comment on column goods_base_info.gmt_abandon is
+'商品过期月数：根据商品过期月数和商品创建时间计算得到；商品手动下架则这个时间为下架时间';
+
+comment on column goods_base_info.goods_status is
+'N正常，D删除，E：过期；商品一旦创建则为正常；商品上架则为正常，需要重新计算过期时间';
+
+comment on column goods_base_info.view_count is
+'商品浏览次数：每次浏览加一';
+
+comment on column goods_base_info.gmt_create is
+'创建时间';
+
+comment on column goods_base_info.cat_path is
+'分类路径';
+
+/*==============================================================*/
+/* Index: IDX_GOODS_MEMBER_ID                                   */
+/*==============================================================*/
+create index IDX_GOODS_MEMBER_ID on goods_base_info (
+   member_id ASC
+);
+
+/*==============================================================*/
+/* Index: IDX_GOODS_SHOP_ID                                     */
+/*==============================================================*/
+create index IDX_GOODS_SHOP_ID on goods_base_info (
+   shop_id ASC
+);
+
+/*==============================================================*/
+/* Index: IDX_GOODS_MODIFYDATE                                  */
+/*==============================================================*/
+create index IDX_GOODS_MODIFYDATE on goods_base_info (
+   gmt_modify ASC
+);
+
+/*==============================================================*/
+/* Table: goods_cat                                             */
+/*==============================================================*/
+create table goods_cat  (
+   type_id              varchar2(3),
+   type_name            varchar2(128),
+   levels               number(1),
+   parent_id            varchar2(3),
+   show_order           number
+);
+
+comment on table goods_cat is
+'商品分类';
+
+comment on column goods_cat.type_id is
+'分类编号';
+
+comment on column goods_cat.type_name is
+'分类名称';
+
+comment on column goods_cat.levels is
+'如果为一级分类，则为1，二级分类为2';
+
+comment on column goods_cat.parent_id is
+'父级类目编号';
+
+comment on column goods_cat.show_order is
+'显示顺序';
+
+/*==============================================================*/
+/* Table: goods_content                                         */
+/*==============================================================*/
+create table goods_content  (
+   goods_id             varchar2(32)                    not null,
+   content              clob,
+   constraint PK_GOODS_CONTENT primary key (goods_id)
+);
+
+comment on table goods_content is
+'商品信息描述';
+
+comment on column goods_content.goods_id is
+'商品编号';
+
+comment on column goods_content.content is
+'商品描述内容';
+
+/*==============================================================*/
+/* Table: market_type                                           */
+/*==============================================================*/
+create table market_type  (
+   market_type          varchar2(2)                     not null,
+   market_name          varchar2(128),
+   market_gis           varchar2(128),
+   market_address       varchar2(128),
+   show_order           number,
+   constraint PK_MARKET_TYPE primary key (market_type)
+);
+
+comment on table market_type is
+'市场分类信息';
+
+comment on column market_type.market_type is
+'市场分类  01、02';
+
+comment on column market_type.market_name is
+'市场名称';
+
+comment on column market_type.market_gis is
+'市场三维地址';
+
+comment on column market_type.market_address is
+'市场地址';
+
+/*==============================================================*/
+/* Table: member                                                */
+/*==============================================================*/
+create table member  (
+   member_id            varchar2(32)                    not null,
+   nick                 varchar2(20),
+   login_password       varchar2(32)                    not null,
+   mobile               varchar2(15),
+   email                varchar2(32),
+   name                 varchar2(20)                    not null,
+   member_type          char(1)                         not null,
+   sex                  varchar2(2),
+   area_code            varchar2(6),
+   phone                varchar2(32),
+   post_code            varchar2(6)                     not null,
+   address              varchar2(128)                   not null,
+   status               char(1)                         not null,
+   phone_validate       char(1)                         not null,
+   gmt_register         date,
+   gmt_create           date,
+   creator              varchar2(32),
+   gmt_modify           date,
+   modifier             varchar2(32),
+   gmt_last_login       date,
+   login_count          number,
+   login_id             varchar2(20)                    not null,
+   register_ip          varchar2(15),
+   last_login_ip        varchar2(15),
+   constraint PK_MEMBER primary key (member_id)
+);
+
+comment on table member is
+'会员信息表';
+
+comment on column member.member_id is
+'会员编号';
+
+comment on column member.nick is
+'昵称：显示用';
+
+comment on column member.login_password is
+'密码需要md5加密';
+
+comment on column member.mobile is
+'手机号码不能为空，需要通过手机号码验证';
+
+comment on column member.email is
+'电子邮件地址';
+
+comment on column member.name is
+'真实姓名';
+
+comment on column member.member_type is
+'会员类型：买家B，卖家S；买卖家有不同的会员权限';
+
+comment on column member.sex is
+'性别：M 男、F女';
+
+comment on column member.area_code is
+'所在地区：根据省、地区、市三级组合成一个地区编码';
+
+comment on column member.phone is
+'固定电话';
+
+comment on column member.post_code is
+'邮政编码';
+
+comment on column member.address is
+'联系地址';
+
+comment on column member.status is
+'会员状态：禁用P，正常N,D删除；如果会员被禁用怎不能登陆';
+
+comment on column member.phone_validate is
+'手机校验：通过Y，否N';
+
+comment on column member.gmt_register is
+'注册时间';
+
+comment on column member.gmt_last_login is
+'最后登陆时间';
+
+comment on column member.login_count is
+'登陆次数';
+
+comment on column member.login_id is
+'会员登陆id、不能有中文、唯一不可修改';
+
+comment on column member.register_ip is
+'注册时的ip';
+
+comment on column member.last_login_ip is
+'最后登陆的ip';
+
+/*==============================================================*/
+/* Index: IDX_MEMBER_LOGIN_ID                                   */
+/*==============================================================*/
+create index IDX_MEMBER_LOGIN_ID on member (
+   login_id ASC
+);
+
+/*==============================================================*/
+/* Table: mobile_validate                                       */
+/*==============================================================*/
+create table mobile_validate  (
+   member_id            varchar2(32)                    not null,
+   phone                varchar2(15),
+   validate_code        varchar2(6),
+   constraint PK_MOBILE_VALIDATE primary key (member_id)
+);
+
+comment on table mobile_validate is
+'手机验证表，如果会员手机没有校验通过，则再这个表中会存在一条手机校验记录，如果校验通过，则删除此表中的信息，重发校验码需要删除这里的记录并新增一条记录';
+
+comment on column mobile_validate.member_id is
+'会员编号';
+
+comment on column mobile_validate.phone is
+'校验的手机号码';
+
+comment on column mobile_validate.validate_code is
+'本次手机校验码:6位手机校验码';
+
+/*==============================================================*/
+/* Table: news_base_info                                        */
+/*==============================================================*/
+create table news_base_info  (
+   news_id              varchar2(32)                    not null,
+   news_title           varchar2(128)                   not null,
+   news_type            varchar2(2)                     not null,
+   phone                varchar2(32),
+   member_id            varchar2(32)                    not null,
+   nick                 varchar2(20)                    not null,
+   news_status          char(1)                         not null,
+   view_count           number,
+   abandon_days         number,
+   gmt_abandon          date,
+   gmt_create           date,
+   creator              varchar2(32),
+   gmt_modify           date,
+   modifier             varchar2(32),
+   constraint PK_NEWS_BASE_INFO primary key (news_id)
+);
+
+comment on table news_base_info is
+'商业资讯表';
+
+comment on column news_base_info.news_id is
+'商业资讯编号';
+
+comment on column news_base_info.news_title is
+'商业资讯标题';
+
+comment on column news_base_info.news_type is
+'商业资讯所属分类';
+
+comment on column news_base_info.phone is
+'联系电话';
+
+comment on column news_base_info.member_id is
+'信息所属会员';
+
+comment on column news_base_info.nick is
+'昵称：登陆使用，全局唯一';
+
+comment on column news_base_info.news_status is
+'商业资讯状态:N 正常、P过期';
+
+comment on column news_base_info.view_count is
+'浏览次数';
+
+comment on column news_base_info.abandon_days is
+'信息过期月数';
+
+comment on column news_base_info.gmt_abandon is
+'根据商品过期月数和商品创建时间计算得到';
+
+/*==============================================================*/
+/* Index: IDX_NEWS_MEMBER_ID                                    */
+/*==============================================================*/
+create index IDX_NEWS_MEMBER_ID on news_base_info (
+   member_id ASC
+);
+
+/*==============================================================*/
+/* Index: IDX_NEWS_MODIFYDATE                                   */
+/*==============================================================*/
+create index IDX_NEWS_MODIFYDATE on news_base_info (
+   gmt_modify ASC
+);
+
+/*==============================================================*/
+/* Table: news_content                                          */
+/*==============================================================*/
+create table news_content  (
+   news_id              varchar2(32)                    not null,
+   content              clob,
+   constraint PK_NEWS_CONTENT primary key (news_id)
+);
+
+comment on table news_content is
+'商业资讯内容';
+
+comment on column news_content.news_id is
+'商业资讯编号';
+
+comment on column news_content.content is
+'商业咨询内容';
+
+/*==============================================================*/
+/* Table: news_type                                             */
+/*==============================================================*/
+create table news_type  (
+   news_type            char(2)                         not null,
+   type_name            varchar2(128),
+   show_order           number,
+   constraint PK_NEWS_TYPE primary key (news_type)
+);
+
+comment on table news_type is
+'商业资讯分类表';
+
+comment on column news_type.news_type is
+'信息编号：01、02';
+
+comment on column news_type.type_name is
+'信息名称';
+
+comment on column news_type.show_order is
+'显示排序';
+
+/*==============================================================*/
+/* Table: quartz_log                                            */
+/*==============================================================*/
+create table quartz_log  (
+   quartz_type          varchar2(20)                    not null,
+   gmt_execute          date,
+   quartz_memo          varchar2(255),
+   constraint PK_QUARTZ_LOG primary key (quartz_type)
+);
+
+comment on table quartz_log is
+'定时程序执行的时间记录，根据不同的类型来获取不同的最后执行时间';
+
+comment on column quartz_log.quartz_type is
+'定时类型如：QUARTZ_INDEX_GOODS（商品的索引定时）、QUARTZ_COMMEND（推荐的最后执行时间）';
+
+comment on column quartz_log.gmt_execute is
+'最后执行定时时间';
+
+comment on column quartz_log.quartz_memo is
+'定时说明';
+
+/*==============================================================*/
+/* Table: search_key_word                                       */
+/*==============================================================*/
+create table search_key_word  (
+   key_name             varchar2(20),
+   key_type             varchar2(16),
+   search_count         number,
+   key_id               number                          not null,
+   constraint PK_SEARCH_KEY_WORD primary key (key_id)
+);
+
+comment on table search_key_word is
+'搜索关键字表';
+
+comment on column search_key_word.key_name is
+'搜索关键字名称/页面搜索中需要控制文字数量';
+
+comment on column search_key_word.key_type is
+'搜索关键字类型:1、商品、2、店铺、3、店主、4、资讯信息';
+
+comment on column search_key_word.search_count is
+'该关键字搜索次数';
+
+comment on column search_key_word.key_id is
+'关键字编号';
+
+/*==============================================================*/
+/* Index: Idx_key_type                                          */
+/*==============================================================*/
+create unique index Idx_key_type on search_key_word (
+   key_name ASC,
+   key_type ASC
+);
+
+/*==============================================================*/
+/* Table: shop                                                  */
+/*==============================================================*/
+create table shop  (
+   shop_id              varchar2(32)                    not null,
+   member_id            varchar2(32)                    not null,
+   login_id             varchar2(20)                    not null,
+   shop_name            varchar2(128)                   not null,
+   shop_owner           varchar2(20)                    not null,
+   commodity            varchar2(128)                   not null,
+   belong_market_id     varchar2(2)                     not null,
+   address              varchar2(128)                   not null,
+   phone                varchar2(30),
+   bank                 varchar2(10),
+   bank_account         varchar2(20),
+   account_name         varchar2(20),
+   goods_count          number,
+   camera               char(1)                        default 'N',
+   web_phone            char(1)                        default 'N',
+   logo                 varchar2(128),
+   shop_img             varchar2(128),
+   gmt_create           date,
+   creator              varchar2(32),
+   gmt_modify           date,
+   modifier             varchar2(32),
+   gis_address          varchar2(128),
+   constraint PK_SHOP primary key (shop_id)
+);
+
+comment on table shop is
+'店铺基础表，一个卖家只能有一个店铺';
+
+comment on column shop.shop_id is
+'店铺编号';
+
+comment on column shop.member_id is
+'会员编号';
+
+comment on column shop.login_id is
+'会员登陆id';
+
+comment on column shop.shop_name is
+'店铺名称';
+
+comment on column shop.shop_owner is
+'店主姓名';
+
+comment on column shop.commodity is
+'主营商品';
+
+comment on column shop.belong_market_id is
+'所在市场编号，所有的市场以两位编码';
+
+comment on column shop.address is
+'店铺地址';
+
+comment on column shop.phone is
+'店内固话';
+
+comment on column shop.bank is
+'开户银行';
+
+comment on column shop.bank_account is
+'银行帐号';
+
+comment on column shop.account_name is
+'开户人姓名';
+
+comment on column shop.goods_count is
+'开户人姓名';
+
+comment on column shop.camera is
+'是否有网络摄像头，Y有N无';
+
+comment on column shop.web_phone is
+'是否集成web800：Y是，N否';
+
+comment on column shop.logo is
+'logo图片路径';
+
+comment on column shop.shop_img is
+'店铺照片';
+
+comment on column shop.gis_address is
+'三维地址/新增时录入/会员自己不能修改三维地址';
+
+/*==============================================================*/
+/* Index: IDX_SHOP_MEMBER_ID                                    */
+/*==============================================================*/
+create index IDX_SHOP_MEMBER_ID on shop (
+   member_id ASC
+);
+
+/*==============================================================*/
+/* Index: IDX_SHOP_MODIFYDATE                                   */
+/*==============================================================*/
+create index IDX_SHOP_MODIFYDATE on shop (
+   gmt_modify ASC
+);
+
+/*==============================================================*/
+/* Table: shop_commend                                          */
+/*==============================================================*/
+create table shop_commend  (
+   shop_id              varchar2(32)                    not null,
+   commend              clob,
+   constraint PK_SHOP_COMMEND primary key (shop_id)
+);
+
+comment on table shop_commend is
+'店铺公告表';
+
+comment on column shop_commend.shop_id is
+'店铺编号';
+
+comment on column shop_commend.commend is
+'店铺公告内容';
+
+/*==============================================================*/
+/* Table: sms                                                   */
+/*==============================================================*/
+create table sms  (
+   sms_id               number                          not null,
+   phone                varchar2(11),
+   status               char(1),
+   context              varchar2(255),
+   gmt_create           date,
+   gmt_modify           date,
+   SEND_COUNT           number,
+   constraint PK_SMS primary key (sms_id)
+);
+
+comment on table sms is
+'短信发送表';
+
+comment on column sms.sms_id is
+'短信编号';
+
+comment on column sms.phone is
+'本次发送手机号';
+
+comment on column sms.status is
+'发送状态:W，等待发送；S，发送成功';
+
+comment on column sms.context is
+'发送内容';
+
+comment on column sms.gmt_create is
+'创建时间';
+
+comment on column sms.gmt_modify is
+'最后修改时间';
+
+comment on column sms.SEND_COUNT is
+'发送次数';
+
+/*==============================================================*/
+/* Index: IDX_SMS_MODIFYDATE                                    */
+/*==============================================================*/
+create index IDX_SMS_MODIFYDATE on sms (
+   gmt_modify ASC,
+   status ASC
+);
+
+
+
+
+--phase two
+
+/*==============================================================*/
+/* DBMS name:      ORACLE Version 9i2                           */
+/* Created on:     2007-9-28 13:20:58                           */
+/*==============================================================*/
+
+
+drop index IDX_SIGN_SHOP_SHOPMEMBER_ID;
+
+drop index idx_sign_shop_memberid;
+
+drop index IDX_TRADE_CAR_OWNER;
+
+drop index IDX_TRADE_CAR_SHOP_OWNER;
+
+drop index IDX_TRADE_ORDER_BUYER_STATUS;
+
+drop index IDX_TRADE_ORDER_SELLER_STATUS;
+
+drop index idx_trade_order_item_orderno;
+
+drop index IDX_TRADE_ORDER_LOG_ORDERNO;
+
+drop index IDX_TRADE_ORDER_NOTE_ORDERNO;
+
+drop index IDX_TRADE_PAY_BUYERID;
+
+drop index IDX_TRADE_PAY_SELLERID;
+
+drop index IDX_TRADE_PAY_TRADEORDERNO;
+
+drop table sign_shop cascade constraints;
+
+drop table trade_car cascade constraints;
+
+drop table trade_car_shop cascade constraints;
+
+drop table trade_order cascade constraints;
+
+drop table trade_order_item cascade constraints;
+
+drop table trade_order_log cascade constraints;
+
+drop table trade_order_note cascade constraints;
+
+drop table trade_pay cascade constraints;
+
+drop sequence seq_sign_shop;
+
+drop sequence seq_trade_car;
+
+drop sequence seq_trade_order;
+
+drop sequence seq_trade_order_item;
+
+drop sequence seq_trade_order_log;
+
+drop sequence seq_trade_order_note;
+
+drop sequence seq_trade_pay;
+
+create sequence seq_sign_shop;
+
+create sequence seq_trade_car;
+
+create sequence seq_trade_order
+start with 10000000;
+
+create sequence seq_trade_order_item;
+
+create sequence seq_trade_order_log;
+
+create sequence seq_trade_order_note;
+
+create sequence seq_trade_pay;
+
+/*==============================================================*/
+/* Table: sign_shop                                           */
+/*==============================================================*/
+create table sign_shop  (
+   id                 number                          not null,
+   shop_id            varchar2(32)                    not null,
+   member_id          varchar2(32)                    not null,
+   constraint PK_SIGN_SHOP primary key (id)
+);
+
+comment on table sign_shop is
+'签约店铺表：用于存储我曾经支付过的店铺和自己选择的店铺';
+
+comment on column sign_shop.shop_id is
+'会员编号';
+
+comment on column sign_shop.member_id is
+'会员id';
+
+/*==============================================================*/
+/* Index: idx_sign_shop_memberid                              */
+/*==============================================================*/
+create index idx_sign_shop_memberid on sign_shop (
+   member_id ASC
+);
+
+/*==============================================================*/
+/* Index: IDX_SIGN_SHOP_SHOPMEMBER_ID                           */
+/*==============================================================*/
+create index IDX_SIGN_SHOP_SHOPMEMBER_ID on sign_shop (
+   member_id ASC,
+   shop_id ASC
+);
+
+/*==============================================================*/
+/* Table: trade_car                                           */
+/*==============================================================*/
+create table trade_car  (
+   id                 number                          not null,
+   goods_id           varchar2(32),
+   shop_id            varchar2(32),
+   owner              varchar2(32),
+   gmt_create         date,
+   constraint PK_TRADE_CAR primary key (id)
+);
+
+comment on table trade_car is
+'采购单（购物车）';
+
+comment on column trade_car.id is
+'会员编号';
+
+comment on column trade_car.goods_id is
+'商品id';
+
+comment on column trade_car.shop_id is
+'店铺id';
+
+comment on column trade_car.owner is
+'创建人id';
+
+comment on column trade_car.gmt_create is
+'创建时间';
+
+/*==============================================================*/
+/* Index: IDX_TRADE_CAR_OWNER                                   */
+/*==============================================================*/
+create index IDX_TRADE_CAR_OWNER on trade_car (
+   owner ASC
+);
+
+/*==============================================================*/
+/* Table: trade_car_shop                                      */
+/*==============================================================*/
+create table trade_car_shop  (
+   shop_id            varchar2(32),
+   owner              varchar2(32)
+);
+
+comment on table trade_car_shop is
+'购物车中所有的店铺表，防止到到购物车表中distinct';
+
+comment on column trade_car_shop.shop_id is
+'店铺id';
+
+comment on column trade_car_shop.owner is
+'创建人id';
+
+/*==============================================================*/
+/* Index: IDX_TRADE_CAR_SHOP_OWNER                              */
+/*==============================================================*/
+create index IDX_TRADE_CAR_SHOP_OWNER on trade_car_shop (
+   owner ASC
+);
+
+/*==============================================================*/
+/* Table: trade_order                                         */
+/*==============================================================*/
+create table trade_order  (
+   order_no           varchar2(32)                    not null,
+   shop_id            varchar2(32),
+   shop_name          varchar2(128),
+   pay_fee            number,
+   status             varchar2(32),
+   order_date         varchar2(8),
+   buyer_id           varchar2(32),
+   seller_id          varchar2(32),
+   order_type         char(1),
+   memo               varchar2(256),
+   buyer_login_id     varchar2(32),
+   seller_login_id    varchar2(32),
+   creator            varchar2(32),
+   gmt_modify         date,
+   modifier           varchar2(32),
+   gmt_create         date,
+   constraint PK_TRADE_ORDER primary key (order_no)
+);
+
+comment on table trade_order is
+'订单';
+
+comment on column trade_order.order_no is
+'订单号20070910(日期)+8为序列号';
+
+comment on column trade_order.shop_id is
+'店铺id';
+
+comment on column trade_order.shop_name is
+'店铺名称';
+
+comment on column trade_order.pay_fee is
+'订单费用';
+
+comment on column trade_order.status is
+'订单状态：
+订单初始状态   ORDER_INIT
+等待卖家确认    WAIT_SELLER_CONFIRM
+等待买家确认    WAIT_BUYER_CONFIRM
+订单作废           ORDER_CLOSE
+双方已确认       WAIT_PAY
+订单已经支付   ORDER_SUCCESS
+';
+
+comment on column trade_order.order_date is
+'订单日期：20070909';
+
+comment on column trade_order.buyer_id is
+'买家编号';
+
+comment on column trade_order.seller_id is
+'卖家编号';
+
+comment on column trade_order.order_type is
+'订单类型:F（快速订单）T（交易订单）快速订单无商品信息';
+
+comment on column trade_order.buyer_login_id is
+'买家login_id';
+
+comment on column trade_order.seller_login_id is
+'卖家login_id';
+
+comment on column trade_order.creator is
+'创建人';
+
+comment on column trade_order.gmt_modify is
+'最后修改时间';
+
+comment on column trade_order.modifier is
+'最后修改人';
+
+comment on column trade_order.gmt_create is
+'创建时间';
+
+/*==============================================================*/
+/* Index: IDX_TRADE_ORDER_BUYER_STATUS                          */
+/*==============================================================*/
+create index IDX_TRADE_ORDER_BUYER_STATUS on trade_order (
+   buyer_id ASC,
+   status ASC
+);
+
+/*==============================================================*/
+/* Index: IDX_TRADE_ORDER_SELLER_STATUS                         */
+/*==============================================================*/
+create index IDX_TRADE_ORDER_SELLER_STATUS on trade_order (
+   seller_id ASC,
+   status ASC
+);
+
+/*==============================================================*/
+/* Table: trade_order_item                                    */
+/*==============================================================*/
+create table trade_order_item  (
+   id                 number                          not null,
+   order_no           varchar2(32),
+   goods_id           varchar2(32),
+   shop_id            varchar2(32),
+   goods_name         varchar2(128),
+   batch_price        number,
+   total_num          number,
+   total_free         number,
+   creator            varchar2(32),
+   gmt_modify         date,
+   modifier           varchar2(32),
+   gmt_create         date,
+   constraint PK_TRADE_ORDER_ITEM primary key (id)
+);
+
+comment on table trade_order_item is
+'订单商品明细：一个订单可以有多个商品（采购单条目）';
+
+comment on column trade_order_item.id is
+'会员编号';
+
+comment on column trade_order_item.goods_id is
+'商品id';
+
+comment on column trade_order_item.shop_id is
+'店铺id';
+
+comment on column trade_order_item.goods_name is
+'商品名称';
+
+comment on column trade_order_item.batch_price is
+'商品批量或单个单价，单位分';
+
+comment on column trade_order_item.total_num is
+'购买商品数量';
+
+comment on column trade_order_item.total_free is
+'该商品购买金额=(商品数量/ 商品起批数量)*商品批量或单个价格';
+
+comment on column trade_order_item.creator is
+'创建人';
+
+comment on column trade_order_item.gmt_modify is
+'最后修改时间';
+
+comment on column trade_order_item.modifier is
+'最后修改人';
+
+comment on column trade_order_item.gmt_create is
+'创建时间';
+
+/*==============================================================*/
+/* Index: idx_trade_order_item_orderno                        */
+/*==============================================================*/
+create index idx_trade_order_item_orderno on trade_order_item (
+   order_no ASC
+);
+
+/*==============================================================*/
+/* Table: trade_order_log                                     */
+/*==============================================================*/
+create table trade_order_log  (
+   id                 number                          not null,
+   order_no           varchar2(32)                    not null,
+   status             varchar2(32),
+   member_type        char(1),
+   pay_fee            number,
+   memo               varchar2(2000),
+   creator            varchar2(32),
+   gmt_modify         date,
+   modifier           varchar2(32),
+   gmt_create         date,
+   constraint PK_TRADE_ORDER_LOG primary key (id)
+);
+
+comment on table trade_order_log is
+'订单修改记录';
+
+comment on column trade_order_log.id is
+'会员编号';
+
+comment on column trade_order_log.order_no is
+'商品id';
+
+comment on column trade_order_log.status is
+'当前订单状态，可以用于记录订单历史状态';
+
+comment on column trade_order_log.member_type is
+'买卖方：买家B，卖家S；标识是卖家或买家修改';
+
+comment on column trade_order_log.pay_fee is
+'修改前的金额';
+
+comment on column trade_order_log.memo is
+'修改内容内容';
+
+comment on column trade_order_log.creator is
+'创建人';
+
+comment on column trade_order_log.gmt_modify is
+'最后修改时间';
+
+comment on column trade_order_log.modifier is
+'最后修改人';
+
+comment on column trade_order_log.gmt_create is
+'创建时间';
+
+/*==============================================================*/
+/* Index: IDX_TRADE_ORDER_LOG_ORDERNO                           */
+/*==============================================================*/
+create index IDX_TRADE_ORDER_LOG_ORDERNO on trade_order_log (
+   order_no ASC
+);
+
+/*==============================================================*/
+/* Table: trade_order_note                                    */
+/*==============================================================*/
+create table trade_order_note  (
+   id                 number                          not null,
+   order_no           varchar2(32)                    not null,
+   member_type        char(1),
+   memo               varchar2(1024),
+   creator            varchar2(32),
+   gmt_modify         date,
+   modifier           varchar2(32),
+   gmt_create         date,
+   constraint PK_TRADE_ORDER_NOTE primary key (id)
+);
+
+comment on table trade_order_note is
+'订单留言表';
+
+comment on column trade_order_note.id is
+'会员编号';
+
+comment on column trade_order_note.order_no is
+'商品id';
+
+comment on column trade_order_note.member_type is
+'买卖方：买家B，卖家S；标识是卖家或买家留言';
+
+comment on column trade_order_note.memo is
+'留言内容';
+
+comment on column trade_order_note.creator is
+'创建人';
+
+comment on column trade_order_note.gmt_modify is
+'最后修改时间';
+
+comment on column trade_order_note.modifier is
+'最后修改人';
+
+comment on column trade_order_note.gmt_create is
+'创建时间';
+
+/*==============================================================*/
+/* Index: IDX_TRADE_ORDER_NOTE_ORDERNO                          */
+/*==============================================================*/
+create index IDX_TRADE_ORDER_NOTE_ORDERNO on trade_order_note (
+   order_no ASC
+);
+
+/*==============================================================*/
+/* Table: trade_pay                                           */
+/*==============================================================*/
+create table trade_pay  (
+   id                 number                          not null,
+   order_no           varchar2(32)                    not null,
+   buyer_name         varchar2(32),
+   seller_name        varchar2(32),
+   buyer_account      varchar2(32),
+   buyer_bank         varchar2(64),
+   seller_account     varchar2(32),
+   seller_bank        varchar2(128),
+   buyer_id           varchar2(32),
+   seller_id          varchar2(32),
+   pay_fee            number,
+   pay_status         char(1),
+   trans_status       char(1),
+   pay_date           date,
+   bank_no            varchar2(64),
+   trans_date         date,
+   pay_success_date   date,
+   creator            varchar2(32),
+   gmt_modify         date,
+   modifier           varchar2(32),
+   gmt_create         date,
+   constraint PK_TRADE_PAY primary key (id)
+);
+
+comment on table trade_pay is
+'网上支付信息表
+快速支付只要订单表和本表即可';
+
+comment on column trade_pay.id is
+'采购单编号';
+
+comment on column trade_pay.order_no is
+'订单号';
+
+comment on column trade_pay.buyer_account is
+'买家银行帐号，目前系统中是没有买家银行帐号的，所以这个字段可以为空';
+
+comment on column trade_pay.buyer_bank is
+'支付银行';
+
+comment on column trade_pay.seller_account is
+'卖家银行帐号：如果卖家没有银行帐号则不允许支付';
+
+comment on column trade_pay.buyer_id is
+'买家编号';
+
+comment on column trade_pay.seller_id is
+'卖家编号';
+
+comment on column trade_pay.pay_status is
+'支付状态，支付不成功对订单也是等待支付状态、支付成功订单成功S(成功)F( 失败)I(初始状态)';
+
+comment on column trade_pay.trans_status is
+'转帐状态：S(成功)I( 未转帐)';
+
+comment on column trade_pay.pay_date is
+'去银行支付的时间';
+
+comment on column trade_pay.trans_date is
+'转帐时间';
+
+comment on column trade_pay.pay_success_date is
+'支付成功时间';
+
+comment on column trade_pay.creator is
+'创建人';
+
+comment on column trade_pay.gmt_modify is
+'最后修改时间';
+
+comment on column trade_pay.modifier is
+'最后修改人';
+
+comment on column trade_pay.gmt_create is
+'创建时间';
+
+/*==============================================================*/
+/* Index: IDX_TRADE_PAY_TRADEORDERNO                            */
+/*==============================================================*/
+create unique index IDX_TRADE_PAY_TRADEORDERNO on trade_pay (
+   order_no ASC
+);
+
+/*==============================================================*/
+/* Index: IDX_TRADE_PAY_BUYERID                                 */
+/*==============================================================*/
+create index IDX_TRADE_PAY_BUYERID on trade_pay (
+   buyer_id ASC
+);
+
+/*==============================================================*/
+/* Index: IDX_TRADE_PAY_SELLERID                                */
+/*==============================================================*/
+create index IDX_TRADE_PAY_SELLERID on trade_pay (
+   seller_id ASC
+);
+

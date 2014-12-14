@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="NEWSTYPE_SPACE">
+	<resultMap id="newstype" class="com.nonfamous.tang.domain.NewsType">
+		<result property="newsType" column="NEWS_TYPE"/>
+		<result property="typeName" column="TYPE_NAME"/>
+		<result property="showOrder" column="SHOW_ORDER"/>
+	</resultMap>
+	
+	<insert id="newstype_insert" parameterClass="com.nonfamous.tang.domain.NewsType">
+		INSERT INTO NEWS_TYPE (
+				NEWS_TYPE,
+				TYPE_NAME,
+				SHOW_ORDER
+	                     )
+	             VALUES ( 
+				#newsType#,
+				#typeName#,
+				#showOrder#
+	                     )
+	</insert>
+	
+	<update id="newstype_update" parameterClass="com.nonfamous.tang.domain.NewsType">
+		UPDATE NEWS_TYPE t SET  
+			<isNotEmpty prepend="" property="newsType"> t.NEWS_TYPE = #newsType#,</isNotEmpty>
+			<isNotEmpty prepend="" property="typeName"> t.TYPE_NAME = #typeName# </isNotEmpty>
+		WHERE t.NEWS_TYPE = #newsType#
+	</update>
+	
+	<select id="get_newstype_list" parameterClass="java.util.Map" resultMap="newstype">
+		SELECT 
+			NEWS_TYPE,
+			TYPE_NAME,
+			SHOW_ORDER 
+		FROM NEWS_TYPE  t  
+		  ORDER BY t.SHOW_ORDER 
+	</select>
+	<select id="get_yy_newstype_list" parameterClass="java.util.Map" resultMap="newstype">
+		SELECT 
+			NEWS_TYPE,
+			TYPE_NAME,
+			SHOW_ORDER 
+		FROM NEWS_TYPE  t  where t.NEWS_TYPE>90
+		  ORDER BY t.SHOW_ORDER 
+	</select>
+	
+	<select id="get_newstype" parameterClass="java.lang.String" resultMap="newstype">
+		SELECT 
+			NEWS_TYPE,
+			TYPE_NAME,
+			SHOW_ORDER 
+		FROM NEWS_TYPE  t     
+		WHERE t.NEWS_TYPE = #value#
+	</select>
+	
+	<delete id="delete_newstype" parameterClass="java.lang.String">
+		DELETE FROM NEWS_TYPE  WHERE NEWS_TYPE = #value#
+	</delete>
+</sqlMap>

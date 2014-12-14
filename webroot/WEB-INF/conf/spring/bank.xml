@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+	<bean id="bankCommConfig" class="com.nonfamous.tang.bank.comm.BankCommConfig" >
+		<property name="apiURL">
+			<value>${bank.comm.apiURL}</value>
+		</property>
+		<property name="orderURL">
+			<value>${bank.comm.orderURL}</value>
+		</property>
+		<property name="enableLog">
+			<value>${bank.comm.enableLog}</value>
+		</property>
+		<property name="logPath">
+			<value>${bank.comm.logPath}</value>
+		</property>
+		<property name="settlementFilePath">
+			<value>${bank.comm.settlementFilePath}</value>
+		</property>
+		<property name="merchantCertFile">
+			<value>${bank.comm.merchantCertFile}</value>
+		</property>
+		<property name="merchantCertPassword">
+			<value>${bank.comm.merchantCertPassword}</value>
+		</property>
+		<property name="rootCertFile">
+			<value>${bank.comm.rootCertFile}</value>
+		</property>
+		<property name="templateName">
+			<value>bank/comm/config.vm</value>
+		</property>
+		<property name="vmencoding">
+			<value>${vm.encoding}</value>
+		</property>
+		<property name="xmlencoding">
+			<value>gb2312</value>
+		</property>
+		<property name="velocityConfig">
+			<ref bean="velocityConfigurer" />
+		</property>
+	</bean>
+	<!-- 
+	<bean id="bankcommSignHelper" class="com.nonfamous.tang.bank.comm.BankCommSignHelper" init-method="init">
+		<property name="config" ref="bankCommConfig"/>
+		<property name="merchantId">
+			<value>${bank.comm.merchantId}</value>
+		</property>
+	</bean>
+	 -->
+</beans>

@@ -1,0 +1,465 @@
+/*====================ID Define================================================*/
+body {
+	      /* top right bottom left  */
+	margin   : 0px   auto;
+	min-width: 1024px; 
+	max-width: 80em  ; 
+	margin-left: expression(document.body.clientWidth <= 1024 ? 0   : (document.body.clientWidth - 1024)/2);
+	font-family:				Tahoma, Arial, sans-serif;
+	font-size:					12px;
+	/*background-color:			#F6F6F6;
+	scrollbar-arrow-color:		#FFFFFF;
+	scrollbar-3dlight-color:	#DDDDDD;
+	scrollbar-highlight-color:	#AAAAAA;
+	scrollbar-face-color:		#AAAAAA;
+	scrollbar-shadow-color:		#AAAAAA;
+	scrollbar-track-color:		#CCCCCC;
+	scrollbar-darkshadow-color:	#666666;*/
+}
+
+a:link {
+	color:#888;
+	text-decoration:none;
+}
+
+a:visited {
+	color:#888;
+	text-decoration:none;
+}
+
+a:hover {
+	color:#FF5500;
+	text-decoration:underline;
+}
+
+	
+.handCursor {
+	cursor:pointer ;
+}
+
+.scroll_div {
+	margin:						0px 0px 0px 0px;
+	scrollbar-arrow-color:		#FFFFFF;
+	scrollbar-3dlight-color:	#DDDDDD;
+	scrollbar-highlight-color:	#AAAAAA;
+	scrollbar-face-color:		#AAAAAA;
+	scrollbar-shadow-color:		#AAAAAA;
+	scrollbar-track-color:		#CCCCCC;
+	scrollbar-darkshadow-color:	#666666;
+	overflow-y:auto;
+	overflow-x:no;
+	border:0px solid black;	
+}
+
+.ajaxError {
+    width: 400 px;
+}
+
+.datetime_input {
+	background: transparent url(../images/calendar_single.png) no-repeat 0 0;
+	background-position:right;
+    border: 1px solid black;
+}
+
+/* content_list */
+.content_list {
+  list-style-type:	none;	
+  margin: 0px;
+  text-align: left;
+  padding:5px 0px 0px 10px;
+}
+
+.content_list li {
+	padding:1px 0px 0px 0px;
+	line-height:18px;
+}
+
+.content_list li a{
+    text-decoration: none ;
+    text-align:		left  ; 
+	font-size:		12px  ;
+	font-family:    宋体  ;  
+    color      :    black ;    
+}
+.content_list li a:hover{
+	text-decoration: underline;
+}
+
+/* link_list */
+.link_list {
+  list-style-type:	none;	
+  margin: 0px;
+  text-align: left;
+  padding:0px 0px 0px 0px;
+}
+
+.link_list li {
+	float:left;
+	padding:0px 20px 0px 0px  ;
+	margin: 0px 0px 0px 0px   ;
+}
+
+.link_list li img{
+	width:  170px;
+	cursor: pointer;
+	border: 1px solid #666666
+}
+
+.link_list_items {
+   height: 40px; 	
+}
+
+.link_list_img {
+	height: 20px;
+}
+.footer{
+text-align:center;
+border-top:1px solid #DEDEDE;
+margin-top:12px;
+}
+.footer1{
+  list-style-type:	none  ;	
+  margin:  0px;
+  padding:10px 0px 0px 200px;	
+}
+
+
+.footer1 li a{
+	line-height     : 20px;
+	white-space     : nowrap;
+	border-right    : 1px solid black;
+    padding         : 0px 8px 0px 8px;
+    text-decoration : none ;
+    text-align      : left  ; 
+	font-size       : 12px  ;
+	font-family     : 宋体  ;
+	color           : black ; 
+    cursor          : pointer;
+}
+
+.footer2{
+  list-style-type:	none  ;	
+  margin:  0px;
+  padding:10px 0px 0px 260px;	
+  line-height     : 20px;
+  white-space     : nowrap;
+  text-decoration : none ;
+  text-align      : left  ; 
+  font-size       : 12px  ;
+  font-family     : 宋体  ;
+  color           : black ; 
+}
+.link_font{
+  list-style-type:	none  ;	
+  margin:  0px;
+  line-height     : 20px;
+  white-space     : nowrap;
+  text-decoration : none ;
+  text-align      : left  ; 
+  font-size       : 12px  ;
+  font-family     : 宋体  ;
+  color           : black ; 
+}
+
+
+
+.content_list_numeric li label{
+	font-size:		12px  ;
+	font-family:    宋体  ;  
+    color      :    white ;   
+    padding:0px 10px 0px 0px; /* top right bottom left */
+    background: transparent url(../images/label_numeric.gif) no-repeat 0 0;
+}
+
+.content_list_dash {
+	margin: -3px 0px 0px -10px;
+    border-bottom: 1px dotted #999999;	
+    vertical-align:top;
+}
+
+.contact_list {
+  list-style-type:	none;	
+  margin: 0px;
+  text-align: left;
+  padding:0px 0px 0px 10px;
+}
+
+/* list_table */
+.list_table {
+  border: 1px solid #EEAAB9;
+}
+
+.list_table_content {
+  vertical-align: top;	
+}
+
+.list_table_header {	
+  border-spacing: 0px;
+  padding: 0px;	
+  text-decoration: none;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.list_table_header img{
+  cursor:pointer;
+}
+
+
+.contact_list_gm_mail{
+  background: transparent url(../images/contact_mail.gif) no-repeat 0 0;	
+  padding:0px 0px 0px 40px;	
+  color: #026EDD;
+  font-weight: bold;
+}
+
+.contact_list_gm_mail2 a{
+  padding:0px 0px 0px 40px;	
+  color: #FF3199;
+  font-weight: bold;
+  font-size:10pt;
+  text-decoration:none;
+}
+
+.form_validate_fail{
+  border: 1px solid red ;
+}
+
+.radio_form_validate_fail {
+  background-color:red  ;
+  border:none;
+}
+
+select.form_validate_fail{
+  background: transparent url(../images/error.gif) no-repeat 0 0; 
+  background-position: center;
+}
+
+ul.form_message {
+	list-style-type:	none;
+	margin:				0px;
+	padding:			0px;
+}
+
+ul.form_message li {
+	padding-left:		35px;
+	line-height:		25px;
+	vertical-align:		middle;
+	font-size:			9pt;
+	font-weight:		bold;
+	background-color:	#FFFFDD;
+	border:				1px dotted black;	
+	background-position:5px 50%; /* X-pos Y-pos (from top-left) */
+}
+
+.validate_fail_msg {
+    color:				#FF0000;
+    background-image:	url(../images/cross.png);
+    background-repeat:	no-repeat;
+}
+
+.validate_alert_msg {
+    background-image:	url(../images/message.gif);
+    background-repeat:	no-repeat;
+}
+
+.validate_info_msg {
+    background-image:	url(../images/message.gif);
+    background-repeat:	no-repeat;
+}
+
+
+.header_search {
+  background: transparent url(../images/bg_biaoti.jpg) no-repeat 0 0;  
+  padding: 10px 0px 0px 30px ;  
+  white-space     : nowrap;
+  text-align      : left  ; 
+  font-size       : 12px  ;
+  font-family     : 宋体  ;
+  color           : black ;
+  width   : 985px     ;
+  height  : 65px      ;	  
+}
+
+.header_search input{
+  background-color: white;
+}
+
+.header_search label{
+  font-weight: bold ;
+}
+
+.header_search a{
+  color: white;
+}
+
+.header {
+  background: transparent url(../images/bg_head.jpg) repeat-y 0 0;  
+  padding: 10px 0px 0px 10px ;
+  white-space     : nowrap;
+  vertical-align  : top   ;
+  font-size       : 12px  ;
+  /*font-weight     : bold  ;*/
+  font-family     : 宋体  ;
+  text-align      : right ; 
+  width: 985px;
+}
+.header a{
+  margin: 10px 5px 0 0;
+  color: #e13581;	
+  text-decoration:none;
+  line-height: 16px ;
+  
+}
+
+.header a:hover{
+  margin: 10px 5px 0 0;
+  text-decoration:underline;
+}
+
+.header label{
+  margin: 10px 5px 0 0;
+}
+
+.main_table {
+  width :990px;
+  border-spacing: 0px;
+  padding: 0px 0px 0px 0px;	
+  margin-top: 5px;
+  border-top: 1px solid #ddd;;
+}
+
+.main_table_td {
+  vertical-align: top;
+}
+.main_table_td_bottom {
+  vertical-align: bottom;
+}
+
+.seperator_1_3 {
+    width: 1px;
+    height:3px;
+    margin-top:expression("-15px") ;
+}
+
+
+.video_preview_ul{
+  list-style-type:	none;	
+  margin: 0px;
+  vertical-align:bottom;
+  padding:0px 0px 0px 0px;	
+  font-size       : 12px  ;
+  font-family     : 宋体  ;
+}
+
+
+.video_preview_ul_img{
+  height: 55px;	
+  width : 55px;
+  border: 1px solid  #C0D6E4;
+  float : left;
+}
+
+.video_preview_ul li{
+  margin: 1px 1px 1px 1px;
+  width:  200px;
+}
+
+.video_preview_ul_intro {
+  background-color:#F5F5F5;	
+}
+
+.video_preview_ul_price{
+  background-color:#9AD2D4;	
+  font-weight: bold ;
+  color      : white;
+  font-weight: bold ;
+  padding-left: 5px  ;
+}
+
+.video_preview_ul_price a{
+  width: 70px;
+  text-decoration:none;
+}
+
+.video_preview_ul_price a:hover{
+  text-decoration:underline;
+}
+
+.video_preview_ul_price label{
+  text-align: right;
+  width: 50px;	
+}
+
+#latestMessage{
+	background: transparent url(../images/bg_roolbanner.jpg) no-repeat 0 0;
+	background-position: center;
+	width: 478px;
+	height: 15px;
+	font-size: 11px;
+	color: white;   	
+}
+	
+#hotSearchKeywords
+{
+}
+#hotSearchKeywords a:link, #hotSearchKeywords a:visited{color: white}
+#hotSearchKeywords a:hover, #hotSearchKeywords a:active{color: #E13581}
+
+
+      #msg_board {
+	    width   : 235px     ;
+	    height  : 260px     ;
+      }
+      
+      #businesses {
+	    width   : 235px     ;
+	    height  : 260px     ;
+      }
+      
+      #livingspace {
+	    width   : 235px   ;
+	    height  : 260px   ;
+      }
+      
+	  #shequjinghua {
+	    width   : 245px   ;
+	    height  : 260px   ;
+      }
+      
+      #mamibaobei {
+	    width   : 245px   ;
+	    height  : 260px   ;
+      }
+      
+	  #safe {
+	    width   : 235px   ;
+	    height  : 260px   ;
+      }
+      
+      #categories {
+	    width   : 235px   ;
+      }
+      
+      #service {
+	    width   : 235px   ;
+	    height  : 115px   ;
+      }
+      #rental {
+	    width   : 235px   ;
+	    height  : 115px   ;	      
+      }
+      
+      #banner_middle{
+	    width   : 733px   ;
+      }
+      
+      #recommend {
+	    width   : 235px   ;
+	    height  : 295px   ;	      
+      }
+      
+      #banner_02 {
+	    width   : 235px   ;    
+	    height  : 100px   ;
+      }      

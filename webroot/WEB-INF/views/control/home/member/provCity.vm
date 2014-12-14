@@ -1,0 +1,124 @@
+#if($stringUtils.isNotEmpty($areaCode))
+	#set($initProvCode = $stringUtils.substring($areaCode,0,2))
+	#set($initCityCode = $stringUtils.substring($areaCode,2,4))
+	#set($initAreaCode = $stringUtils.substring($areaCode,4,6))
+#end
+<select name="prov" onChange="changeProv();"></select>
+<select name="city" onChange="changeCity();"></select>
+<select name="area" onChange="sumAreaCode();"></select>
+<input type="hidden" name="areaCode" value="$!areaCode"/>
+<script language="javascript" type="text/javascript">
+	var provs = new Array();
+	#if($provList)
+		#set($provIndex = 0)
+		#foreach($prov in $provList)
+		#set($provCode = $stringUtils.substring($prov.areaCode,0,2))
+	provs[$provIndex] = new Array();
+	provs[$provIndex][0] = "$provCode";
+	provs[$provIndex][1] = "$prov.name";
+	provs[$provIndex][2] = new Array();
+			#set($cityIndex = 0)
+			#foreach($city in $prov.childList)
+			#set($cityCode = $stringUtils.substring($city.areaCode,2,4))
+	provs[$provIndex][2][$cityIndex] = new Array();
+	provs[$provIndex][2][$cityIndex][0] = "$cityCode";
+	provs[$provIndex][2][$cityIndex][1] = "$city.name";
+	provs[$provIndex][2][$cityIndex][2] = new Array();
+				#set($areaIndex = 0)
+				#foreach($area in $city.childList)
+				#set($areaCode = $stringUtils.substring($area.areaCode,4,6))
+	provs[$provIndex][2][$cityIndex][2][$areaIndex] = new Array();
+	provs[$provIndex][2][$cityIndex][2][$areaIndex][0] = "$areaCode";
+	provs[$provIndex][2][$cityIndex][2][$areaIndex][1] = "$area.name";
+				#set($areaIndex = $areaIndex+1)
+				#end
+			#set($cityIndex = $cityIndex+1)
+			#end
+		#set($provIndex = $provIndex+1)
+		#end
+	#end
+	
+	function init(provCode,cityCode,areaCode) {
+		var provObj = document.getElementsByName("prov")[0];
+		var index = 0;
+		if(provObj != null) {
+			clearAll(provObj);
+			if(provs.length > 0) {
+				for(var i=0;i<provs.length;i++) {
+					provObj.options[i] = new Option(provs[i][1],provs[i][0]);
+					if(provCode == provs[i][0]) {
+						provObj.options[i].selected = true;
+						index = i;
+					}
+				}
+			}
+			initCity(index,cityCode,areaCode);
+		}
+	}
+	
+	function initCity(provIndex,cityCode,areaCode) {
+		var cityObj = document.getElementsByName("city")[0];
+		var index = 0;
+		if(cityObj != null) {
+			clearAll(cityObj);
+			if(provs.length > 0 && provs[provIndex][2].length > 0) {
+				for(var i=0;i<provs[provIndex][2].length;i++) {
+					cityObj.options[i] = new Option(provs[provIndex][2][i][1],provs[provIndex][2][i][0]);
+					if(cityCode == provs[provIndex][2][i][0]) {
+						cityObj.options[i].selected = true;
+						index = i;
+					}
+				}
+			}
+		}
+		initArea(provIndex,index,areaCode);
+	}
+	
+	function initArea(provIndex,cityIndex,areaCode) {
+		var areaObj = document.getElementsByName("area")[0];
+		if(areaObj != null) {
+			clearAll(areaObj);
+			areaObj.options[0] = new Option("","00");
+			if(provs.length > 0 && provs[provIndex][2].length > 0 && provs[provIndex][2][cityIndex][2].length > 0) {
+				for(var i=0;i<provs[provIndex][2][cityIndex][2].length;i++) {
+					areaObj.options[i+1] = new Option(provs[provIndex][2][cityIndex][2][i][1],provs[provIndex][2][cityIndex][2][i][0]);
+					if(areaCode == provs[provIndex][2][cityIndex][2][i][0]||areaCode=="") {
+						areaObj.options[i+1].selected = true;
+					}
+				}
+			}
+		}
+	}
+	
+	function changeProv() {
+		var provIndex = document.getElementsByName("prov")[0].selectedIndex;
+		initCity(provIndex,"","");
+		sumAreaCode();
+	}
+	
+	function changeCity() {
+		var provIndex = document.getElementsByName("prov")[0].selectedIndex;
+		var cityIndex = document.getElementsByName("city")[0].selectedIndex;
+		initArea(provIndex,cityIndex,"");
+		sumAreaCode();
+	}
+	
+	function sumAreaCode() {
+		var provCode = document.getElementsByName("prov")[0].value;
+		var cityCode = document.getElementsByName("city")[0].value;
+		var areaCode = document.getElementsByName("area")[0].value;
+		document.getElementsByName("areaCode")[0].value = provCode+cityCode+areaCode;
+	}
+	
+	function clearAll(obj) {
+		if (!obj) {
+			return;
+		}
+		for (var i = obj.length - 1; i >= 0; --i) {
+			obj.remove(i);
+		}
+		obj.value = '';
+	}
+	
+	init("$!initProvCode","$!initCityCode","$!initAreaCode");
+</script>

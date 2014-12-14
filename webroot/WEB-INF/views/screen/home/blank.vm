@@ -1,0 +1,15 @@
+#set( $layout = "layout/home/memberdefault.vm" )
+<script language="JavaScript">
+	function openWin(url){
+	window.open(url,'win','width=600,height=450,top=100,left=300,resizable=yes,scrollbars=yes,location=no');
+	}
+</script>
+<td width="10" valign="top">°°</td>
+<td width="740" valign="top">
+	
+µÍ∆Ã√˚≥∆£∫<input type="text" name="shop_name">
+<input type="button" value="—°‘ÒµÍ∆Ã" onclick="javaScript:openWin('$appServer.setTarget('/member/select_shop_list.htm')');">
+		<br/>
+		µÍ  ∆Ãid£∫<input type="text" name="shop_id">
+			<br/>
+</td>

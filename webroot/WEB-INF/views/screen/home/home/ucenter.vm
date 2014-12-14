@@ -1,0 +1,18 @@
+$!synLoginCode
+<script language="javascript" type="text/javascript">
+	var bbsUrl = "$!bbsUrl";
+	var homeUrl = "$!homeUrl";
+	
+	//redirect to bbs or uchome
+	if(bbsUrl){
+		window.location.href = bbsUrl;
+	}
+	else if(homeUrl){
+		window.location.href = homeUrl;
+	}
+	else{
+		//window.alert("Õ¨≤Ωµ«¬Ω ß∞‹£¨«Î÷ÿ ‘!");
+		//hard code
+		window.location.href = "http://www.5iyya.com/home";
+	}
+</script>

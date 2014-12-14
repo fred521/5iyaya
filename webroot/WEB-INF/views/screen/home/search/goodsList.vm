@@ -1,0 +1,362 @@
+<script>
+	function pageTo(num) {
+	    document.main.page.value=num;
+		document.main.submit();
+	}
+	function pageTopre(num) {
+	    document.main.page.value=num-1;
+		document.main.submit();
+	}
+	function pageTonext(num) {
+	    document.main.page.value=parseInt(num)+1;
+		document.main.submit();
+	}
+	function toSort(sort,reverse) {
+	    document.main.sort.value=sort;
+	    document.main.reverse.value=reverse;
+		document.main.submit();
+	}
+	function toMarket(marketType) {
+	    document.main.marketType.value=marketType;
+		document.main.submit();
+	}
+	function toSubcat(cat) {
+	    document.main.searchcate.value=cat;
+		document.main.submit();
+	}
+</script>
+
+
+#set( $layout = "layout/home/searchDefault.vm" )
+<table border="0" width="950" cellspacing="0" cellpadding="0" height="30">
+	<tr>
+		<td>当前类目下共有 <b><font color="#FF6600">$total</font></b> 个商品
+		#if($subcatnum && $subcatnum>0)
+		,您可以选择下面的详细分类:
+		#end
+		</td>
+	</tr>
+</table>
+#if($subcatnum && $subcatnum>0)
+<table border="0" width="990" cellspacing="0" cellpadding="10" style="border: 1px solid #CCCCCC; background-color: #F7F7F7">
+	<tr>
+		<td><table border="0" width="100%" cellspacing="0" cellpadding="2">
+		#set($catCount = 1)
+		#foreach($cat in $cats)
+					  #if($catCount%6 == 1)
+					   <tr>
+					  #end
+					  <td><a href="#" onClick="toSubcat('$cat.typeId');return false;" class="gray">$cat.typeName</a>($cat.num)</td>
+		              #if($catCount%6  == 0)
+					    </tr>
+					  #end
+			#set($catCount = $catCount + 1)
+		#end
+</table></td>
+	</tr>
+</table>
+#end
+<table border="0" width="950" cellspacing="0" cellpadding="0" height="6">
+	<tr>
+		<td width="950px">&nbsp;</td>
+	</tr>
+</table>
+<table border="0" width="950px" cellspacing="0" cellpadding="0">
+	<tr>
+		<td width="190px" valign="top" align="left">
+		#*
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #F7F7F7" height="145">
+			<tr>
+				<td height="26" bgcolor="#E3E3E3" style="padding-left:10px;font-weight:bold;">缩小搜索范围</td>
+			</tr>
+			<tr>
+				<td valign="top" align=center>
+				<table border="0" width="180" cellspacing="0" cellpadding="2" id="table1">
+					<tr>
+						<td width="90" height="30">
+						<input id="OnlineState3" type="checkbox" value="1" name="OnlineState3"> 
+						网络摄像头</td>
+						<td width="90" height="30">
+						<input id="OnlineState4" type="checkbox" value="1" name="OnlineState4"> 
+						Web800</td>
+					</tr>
+					<tr>
+						<td width="180" colspan="2">价格区间：
+						<input maxLength="10" size="5" name="BeginPrice"> 至 
+						<input maxLength="10" size="5" name="EndPrice"> </td>
+					</tr>
+					<tr>
+						<td width="180" colspan="2">关 键 字：
+						<input id="KeyWord" size="15" name="KeyWord"> </td>
+					</tr>
+					<tr>
+						<td width="180" colspan="2" align=center>
+						<input type="submit" value="确  定" name="submit4"> </td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+		*#
+		<table border="0" width="190px" cellspacing="0" cellpadding="0">
+			<tr>
+				<td height="8" width="190px">&nbsp;</td>
+			</tr>
+		</table>
+		#if($goods_search_special_goods && $goods_search_special_goods.size()>0)
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #F7F7F7" >
+			<tr>
+				<td height="26" bgcolor="#E3E3E3" style="padding-left:10px;font-weight:bold;">推荐特价商品</td>
+			</tr>
+			<tr>
+				<td valign="top" align=center>
+				<table border="0" width="94%" cellspacing="0" cellpadding="3" id="table2">
+					#foreach($commend in $goods_search_special_goods)						
+						<tr>
+    						<td width="86">
+							#if($commend.picPath)
+    						<img border="0" src="${upServer}/$!{commend.picPath}.n.jpg" width="80" height="80">
+							#else
+							<img border="0" src="$commend.picUrl" width="80" height="80">
+							#end
+							</td>
+    						<td>
+    						<a href="$commend.commendUrl" class="blue">$stringUtils.abbreviate($!commend.commendText,8)</a><br/>
+    						#if($commend.batchNum)$!commend.batchNum 件起拿货 #end
+							<br>
+							#if($!priceUtils.fenToYuanString($!commend.batchPrice).equals("0.00"))	
+    						价:<font color="#FF6600">面议</font> 								
+    						#else
+    						价:<font color="#FF6600">$!priceUtils.fenToYuanString($!commend.batchPrice)</font> 元
+							#end
+							</td>
+						</tr>
+					#end		
+					</table>
+				</td>
+			</tr>
+		</table>
+		#end
+		<table border="0" width="100%" cellspacing="0" cellpadding="0">
+			<tr>
+				<td height="8">&nbsp;</td>
+			</tr>
+		</table>
+		#if($goods_search_hot_goods && $goods_search_hot_goods.size()>0)
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" style="border: 1px solid #FF9000; " >
+			<tr>
+				<td height="26" bgcolor="#FEC67B" style="padding-left:10px;font-weight:bold;">热卖排行榜</td>
+			</tr>
+			<tr>
+				<td valign="top" align=center>
+				<table border="0" width="92%" cellspacing="0" cellpadding="3" id="table2">
+					#foreach($commend in $goods_search_hot_goods)													
+						<tr>
+						<td>$velocityCount.<a href="$commend.commendUrl" class="blue">$stringUtils.abbreviate($!commend.commendText,15)</a><br>
+						#if($commend.batchPrice)    						
+							价格：<font class="fontOrange">$!priceUtils.fenToYuanString($!commend.batchPrice)</font>&nbsp;元
+						#end
+						</td>
+						</tr>
+						#end											
+					</table>
+				</td>
+			</tr>
+		</table>
+		#end
+		<script type="text/javascript"><!--
+google_ad_client = "pub-3821823050447653";
+/* 120x240, 创建于 08-6-22 */
+google_ad_slot = "0040552984";
+google_ad_width = 120;
+google_ad_height = 240;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+  <a href="http://www.mommybabyexpo.cn/main/index.asp" target="_blank">
+  <img src="${imgServer}/images/guangzhouyunying.jpg.gif" border="0" style="height:120px;width:120px"></img></a>
+  <a href="http://www.mamabaobao.com" target="_blank">
+  <img src="${imgServer}/images/mamabaobao.jpg" border="0" style="height:120px;width:120px"></img></a>
+  <a href="http://www.cesechina.com" target="_blank">
+  <img src="${imgServer}/images/194-164cese.jpg" border="0" style="height:120px;width:120px"></img></a>
+		</td>
+		<td width="10px" >&nbsp;</td>
+		<td width="750px" valign="top" align="right">
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" >
+			<tr>
+				<td >
+				<table border="0" width="750px" cellspacing="0" cellpadding="0" id="table5">
+					<tr>
+						<td width="92"><img border="0" src="${imgServer}/images/list_title1.gif" width="88" height="29"></td>
+						<td width="358" align="center">&nbsp;</td>
+						<td width="300">
+						<table border="0" width="100%" cellspacing="0" cellpadding="3" id="table6">
+							<tr>
+								<td width="138">　</td>
+								#if($!{query.getTotalPage()}>1)
+								<td width="80" align="right">$!{query.currentPage}/$!{query.getTotalPage()}</td>
+								<td width="19" align="center"><img border="0" onClick="pageTopre('$!{query.currentPage}')" src="${imgServer}/images/btn_pre.gif" width="19" height="18" style="cursor: pointer"></td>
+								<td width="52" align="center"><img border="0" onClick="pageTonext('$!{query.currentPage}')" src="${imgServer}/images/btn_next.gif" width="52" height="18" style="cursor: pointer"></td>
+							    #end
+							</tr>
+						</table>
+						</td>
+					</tr>
+				</table>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" style="background:url(${imgServer}/images/gb_gd_8.gif) repeat-x;">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+				#if($!{query.totalItem}>0)
+				<table border="0" width="750" cellspacing="0" cellpadding="0" height="28" background="${imgServer}/images/list_title_bg.gif">
+					<tr>
+						
+						<td width="100%">
+						<table border="0" width="750" cellspacing="0" cellpadding="3">
+			              <tr>
+				             <td width="76" align="right">&nbsp;</td>
+				            <td width="106">&nbsp;</td>
+				            <td width="65" align="right">&nbsp;</td>
+				            <td width="92">&nbsp;</td>
+				            <td width="381" align="right" style="padding-right:6px;">
+							<select size="1" name="selectmarket"  onChange="toMarket(document.all('selectmarket').options[document.all('selectmarket').selectedIndex].value)">
+							<option value="">所有市场分类</option>
+                            #foreach($mtype in $marketType)
+                               <option #if($query.marketType && "$query.marketType"=="$!{mtype.marketType}") selected #end value="$!{mtype.marketType}">$!{mtype.marketName}</option>
+			                #end
+							</select></td>
+			              </tr>
+		                </table></td>
+					</tr>
+				</table>
+				
+				<table border="0" width="750" cellspacing="0" cellpadding="0">
+					<tr>
+						<td height="29" width="29" align="center">&nbsp;</td>
+						<td height="29" width="121">&nbsp;</td>
+						<td height="29" width="309">商品名称</td>
+						#if(${query.sort} && "$!{query.sort}"=="batchPrice" && !${query.reverse})
+						<td height="29" width="88" align="center"><a href="#" onClick="toSort('batchPrice','true')" class="good">批发价格</a><img border="0" src="${imgServer}/images/arrow_up.gif"></td>
+						#else
+						<td height="29" width="88" align="center"><a href="#" onClick="toSort('batchPrice','false')" class="good">批发价格</a><img border="0" src="${imgServer}/images/arrow_down.gif"></td>
+						#end
+						<td height="29" width="83" align="center">所在市场</td>
+						#if(${query.sort} && "$!{query.sort}"=="viewCount" && !${query.reverse})
+						<td height="29" width="47" align="center"><a href="#" onClick="toSort('viewCount','true')" class="good">浏览量</a><img border="0" src="${imgServer}/images/arrow_up.gif"></td>
+						#else
+						<td height="29" width="47" align="center"><a href="#" onClick="toSort('viewCount','false')" class="good">浏览量</a><img border="0" src="${imgServer}/images/arrow_down.gif"></td>
+						#end
+						<td height="29" width="73" align="center">库存量</td>
+					</tr>
+					<tr>
+						<td bgcolor="#E0E0E0" height=1 width="750" colspan="7"></td>
+					</tr>
+				</table>
+				#else
+				<table align="center">
+				  <tr><td height="15"> &nbsp;</td></tr>
+				  <tr>
+				    <td> <b><font color="pink">未找到该商品, 等待商家录入!</font></b></td>
+				  </tr>
+				</table>
+				#end
+				
+				</td>
+			</tr>
+			<tr>
+				<td height="5">&nbsp;</td>
+			</tr>
+		</table>
+		<table border="0" width="750" cellspacing="0" cellpadding="0" id="table3" height="72">
+			
+			<TBODY>
+			#set($goodcount=1)
+			#foreach($good in $goods)
+				##if($good.isNew)
+					##新产品哦
+				##else
+					##旧产品哦
+				##end
+				##$good.gmtCreate
+			##${dateUtils.getBetweenDate($good.gmtCreate)}
+			<tr >
+				<td height="88" width="27" align="center" #if($goodcount%2==0) bgcolor="#F6F6F6" #end>&nbsp;#if($good.isNew)<img border="0" src="${imgServer}/images/new_icon.gif" width="25" height="9" />#end</td>
+				<td width="93" align="center" #if($goodcount%2==0) bgcolor="#F6F6F6" #end>
+				<a href="${appServer}/goods/$!{good.goodsId}.htm" target="_blank">
+				#if($stringUtils.isNotBlank($good.goodsPic))
+					<img border="0" src="${upServer}$!{good.goodsPic}.s.jpg" width="80" height="80" />
+				#else
+					<img border="0" src="${imgServer}/images/showimg.gif" width="80" height="80" />
+				#end
+				</a>
+				</td>
+				<td width="29" valign="middle" #if($goodcount%2==0) bgcolor="#F6F6F6" #end>
+				
+				<img border="0" src="${imgServer}/images/mid_1.gif" style="width:16px;height:20px;cursor:pointer" 
+				     onclick='window.open("${appServer}/myvideo/viewLive.htm?memberId=$!good.memberId","viewLive","width=320,height=240,resizable=no");'
+				/>
+			    
+				</td>
+				<td width="311" #if($goodcount%2==0) bgcolor="#F6F6F6" #end>
+				<table border="0" width="100%" cellspacing="0" cellpadding="1">
+		          <tr>
+			        <td><a href="${appServer}/goods/$!{good.goodsId}.htm" class="good" target="_blank"><b>$!{good.goodsName}</b></a></td>
+		          </tr>
+		          <tr>
+			        <td><a class="gray" href="${appServer}/shop/$!{good.shopId}.htm" target="_blank">$!{good.shopName} #if($good.gisAddress)<img src="${imgServer}/images/dot_this.gif" align=absmiddle border="0">#end</a></td>
+		          </tr>
+		          <tr>
+			        <td>
+			        <img border="0" src="${imgServer}/images/btn_contact.gif" style="cursor:pointer;" 
+			        onClick="window.open('${appServer}/webchat.html?username=$!{good.goodsName}客户&question=$!{good.goodsName}&link=${appServer}/goods/$!{good.goodsId}.htm','$!{good.goodsId}','width=700,height=535,left=300,top=100');"
+			        >
+			        </td>
+		          </tr>
+		        </table>
+				</td>
+				<td width="100" align=center #if($goodcount%2==0) bgcolor="#F6F6F6" #end>
+				$good.batchNum 件起批<br>
+				#if($!good.batchPriceYuan.equals("0.00"))	
+    						价:<font color="#FF6600">面议</font> 								
+    						#else
+    						价:<font color="#FF6600">$!good.batchPriceYuan</font> 元
+				#end
+				#if(!$good.marketPriceYuan.equals("0.00"))
+				<br>
+				<font color="B4B4B4"><s>市场价:$!good.marketPriceYuan 元</s></font>	
+				#end
+				</td>
+				<td width="83" align="center" #if($goodcount%2==0) bgcolor="#F6F6F6" #end><a href="${appServer}/search/search.htm?searchtype=shop&marketType=$!{good.marketType}" class="good" target=_blank>$good.marketName</a></td>
+				<td width="47" align="center" #if($goodcount%2==0) bgcolor="#F6F6F6" #end>$good.viewCount</td>
+				<td width="73" align="center" #if($goodcount%2==0) bgcolor="#F6F6F6" #end>$good.goodsNum</td>
+			</tr>
+			#set($goodcount=$goodcount+1)
+			#end
+		</table>
+			<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table4">
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+			#if($!{query.getTotalPage()}>1)
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table4" height="46" bgcolor="#F7F7F7">
+			<tr>
+				<td width="100%" align="center">
+				
+				${control.get('searchPageSlider')}
+				
+				</td>
+			</tr>	
+		</table>
+		#end
+				</td>
+			</tr>
+			</TBODY>
+		</table>
+		
+		</td>
+	</tr>
+</table>

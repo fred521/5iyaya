@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="HELPER_SPACE">
+	<resultMap id="helper" class="com.nonfamous.tang.domain.Helper">
+		<result property="helperId" column="HELPER_ID"/>
+		<result property="helperTitle" column="HELPER_TITLE"/>
+		<result property="helperType" column="HELPER_TYPE"/>
+		<result property="content" column="CONTENT"/>
+		<result property="helperStatus" column="HELPER_STATUS"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+	</resultMap>	
+	<insert id="HELPER_INSERT" parameterClass="com.nonfamous.tang.domain.Helper">
+		INSERT INTO HELPER (
+				HELPER_ID,
+				HELPER_TITLE,
+				HELPER_TYPE,
+				HELPER_STATUS,
+				CONTENT,
+				GMT_CREATE,
+				CREATOR,
+				GMT_MODIFY,
+				MODIFIER
+	                     )
+	             VALUES ( 
+				#helperId#,
+				#helperTitle#,
+				#helperType#,
+				#helperStatus#,
+				#content#,
+				sysdate(),
+				#creator#,
+				sysdate(),
+				#modifier#
+	                     )
+	</insert>
+	
+	<update id="HELPER_UPDATE" parameterClass="com.nonfamous.tang.domain.Helper">
+		UPDATE HELPER t SET   
+			<isNotEmpty prepend="" property="helperTitle"> t.HELPER_TITLE = #helperTitle#,</isNotEmpty>
+			<isNotEmpty prepend="" property="helperType"> t.HELPER_TYPE = #helperType#,</isNotEmpty>
+			<isNotEmpty prepend="" property="helperStatus"> t.HELPER_STATUS = #helperStatus#,</isNotEmpty>
+			<isNotEmpty prepend="" property="content"> t.CONTENT = #content#,</isNotEmpty>
+			<isNotEmpty prepend="" property="modifier"> t.MODIFIER = #modifier#, </isNotEmpty>
+			t.GMT_MODIFY = sysdate()
+		WHERE t.HELPER_ID = #helperId#
+	</update>
+	
+	<select id="GET_HELPER_LIST" resultMap="helper">
+		SELECT 
+			HELPER_ID,
+			HELPER_TITLE,
+			HELPER_TYPE,
+			HELPER_STATUS,
+			GMT_CREATE,
+			CREATOR,
+			GMT_MODIFY,
+			MODIFIER,
+			'' as CONTENT
+		FROM HELPER t  
+		WHERE t.HELPER_STATUS = 'N'
+	</select>
+	<select id="GET_ALL_HELPER_COUNT" resultClass="java.lang.Integer">
+		select count(*) as total
+		FROM HELPER  t
+	</select>
+	<select id="GET_ALL_HELPER_COUNT_BY_MEMBERID" resultClass="java.lang.Integer">
+		select count(*) as total
+		FROM HELPER  t 
+		where member_Id=#memberId# and helper_status &lt;> 'D'
+	</select>	
+    <select id="GET_ALL_HELPER_LIST" parameterClass="com.nonfamous.tang.dao.query.HelperQuery" resultMap="helper">
+		  SELECT t.* FROM HELPER  t 
+			limit #dbStartNo#, #dbEndNo#
+	</select>
+	<select id="QUERY_HELPER_COUNT" resultClass="java.lang.Integer">
+		select count(*) as total
+		FROM HELPER  t
+			<dynamic prepend="where">
+				<isNotEmpty property="helperType" prepend="and"> t.helper_type = #helperType# </isNotEmpty>
+				<isNotEmpty property="helperTitle" prepend="and"> t.helper_title = #helperTitle# </isNotEmpty>
+				<isNotEmpty property="helperStatus" prepend="and"> t.helper_status = #helperStatus# </isNotEmpty>
+				<isEmpty property="helperStatus" prepend="and"> t.helper_status &lt;> 'D'</isEmpty>
+				<isNotEmpty property="creator" prepend="and"> t.creator = #creator# </isNotEmpty>
+			</dynamic>
+	</select>
+	
+    <select id="QUERY_HELPER_LIST" parameterClass="com.nonfamous.tang.dao.query.HelperQuery" resultMap="helper">
+				SELECT t.* FROM HELPER  t 
+				<dynamic prepend="where">
+					<isNotEmpty property="helperType" prepend="and"> t.helper_type = #helperType# </isNotEmpty>
+					<isNotEmpty property="helperTitle" prepend="and"> t.helper_title = #helperTitle# </isNotEmpty>
+					<isNotEmpty property="helperStatus" prepend="and"> t.helper_status = #helperStatus# </isNotEmpty>
+					<isEmpty property="helperStatus" prepend="and"> t.helper_status &lt;> 'D'</isEmpty>
+					<isNotEmpty property="creator" prepend="and"> t.creator = #creator# </isNotEmpty>
+			</dynamic>
+			order by t.gmt_create desc LIMIT #dbStartNo#, #dbEndNo#
+	</select>
+	<select id="GET_HELPER_BY_HELPER_ID" parameterClass="java.lang.String" resultMap="helper">
+		SELECT 
+			HELPER_ID,
+			HELPER_TITLE,
+			HELPER_TYPE,
+			HELPER_STATUS,
+			GMT_CREATE,
+			CREATOR,
+			GMT_MODIFY,
+			MODIFIER,
+			CONTENT
+            FROM HELPER t  where HELPER_ID = #value#
+	</select>
+
+	
+	<delete id="DELETE_HELPER_BY_ID" parameterClass="java.lang.String">
+		DELETE FROM HELPER  WHERE HELPER_ID = #value#
+	</delete>
+	
+
+	<select id="QUERY_HELPERS" resultMap="helper">
+		call  list_top10_Helper_by_type() 
+ 	</select>
+ 	
+ 	<select id="QUERY_HELPERS_BY_HELPERTYPE" resultMap="helper">
+		select *
+	  	from (select t.*,
+	               ROW_NUMBER() OVER(PARTITION BY t.Helper_type order by t.gmt_create desc) rn
+	          from HELPER t 
+	          where t.Helper_status = 'N' and t.helper_type=#value#) tt
+	 	where tt.rn &lt;= 10
+ 	</select>
+ 	 <select id="getSysDate" resultClass="java.util.Date">
+		SELECT sysdate()
+	</select>
+</sqlMap>

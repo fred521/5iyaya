@@ -1,0 +1,88 @@
+<HTML><HEAD>
+
+<style>
+TD {font-size:12px;line-height:20px;}
+</style>
+<SCRIPT>
+var Obj
+function MouseDown(obj){
+Obj=obj
+Obj.setCapture()
+Obj.l=event.x-Obj.style.pixelLeft
+Obj.t=event.y-Obj.style.pixelTop
+}
+function MouseMove(){
+if(Obj!=null){
+	Obj.style.left = event.x-Obj.l
+	Obj.style.top = event.y-Obj.t
+	}
+}
+function MouseUp(){
+if(Obj!=null){
+	Obj.releaseCapture()
+	Obj=null
+	}
+}
+function fullit()
+{
+	var width_s=screen.width;
+	var height_s=screen.height;
+	window.open(""+document.all.img.src+"", "招商城电子地图", "width="+document.all.img.width+",height="+document.all.img.height+",left=0,top=0,location=no,toolbar=no,status=no,resizable=no,scrollbars=yes,menubar=no,directories=no");
+}
+</SCRIPT>
+<SCRIPT language="javascript">
+<!--
+var x,y; //声明存放当前鼠标位置坐标的变量
+var can=0 //声明能否移动的控制变量
+function canmove() { //控制能否移动的函数
+x=document.body.scrollLeft+event.clientX; //获取当前鼠标位置的X坐标
+y=document.body.scrollTop+event.clientY; //获取当前鼠标位置的Y坐标
+can=1;} //设置为可以移动
+function move() { //移动图层的函数
+if (can) {
+movediv.style.posLeft=x+20; //设置图层位置的X坐标
+movediv.style.posTop=y;} // 设置图层位置的Y坐标
+setTimeout("move()",30)} //每30毫秒刷新一次图层位置坐标
+-->
+</SCRIPT>
+<SCRIPT LANGUAGE=JavaScript>
+<!--
+function open1()
+{
+  test=window.open("pp.asp","pp","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,width=305,height=471");
+}
+function open2()
+{
+  test=window.open("ppm.asp","pp","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,width=305,height=471");
+}
+function open3()
+{
+  test=window.open("ppc.asp","pp","toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,width=305,height=471");
+}
+function open4()
+{
+  test=window.open("pro.asp");
+}
+function open5()
+{
+  test=window.open("shop.asp");
+}
+//-->
+</SCRIPT>
+
+</HEAD>
+<BODY leftMargin=0 topMargin=0 bgcolor="#F7F7EF" onload="move()">
+<DIV onmouseup=MouseUp() onmousemove=MouseMove() onmousedown=MouseDown(this) 
+style="LEFT: -100px; WIDTH: 1154px; POSITION: absolute; TOP: -100px; HEIGHT: 600px" 
+name="div1"><map name="FPMap0">
+	<area alt="诚信指数：五星级" href="#" shape="rect" coords="1470, 369, 1537, 384">
+	<area coords="1315, 433, 1368, 451" shape="rect" href="###" onclick="open1()">
+	<area coords="1375, 434, 1417, 451" shape="rect" href="###" onclick="open2()">
+	<area href="###" shape="rect" coords="1424, 434, 1477, 451" onclick="open4()">
+	<area href="###" shape="rect" coords="1486, 434, 1539, 451" onclick="open3()">
+	<area href="###" shape="rect" coords="1310, 391, 1535, 427" onclick="open5()">
+	<area target="_blank" coords="164, 138, 240, 163" shape="rect" href="store.html">
+	</map><img src="${imgServer}/images/map3.jpg" name="img" border=0 usemap=#FPMap0 id=img>
+</DIV>
+</BODY>
+</HTML>

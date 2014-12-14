@@ -1,0 +1,548 @@
+## 显示订单详情
+#set( $layout = "layout/home/memberdefault.vm" )
+<script>
+<!--
+	var floatPattern=/^([1-9][0-9]*|0)(\.\d{1,2})?$/;
+	var numPattern = /^[1-9][0-9]*$/;
+	String.prototype.trim = function() {
+		return this.replace(/^\s+|\s+$/g,"");
+	}
+	String.prototype.ltrim = function() {
+		return this.replace(/^\s+/,"");
+	}
+	String.prototype.rtrim = function() {
+		return this.replace(/\s+$/,"");
+	}
+	
+	function isNum(n){
+		if(numPattern.exec(n)){
+			return true;
+		}
+		return false;
+	}
+	function isFloat(f){
+		if(floatPattern.exec(f)){
+			return true;
+		}
+		return false;
+	}
+	
+	function checkAllNumInPages(){
+		var addressChecked = false;
+		var adressNodes=document.getElementsByName('addressGroup');
+		for(var i=0; i<adressNodes.length; i++){
+			if(adressNodes[i].checked){
+			addressChecked = true;
+			}
+		}
+		if(!addressChecked){
+			if(!$stringUtils.isNotBlank($!selectedAddr)){
+				alert('请选择或添加您的邮寄地址信息!');
+				return false;
+			}
+		}
+		
+		sumAreaCode();
+		var checkPass = true；
+		var nums = document.getElementsByName('totalNum');
+		var isNumOk = false;
+		var i = 0;
+		for(;i<nums.length;i++){
+			var num = nums[i].value;
+			if(isNum(num)){
+				isNumOk =true;
+				break;
+			}	
+		}
+		if(!isNumOk)
+		{
+			alert('请至少选择设置一个商品的产品数量!');
+			return false;
+		}
+		#if($order.isSeller($memberId))
+		var logisticsFee = document.updateForm.logisticsFee.value;
+		if(!isFloat(logisticsFee)){
+			alert('请输入运费！');
+			document.updateForm.logisticsFee.focus();
+			document.updateForm.logisticsFee.select();
+			return false;
+		}
+		#end
+		var numbers=document.updateForm.totalNum.value;
+		if(numbers.length>8){
+			alert("您输入的商品数量过大，请检查");
+			document.updateForm.totalNum.focus();
+			document.updateForm.totalNum.select();
+			checkPass = false;
+		}
+
+		if(!checkPass){
+			return false;
+		}
+		var prices = document.getElementsByName('batchPrice');
+		for(i=0;i<prices.length;i++){
+			var price = prices[i].value;
+			if(!isFloat(price)){
+				alert("您输入的商品单价不是数字或您输入的价格超过两位小数");
+				prices[i].focus();
+				prices[i].select();
+				checkPass = false;
+				break;
+			}
+		}
+		if(!checkPass){
+			return false;
+		}
+		var money=document.updateForm.batchPrice.value;
+		if(money.length>10){
+			alert("您输入的商品单价过大，请检查");
+			document.updateForm.batchPrice.focus();
+			document.updateForm.batchPrice.select();
+			checkPass = false;
+		}
+		if(!checkPass){
+			return false;
+		}
+		var frees = document.getElementsByName('totalFree');
+		for(i=0;i<frees.length;i++){
+			var free = frees[i].value;
+			if(!isFloat(free)){
+				alert("您输入的商品总价不是数字或您输入的总价超过两位小数");
+				frees[i].focus();
+				frees[i].select();
+				checkPass = false;
+				break;
+			}
+		}
+		
+		if(!checkPass){
+			return false;
+		}
+// 使留言信息不超过1024个字。
+		var notemessage = document.getElementById('noteMesg');
+		var note = document.updateForm.note.value;
+		if(note.length>1024)
+		{
+			alert("当前您输入的留言信息"+note.length+"字,最多1024个字");
+			notemessage.focus();
+			notemessage.select();
+			checkPass = false;
+		}
+		return checkPass;
+	}
+
+	function removeGoods(itemId,goodsName){
+		if(confirm('确认删除商品:'+goodsName)){
+			var fm = document.getElementById('updateForm');
+			fm.action = '${homeMoudle}/order/removeGoods.htm?item='+itemId;
+			fm.submit();
+		}
+	}
+	
+	//1 goodsNumber 2 goodsPrice  3  totalPrice
+	function dealPrice(numCtrlId,priceCtrlId,totalPriceCtrlId,changeFlag){
+	    try{
+		    var numCtrl = document.getElementById(numCtrlId);
+			var priceCtrl = document.getElementById(priceCtrlId);
+			var totalPriceCtrl = document.getElementById(totalPriceCtrlId);
+			if ( !isNum(numCtrl.value) ){
+				alert("您输入的商品数量不是整数或请输入大于 0 的数字");
+				numCtrl.focus();
+				numCtrl.select();
+				return ;
+			}
+			if(numCtrl.value.length>8){
+				alert("您输入的商品数量过大，请检查");
+				numCtrl.focus();
+				numCtrl.select();
+				return ;
+			}
+			if ( !isFloat(priceCtrl.value) ){
+				alert("您输入的商品单价不是数字或您输入的价格超过两位小数");
+				priceCtrl.focus();
+				priceCtrl.select();
+				return ;
+			}
+			if(priceCtrl.value.length>10){
+				alert("您输入的商品单价过大，请检查");
+				priceCtrl.focus();
+				priceCtrl.select();
+				return ;
+			}
+			if ( !isFloat(totalPriceCtrl.value) ){
+				alert("您输入的商品总价不是数字或您输入的总价超过两位小数");
+				totalPriceCtrl.focus();
+				totalPriceCtrl.select();
+				return ;
+			}
+			if ( changeFlag == 1 ){
+			    totalPriceCtrl.value = (parseInt(numCtrl.value) * parseFloat(priceCtrl.value)).toFixed(2);
+			}else if (changeFlag == 2 ){
+			    totalPriceCtrl.value = (parseInt(numCtrl.value) * parseFloat(priceCtrl.value)).toFixed(2);
+			}else{
+			    priceCtrl.value = (parseFloat(totalPriceCtrl.value) / parseInt(numCtrl.value)).toFixed(2);
+			}
+		}catch(e){
+		   alert("对不起，您的数据输入有问题");
+		}
+	}
+	function orderNote(){
+		var f = document.getElementById('updateForm');
+
+		var notemessage = document.getElementById('noteMesg');
+		var note = document.updateForm.note.value;
+		if(!checkNoteNotEmpty(note))
+		{
+			alert("请输入您的留言信息");
+			return false;
+		}
+		// 使留言信息不超过1024个字。
+		if(note.length>1024)
+		{
+			alert("当前您输入的留言信息"+note.length+"字,最多1024个字");
+			notemessage.focus();
+			notemessage.select();
+			return false;
+		}
+		
+		
+	}
+	
+	function showAddNewAddress(){	
+		var addressAddTable = document.getElementById("addressAddTable");
+		addressAddTable.style.display="block";
+	}
+										
+	function checkNoteNotEmpty(note){
+		note=note.trim();
+		if(note.length==0)
+		{
+			return false;
+		}
+		return true;
+	}
+-->
+</script>
+<form name="updateForm" id="updateForm" action="${homeMoudle}/order/modify.htm" method="post">
+	<input type="hidden" name="id" value="$!{order.orderNo}" />
+<td width="10" valign="top">　</td>
+<td width="740" valign="top">
+<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>丫丫订单管理</h1>
+	   </div>
+		<table border="0" width="90%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+				<div class="roundCorner gray onlyBottom" style="width: 736px;">
+	    <p>   
+	   <div align="center"><img src="${imgServer}/images/logo_copy.gif" align="absmiddle" /></div>
+	   </div>
+	   <p>
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+			<tr>
+				<td></td>
+			</tr>
+		</table>
+		<table border="0" width="90%" cellspacing="0" cellpadding="0" height="18">
+			<tr>
+				<td width="84">
+				
+				<table border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+						<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+						<a href="${homeMoudle.setTarget('tradecar/list.htm')}" style="text-decoration: none"><font color="#A1A1A1">我的采购单</font></a></td>
+						<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+					</tr>
+				</table>
+				
+				</td>
+				<td width="96">
+				<table border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+						<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">
+						我的订单</td>
+						<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+					</tr>
+				</table>
+				
+				</td>
+				<td>&nbsp;　&nbsp;</td>
+			</tr>
+		</table>
+		<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+			<tr>
+				<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+				<table cellSpacing="0" cellPadding="0" width="90%" align="center">
+					<tr>
+						<td align=center>
+							<table border="0" width="560" cellspacing="0" cellpadding="6">
+								<tr>
+									<td height="24" class="tx_title" width="50%"><b>查看订单详细内容</b></td>
+									<td height="24" class="tx_title" width="50%" align=right>
+									　</td>
+								</tr>
+								<tr>
+									<td width="560" height="35" colspan="2">
+									<table border="1" width="100%" cellspacing="1" cellpadding="3" style="border-collapse: collapse" bordercolor="#E4E4E4" id="table1">
+										<tr>
+											<td width="127" align="left"><font color="#FF6600">订单买方: </font></td>
+											<td>$!{order.buyerLoginId} #if($order.isBuyer($memberId))(本人)#end</td>
+										</tr>
+										<tr>
+											<td width="127" align="left"><font color="#FF6600">买方收货地址: </font></td>
+											<td>
+											  #if($stringUtils.isNotBlank($!selectedAddr))
+											   <input type="hidden" name="addressGroup" value="$!selectedAddr" />$!selectedAddr
+											  #else
+											   #foreach($address in $addressList)
+											  	 <input type="radio" name="addressGroup" value=$address.addressId >$!address.getFullAddress()<br>
+											   #end
+											   #if($addressList.size()<5 || $stringUtils.isNotBlank($!errorMessage))
+												<input type="radio" name="addressGroup" value="New" #if($stringUtils.isNotBlank($!errorMessage)|| $addressList.size()==0)checked #end onclick = "showAddNewAddress()"/><b>选择添加新地址：</b>
+												<input type="hidden" id = "addressAddFlag" name="addressAddFlag" value="$!addressAddFlag">
+												<table id = "addressAddTable" border="0" width="450" cellspacing="0" cellpadding="5" #if($stringUtils.isNotBlank($!errorMessage)|| $addressList.size()==0 ) style="display:block;" #else style="display:none;" #end>
+
+										<tr>
+											<td width="120" height="35" colspan="1">收货人姓名:</td>
+											<td width="460" style="color:red;font-weight:bold;font-size:13px;" colspan="3">
+												<input value="$!form.getField('consignee').value" id="consignee" name="consignee" class="input3"/>
+												<span class="red">*$!form.getField('consignee').message</span>
+											</td>
+										</tr>
+										<tr>
+											<td height="35" colspan="1">所在地区:</td>
+											<td colspan="3">
+												$control.get('prov_city').put("areaCode",$!form.getField('areaCode').value)
+											</td>
+
+										</tr>
+										<tr>
+											<td width="120" colspan="1">街道地址:</td>
+											<td width="460" style="color:red;font-weight:bold;font-size:13px;" colspan="3">
+												<input value="$!form.getField('streetAddress').value" id="streetAddress" name="streetAddress" class="input3"/>
+												<span class="red">*(不需要重复填写省/市/区)$!form.getField('streetAddress').message</span>
+											</td>
+										</tr>
+										<tr>
+											<td width="120" colspan="1">邮政编码:</td>
+											<td width="460" style="color:red;font-weight:bold;font-size:13px;">
+											<input value="$!form.getField('postCode').value" id="postCode" name="postCode" class="input5" maxLength="6"/>
+											<span class="red">*$!form.getField('postCode').message</span></td>
+										</tr>
+										<tr>
+											<td width="120" colspan="1">电话号码:</td>
+											<td width="460" style="color:red;font-weight:bold;font-size:13px;">
+											<input value="$!form.getField('phone').value" id="phone" name="phone" class="input3"/>
+											<span class="red">(例如：0571-88889999)$!form.getField('phone').message</span>
+											</td>
+										</tr>
+										<tr>
+											<td>手机号码:</td>
+											<td width="460" style="color:red;font-weight:bold;font-size:13px;">
+											<input value="$!form.getField('mobile').value" id="mobile" name="mobile" class="input3"/>
+											<span class="red">*$!form.getField('mobile').message</span>
+											</td>
+										</tr>
+									 </table>
+											  #end
+											 #end
+										
+											</td>
+										</tr>
+										<tr>
+											<td width="127" align="left"><font color="#FF6600">订单卖方: </font></td>
+											<td>$!{order.sellerLoginId}</td>
+										</tr>
+										<tr>
+											<td width="127" align="left"><font color="#FF6600">下单时间: </font></td>
+											<td>$dateUtils.dtSimpleFormat($order.gmtCreate)</td>
+										</tr>
+										<tr>
+											<td width="127" align="left"><font color="#FF6600">订单总金额: </font></td>
+											<td>$!{order.getMoney($order.payFee)}</td>
+										</tr>
+										#if($order.isBuyer($memberId))
+											<tr>
+												<td width="127" align="left"><font color="#FF6600">运费: </font></td>
+												<td>
+												#if(!${order.getMoney($order.logisticsFee)})
+													暂无
+												#else
+													$!{order.getMoney($order.logisticsFee)}
+												#end
+												</td>
+												
+											</tr>
+										#end
+										<tr>
+											<td width="127" align="left"><font color="#FF6600">订单状态: </font></td>
+											<td>
+												#if($order.waitForMeConfirm($memberId))
+													等待我方确认
+												#elseif($order.waitForHimConfirm($memberId))
+													等待对方确认
+												#elseif($order.isClosed())
+													已经作废
+												#elseif($order.isSuccess())
+													已经交易成功
+												#elseif($order.isWaitMyPay($memberId))
+													等待我付款
+												#elseif($order.isWaitHimPay($memberId))
+													等待对方付款
+												#end
+											</td>
+										</tr>
+										<tr>
+											<td width="127" align="left"><font color="#FF6600">订单备注: </font></td>
+											<td style="word-break: break-all">$!order.memo</td>
+										</tr>
+									</table>
+									
+									</td>
+								</tr>
+								<tr>
+									<td width="560" height="35" colspan="2">
+									<table border="1" width="100%" cellspacing="1" cellpadding="2" style="border-collapse: collapse" bordercolor="#E4E4E4" id="table1">
+										<tr>
+											<td width="15%" align="center"><b>商品编号</b></td>
+											<td width="36%" align="center"><b>商品名称</b></td>
+											<td width="14%" align="center"><b>数量</b></td>
+											<td width="14%" align="center"><b>单价</b></td>
+											<td width="14%" align="center"><b>金额</b></td>
+											<td width="10%" align="center"><b>删除</b></td>
+										</tr>
+										#foreach($item in $items)
+										<tr>
+											<td bgcolor="#FFFFFF" align="center">${velocityCount}</td>
+											<td bgcolor="#FFFFFF" align="left">$!{item.goodsName}</td>											
+											<td bgcolor="#FFFFFF" align="center">
+												<input type="text" id="totalNum${velocityCount}" name="totalNum" value="$!{item.totalNum}" style="width:100%" class="input11" onchange="javaScript:dealPrice('totalNum${velocityCount}','batchPrice${velocityCount}','totalFree${velocityCount}','1');"/>
+											</td>
+											<td bgcolor="#FFFFFF" align=center>
+												#if($order.isSeller($memberId))
+													<input type="text" id="batchPrice${velocityCount}" name="batchPrice" value="$!{priceUtils.fenToYuanString($item.batchPrice)}" style="width:100%" class="input11" onchange="javaScript:dealPrice('totalNum${velocityCount}','batchPrice${velocityCount}','totalFree${velocityCount}','2');"/>
+												#else
+													<input type="hidden" name="batchPrice" value="$!{priceUtils.fenToYuanString($item.batchPrice)}"/>
+													<input disabled="true" type="text" id="batchPrice${velocityCount}" name="batchPrice" value="$!{priceUtils.fenToYuanString($item.batchPrice)}" style="width:100%" class="input11" onchange="javaScript:dealPrice('totalNum${velocityCount}','batchPrice${velocityCount}','totalFree${velocityCount}','2');"/>
+												#end
+											</td>
+											<td bgcolor="#FFFFFF" align=center>
+												<input type="text" id="totalFree${velocityCount}" name="totalFree" value="$!{priceUtils.fenToYuanString($item.totalFree)}" style="width:100%" class="input11" onchange="javaScript:dealPrice('totalNum${velocityCount}','batchPrice${velocityCount}','totalFree${velocityCount}','3');"/>
+											</td>
+											<td bgcolor="#F6F6F6" align=center>
+												#if($order.waitForMeConfirm($memberId) && $items.size() > 1)
+												<img border="0" src="${imgServer}/images/btn_del.gif" width="33" height="14" onclick="removeGoods('$!{item.id}','$!{item.goodsName}')" style="cursor:pointer" />
+												#end
+											</td>
+										</tr>
+										#end
+										#if($order.isSeller($memberId))
+											<tr>
+												<td align="right">运费</td>
+												<td><input type="text" value="$!{order.getMoney(${order.logisticsFee})}" name="logisticsFee"/></td>
+												<td colspan="4"><span style="background-color: #CCCCCC;color: #FF0000;font-weight: bold;"><-运费金额请先与客服人员确认，再填写。<span></td>
+											</tr>
+										#end
+										<tr>
+											<td colspan="6" align="right">
+												<input type="submit" value=" 修改订单 " name="" class="input6" onclick="return checkAllNumInPages()">
+											</td>
+										</tr>										
+									</table>
+									</td>
+								</tr>
+								#if( $logs && $logs.size() > 0)
+								<tr>
+									<td height="24" class="tx_title" width="50%"><b>双方订单修改记录</b></td>
+									<td height="24" class="tx_title" width="50%" align=right>
+									&nbsp;
+									</td>
+								</tr>
+								<tr>
+									<td height="24" class="tx_title" width="100%" colspan="2">
+									<table border="1" width="100%" cellspacing="1" cellpadding="2" style="border-collapse: collapse" bordercolor="#E4E4E4" id="table1">
+										<tr>
+											<td width="10%" align="center"><b>修改方</b></td>
+											<td width="25%" align="center"><b>修改时间</b></td>
+											<td width="65%" align="center"><b>修改内容</b></td>
+										</tr>
+										#foreach($log in $logs)
+										<tr>
+											<td bgcolor="#FFFFFF" align="center">
+											<font color="#0000FF">#if($log.isBuyerModify())买方#elseif($log.isSellerModify())卖方#end</font></td>
+											<td bgcolor="#FFFFFF" align="center">$!{dateUtils.simpleDate($log.gmtCreate)}</td>
+											<td bgcolor="#FFFFFF" align="left">$!{log.memo}</td>
+										</tr>
+										#end
+									</table></td>
+								</tr>
+								#end
+								#if( $notes && $notes.size() > 0)
+								<tr>
+									<td height="24" class="tx_title" width="50%"><b>双方议价留言</b></td>
+									<td height="24" class="tx_title" width="50%" align=right>
+									&nbsp;
+									</td>
+								</tr>
+								
+								<tr>
+									<td height="24" class="tx_title" width="100%" colspan="2">
+									<table border="1" width="100%" cellspacing="1" cellpadding="2" style="border-collapse: collapse" bordercolor="#E4E4E4" id="table1">
+										<tr>
+											<td width="10%" align="center"><b>留言方</b></td>
+											<td width="25%" align="center"><b>留言时间</b></td>
+											<td width="65%" align="center"><b>留言内容</b></td>
+										</tr>
+										#foreach($note in $notes)
+										<tr>
+											<td bgcolor="#FFFFFF" align="center">
+												#if($note.isBuyer())
+													<font color="#0000FF">买方</font>
+												#else
+													<font color="#FF0066">卖方</font>
+												#end
+											</td>
+											<td bgcolor="#FFFFFF" align="center">$!{dateUtils.simpleDate($note.gmtCreate)}</td>
+											<td bgcolor="#FFFFFF" align="left">$!{stringUtils.escapeHtml($note.memo)}</td>
+										</tr>
+										#end
+									</table></td>
+								</tr>
+								#end
+								<tr>
+									<td height="24" class="tx_title" width="50%"><b>给对方留言</b></td>
+									<td height="24" class="tx_title" width="50%" align=right>
+									&nbsp;
+									</td>
+								</tr>
+								<tr>
+									<td height="24" class="tx_title" width="100%" colspan="2">
+									<textarea rows="3" name="note" id="noteMesg" cols="20" style="width:100%"></textarea></td>
+								</tr>
+								<tr>
+									<td height="24" colspan="2" align=right>
+									<input type="submit" value=" 留 言 " name="" class="input6" onclick="return orderNote()">
+									
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			  </td>
+			</tr>
+		</table>
+		<br>
+		</td>
+	</tr>
+</table>
+</td>
+</form>

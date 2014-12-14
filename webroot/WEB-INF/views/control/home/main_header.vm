@@ -1,0 +1,55 @@
+<div id="top">
+<h1>我爱丫丫|母婴专家</h1>
+  <div id="top_flash" class="left">
+  <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="451" height="95">
+    <param name="movie" value="images/top.swf" />
+    <param name="quality" value="high" />
+    <embed src="images/top.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="451" height="95"></embed>
+  </object>
+  </div>
+  <div id="top_right" class="left">
+      <div class="top_menu">
+	     <a class="t_link" href="${appServer}/search/search.htm?searchtype=good">我要买</a>
+		 |
+		<script>
+        		function getCookie(c_name)
+                {
+                if (document.cookie.length>0)
+                  {
+                  c_start=document.cookie.indexOf(c_name + "=");
+                  if (c_start!=-1)
+                    {
+                    c_start=c_start + c_name.length+1;
+                    c_end=document.cookie.indexOf(";",c_start);
+                    if (c_end==-1) c_end=document.cookie.length;
+                    return unescape(document.cookie.substring(c_start,c_end));
+                    }
+                  }
+                return "";
+                }
+        		var loginName = getCookie("lname");
+        		var memberPermission = getCookie("mp");
+        		if(loginName!="" && memberPermission != ""){
+        			document.write("欢迎您,"+loginName+"&nbsp;<a href='${homeMoudle}/visitor/logout.htm'>[退出] </a>|&nbsp;");
+        		}
+        		else{
+        			document.write("<a href='${homeMoudle}/visitor/register.htm' >会员注册</a> |&nbsp;");
+        			document.write("<a href='${homeMoudle}/visitor/init.htm' >登录</a> |&nbsp;");       			
+        		}
+        		
+        	</script>
+		 <a href="${homeMoudle}/member/index.htm">我的帐户</a>
+	  </div>
+	  <div class="top_jiezhang">
+	      <div class="ico_1 left">
+		  </div>
+		  <div class="jiezhang-cen left">
+		    <span>您的购物车有：0件商品
+			<a href="#"><img src="css/img/top_button.gif" /></a>
+			</span>
+		  </div>
+		  <div class="ico_2 left">
+		  </div>
+	  </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="zh_CN">
+<head>
+<title>Cascade Select Demo Page</title>
+<script language="javascript" type="text/javascript" src="../3rd/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="CascadeSelect.js"></script>
+<script language="javascript">
+	$(document.body).ready(function(){
+		var defaultSettings = {
+				key: 'typeId',
+				value: 'typeName',
+				data: {},
+				url: 'http://localhost:8080/5iyaya/goods/listGoodsCategory.htm'
+			};
+		$(document).cascadeSelect($.extend({}, defaultSettings, {
+			isRoot: true,
+			target: '#sel1',
+			defaultOption : {typeId : '-1', typeName : '---一级类目---'},
+			selectedOption: {typeId : '301'}
+		}));
+		
+		$('#sel1').cascadeSelect($.extend({}, defaultSettings, {
+			target: '#sel2',
+			defaultOption : {typeId : '-1', typeName : '---二级类目---'},
+			selectedOption: {typeId : '302'}
+		}));
+		$('#sel2').cascadeSelect($.extend({}, defaultSettings, {
+			target: '#sel3',
+			defaultOption : {typeId : '-1', typeName : '---三级类目---'},
+			selectedOption: {typeId : '401'}
+		}));
+	});
+</script>
+</head>
+<body>
+	<h3>级联选择测试页面</h3>
+	<select id="sel1" name="firstTypeId" style="width: 100px;">
+	</select>
+	<select id="sel2" name="secondTypeId" style="width: 120px;">
+	</select>
+	<select id="sel3" name="thirdTypeId" style="width: 120px;">
+	</select>
+</body>
+</html>
+

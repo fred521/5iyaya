@@ -1,0 +1,42 @@
+#set( $layout = "layout/admin/default.vm" )
+<BODY leftMargin="8" background="${imgServer}/images/admin/allbg.gif" topMargin="160px">
+<form name="login" action="${adminMoudle}/admin_user/cg_pwd.htm" method="post">
+ <TABLE cellSpacing=1 cellPadding="3" width="400px" align="center" bgColor="#666666" border="0">
+  <TBODY>
+  <TR>
+      <TD background="${imgServer}/images/admin/tbg.gif" height="19">&nbsp;<b>修改我的口令</b></TD>
+    </TR>
+  <TR>
+      <TD vAlign="top" bgColor="#ffffff" height="200px">
+      	<table border="0" width="98%" cellspacing="0" cellpadding="6">
+          <tr> 
+            <td width="100px">原口令：</td>
+            <td width="300px">
+            	<input type="password" name="original_pwd" value="" class="input4" />#errorOut($originalErrorMessage)
+            </td>
+          </tr>
+          <tr> 
+            <td>新密码：</td>
+            <td>
+            	<input type="password" name="new_pwd_one" value="" class="input4" />#errorOut($newPwdOneErrorMessage)
+            </td>
+          </tr>
+          <tr> 
+            <td>确认新密码：</td>
+            <td>
+            	<input type="password" name="new_pwd_two" value="" class="input4" />#errorOut($newPwdTwoErrorMessage)
+            </td>
+          </tr>
+          <tr> 
+            <td>&nbsp;</td>
+            <td>
+            	<input type="submit" name="sm" value=" 修 改 " class="input6"/>
+            </td>
+          </tr>
+         </table>
+        </TD>
+    </TR>
+  </TBODY>
+ </TABLE>
+</form>
+</body>

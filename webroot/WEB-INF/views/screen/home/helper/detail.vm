@@ -1,0 +1,27 @@
+#set( $layout = "layout/home/helper/default.vm" )
+<style type="text/css">#doc3{FONT: 12px arial,helvetica,sans-serif;}</style>
+
+<DIV class=bbp-custom-t2 id=doc3><DIV id=hd><DIV id=bd>
+      
+      <DIV class="help-search">
+		<SPAN class=tl></SPAN>
+		<SPAN class=tr></SPAN>
+		<SPAN class=bl></SPAN>
+		<SPAN class=br></SPAN>
+	  </DIV>
+	  
+	  <DIV class=help-nav><A href="${appServer}">ÎÒ°®Ñ¾Ñ¾Íø</A>&nbsp;&nbsp;&gt;&nbsp;&nbsp;°ïÖúÖĞĞÄ&nbsp;&nbsp;&gt;&nbsp;&nbsp;$!helper.helperTitle</DIV>
+	   <DIV id=bb-main>	    
+	    <!-- bb-c start -->
+		<DIV class=bb-c><h1>$helper.helperTitle</h1>
+			<div class="cont richtext">
+				$helper.content
+				</div>
+					</DIV><!-- bb-c end -->		
+	</DIV><!-- bb-main end -->	
+	  $control.get('helper_control')
+	  
+</DIV></DIV></DIV>
+ 
+
+

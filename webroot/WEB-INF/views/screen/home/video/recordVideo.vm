@@ -1,0 +1,125 @@
+#set( $layout = "layout/home/memberdefault.vm" )	
+	<td width="10" valign="top">　  
+	
+	</td>
+		<td width="740" valign="top">
+			<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>丫丫店铺管理</h1>
+			</div>
+		<table border="0" width="90%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+		<div class="roundCorner gray onlyBottom" style="width: 736px;">
+	    <p>   
+			<div align="center"><img src="${imgServer}/images/logo_copy.gif" align="absmiddle" /></div>
+	    </div>
+	    <p>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td align="center"><font color="red">$!success $!error</font></td>
+					</tr>
+				</table>
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="18">
+					<tr>
+						<td width="96">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="${homeMoudle}/myshop/addNotes.htm" style="text-decoration: none"><font color="#A1A1A1">店铺公告管理</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td width="96">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="${homeMoudle}/myshop/updateShop.htm" style="text-decoration: none"><font color="#A1A1A1">修改店铺信息</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td width="96">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">
+								录制店铺视频</td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td width="96">
+							<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="${homeMoudle}/shop/detail.htm?id=$!shopId" style="text-decoration: none" target="_blank"><font color="#A1A1A1">查看我的店铺</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						<!--
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="shop_category.html" style="text-decoration: none"><font color="#A1A1A1">店铺商品类目</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						-->
+						</td>
+						<td>&nbsp;　&nbsp;</td>
+					</tr>
+				</table>
+				
+				<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+					<form name="shopLogo"  action="${homeMoudle}/myshop/saveLogo.htm" method="post" encType="multipart/form-data" id="updateLogo">
+					<input type="hidden" name="shopId" value="$!shopId">
+					<input type="hidden" name="img" value="$!shopImg">
+					<input type="hidden" name="logo" value="$!logo">
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<table cellSpacing="0" cellPadding="0" width="90%">
+						    <tr>
+								<td height="24" class="tx_title" colspan="2"><b><font color="#FF69B4">录制店铺视频</font></b></td>
+							</tr>
+							<tr>
+								<td>								
+								    <iframe 
+								        src="$!recordAddress" 
+								        width="670" 
+								        height="400" 
+								        marginwidth="0" 
+								        marginheight="0" 
+								        scrolling="no" 
+								        border="0" 
+								        frameborder="0" 
+								        style="border: 0px solid #F6F6F6;"></iframe>
+								</td>
+							</tr>
+						</table>
+					  </td>
+					</tr>
+					</form>
+				</table>
+				
+				<br>
+				</td>
+			</tr>
+		</table>
+		</td>

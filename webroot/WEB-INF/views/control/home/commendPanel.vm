@@ -1,0 +1,134 @@
+	<tr><td class="main_table_td_bottom" >
+                <!-- 6,推荐商品 -->
+				<table id="recommend_goods" cellspacing="0" class="list_table_recommend_goods">
+			      <tbody>
+			        <tr>
+			          <td colspan=5 class="list_table_header list_table_header_recommend_goods"><img src="images/more.gif" /></td>
+			        </tr>
+			        <tr id="goods_recommend_tr" >
+					#foreach($commend in $index_mid_goods)
+						#if($velocityCount<11 )
+					        <td class="list_recommend" #if($velocityCount > 5 ) style="display:none" #end >
+					            <ul>
+					              <li>
+					                <a href="$commend.commendUrl" >
+										#if($commend.picPath)
+										<img style="border:1px solid #CCC" src="${upServer}$!{commend.picPath}.n.jpg"  width="85" height="85" >
+										#else
+										<img style="border:1px solid #CCC" src="$!commend.picUrl"  width="85" height="85" >
+										#end
+									</a>
+									
+									<br>
+									<a href="$commend.commendUrl" >$!commend.commendText
+										#if($!commend.batchNum)
+											<br><span>起批量$!commend.batchNum</span>
+										#end
+										#if($!priceUtils.fenToYuanString($!commend.batchPrice).equals("0.00"))
+											<br><font color="#FF6600">面议</font> 
+										#else 
+											<br><span>￥ $!priceUtils.fenToYuanString($!commend.batchPrice)</span>
+										#end
+								    </a>
+			                      </li>
+					            </ul>
+				              </td>
+						#end
+					#end
+			        </tr>
+			        
+					<script type="text/javascript">
+					    jQuery(document).ready( function(){
+						    function auto_scroll( ) {
+						        var tds = jQuery( "#goods_recommend_tr td" );
+						        // 1, find all the tds
+						        var gtr  = document.getElementById( "goods_recommend_tr" ) ;
+						        var begin= 0 ;
+						        
+						        if( tds.length <= 5 ) {
+						            return ;
+						        }
+						        
+						        // 2, hide first element
+						        tds[0].style.display='none' ;
+						        tds[5].style.display=''     ;
+						        
+						        
+						        var firstElem = tds[0]      ;
+						        
+						        
+						        gtr.removeChild( firstElem )           ;
+						        gtr.appendChild( firstElem )           ;
+						        
+						        setTimeout( auto_scroll , 3000 ) ;
+						        
+						    }
+						    setTimeout( auto_scroll , 3000 ) ;
+					    } ) ;	
+					</script>
+					
+			      </tbody>
+			    </table>
+       </td></tr>
+		
+	<tr><td class="main_table_td_bottom" >
+                <!-- 7,推荐商铺 -->
+				<table id="recommend_stores" cellspacing="0" class="list_table_recommend_stores">
+			      <tbody>
+			        <tr>
+			          <td colspan=5 class="list_table_header list_table_header_recommend_stores"><img src="images/more.gif" /></td>
+			        </tr>
+			        <tr>
+						#foreach($commend in $index_bottom_shop)
+							#if($velocityCount<6)
+			          <td class="list_recommend_small" >
+			            <ul>
+			              <li class="list_recommend_small_img" ><a href="$!commend.commendUrl" >
+								
+										#if($commend.picPath)
+											<img style="border:1px solid #CCC" src="${upServer}$!{commend.picPath}.n.jpg"  width="90" height="90">
+										#else
+											<img style="border:1px solid #CCC" src="$commend.picUrl"  width="90" height="90">
+										#end
+						</li>
+			              <li class="list_recommend_small_lab" ><a href="$!commend.commendUrl">$!commend.commendText</a></li>
+			            </ul>
+			          </td>
+							#end
+						#end
+			        </tr>
+			      </tbody>
+			    </table>
+        </td></tr>
+		
+		
+		<tr><td class="main_table_td_bottom" >
+                <!-- 8,旺铺新开 -->
+				<table id="recommend_stores" cellspacing="0" class="list_table_recommend_newstores">
+			      <tbody>
+			        <tr>
+			          <td colspan=5 class="list_table_header list_table_header_recommend_newstores"><img src="images/more.gif" ></td>
+			        </tr>
+			        <tr>
+						#foreach($commend in $index_fresh_shop)
+							#if($velocityCount<6)
+			          <td class="list_recommend_small" >
+			            <ul>
+			              <li class="list_recommend_small_img" ><a href="$!commend.commendUrl" >
+								
+										#if($commend.picPath)
+											<img style="border:1px solid #CCC" src="${upServer}$!{commend.picPath}.n.jpg"  width="90" height="90">
+										#else
+											<img style="border:1px solid #CCC" src="$commend.picUrl"  width="90" height="90">
+										#end
+						</li>
+			              <li class="list_recommend_small_lab" ><a href="$!commend.commendUrl">$!commend.commendText</a></li>
+			            </ul>
+			          </td>
+							#end
+						#end
+			        </tr>
+			      </tbody>
+			    </table>
+        </td></tr>
+		

@@ -1,0 +1,152 @@
+#set( $layout = "layout/admin/default.vm" )
+<STYLE type=text/css>.rb {
+	BORDER-RIGHT: #666666 1px solid
+}
+.tb {
+	BORDER-TOP: #666666 1px solid
+}
+</STYLE>
+<script language="JavaScript">
+function showfile()
+{
+	var filetype = document.getElementById("filetype");
+	filetype.style.display = filetype.style.display == "none"?"block":"none";
+}
+
+function openWin(url){
+     window.open(url,'win','width=800,height=650,top=50,left=50,resizable=yes,scrollbars=yes');
+}
+</script>
+<table border="0" width="98%" cellspacing="0" cellpadding="0" align=center>
+	<tr>
+		<td><input type="button" value="发布帮助信息" name="B3" onclick="location.href='helper_add_init.htm'"></td>
+	</tr>
+	<tr>
+		<td height="8"></td>
+	</tr>
+</table>
+<TABLE cellSpacing=1 cellPadding=0 width="98%" align=center bgColor=#666666 border=0>
+  <TBODY>
+    <TR valign="top"> 
+      <TD height=24 colSpan=7> 
+      <TABLE width=100% border=0 cellPadding=2 cellSpacing=0 background="${imgServer}/images/admin/tbg.gif">
+      <SCRIPT language=javascript src="${imgServer}/js/page.js"></SCRIPT>
+          <FORM name="helperForm" action="helper_list.htm" method="post">
+          <input type="hidden" name="currentPage" value="$!search.currentPage">
+            <TBODY>
+              <TR> 
+                <TD width=160 height="24"><STRONG>&nbsp;帮助信息列表</STRONG></TD>
+                <TD align=right>
+                <table border="0" width="90%" cellspacing="0" cellpadding="0">
+                    <tr>                    
+                      <td>
+                      
+                      </td>
+                      <td>
+                      请选择帮助分类:<select name="helperType" size="1" class="px12">
+						<option ></option>
+					#foreach($type in $helperTypeList)
+                   <option value="$type.helperType" #if($!helperType=="$type.helperType") selected #end>$type.typeName</option>
+		            #end
+                      </select>
+                      </td>
+					  <td><select name="keyType" size="1" class="px12">
+                          <option value="helperTitle" #if($!keyType == "helperTitle")selected#end>帮助标题</option>
+                        </select>
+					  </td>
+                      <td>关键字:</td>
+					  
+                      <td width="210"><INPUT id=keyword style="WIDTH: 200px" size=12 name="keyWord" value="$!keyWord"></td>
+                      <td><img src="${imgServer}/images/admin/button_search.gif" border=0 name=imageField align=absmiddle onClick="document.helperForm.submit();"></td>
+                      ##<td><a href="#" onclick="showfile();">高级搜索</a></td>
+                    </tr>
+                  </table>
+                </TD>
+              </TR>
+            </TBODY>
+          </FORM>
+        </TABLE>
+        <span id="filetype" style="DISPLAY: none"> 
+        <table width="100%" border="0" cellspacing="0" cellpadding="4">
+          <tr> 
+            <td bgcolor="#666666" height="1"></td>
+          </tr>
+          <tr>
+            <td bgcolor="#F7FEEF" align=right>
+					            <table width="96%" border="0" cellspacing="0" cellpadding="5" height="71">
+                <tr> 
+                  <td width="10%">帮助标题:</td>
+                  <td width="25%"><INPUT id=keyword0 style="WIDTH: 150px" size=12 name=keyword0></td>
+                  <td width="10%">发 布 者:</td>
+                  <td width="25%"><INPUT id=keyword0 style="WIDTH: 150px" size=12 name=keyword0></td>
+                  <td width="30%"></td>
+                </tr>
+                <tr> 
+                 <td width="10%">帮助分类:</td>
+                  <td width="25%">
+                    <select id="DropDownList1" name="DropDownList2" style="font-size:12px;">
+					                    <option value="1" selected>商铺招租</option>
+					                  </select>
+					                  </td>
+                  <td width="10%">帮助信息状态:</td>
+                  <td width="25%">
+                    <select id="DropDownList1" name="DropDownList2" style="font-size:12px;">
+														                    <option value="" selected>不限</option>
+                    					<option value="N" selected>正常</option>
+                    					<option value="W" selected>未审核</option>
+                    					<option value="P" selected>已过期</option>
+                    					</select>
+                    					</td>
+                  <td width="30%"></td>
+                </tr>           	
+	                	<tr> 
+                  <td width="10%">　</td>
+                  <td width="25%" align="right" style="padding-right:40px;"> 
+                    <INPUT class=np type=image src="${imgServer}/images/admin/button_search.gif" border=0 name=imageField0></td>
+                  <td width="30%" align="right" style="padding-right:5px;"><a href="#" onclick="showfile();">关闭高级搜索</a></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        </span> </TD>
+    </TR>
+    	
+    <TR> 
+      <TD width="7%" align=middle bgcolor="#edf7d0" height="22"><b>ID</b></TD>
+      <TD width="18%" align=middle bgcolor="#edf7d0"><b>帮助标题</b></TD>
+      <TD width="16%" align=middle bgcolor="#edf7d0"><b>帮助信息状态</b></TD>
+      <TD width="10%" align=middle bgcolor="#edf7d0"><b>帮助分类</b></TD>
+      <TD width="10%" align=middle bgcolor="#edf7d0"><b>添加日期</b></TD>
+      <TD align=middle bgcolor="#edf7d0" width="39%"><b>操作</b></TD>
+    </TR>
+	#if($helperList&&$helperList.size()>0)
+    #foreach($helper in $helperList)
+    <TR onmousemove="javascript:this.bgColor='#F3F7EA';" onmouseout="javascript:this.bgColor='#FFFFFF';" align=middle bgColor=#ffffff> 
+      #set($helperCount = (-1 + $velocityCount+$search.getPageFristItem()))
+      <TD height="30">${helperCount}</TD>
+      <TD align="left">&nbsp;$helper.helperTitle</TD>
+      <TD  >
+		#if($helper.helperStatus=='P')<font color="#FF3300">过期</font>#elseif($helper.helperStatus=='N')<font color="#009933">正常</font>#elseif($helper.helperStatus=='W')<font color="#999999">未审核</font> #end</font></td>
+      <TD align=middle >$helper.helperTypeDO.typeName</TD>
+      <TD align=middle >${dateUtils.dtSimpleFormat($!helper.gmtCreate)}</TD>
+      <TD align=middle width="39%" ><A href="#" onclick="openWin('helper_update_init.htm?id=$helper.helperId');">[修改]</A> 
+			  #if($helper.helperStatus=='W')<A href="helper_approve.htm?id=$helper.helperId">[审核]</A> #end
+<a href="helper_delete.htm?id=$helper.helperId" onclick="return(confirm('确定删除?'))"> <font color="#008000">[删除]</font> </a> </TD>
+    </TR>
+    #end    
+    <tr>
+	        	<td colspan="7"  background="${imgServer}/images/admin/tbg.gif"> 
+	        	<script>
+	        		pageSlider($!search.totalPage,$!search.currentPage,$!search.totalItem,$!search.pageSize,'','helperForm','currentPage','${imgServer}/images/admin');
+    	    </script>
+		       </td>
+	   </tr>
+	#else
+		<TR bgColor=#ffffff> 
+         <TD align=middle colspan="7">当前查询无记录</TD>
+        </TR>
+    #end
+  </TBODY>
+</TABLE>
+

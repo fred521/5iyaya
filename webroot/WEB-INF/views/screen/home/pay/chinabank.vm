@@ -1,0 +1,17 @@
+#set( $layout = "layout/home/memberdefault.vm" )
+<td style="margin: 10px; align: center; vertical-align: top;">
+<form action="https://pay3.chinabank.com.cn/PayGate" method="POST" name="E_FORM">
+  
+<input type="text" name="v_md5info"    value="${v_md5info}" size="20"><br/>
+<input type="text" name="v_mid"        value="${v_mid}"><br/>
+<input type="text" name="v_oid"        value="${v_oid}"><br/>
+<input type="text" name="v_amount"     value="${v_amount}"><br/>
+<input type="text" name="v_moneytype"  value="${v_moneytype}"><br/>
+<input type="text" name="v_url"        value="${v_url}"> <br/>
+
+<input type="submit" name="submitBtn" value="网银在线支付" onclick="document.E_FORM.submit()"/>
+</form>
+<script type="text/javascript">
+	document.E_FORM.submit()
+</script>
+</td>

@@ -1,0 +1,4 @@
+#set( $layout = "layout/admin/loginpage.vm" )
+<script>
+window.parent.location.href="${adminMoudle.setTarget('/admin_session/init.htm')}";
+</script>

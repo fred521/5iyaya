@@ -1,0 +1,4 @@
+重建索引结果：$!{result}<br>
+#if($time)
+所用时间：$!{time}ms
+#end

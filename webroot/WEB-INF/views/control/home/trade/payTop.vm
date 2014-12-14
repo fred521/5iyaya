@@ -1,0 +1,48 @@
+	<table border="0" width="90%" cellspacing="0" cellpadding="0" height="18">
+		<tr>
+			<td width="96">		
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					#if("$menuIndex" == "1")
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">选择网上银行</td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+					#else
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+					<font color="#A1A1A1">选择网上银行</font></td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+					#end
+				</tr>
+			</table>
+			
+			</td>
+			<td width="72">			
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					#if("$menuIndex" == "2")
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">支付确认 </td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+					#else
+					<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+					<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+					<font color="#A1A1A1">支付确认</font></td>
+					<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+					#end
+				</tr>
+			</table>
+			
+			</td>
+			
+			<td width="72">			
+			
+			</td>
+			
+			<td width="72">			
+			
+			
+			</td>
+			<td>&nbsp;　&nbsp;</td>
+		</tr>
+	</table>

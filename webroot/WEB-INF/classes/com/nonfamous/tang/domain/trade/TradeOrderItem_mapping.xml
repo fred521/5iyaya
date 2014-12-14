@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="TRADEORDERITEM_SPACE">
+	<resultMap id="tradeorderitem" class="com.nonfamous.tang.domain.trade.TradeOrderItem">
+		<result property="id" column="ID"/>
+		<result property="orderNo" column="ORDER_NO"/>
+		<result property="goodsId" column="GOODS_ID"/>
+		<result property="shopId" column="SHOP_ID"/>
+		<result property="goodsName" column="GOODS_NAME"/>
+		<result property="batchPrice" column="BATCH_PRICE"/>
+		<result property="totalNum" column="TOTAL_NUM"/>
+		<result property="totalFree" column="TOTAL_FREE"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+	</resultMap>
+	
+	<resultMap id="orderItemQuery" class="com.nonfamous.tang.domain.trade.TradeOrderItem">
+		<result property="orderNo" column="ORDER_NO"/>
+		<result property="batchPrice" column="BATCH_PRICE"/>
+		<result property="totalNum" column="TOTAL_NUM"/>
+		<result property="totalFree" column="TOTAL_FREE"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+		<result property="buyerLoginId" column="BUYER_LOGIN_ID"/>
+		<result property="orderStatus" column="STATUS"/>
+		<result property="orderDate" column="ORDER_DATE"/>
+	</resultMap>
+	
+	
+	
+	<insert id="tradeorderitem_insert" parameterClass="com.nonfamous.tang.domain.trade.TradeOrderItem">
+		INSERT INTO TRADE_ORDER_ITEM (
+				ID,
+				ORDER_NO,
+				GOODS_ID,
+				SHOP_ID,
+				GOODS_NAME,
+				BATCH_PRICE,
+				TOTAL_NUM,
+				TOTAL_FREE,
+				CREATOR,
+				GMT_MODIFY,
+				MODIFIER,
+				GMT_CREATE
+	                     )
+	             VALUES ( 
+				#id#,
+				#orderNo#,
+				#goodsId#,
+				#shopId#,
+				#goodsName#,
+				#batchPrice#,
+				0,
+				0,
+				#creator#,
+				sysdate(),
+				#modifier#,
+				sysdate()
+	                     )
+	</insert>
+	
+	<update id="tradeorderitem_update" parameterClass="com.nonfamous.tang.domain.trade.TradeOrderItem">
+		UPDATE TRADE_ORDER_ITEM t SET   
+			t.BATCH_PRICE = #batchPrice#,
+			t.TOTAL_NUM = #totalNum#,
+			t.TOTAL_FREE = #totalFree#,
+			t.GMT_MODIFY = sysdate(),
+			t.MODIFIER = #modifier#
+		WHERE t.id = #id#
+	</update>
+	
+	<select id="get_tradeorderitem_list_by_orderid" resultMap="tradeorderitem">
+		SELECT 
+			ID,
+			ORDER_NO,
+			GOODS_ID,
+			SHOP_ID,
+			GOODS_NAME,
+			BATCH_PRICE,
+			TOTAL_NUM,
+			TOTAL_FREE,
+			CREATOR,
+			GMT_MODIFY,
+			MODIFIER,
+			GMT_CREATE
+		FROM TRADE_ORDER_ITEM  t  
+		WHERE t.ORDER_NO = #value#
+	</select>
+	
+	<select id="get_tradeorderitem_list_by_goodsid" resultMap="orderItemQuery">
+		select 
+		item.order_no,
+		item.batch_price,
+		item.total_num,
+		item.total_free,
+		item.modifier,
+		item.gmt_modify,
+		b.status,
+		b.buyer_login_id,
+		b.order_date 
+		from trade_order_item as item 
+		left join  trade_order b on item.order_no=b.order_no 
+		where item.goods_id=#goodsId# and b.status!='ORDER_INIT'
+		ORDER BY item.GMT_CREATE desc
+			LIMIT #dbStartNo#, #dbEndNo#
+	</select>
+	
+	<select id="get_order_item_number_by_query" resultClass="java.lang.Integer">
+		select count(*) as total
+		from trade_order_item as item 
+		left join  trade_order b on item.order_no=b.order_no 
+		where item.goods_id=#goodsId# and b.status!='ORDER_INIT'
+	</select>
+	
+	<select id="get_tradeorderitem" resultMap="tradeorderitem">
+		SELECT 
+			ID,
+			ORDER_NO,
+			GOODS_ID,
+			SHOP_ID,
+			GOODS_NAME,
+			BATCH_PRICE,
+			TOTAL_NUM,
+			TOTAL_FREE,
+			CREATOR,
+			GMT_MODIFY,
+			MODIFIER,
+			GMT_CREATE
+		FROM TRADE_ORDER_ITEM  t     
+		WHERE t.id = #value#
+	</select>
+	
+	<delete id="delete_tradeorderitem">
+		DELETE FROM TRADE_ORDER_ITEM  WHERE id = #value#
+	</delete>
+</sqlMap>

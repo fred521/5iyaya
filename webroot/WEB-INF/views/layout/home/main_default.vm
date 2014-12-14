@@ -1,0 +1,44 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=$!{page_encoding}">
+<title>我爱丫丫网 - 母婴产品批发 - 母婴产品团购#if($page_title) - ${page_title} #end</title>
+<meta name="Description" content="我爱丫丫网是新一代专业母婴批发团购电子商务平台，其丰富的内容和多元的形式，让每个家庭都享受到互联网带来的乐趣。" />
+<meta name="Keywords" content="我爱丫丫网,母婴, 我爱丫丫 母婴专家 ,丫丫网,母婴批发,母婴团购,专业母婴购物平台,母婴 批发,母婴 团购" />
+<meta name="robots" content="index,follow">
+<link rel="SHORTCUT ICON" href="${imgServer}/images/favicon.ico" />
+<link rel="icon" href="${imgServer}/images/favicon.gif" type="image/x-icon" />
+
+<link rel="stylesheet" type="text/css" href="${appServer}/css/main_layout.css"  />
+  
+ #if( $request.getHeader( "Accept-Encoding" ).indexOf( "gzip" ) >= 0 )
+    <link rel="stylesheet" type="text/css" href="${appServer}/css/main_gzip.css?gzip=true"  />
+    <script type='text/javascript' src='${appServer}/lib/core_gzip.js?gzip=true' runtime='true' ></script> 
+	<script language="javascript" type="text/javascript" src="${imgServer}/js/common_gzip.js?gzip=true"></script>
+  #else
+    <link rel="stylesheet" type="text/css" href="${appServer}/css/main_min.css"  />
+    <script type='text/javascript' src='${appServer}/lib/core_min.js' runtime='true' ></script> 
+	<script language="javascript" type="text/javascript" src="${imgServer}/js/common.js"></script>
+  #end
+</head>
+<style type="text/css">
+
+</style>
+<body>
+	<form name="main" action="$homeMoudle.setTarget('/search/search.htm')" method="post">
+	$control.setTemplate("home/main_header")
+	$control.setTemplate("home/main_search")
+	$screen_content
+	$control.setTemplate("home/main_help")
+	$control.get('main_friendship')
+	$control.setTemplate("home/guild")
+	$control.setTemplate("home/main_footer")
+	
+	</form>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-4182324-1";
+urchinTracker();
+</script>
+</body>
+</html>

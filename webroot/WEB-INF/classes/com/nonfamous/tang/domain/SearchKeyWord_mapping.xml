@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="SEARCHKEYWORD_SPACE">
+	<resultMap id="searchkeyword" class="com.nonfamous.tang.domain.SearchKeyWord">
+		<result property="keyName" column="KEY_NAME"/>
+		<result property="keyType" column="KEY_TYPE"/>
+		<result property="searchCount" column="SEARCH_COUNT"/>
+		<result property="keyId" column="KEY_ID"/>
+	</resultMap>
+	
+	<insert id="searchkeyword_insert" parameterClass="com.nonfamous.tang.domain.SearchKeyWord">
+		INSERT INTO SEARCH_KEY_WORD (
+				KEY_NAME,
+				KEY_TYPE,
+				SEARCH_COUNT,
+				KEY_ID
+	                     )
+	             VALUES ( 
+				#keyName#,
+				#keyType#,
+				1,
+				#keyId#
+	                     )
+	</insert>
+	
+	<update id="searchkeyword_update" parameterClass="com.nonfamous.tang.domain.SearchKeyWord">
+		UPDATE SEARCH_KEY_WORD t SET  
+			<isNotEmpty prepend="" property="keyName"> t.KEY_NAME = #keyName#,</isNotEmpty>
+			<isNotEmpty prepend="" property="keyType"> t.KEY_TYPE = #keyType#,</isNotEmpty>
+			<isNotEmpty prepend="" property="searchCount"> t.SEARCH_COUNT = #searchCount#,</isNotEmpty>
+			<isNotEmpty prepend="" property="keyId"> t.KEY_ID = #keyId# </isNotEmpty>
+		WHERE t.KEY_ID = #keyId#
+	</update>
+	
+	<select id="get_searchkeyword_list" parameterClass="java.util.Map" resultMap="searchkeyword">
+		SELECT 
+			KEY_NAME,
+			KEY_TYPE,
+			SEARCH_COUNT,
+			KEY_ID
+		FROM SEARCH_KEY_WORD  t  
+	</select>
+	<select id="get_hotkeyword_list" parameterClass="java.util.Map" resultMap="searchkeyword">
+           SELECT t.* 
+             FROM SEARCH_KEY_WORD t
+            WHERE KEY_TYPE = #keyType#
+            ORDER BY SEARCH_COUNT DESC
+           	LIMIT #num# 
+	</select>
+	<select id="get_searchkeyword" parameterClass="java.lang.String" resultMap="searchkeyword">
+		SELECT 
+			KEY_NAME,
+			KEY_TYPE,
+			SEARCH_COUNT,
+			KEY_ID
+		FROM SEARCH_KEY_WORD  t     
+		WHERE t.KEY_NAME = #value#
+	</select>
+	
+	<delete id="delete_searchkeyword" parameterClass="java.lang.String">
+		DELETE FROM SEARCH_KEY_WORD  WHERE KEY_NAME = #value#
+	</delete>
+	
+	<update id="update_count_by_name_and_type">
+		UPDATE SEARCH_KEY_WORD t SET  
+			 t.SEARCH_COUNT =  t.SEARCH_COUNT + 1
+		WHERE t.KEY_NAME = #keyName# AND t.KEY_TYPE = #keyType#
+	</update>
+</sqlMap>

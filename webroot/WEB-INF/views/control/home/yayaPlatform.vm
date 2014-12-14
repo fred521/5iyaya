@@ -1,0 +1,17 @@
+<div id="yayaPlatformPanel" class="roundCorner">
+	<div id="yayaPlatformPanel_title"><img src="${imgServer}/images/title_btm02.gif" />&nbsp;&nbsp;&nbsp;&nbsp;<img src="${imgServer}/images/btm_yyPlatform.gif" alt="ѾѾƽ̨"/></div>
+	<table>
+		<tr>
+			<td><img src="${imgServer}/images/icon_hot.gif" /></td>
+			</tr>
+		</table>
+	#if( $index_left_commend && $index_left_commend.size() > 0) 
+		<ul>
+			#foreach($commend in $index_left_commend)									
+								<li style="height:18px;"><a href="$!commend.commendUrl" class="blue" title="$!commend.commendText">$stringUtils.abbreviate($!commend.commendText,28)</a></li>
+																
+			#end
+		</ul>		
+			
+	#end
+</div>

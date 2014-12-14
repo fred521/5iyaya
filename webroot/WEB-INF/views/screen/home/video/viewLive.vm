@@ -1,0 +1,19 @@
+<html>
+  <head><title>$!liveId</title></head>
+  <body style="margin:0px 0px 0px 0px;">
+  #if($!stringUtils.isEmpty($!liveId) )
+  the seller is not online now.
+  #else
+  <iframe 
+    src="/video/publicPlay.action?mp_share=true&live=true&playVideoId=$!liveId" 
+    width="100%" 
+    height="100%" 
+    marginwidth="0" 
+    marginheight="0" 
+    scrolling="no" 
+    border="0" 
+    frameborder="0" 
+    style="border: 0px solid #F6F6F6;"></iframe>  
+  </body>
+  #end
+</html> 

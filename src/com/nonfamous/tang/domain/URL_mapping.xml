@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="URLS_SPACE">
+	<resultMap id="urls" class="com.nonfamous.tang.domain.URL">
+		<result property="id" column="ID"/>
+		<result property="path" column="PATH"/>
+		<result property="url" column="URL"/>
+		<result property="title" column="TITLE"/>
+	</resultMap>
+	
+	<insert id="URLS_INSERT" parameterClass="com.nonfamous.tang.domain.URL">
+		INSERT INTO URLS (
+				ID,
+				PATH,
+				URL,
+				TITLE
+	                     )
+	            VALUES ( 
+				#id#,
+				#path#,
+				#url#,
+				#title#
+	                     )
+	</insert>
+	
+	<update id="URLS_UPDATE" parameterClass="com.nonfamous.tang.domain.URL">
+		UPDATE URLS t SET   
+			<isNotEmpty prepend="" property="path"> t.PATH = #path#,</isNotEmpty>
+			<isNotEmpty prepend="" property="url"> t.URL = #url#,</isNotEmpty>
+			<isNotEmpty prepend="" property="title"> t.TITLE = #title#</isNotEmpty>
+		WHERE t.ID = #id#
+	</update>
+
+	<select id="GET_URL_BY_ID" parameterClass="java.lang.String" resultMap="urls">
+		select t.*
+		FROM URLS  t 
+		where t.ID = #id#
+	</select>	
+	
+	<select id="GET_ALL_URLS" parameterClass="java.lang.String" resultMap="urls">
+		select t.*
+		FROM URLS  t 
+	</select>	
+	
+	<delete id="DELETE_URLS_BY_ID" parameterClass="java.lang.String">
+		DELETE FROM URLS WHERE ID = #id#
+	</delete>
+
+</sqlMap>

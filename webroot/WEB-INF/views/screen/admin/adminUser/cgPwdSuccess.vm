@@ -1,0 +1,5 @@
+#set( $layout = "layout/admin/default.vm" )
+<script>
+alert("口令修改成功，请重新登录");
+window.parent.location.href="${adminMoudle.setTarget('/admin_session/init.htm')}";
+</script>

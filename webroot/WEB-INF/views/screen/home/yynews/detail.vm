@@ -1,0 +1,74 @@
+#set( $layout = "layout/home/yynewsdefault.vm" )
+<table width="950" cellspacing="1" cellpadding="0" height="30">
+	<tr>
+		<td background="${imgServer}/images/sreach_conbg.gif" align="center">
+		<table border="0" width="100%" cellspacing="0" cellpadding="3">
+			<tr>
+				<td><a href="${appServer}">首页</a> <span style="font-family:宋体">>></span> 
+				<a href="#">分类信息 </a><span style="font-family:宋体">>></span> 
+				<a href="#">$!dto.newsType.typeName</a> <span style="font-family:宋体">>></span> 信息详情</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+</table>
+<table border="0" width="950" cellspacing="0" cellpadding="0" height="306">
+	<tr>
+		<td width="650" valign="top">
+		<table border="0" width="100%" cellspacing="0" cellpadding="2">
+			<tr>
+				<td align="center" style="color: #FF0099;padding-left:20px;" height="26">
+				<font size="+1"><b>$!news.newsTitle</b></font></td>
+			</tr>
+			<tr>
+				<td align="center" style="color: #FF0099;padding-left:20px;" height="26">发布时间:${dateUtils.frontFullChineseDate($!news.gmtCreate)}      #*信息编号：$!news.newsId*#</td>
+			</tr>
+			<tr><td align="center"><hr width="100%"></hr></td></tr>				
+			
+			<tr>
+				<td height="10"></td>
+			</tr>
+			<tr>
+				<td style="font-size:14px;padding-left:20px;word-break: break-all"  id="content">  $!news.content.content </td>
+			</tr>
+			<tr>
+				<td height="10"></td>
+			</tr>
+			<tr>
+				<td height="10"><hr size="1" color="#CCCCCC"></td>
+			</tr>
+			</table>
+		</td>
+		<td width="40" valign="top">　</td>
+		<td width="260" valign="top">
+		
+		<table border="0" width="260" cellspacing="0" cellpadding="0" style="border: 1px solid #E6C392; background-color: #FCF8F1" >
+			<tr>
+						<td align="center"><img src="${imgServer}/images/ertong_jpg.jpg" width="82" height="70" />                      
+						<img src="${imgServer}/images/ertong_jpg.jpg" width="82" height="70" />                       
+						<img src="${imgServer}/images/ertong_jpg.jpg" width="82" height="70" /></td>                              
+			</tr>
+			<tr>
+				<td height="1" bgcolor="#E6C392"></td>
+			</tr>
+			<tr>
+				<td align="center">
+				<table border="0" width="94%" cellspacing="0" cellpadding="5">
+					<tr>
+						<td>
+						<table width="100%" cellspacing="0" cellpadding="1">
+ #foreach($news in $dto.list)
+ #set($newsTypeId=$dto.newsType.newsType)
+ <tr>
+   <td width="76%"><li style="color:pink;"><a href="${homeMoudle}/yynews/${news.newsId}.htm" class="blue">$news.newsTitle</a></li></td>
+  </tr>
+ #end       
+</table></td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+</table>

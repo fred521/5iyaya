@@ -1,0 +1,128 @@
+#set( $layout = "layout/admin/default.vm" )
+<BODY leftMargin=8 background="${imgServer}/images/adimn/allbg.gif" topMargin=16>
+<FORM name="formAdd" action="${adminMoudle}/admin_member/do_member_edit.htm" method="post">
+<input name="memberId" type="hidden" value="$!form.getField('memberId').value">
+<input name="lastLoginIp" type="hidden" value="$!form.getField('lastLoginIp').value">
+<input name="registerIp" type="hidden" value="$!form.getField('registerIp').value">
+<input name="lastLoginTime" type="hidden" value="$!form.getField('lastLoginTime').value">
+<input name="registerTime" type="hidden" value="$!form.getField('registerTime').value">
+<TABLE cellSpacing=1 cellPadding=3 width="98%" align=center bgColor=#666666 border=0>
+  <TBODY>
+	<TR>
+		<TD background="${imgServer}/images/admin/tbg.gif" height=19><B>&nbsp;会员信息修改</B></TD>
+	</TR>
+	<TR>
+    <TD vAlign=top bgColor=#ffffff height=200> 
+      <table border="0" width="98%" cellspacing="0" cellpadding="6">
+		 <tr> 
+			<td colspan="2" align="center"><span class="red">$!succMessage$!errorMessage</span></td>
+		 </tr>
+          <tr> 
+            <td height="24" class="tx_title" colspan="2"><b>输入登录信息</b></td>
+          </tr>
+          <tr> 
+            <td width="150" height="17">用户名:</td>
+            <td style="color:red;font-weight:bold;font-size:13px;">
+				$!form.getField('loginId').value
+				<input name="loginId" type="hidden" value="$!form.getField('loginId').value">
+			</td>
+          </tr>
+          <tr> 
+            <td height="18">密　码:</td>
+            <td>
+				<input name="loginPassword" type="password" class="input3">
+				<span class="red">$!form.getField('loginPassword').message</span>
+			</td>
+          </tr>
+          <tr> 
+            <td height="35">注册时间: </td>
+            <td>$!form.getField('registerTime').value 　IP: $!form.getField('registerIp').value </td>
+          </tr>
+          <tr> 
+            <td height="35">最近登录时间: </td>
+            <td>$!form.getField('lastLoginTime').value 　IP: $!form.getField('lastLoginIp').value </td>
+          </tr>
+          <tr> 
+            <td height="35">手机号码:</td>
+            <td> 
+				<input value="$!form.getField('mobile').value" type="text" name="mobile" class="input3"> 
+				<span class="red">$!form.getField('mobile').message</span>
+			</td>
+          </tr>
+          <tr> 
+            <td>E-mail:</td>
+            <td>
+				<input value="$!form.getField('email').value" type="text" name="email" class="input3">
+				<span class="red">$!form.getField('email').message</span>
+			</td>
+          </tr>
+          <tr> 
+            <td height="16" colspan="2"></td>
+          </tr>
+          <tr> 
+            <td height="24" class="tx_title" colspan="2"><b>输入个人资料</b></td>
+          </tr>
+          <tr> 
+            <td>真实姓名:</td>
+            <td>
+				<input value="$!form.getField('name').value" type="text"  name="name" class="input3">
+				<span class="red">*$!form.getField('name').message</span>
+			</td>
+          </tr>
+          <tr> 
+            <td>性别:</td>
+            <td>
+				<input type="radio" value="M" #if("$!form.getField('sex').value" == "M")checked#end name="sex">男 
+				<input type="radio" value="F" #if("$!form.getField('sex').value" == "F")checked#end name="sex">女 
+			</td>
+		  </tr>
+          <tr> 
+            <td>会员昵称:</td>
+            <td>
+				<input value="$!form.getField('nick').value" name="nick" type="text" class="input3">
+				<span class="red">$!form.getField('nick').message</span>
+			</td>
+          </tr>
+          <tr> 
+            <td>所在地区:</td>
+            <td>$control.get('prov_city').put("areaCode",$!form.getField('areaCode').value)</td>
+          </tr>
+          <tr> 
+            <td>详细地址:</td>
+            <td> 
+				<input value="$!form.getField('address').value" type="text" name="address" style="width:220" class="input7"> 
+				<span class="red">*$!form.getField('address').message</span>
+			</td>
+          </tr>
+          <tr> 
+            <td>邮政编码:</td>
+            <td>
+				<input value="$!form.getField('postCode').value" type="text" name="postCode" class="input5" maxLength="6"> 
+				<span class="red">*$!form.getField('postCode').message</span>
+			</td>
+          </tr>
+          <tr> 
+            <td>固定电话:</td>
+            <td>
+				<input value="$!form.getField('phone').value" type="text" name="phone" class="input3"> 
+				<span class="red">$!form.getField('phone').message</span>
+			</td>
+          </tr>
+          <tr> 
+            <td>　</td>
+            <td> 
+				<INPUT type="submit" value="确定修改"> &nbsp;&nbsp; 
+				<INPUT type="reset" value="重置" onclick="history.go(0)"> &nbsp;&nbsp;
+				<INPUT type="button" value="关闭窗口" onclick="window.close();"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+	</TD>
+  </TR>
+  </TBODY>
+</TABLE>
+</FORM>
+</BODY>

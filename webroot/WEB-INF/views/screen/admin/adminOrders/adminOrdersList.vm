@@ -1,0 +1,179 @@
+#set( $layout = "layout/admin/default.vm" )
+
+<SCRIPT language=javascript src="${imgServer}/js/page.js"></SCRIPT>
+<script language="javascript">
+function confirmDel()
+{
+	if(confirm("确定要删除该商品吗？")){
+	 	return true;
+	 }
+	else{
+		return 	false; 	
+	}
+}
+
+  function search(){
+     document.formSearch.shop_id.value = "";
+	 document.formSearch.submit();
+  }
+  
+  function openWin(url){
+     window.open(url,'win','width=800,height=650,top=50,left=50,resizable=yes,scrollbars=yes');
+}
+</script>
+<BODY leftMargin=8 background="${imgServer}/images/admin/allbg.gif" topMargin=16>
+<table border="0" width="98%" cellspacing="0" cellpadding="0" align=center>
+	<tr>
+		<td><input type="button" value="添加商品" name="B3" onclick="location.href='${adminMoudle.setTarget('mygoods/add_init.htm')}'"></td>
+	</tr>
+</table>
+<FORM name="formSearch" action="${adminMoudle}/admin_order/list.htm" method="post">
+<input type="hidden" name="currentPage" value="$!query.currentPage" />
+<input type="hidden" name="shop_id" value="$!{query.shopId}"/>
+<TABLE cellSpacing=1 cellPadding=0 width="98%" align=center bgColor=#666666 border=0>
+  <TBODY>
+    <TR> 
+      <TD colSpan=7 height=24> 
+      	<TABLE width="100%" border=0 cellPadding=2 cellSpacing=0 background="${imgServer}/images/admin/tbg.gif">
+            <TBODY>
+              <TR> 
+                <TD width=160 height="24"><STRONG>&nbsp;订单列表</STRONG></TD>
+                <TD align=right>
+                <table border="0" width="70%" cellspacing="0" cellpadding="0">
+                    <tr> 
+                      <td></td>
+                      <td>
+                      	<select name="keyType" size="1" class="px12">
+                          <option value="goodsName" #if("$!keyType" == "status")selected#end>订单状态</option>
+                          <option value="goodsCat" #if("$!keyType" == "memberId")selected#end>会员ID</option>
+                          <option value="loginId" #if("$!keyType" == "type")selected#end>订单类型</option>
+                        </select>
+                      </td>
+                      <td>关键字:</td>
+                      <td width="210">
+						<INPUT style="WIDTH: 200px" size="12" name="keyWord" value="$!keyWord"/>
+					  </td>
+                      <td>
+						<img src="${imgServer}/images/admin/button_search.gif" border="0" name="imageField" align="absmiddle" onClick="search();"/>
+					  </td>
+                      ##<td><a href="###" onclick="showfile();">高级搜索</a></td>
+                    </tr>
+                  </table>
+                </TD>
+              </TR>
+            </TBODY>
+        </TABLE>
+        <span id="filetype" style="DISPLAY: none"> 
+        <table width="100%" border="0" cellspacing="0" cellpadding="4">
+          <tr> 
+            <td bgcolor="#666666" height="1"></td>
+          </tr>
+          <tr>
+            <td bgcolor="#F7FEEF" align=right>
+			<table width="96%" border="0" cellspacing="0" cellpadding="5" height="71">
+                <tr> 
+                  <td width="10%">商品名称:</td>
+                  <td width="25%"><INPUT id=keyword0 style="WIDTH: 150px" size=12 name=keyword0></td>
+                  <td width="10%">商品类目:</td>
+                  <td width="25%"><INPUT id=keyword0 style="WIDTH: 150px" size=12 name=keyword0></td>
+                  <td width="30%"></td>
+                </tr>
+                <tr> 
+                  <td width="10%">商品分类:</td>
+                  <td width="60%" colspan="3">
+					<select class="px12" id="select" name="DropDownList2">
+					<option value="1" selected>一级商品分类</option>
+					</select>
+					<select class="px12" id="select" name="DropDownList3">
+					<option value="1" selected>二级商品分类</option>
+					</select>
+        			<span id="filetype" style="DISPLAY: none"></span> 
+        		 </td>
+                 <td width="30%"></td>
+                </tr>
+                <tr> 
+                  <td width="10%">会员帐号:</td>
+                  <td width="25%"><INPUT id=keyword0 style="WIDTH: 150px" size=12 name=keyword0></td>
+                  <td width="10%">店主姓名:</td>
+                  <td width="25%"><INPUT id=keyword0 style="WIDTH: 150px" size=12 name=keyword0></td>
+                  <td width="30%"></td>
+                </tr>
+                <tr> 
+                  <td width="10%">会员昵称:</td>
+                  <td width="25%"><INPUT id=keyword0 style="WIDTH: 150px" size=12 name=keyword0></td>
+                  <td width="10%">手机号码:</td>
+                  <td width="25%"><INPUT id=keyword0 style="WIDTH: 150px" size=12 name=keyword0></td>
+                  <td width="30%"></td>
+                </tr>
+				<tr> 
+                  <td width="10%">商品状态</td>
+                  <td width="25%">
+					<select class="px12" id="select0" name="DropDownList4" size="1">
+					<option value="1" selected>正常</option>
+					<option value="4">下架</option>
+					<option value="2">推荐</option>
+					<option value="3">未审核</option>
+					</select>
+				  </td>
+                  <td width="10%">　</td>
+                  <td width="25%" align="right" style="padding-right:39px;"> 
+                    <INPUT class=np type=image src="${imgServer}/images/button_search.gif" border=0 name="imageField0" />
+                  </td>
+                  <td width="30%" align="right" style="padding-right:5px;cursor:pointer"onclick="showfile();">关闭高级搜索</td>
+                </tr>
+              </table>
+             </td>
+          </tr>
+        </table>
+        </span> 
+       </TD>
+    </TR>
+    
+    <TR bgColor=#edf7d0> 
+      <TD align=middle width="6%" height="22"><b>ID</b></TD>
+      <TD align=middle width="10%"><b>下单日期</b></TD>
+      <TD align=middle width="12%"><b>买家id</b></TD>
+      <TD align=middle width="20%"><b>卖家id</b></TD>
+      <TD align=middle width="10%"><b>金额</b></TD>
+      <TD align=middle width="5%"><b>订单状态</b></TD>
+      <TD align=middle width="10%"><b>店铺名称</b></TD>
+      <TD align=middle><b>操作</b></TD>
+    </TR>
+	#if($list&&$list.size()>0)
+        #foreach( $order in $list )
+        <TR onmousemove="javascript:this.bgColor='#F3F7EA';" onmouseout="javascript:this.bgColor='#FFFFFF';" align=middle bgColor=#ffffff> 
+    	#set($ordersCount = ($velocityCount+$query.getPageFristItem()))
+    	#set($ordersCount = $ordersCount - 1)
+          <TD height="30">${ordersCount}</TD>
+          <TD align="left" style="padding-left:6px;">$!order.orderDate
+          </TD>
+          <TD >$!order.buyerLoginId</TD>
+    	  #set($vc = $velocityCount - 1)
+          <TD align=middle >$!order.sellerLoginId</TD>
+          <TD align=middle >$!{order.getMoney($order.payFee)}</TD>
+          <TD align=middle>
+            $!{order.getStatusString()}
+          </TD>
+          <TD align=middle>$!order.shopName</TD>
+          <TD align=middle >
+          <!--<a href="#" onclick="openWin('${adminMoudle.setTarget('mygoods/update_init.htm').addQueryData('goodsId',$goods.goodsId)}');"> [修改]</a>
+          <a href="${adminMoudle.setTarget('mygoods/delete.htm').addQueryData('goodsId',$goods.goodsId)}" onClick="return confirmDel()"> [删除]</a>
+          --></TD>
+        </TR>
+        #end
+        <tr>
+    		<td colspan="7"  background="${imgServer}/images/admin/tbg.gif"> 
+    		<script>
+    			pageSlider($!query.totalPage,$!query.currentPage,$!query.totalItem,$!query.pageSize,'','formSearch','currentPage','${imgServer}/images/admin');
+        	</script>
+    		</td>
+    	</tr>
+	#else
+		<TR bgColor=#ffffff> 
+         <TD align=middle colspan="6">当前查询无记录</TD>
+        </TR>
+	#end
+  </TBODY>
+</TABLE>
+</FORM>
+</BODY>

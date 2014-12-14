@@ -1,0 +1,51 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=$!{page_encoding}">
+<title>我爱丫丫网 - 母婴产品批发  - 母婴产品团购#if($page_title) - ${page_title} #end</title>
+<meta name="Description" content="我爱丫丫网拥有精确的商品搜索功能,母婴产品全而丰富，我爱丫丫, 母婴专家" />
+<meta name="Keywords" content="我爱丫丫网,母婴, 我爱丫丫 母婴专家 ,丫丫网,母婴批发,母婴团购,专业母婴购物平台,母婴 批发,母婴 团购" />
+<link rel="SHORTCUT ICON" href="${imgServer}/images/favicon.ico" />
+<link rel="icon" href="${imgServer}/images/favicon.gif" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" href="${appServer}/css/main.css" />
+<link rel="stylesheet" type="text/css" href="${appServer}/css/tabset.css" /> 
+<link rel="stylesheet" type="text/css" href="${appServer}/css/jquerycluetip.css" /> 
+<link rel="stylesheet" type="text/css" href="${appServer}/css/galleria.css" />
+<script type='text/javascript' src='${appServer}/lib/3rd/jquery.js'></script> 
+<script type='text/javascript' src='${appServer}/lib/3rd/jquerycookie.js'></script>
+<script type='text/javascript' src='${appServer}/lib/3rd/jquerydimensions.js'></script>
+<script type='text/javascript' src='${appServer}/lib/3rd/jqueryhoverIntent.js'></script>
+<script type='text/javascript' src='${appServer}/lib/3rd/jquerycluetip.js'></script>
+<script type='text/javascript' src='${appServer}/lib/core.js' runtime='false' ></script> 
+<script type='text/javascript' src='${appServer}/lib/component/TabSet.js'></script>
+<script type='text/javascript' src='${appServer}/lib/component/Tooltip.js'></script>
+<script type='text/javascript' src='${appServer}/lib/component/Gallery.js'></script>
+<script type='text/javascript' src='${appServer}/lib/3rd/jquery.ifixpng.js'></script>
+</head>
+<style type="text/css">
+	td{
+	font-family: Tahoma, Arial, sans-serif;
+    font-size:12px;
+    font-style: normal;
+	color: #333333;
+	}
+	#shop_board {
+	    width   : 235px     ;
+	    height  : 260px     ;
+      }
+ </style>
+<body>
+	<form name="main" action="$homeMoudle.setTarget('/search/search.htm')" method="post">
+	$control.setTemplate("home/header")
+	$control.setTemplate("home/search")
+	</form>
+	$screen_content
+	##$control.setTemplate("home/footer")
+	$control.setTemplate("home/main_footer")
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-4182324-1";
+urchinTracker();
+</script>
+</body>
+</html>

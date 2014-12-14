@@ -1,0 +1,123 @@
+#set( $layout = "layout/home/memberdefault.vm" )
+		$!synLoginCode ##单点登录同步
+		<td width="740" valign="top">
+			<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>丫丫会员首页</h1>
+			</div>
+				<!--<table border="0" width="90%" cellspacing="0" cellpadding="0" height="40">
+					<tr>
+						<td width="26"><img height="17" src="${imgServer}/images/mail.gif" width="16"></td>
+						<td width="180">您有 <a href="" class="good"><b>8</b></a> 条留言未读!</td>
+						<td width="22"><img height="11" src="${imgServer}/images/JT_4.gif" width="11"></td>
+						<td><b><a class="good" href="message_tome.html">立即查看</a></b></td>
+					</tr>
+				</table>-->
+				#if($member)
+				<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<table cellSpacing="0" cellPadding="0" width="94%" align="center">
+							<tr>
+								<td vAlign="center" align="middle" width="124">
+								<img border="0" src="${imgServer}/images/pic_notes1.gif" width="51" height="52"></td>
+								<td class="tx_title">
+									<table border="0" width="100%" cellspacing="0" cellpadding="0">
+										<tr>
+											<td height="24" class="tx_title">
+											会员状态:#if("$member.status"=="P")被禁用#elseif("$member.status"=="N")正常#elseif("$member.status"=="D")已删除#end</td>
+										</tr>
+										<tr>
+											<td height="24" class="tx_title">
+											会员级别:#if("$member.memberType"=="S")卖家会员#elseif("$member.memberType"=="B")买家会员#end</td>
+										</tr>
+										<tr>
+											<td height="24" class="tx_title">
+											注册时间:$dateUtils.simpleFormat($member.gmtRegister)</td>
+										</tr>
+										<tr>
+											<td height="24" class="tx_title">
+											登录次数:$member.loginCount</td>
+										</tr>
+										</table>
+								</td>
+							</tr>
+						</table>
+					  </td>
+					</tr>
+				</table>
+				#end
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td align="center"><font color="red">$!errorMessage</font></td>
+					</tr>
+				</table>
+				#if($member && ("$!member.phoneValidate" == "Y"))
+				<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<table cellSpacing="0" cellPadding="0" width="94%" align="center">
+							<tr>
+								<td vAlign="center" align="middle" width="124">
+								<img border="0" src="${imgServer}/images/pic_notes.gif" width="51" height="52"></td>
+								<td class="tx_title">
+									<table border="0" width="100%" cellspacing="0" cellpadding="0">
+										#if($member && $!member.isNotFull())
+										<tr>
+											<td height="24" class="tx_title">
+											您的个人基本信息还未完善,请尽快&nbsp;
+											<a class="good" href="$homeMoudle.setTarget('/member/modify.htm')">完善个人信息</a></td>
+										</tr>
+										#end
+										#if($shop && $shop.isNotFull() && ("$!member.memberType" == "S"))
+										<tr>
+											<td height="24" class="tx_title">
+											您的店铺信息还未完善,请尽快&nbsp;
+											<a class="good" href="$homeMoudle.setTarget('/myshop/updateShop.htm')">完善店铺信息</a></td>
+										</tr>
+										#end
+										#if($shop && ("$!member.memberType" == "S"))
+										<tr>
+											<td height="24" class="tx_title">
+											您已添加 <b>
+											<a class="good" href="${homeMoudle.setTarget('mygoods/list_init.htm')}">$!shop.goodsCount</a></b> 个商品,继续&nbsp;
+											<a class="good" href="${homeMoudle.setTarget('mygoods/add_init.htm')}">添加商品</a></td>
+										</tr>
+										#end
+										#if($member && ("$!member.phoneValidate" == "Y"))
+										<tr>
+											<td height="24" class="tx_title">
+											您已发布 <b>
+											<a class="good" href="$homeMoudle.setTarget('mynews/news_member_list.htm')">$!totalNews</a></b> 条分类信息,继续&nbsp;
+											<a class="good" href="$homeMoudle.setTarget('mynews/news_add_init.htm')">发布分类信息</a></td>
+										</tr>
+										#end
+										#if($!total_unsettle_order > 0)
+										<tr>
+											<td height="24" class="tx_title">
+											<font color="#FF0000">您有</font> <b>
+											<a class="good" href="${homeMoudle.setTarget('order/list.htm').addQueryData('status',3)}">$!total_unsettle_order</a></b> 
+											<font color="#FF0000">个订单尚未处理,请尽快</font>&nbsp;
+											<a class="good" href="${homeMoudle.setTarget('order/list.htm').addQueryData('status',3)}">确认订单</a></td>
+										</tr>
+										#end
+										#if( $!total_unpay_order > 0)
+										<tr>
+											<td height="24" class="tx_title">
+											您有 <b>
+											<a class="good" href="${homeMoudle.setTarget('order/list.htm').addQueryData('status',5)}">$!total_unpay_order</a></b> 条订单信息尚未支付,请尽快&nbsp;
+											<a class="good" href="${homeMoudle.setTarget('order/list.htm').addQueryData('status',5)}">支付</a></td>
+										</tr>
+										#end
+									</table>
+								</td>
+							</tr>
+						</table>
+					  </td>
+					</tr>
+				</table>
+				#end
+				<br>
+				</td>
+			</tr>
+		</table>
+		</td>

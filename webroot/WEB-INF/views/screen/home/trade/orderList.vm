@@ -1,0 +1,146 @@
+## 显示会员订单列表
+#set( $layout = "layout/home/memberdefault.vm" )
+<td width="10" valign="top">　  
+	</td>
+		<td width="740" valign="top">
+			<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>丫丫订单管理</h1>
+			</div>
+		<table border="0" width="90%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+		<div class="roundCorner gray onlyBottom" style="width: 736px;">
+	    <p>   
+			<div align="center"><img src="${imgServer}/images/logo_copy.gif" align="absmiddle" /></div>
+	    </div>
+	    <p>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td align="center"><span class="red">$!errorMessage</span></td>
+					</tr>
+				</table>
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="18">
+					<tr>
+						<td width="84">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="${homeMoudle.setTarget('tradecar/list.htm')}" style="text-decoration: none"><font color="#A1A1A1">我的采购单</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td width="96">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">
+								我的订单</td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td>&nbsp;　&nbsp;</td>
+					</tr>
+				</table>
+				<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<table cellSpacing="0" cellPadding="0" width="90%" align="center">
+							<tr>
+								<td align=center>
+									<table border="0" width="560" cellspacing="0" cellpadding="6">
+										<tr>
+											<td height="24" class="tx_title" width="30%"><b>查看我的订单</b></td>
+											<td height="24" class="tx_title" width="70%" align=right>状态:
+											<a href="${homeMoudle}/order/list.htm" class="good">所有订单</a>
+											<a href="${homeMoudle}/order/list.htm?status=1" class="good">双方已确认</a>
+											<a href="${homeMoudle}/order/list.htm?status=2" class="good">等待对方确认</a>
+											<a href="${homeMoudle}/order/list.htm?status=3" class="good">等待我方确认</a>
+											<a href="${homeMoudle}/order/list.htm?status=4" class="good">订单已作废</a>
+											</td>
+										</tr>
+										<tr>
+											<td width="560" height="35" colspan="2">
+											<table border="1" width="100%" cellspacing="1" cellpadding="2" style="border-collapse: collapse" bordercolor="#E4E4E4" id="table1">
+												<tr>
+													<td width="10%" align="center"><b>编号</b></td>
+													<td width="51%" align="center"><b>订单内容</b></td>
+													<td width="20%" align="center"><b>状态</b></td>
+													<td width="14%" align="center"><b>详细</b></td>
+												</tr>
+												#foreach($order in $query.orders)
+												#set($orderCount = ($velocityCount+$query.getPageFristItem()))
+												#set($orderCount = $orderCount - 1)
+												<tr>
+													<td bgcolor="#FFFFFF" align="center"><b>$orderCount</b></td>
+													<td bgcolor="#FFFFFF" style="padding-left:6px;">
+														<a href="${homeMoudle}/order/detail.htm?id=$!{order.orderNo}" class="good">$!{order.orderDate} 会员$!{order.buyerLoginId}向店铺$!{order.shopName}的订单</a>
+													</td>
+													<td bgcolor="#FFFFFF" align=center>
+														#if($order.waitForMeConfirm($memberId))
+															<font color="#FF3300">等待我方确认</font>
+														#elseif($order.waitForHimConfirm($memberId))
+															<font color="#0000FF">等待对方确认</font>
+														#elseif($order.isClosed())
+															<font color="#0099FF">已经作废</font>
+														#elseif($order.isSuccess())
+															<font color="#ff00FF">已经交易成功</font>
+														#elseif($order.isWaitMyPay($memberId))
+															<font color="#9900cc">等待我付款</font>
+														#elseif($order.isWaitHimPay($memberId))
+															等待对方付款
+															#elseif($order.isWaitMyShipping($memberId))
+															<font color="#9900cc">等待我发货</font>
+															#elseif($order.isWaitMyConfirmShipping($memberId))
+															等待确认收货
+														#end
+													</td>
+													<td bgcolor="#FFFFFF" align=center>
+														#if($order.waitForMeConfirm($memberId))
+															<a href="${homeMoudle}/order/detail.htm?id=$!{order.orderNo}">
+																<img border="0" src="${imgServer}/images/btn_queren.gif">
+															</a>
+														#else
+															<a href="${homeMoudle}/order/detail.htm?id=$!{order.orderNo}">
+																<img border="0" src="${imgServer}/images/btn_order.gif" width="55" height="14">
+															</a>
+														#end
+        												
+													</td>
+												</tr>
+												#end
+											</table>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					  </td>
+					</tr>
+				</table>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="6">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+				#if($query.orders.size() > 0)
+				${control.get('orderListPageSlider')}
+				#end
+				<br>
+				</td>
+			</tr>
+		</table>
+		</td>

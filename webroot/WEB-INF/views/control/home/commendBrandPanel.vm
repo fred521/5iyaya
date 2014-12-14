@@ -1,0 +1,14 @@
+<ul>
+	#foreach($commend in $index_commend_brand)
+		<li>
+		<a href="$commend.commendUrl" title="$!commend.commendText">
+		
+			#if($commend.picPath)
+				<img style="border:1px solid #CCC" src="${upServer}$!{commend.picPath}.n.jpg"  width="111" height="53" >
+			#else
+				<img style="border:1px solid #CCC" src="$!commend.picUrl"  width="111" height="53" >
+			#end
+		</a>
+		</li>
+	#end
+</ul>

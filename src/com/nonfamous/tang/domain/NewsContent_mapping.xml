@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="NEWSCONTENT_SPACE">
+	<resultMap id="newscontent" class="com.nonfamous.tang.domain.NewsContent">
+		<result property="newsId" column="NEWS_ID"/>
+		<result property="content" column="CONTENT"/>
+	</resultMap>
+	
+	<insert id="NEWS_CONTENT_INSERT" parameterClass="com.nonfamous.tang.domain.NewsContent">
+		INSERT INTO NEWS_CONTENT (
+				NEWS_ID,
+				CONTENT
+	                     )
+	             VALUES ( 
+				#newsId#,
+				#content#
+	                     )
+	</insert>
+	
+	<update id="UPDATE_NEWS_CONTENT_BY_ID" parameterClass="com.nonfamous.tang.domain.NewsContent">
+		UPDATE NEWS_CONTENT t SET  
+			<isNotEmpty prepend="" property="content"> t.CONTENT = #content# </isNotEmpty>
+		WHERE t.NEWS_ID = #newsId#
+	</update>
+	
+	<select id="GET_NEWS_CONTENT_LIST" parameterClass="java.util.Map" resultMap="newscontent">
+		SELECT 
+			NEWS_ID,
+			CONTENT
+		FROM NEWS_CONTENT  t  
+	</select>
+	
+	<select id="GET_NEWS_CONTENT_BY_ID" parameterClass="java.lang.String" resultMap="newscontent">
+		SELECT 
+			NEWS_ID,
+			CONTENT
+		FROM NEWS_CONTENT  t     
+		WHERE t.NEWS_ID = #value#
+	</select>
+	
+	<delete id="DELETE_NEWS_CONTENT_BY_ID" parameterClass="java.lang.String">
+		DELETE FROM NEWS_CONTENT  WHERE NEWS_ID = #value#
+	</delete>
+	
+</sqlMap>

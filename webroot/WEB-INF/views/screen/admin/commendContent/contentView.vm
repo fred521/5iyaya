@@ -1,0 +1,147 @@
+#set( $layout = "layout/admin/default.vm" )
+
+  <!-- calendar stylesheet -->
+  <link rel="stylesheet" type="text/css" media="all" href="${imgServer}/js/jscalendar/calendar-win2k-cold-1.css" title="win2k-cold-1" />
+
+  <!-- main calendar program -->
+  <script type="text/javascript" src="${imgServer}/js/jscalendar/calendar_stripped.js"></script>
+
+  <!-- language for the calendar -->
+  <script type="text/javascript" src="${imgServer}/js/jscalendar/lang/cn_utf8.js"></script>
+
+  <!-- the following script defines the Calendar.setup helper function, which makes
+       adding a calendar a matter of 1 or 2 lines of code. -->
+  <script type="text/javascript" src="${imgServer}/js/jscalendar/calendar-setup_stripped.js"></script>
+
+<script>
+function showPic()
+{	
+  	document.all('imagek').innerHTML = "<img id=\"img\" border=\"0\"  />" ;
+ 	document.all('img').src = document.all('pic').value;            
+}
+function changeselect(obj){
+  if (obj==1){
+      document.all.bNum.style.display="";
+      document.all.bPrice.style.display="";
+  }
+  else{
+      document.all.bNum.style.display="none";
+      document.all.bPrice.style.display="none";
+  }      
+  }  
+</script>
+<BODY leftMargin=8 background="${imgServer}/images/admin/allbg.gif" topMargin=16>
+<form name="contentAdd"  action="${adminMoudle}/commend_content/con_modify.htm" method="post" encType="multipart/form-data">
+<input type="hidden" name="contentId" #if($commendContent.contentId) value="$!commendContent.contentId" #else value="$contentId" #end>
+<TABLE cellSpacing=1 cellPadding=3 width="98%" align=center bgColor=#666666 border=0>
+  <TBODY>
+  <TR>
+      <TD background="${imgServer}/images/admin/tbg.gif" height=19>&nbsp;<b>添加/修改推荐管理</b></TD>
+    </TR>
+  <TR>
+      <TD vAlign=top bgColor=#ffffff height=200> <table border="0" width="98%" cellspacing="0" cellpadding="6">          
+          <tr> 
+            <td>推荐类型:</td>
+			<input type="hidden" name="commendType" value="$!commendContent.commendType">
+            <td>#showCommendType($commendContent.commendType)</td>				
+          </tr>			
+          <tr> 
+            <td colspan="2"><hr size="1"></td>
+          </tr>
+          <tr> 
+            <td width="100">推荐名称:</td>
+            <td width="460"><input name="commendText" class="input4" size="29" value="$!form.getField("commendText").value"> 
+              <span class="red"><font color=red>* &nbsp;$!form.getField("commendText").message</font></span></td>
+          </tr>         
+		 
+		  <tr> 
+            <td>推荐位置:</td>
+            <td>$control.setTemplate('admin/position')</td>
+          </tr>
+		   <tr> 
+            <td width="100">开始时间:</td>
+            <td width="460"><input value="$!form.getField("gmtStart").value" name="gmtStart" class="input3" readonly=true id="A_endtime"><img border="0" id="f_trigger_e" src="${imgServer}/images/selectdate.gif" align=absmiddle>
+			<span class="red"><font color=red>* &nbsp;$!form.getField("gmtStart").message</font></span>
+			</td>
+          </tr>
+
+<script type="text/javascript">
+    Calendar.setup({
+        inputField     :    "A_endtime",     // id of the input field
+        ifFormat       :    "%Y年%m月%d日",      // format of the input field
+        button         :    "f_trigger_e",  // trigger for the calendar (button ID)
+        align          :    "br",           // alignment (defaults to "Bl")
+        singleClick    :    true
+    });
+</script>
+
+          <tr> 
+            <td width="100">到期时间:</td>
+            <td width="460"><input value="$!form.getField("gmtEnd").value" name="gmtEnd" class="input3" readonly=true  id="A_endtime1"><img border="0" id="f_trigger_e1" src="${imgServer}/images/selectdate.gif" align=absmiddle>
+			<span class="red"><font color=red>* &nbsp;$!form.getField("gmtEnd").message</font></span>
+			</td>
+          </tr>		
+
+<script type="text/javascript">
+    Calendar.setup({
+        inputField     :    "A_endtime1",     // id of the input field
+        ifFormat       :    "%Y年%m月%d日",      // format of the input field
+        button         :    "f_trigger_e1",  // trigger for the calendar (button ID)
+        align          :    "br",           // alignment (defaults to "Bl")
+        singleClick    :    true
+    });
+</script>
+
+          <tr id="picc" #if($stringUtils.contains($!form.getField("id_type").value,'_3')) style="display:none" #end> 
+            <td width="100">图片预览:</td>
+            <td width="460">
+				<div id="imagek">
+				#if($commendContent.picPath)
+				<img id="img" border="0" src="${upServer}/${commendContent.picPath}.n.jpg">&nbsp;&nbsp;&nbsp;
+				#else
+				<img id="img" border="0" src="${imgServer}/images/showimg.gif" />&nbsp;&nbsp;&nbsp;
+				#end
+				</div>
+			</td>
+          </tr> 
+          <tr id="pic" #if($stringUtils.contains($!form.getField("id_type").value,'_3')) style="display:none" #end> 
+            <td width="100" >推荐图片:</td>
+            <td width="460"><input type="file" name="picPath" size="29" onChange="showPic()"><span class="red"><font color=red>$!form.getField("picPath").message</font></span></td>
+          </tr>                    
+		  <tr id="bNum" #if("$commendContent.commendType"!="1") style="display:none" #end> 
+            <td width="100">起批量:</td>
+            <td width="460"><input name="batchNum" value="$!form.getField("batchNum").value" class="input4" size="29">
+			<span class="red"><font color=red>$!form.getField("batchNum").message</font></span>
+			</td>          
+		  </tr>
+          <tr id="bPrice" #if("$commendContent.commendType"!="1") style="display:none" #end> 
+            <td width="100">批发价:</td>
+            <td width="460"><input name="batchPrice" value="$!form.getField("batchPrice").value" class="input4" size="29">
+			<span class="red"><font color=red>$!form.getField("batchPrice").message</font></span>
+			</td>
+          </tr>
+		  
+          <tr> 
+            <td width="100">推荐URL:</td>
+            <td width="460"><input name="commendUrl" value="$!form.getField("commendUrl").value" class="input4" size="29">
+			<span class="red"><font color=red>$!form.getField("commendUrl").message</font></span>
+			</td>
+          </tr>
+          <tr> 
+            <td width="100">推荐说明:</td>
+            <td width="460"><input name="commendDesc" value="$!form.getField("commendDesc").value" class="input4" size="29">
+			<span class="red"><font color=red>$!form.getField("commendDesc").message</font></span>
+			</td>
+          </tr>
+          <tr> 
+            <td>　</td>
+            <td><input type=submit value=提交 name=Submit > &nbsp;&nbsp; <input type=reset value=重置 name=Submit2222></td>
+          </tr>
+          <tr>
+            <td>　</td>
+            <td>　</td>
+          </tr>
+        </table>
+        
+      </TD>
+    </TR></TBODY></TABLE></FORM></BODY>

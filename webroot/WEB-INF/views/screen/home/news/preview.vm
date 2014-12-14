@@ -1,0 +1,77 @@
+#set( $layout = "layout/home/memberdefault.vm" )
+<STYLE type=text/css>.rb {
+	BORDER-RIGHT: #666666 1px solid
+}
+.tb {
+	BORDER-TOP: #666666 1px solid
+}
+</STYLE>
+		<td width="10" valign="top"></td>
+		<td width="740" valign="top">
+		<table border="0" width="90%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				<table border="0" width="100%" cellspacing="0" cellpadding="2">            
+					<tr>
+						<td bgcolor="#F0DEC8" style="font-weight:bold;font-size:14px;padding-left:8px;">分类信息管理</td>
+					</tr>
+				</table>
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+				<table cellSpacing="0" cellPadding="0" width="93%" align="center" border="0">
+					<tr>
+						<td align="right" width="19%" height="104"><img height="101" alt="" src="${imgServer}/images/member_15.gif" width="146"></td>
+						<td width="81%">
+						<table cellSpacing="0" cellPadding="0" width="98%" border="0">
+							<tr>
+								<td width="4%" bgColor="#efefef" height="74"></td>
+								<td style="font-size:14px;" width="96%" bgColor="#efefef">中国最大的批发市场在线电子商务平台</td>
+							</tr>
+						</table>
+						</td>
+					</tr>
+				</table>
+		<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+		<tr>
+		<td width="740" valign="top">
+		<table border="0" width="100%" cellspacing="0" cellpadding="2">
+			<tr>
+				<td bgcolor="#F3F3F3" style="font-size:14px;font-weight:bold;padding-left:20px;color: #0000A0" height="30">
+				<font color="#B4711F">$!news.newsTitle</font></td>
+			</tr>
+			<tr>
+				<td style="color: #797979;padding-left:20px;" height="26">发布时间:${dateUtils.frontFullChineseDate($!news.gmtCreate)}      #*信息编号：$!news.newsId*#</td>
+			</tr>
+			<tr>
+				<td height="10"></td>
+			</tr>
+			<tr>
+				<td style="font-size:14px;padding-left:20px;">  $!news.content.content </td>
+			</tr>
+			<tr>
+				<td height="10"></td>
+			</tr>
+			<tr>
+				<td style="padding-left:20px;"><b>联系电话</b>:&nbsp;$!news.phone&nbsp;&nbsp;#*<img border="0" src="${imgServer}/images/voip3.gif" align=absmiddle style="cursor:pointer" onClick=window.open("${imgServer}/contact/duanxin.html","发送短信","width=542,height=429,left=300,top=100")>*#</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+		</td>
+
+
+
+
+
+
+
+
+
+

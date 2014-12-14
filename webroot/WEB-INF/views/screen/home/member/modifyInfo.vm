@@ -1,0 +1,119 @@
+#set( $layout = "layout/home/memberdefault.vm" )
+	<td width="10" valign="top">　  </td>
+		<td width="740" valign="top">
+			<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>会员信息管理</h1>
+	   </div>
+		<table border="0" width="90%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+  <div class="roundCorner gray onlyBottom" style="width: 736px;">
+	    <p>   
+	   <div align="center"><img src="${imgServer}/images/logo_copy.gif" align="absmiddle" /></div>
+	   </div>
+	   <p>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td align="center"><span class="red">$!errorMessage$!succMessage</span></td>
+						<form name="formModify" method="post" action="$homeMoudle.setTarget('/member/do_modify.htm')">
+					</tr>
+				</table>
+				$control.setTemplate("home/member/updateTop").put("menuIndex","2")
+				<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+					
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<table cellSpacing="0" cellPadding="0" width="90%" align="center">
+							<tr>
+								<td align=center>
+									<table border="0" width="560" cellspacing="0" cellpadding="6">
+										<tr>
+											<td height="24" class="tx_title" colspan="2"><b>输入登录信息</b></td>
+										</tr>
+										<tr>
+											<td width="100" height="35">用户名:</td>
+											<td width="460" style="color:red;font-weight:bold;font-size:13px;">
+												$!form.getField('loginId').value
+												<input type="hidden" name="loginId" value="$!form.getField('loginId').value"/>
+											</td>
+										</tr>
+										<tr>
+											<td height="35">手机号码:</td>
+											<td>
+												<input value="$!form.getField('mobile').value" name="mobile" class="input3"/>
+											<span class="red">*$!form.getField('mobile').message</span>
+											<!--<img border="0" src="${imgServer}/images/icon1.gif" align=absmiddle>
+											<a href="member_moble.html" class="good">更换手机号码</a>-->
+											</td>
+										</tr>
+										<tr>
+											<td>E-mail:</td>
+											<td><input readOnly value="$!form.getField('email').value" name="email" class="input3"/></td>
+										</tr>
+										<tr>
+											<td height="16" colspan="2"></td>
+										</tr>
+										<tr>
+											<td height="24" class="tx_title" colspan="2"><b>输入个人资料</b></td>
+										</tr>
+										<tr>
+											<td>真实姓名:</td>
+											<td><input value="$!form.getField('name').value" name="name" class="input3"/>
+											<span class="red">*$!form.getField('name').message</span></td>
+										</tr>
+										<tr>
+											<td>性别:</td>
+											<td>
+											<input type="radio" #if("$!form.getField('sex').value" == "M")CHECKED#end value="M" name="sex"/>男
+											<input type="radio" #if("$!form.getField('sex').value" == "F")CHECKED#end value="F" name="sex"/>女
+											</td>
+										</tr>
+										<tr>
+											<td>会员昵称:</td>
+											<td><input value="$!form.getField('nick').value" name="nick" class="input3"/><span class="red">$!form.getField('nick').message</span></td>
+										</tr>
+										<tr>
+											<td>所在地区:</td>
+											<td>
+											$control.get('prov_city').put("areaCode",$!form.getField('areaCode').value)
+											</td>
+										</tr>
+										<tr>
+											<td>详细地址:</td>
+											<td><input value="$!form.getField('address').value" name="address" class="input4"/>
+											<span class="red">*$!form.getField('address').message</span></td>
+										</tr>
+										<tr>
+											<td>邮政编码:</td>
+											<td><input value="$!form.getField('postCode').value" name="postCode" class="input5" maxLength="6"/>
+											<span class="red">*$!form.getField('postCode').message</span></td>
+										</tr>
+										<tr>
+											<td>固定电话:</td>
+											<td><input value="$!form.getField('phone').value" name="phone" class="input3"/><span class="red">$!form.getField('phone').message</span>
+											</td>
+										</tr>
+										<tr>
+											<td>　</td>
+											<td>
+											<img src="${imgServer}/images/btm_Submitted.gif" onClick="document.formModify.submit();" style="cursor:pointer"></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					  </td>
+					</tr>
+				</table>
+				</form>
+				<br>
+				</td>
+			</tr>
+		</table>
+		</td>

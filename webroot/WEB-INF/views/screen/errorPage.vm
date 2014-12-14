@@ -1,0 +1,25 @@
+#set( $layout = "layout/home/error.vm" )
+<table width="950" cellspacing="0" cellpadding="0">
+	<tr>
+		<td bgcolor="#E2E2E2" height="1"></td>
+	</tr>
+	<tr>
+		<td height="10"></td>
+	</tr>
+	<tr>
+		<td bgcolor="#EAD0B0" height="24" style="padding-left:20px;font-family:ËÎÌו;font-weight:bold;font-size:14px;padding-top:2px;" align="center">$!error_message</td>
+	</tr>
+</table>
+<table border="0" width="950" cellspacing="0" cellpadding="0">
+   <tr>
+		<td width="15">&nbsp;</td>
+		<td width="920" align=center>
+			
+			<img border="0" src="${imgServer}/images/err.gif" >
+		</td>
+		<td width="15">&nbsp;</td>
+	</tr>
+</table>
+<!--
+${error}
+-->

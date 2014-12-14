@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="memberTradeSecureHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="requestEncoding" />
+				<ref bean="responseEncoding" />
+				<ref bean="cookyjarInterceptor" />
+				<ref bean="memberMoudleSecure" />
+				<ref bean="memberAuthTokenInterceptor" />
+			</list>
+		</property>
+		<property name="urlMap">
+			<map>
+				<entry key="/member/select_shop_list.htm" value-ref="selectShopListAction" />
+				<entry key="/tradepay/*.htm" value-ref="tradePayAction" />
+				<entry key="/order/*.htm" value-ref="orderAction" />
+				<entry key="/tradecar/*.htm" value-ref="tradeCarAction" />
+				<entry key="/signshop/signshop_add.htm" value-ref="signshopAdd" />
+				<entry key="/signshop/*.htm" value-ref="signShopAction" />
+				<!-- entry key="/pay/*.htm" value-ref="bankPayAction" /-->
+			</map>
+		</property>
+	</bean>
+	<bean id="tradeNoSecureHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="requestEncoding" />
+				<ref bean="responseEncoding" />
+				<ref bean="cookyjarInterceptor" />
+			</list>
+		</property>
+		<property name="urlMap">
+			<map>
+				<!-- entry key="/pay_call_back/*.htm" value-ref="bankPayReturnAction" /-->
+			</map>
+		</property>
+	</bean>
+	<bean id="memberNetTradeSecureHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="cookyjarInterceptor" />
+				<ref bean="memberMoudleSecure" />
+				<ref bean="memberAuthTokenInterceptor" />
+			</list>
+		</property>
+		<property name="urlMap">
+			<map>
+				<entry key="/netpay/alipay.htm" value-ref="alipayAction" />
+			</map>
+		</property>
+	</bean>
+	<bean id="netPaySecureHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="requestEncoding" />
+				<ref bean="responseEncoding" />
+				<ref bean="cookyjarInterceptor" />
+				<ref bean="memberMoudleSecure" />
+				<ref bean="memberAuthTokenInterceptor" />
+			</list>
+		</property>
+		<property name="urlMap">
+			<map>
+				<entry key="/netpay/alipay_return.htm" value-ref="alipayAction" />
+				<entry key="/netpay/alipay_notify.htm" value-ref="alipayAction" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="chinabankPayMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="gbkRequestEncoding" />
+				<ref bean="gbkResponseEncoding" />
+				<ref bean="cookyjarInterceptor" />
+				<ref bean="memberMoudleSecure" />
+				<ref bean="memberAuthTokenInterceptor" />
+			</list>
+		</property>
+		<property name="urlMap">
+			<map>
+				<entry key="/netpay/chinabank.htm" value-ref="chinabankPayAction" />
+				<entry key="/netpay/chinabank_return.htm" value-ref="chinabankPayAction" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="tradePayAction" class="com.nonfamous.tang.web.home.TradePayAction">
+		<property name="methodNameResolver">
+			<bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"></bean>
+		</property>
+		<property name="cacheSeconds" value="0" />
+		<property name="tradePayService">
+			<ref bean="tradePayService" />
+		</property>
+		<property name="formFactory">
+			<ref bean="formFactory"/>
+		</property>
+		<property name="shopService">
+			<ref bean="shopService"/>
+		</property>
+	</bean>
+	
+	<bean id="selectShopListAction" class="com.nonfamous.tang.web.home.SelectShopListAction">
+		<property name="memberService">
+			<ref bean="memberService" />
+		</property>
+	</bean>
+	
+	<!-- 支付宝在线支付 -->
+	<bean id="alipayAction" class="com.nonfamous.tang.web.netpay.AlipayAction">
+		<property name="methodNameResolver">
+			<bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver">
+			</bean>
+		</property>
+		<property name="payGateway" value="${alipay.gateway}"/>
+		<property name="payReturn" value="${alipay.return}"/>
+		<property name="payNotify" value="${alipay.notify}"/>
+		<property name="payNotifyQuery" value="${alipay.notifyQuery}"/>
+		<property name="inputCharset" value="${alipay.inputCharset}"/>
+		<property name="signType" value="${alipay.signType}"/>
+		<property name="tradePayService" ref="tradePayService"/>
+		<property name="goodsService" ref="goodsService"/>
+		<property name="tradeOrderService" ref="tradeOrderService"/>
+		<property name="memberService" ref="memberService"/>
+		<property name="mailService" ref="mailEngine"/>
+		<property name="emailSubject" value="alipay.email.subject"/>
+	</bean>
+	
+	<!-- 网银在线支付 -->
+	<bean id="chinabankPayAction" class="com.nonfamous.tang.web.netpay.ChinabankPayAction">
+		<property name="methodNameResolver">
+			<bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver">
+			</bean>
+		</property>
+		<property name="payGateway" value="${chinabank.gateway}"/>
+		<property name="payReturn" value="${chinabank.return}"/>
+		<property name="tradeOrderService" ref="tradeOrderService"/>
+		<property name="tradePayService" ref="tradePayService"/>
+		<property name="goodsService" ref="goodsService"/>
+		<property name="memberService" ref="memberService"/>
+		<property name="mailService" ref="mailEngine"/>
+		<property name="emailSubject" value="chinabank.email.subject"/>
+	</bean>
+	
+	<bean id="orderAction" class="com.nonfamous.tang.web.home.OrderAction">
+		<property name="methodNameResolver">
+			<bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver">
+			</bean>
+		</property>
+		<property name="cacheSeconds" value="0" />
+		<property name="tradeOrderService" >
+			<ref bean="tradeOrderService"/>
+		</property>
+		<property name="memberService">
+			<ref bean="memberService"/>
+		</property>
+		<property name="formFactory">
+			<ref bean="formFactory"/>
+		</property>
+		<property name="shopService">
+			<ref bean="shopService"/>
+		</property>
+		<property name="goodsService">
+			<ref bean="goodsService"/>
+		</property>
+		<property name="tradePayService">
+			<ref bean="tradePayService"/>
+		</property>
+		<property name="addressService" ref="addressService"/>
+		<property name="addressHelper" ref="addressHelper"/>
+		<property name="mailEngine">
+			<ref bean="mailEngine"/>
+		</property>
+	</bean>
+	<bean id="tradeCarAction" class="com.nonfamous.tang.web.home.TradeCarAction">
+		<property name="methodNameResolver">
+			<bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver">
+			</bean>
+		</property>
+		<property name="cacheSeconds" value="0" />	
+		<property name="tradeCarService" >
+			<ref bean="tradeCarService"/>
+		</property>
+		<property name="memberService" ref="memberService"/>
+	</bean>
+	<bean id="signShopAction" class="com.nonfamous.tang.web.home.SignShopAction">
+		<property name="methodNameResolver">
+			<bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver">
+			</bean>
+		</property>
+		<property name="cacheSeconds" value="0" />	
+		<property name="shopService" >
+			<ref bean="shopService"/>
+		</property>
+		<property name="signShopDAO" >
+			<ref bean="signShopDAO"/>
+		</property>
+	</bean>
+	<bean name="signshopAdd" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" value="home/shop/signshopAdd" />
+	</bean>
+	<bean name="orderListPageSlider" class="com.nonfamous.tang.web.control.PageSlider">
+		<property name="sliderWidth" value="5" />
+		<property name="sliderPath" value="home/trade/orderListPageSlider" />
+	</bean>
+	<bean name="beorderListPageSlider" class="com.nonfamous.tang.web.control.PageSlider">
+		<property name="sliderWidth" value="5" />
+		<property name="sliderPath" value="home/trade/beorderListPageSlider" />
+	</bean>
+	<bean name="signshopListPageSlider" class="com.nonfamous.tang.web.control.PageSlider">
+		<property name="sliderWidth" value="5" />
+		<property name="sliderPath" value="home/shop/signshopListPageSlider" />
+	</bean>
+	
+	<bean name="payHistListPageSlider" class="com.nonfamous.tang.web.control.PageSlider">
+		<property name="sliderWidth" value="5" />
+		<property name="sliderPath" value="home/trade/payHistListPageSlider" />
+	</bean>
+	
+	<bean name="receivePayListPageSlider" class="com.nonfamous.tang.web.control.PageSlider">
+		<property name="sliderWidth" value="5" />
+		<property name="sliderPath" value="home/trade/receivePayListPageSlider" />
+	</bean>
+	
+	<bean name="/blank.htm" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="cacheSeconds" value="0" />
+		<property name="viewName" value="home/blank" />
+	</bean>
+	<!-- 
+	<bean id="bankPayAction" class="com.nonfamous.tang.web.home.BankPayAction">
+		<property name="methodNameResolver">
+			<bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"></bean>
+		</property>
+		<property name="cacheSeconds" value="0" />
+		<property name="tradePayService">
+			<ref bean="tradePayService" />
+		</property>
+		<property name="tradeOrderService">
+			<ref bean="tradeOrderService"/>
+		</property>
+		<property name="appServer">
+			<ref bean="appServer"/>
+		</property>
+		<property name="bankcommSignHelper">
+			<ref bean="bankcommSignHelper"/>
+		</property>
+	</bean>
+		
+	<bean id="bankPayReturnAction" class="com.nonfamous.tang.web.home.BankPayReturnAction">
+		<property name="methodNameResolver">
+			<bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"></bean>
+		</property>
+		<property name="cacheSeconds" value="0" />
+		<property name="tradePayService">
+			<ref bean="tradePayService" />
+		</property>
+		<property name="bankcommSignHelper">
+			<ref bean="bankcommSignHelper"/>
+		</property>
+	</bean>
+	 -->
+</beans>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+<!-- ======================================================================== -->
+    <!--  DataSource定义。                                                        -->
+    <!-- ======================================================================== -->
+    <bean id="mysqlConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>WEB-INF/conf/server.properties</value>
+				<value>WEB-INF/conf/bank_comm.properties</value>
+			</list>
+		</property>
+	</bean>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName">
+            <value>${mysql.driverClassName}</value>
+        </property>
+        <property name="url">
+            <value>${mysql.url}</value>
+        </property>
+        <property name="username">
+			<value>${mysql.username}</value>
+		</property>
+		<property name="password">
+			<value>${mysql.password}</value>
+		</property>
+    </bean>
+    <!-- ======================================================================== -->
+    <!--  TransactionManager定义。                                                -->
+    <!-- ======================================================================== -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+    <!-- ======================================================================== -->
+    <!--  iBatis SQL map定义。                                                    -->
+    <!-- ======================================================================== -->
+    <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="WEB-INF/conf/spring/SqlMapConfig.xml"/>
+    </bean>
+</beans>

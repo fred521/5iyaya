@@ -1,0 +1,177 @@
+#set( $layout = "layout/home/memberdefault.vm" )
+	<td width="10" valign="top">　  </td>
+		<td width="740" valign="top">
+			<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>地址管理</h1>
+	   </div>
+		<table border="0" width="90%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+  <div class="roundCorner gray onlyBottom" style="width: 736px;">
+	    <p>   
+	   <div align="center"><img src="${imgServer}/images/logo_copy.gif" align="absmiddle" /></div>
+	   </div>
+	   <p>
+		<form id="formModify" name="formModify" method="post" action="$homeMoudle.setTarget('/myaddress/add.htm')">
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td align="center"><span class="red">$!errorMessage $!succMessage</span>
+						</td>
+					</tr>
+				</table>
+				$control.setTemplate("home/member/updateTop").put("menuIndex","5")
+				<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<table cellSpacing="0" cellPadding="0" align="center">
+							<tr>
+								<td align=center>
+									<table border="0" width="100%" cellspacing="0" cellpadding="6" style="border: 1px solid #eee;">
+										<tr>
+											<td height="24" class="tx_title" colspan="2"><b>收货人</b></td>
+											<td height="24" class="tx_title" colspan="2"><b>所在地区</b></td>
+											<td height="24" class="tx_title" colspan="2"><b>街道地址</b></td>
+											<td height="24" class="tx_title" colspan="2"><b>邮编</b></td>
+											<td height="24" class="tx_title" colspan="2"><b>电话/手机</b></td>
+											<td height="24" class="tx_title" colspan="2"><b>操作</b></td>
+										</tr>
+										#foreach($address in $addressList)	
+										<tr id="tr_${address.addressId}">
+											<td height="24" class="tx_title" colspan="2" id="td_${address.addressId}_consignee">${address.consignee}</td>
+											<td height="24" class="tx_title" colspan="2">$!{address.areaCodeStr}</td>
+											<td height="24" class="tx_title" colspan="2" id="td_${address.addressId}_streetAddress">$!{address.streetAddress}</td>
+											<td height="24" class="tx_title" colspan="2" id="td_${address.addressId}_postCode">$!{address.postCode}</td>
+											<td height="24" class="tx_title" colspan="2" id="td_${address.addressId}_phone_mobile">$!{address.phone}/$!{address.mobile}</td>
+											<td height="24" class="tx_title" colspan="2">
+												<input type="hidden" id="input_${address.addressId}_areaCode" value="$!{address.areaCode}"/>
+												<a href="#" onclick='onActionClick("update", "${address.addressId}");'>修改</a>|
+												<a href="#" onclick='onActionClick("delete", "${address.addressId}");'>删除</a>
+											</td>
+										</tr>
+										#end
+									</table>
+								</td>
+							</tr>
+						</table>
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<table cellSpacing="0" cellPadding="0" width="90%" align="center">
+							<tr>
+								<td align=center>
+									<table border="0" width="560" cellspacing="0" cellpadding="6">
+										<tr>
+											<td height="24" id="address_title" class="tx_title" colspan="2"><b>新增收货地址</b></td>
+										</tr>
+										<tr>
+											<td width="100" height="35">收货人姓名:</td>
+											<td width="460" style="color:red;font-weight:bold;font-size:13px;">
+												<input value="$!form.getField('consignee').value" id="consignee" name="consignee" class="input3"/>
+												<span class="red">*$!form.getField('consignee').message</span>
+											</td>
+										</tr>
+										<tr>
+											<td height="35">所在地区:</td>
+											<td>
+												$control.get('prov_city').put("areaCode",$!form.getField('areaCode').value)
+											</td>
+										</tr>
+										<tr>
+											<td>街道地址:</td>
+											<td width="460" style="color:red;font-weight:bold;font-size:13px;">
+												<input value="$!form.getField('streetAddress').value" id="streetAddress" name="streetAddress" class="input3"/>
+												<span class="red">*(不需要重复填写省/市/区)$!form.getField('streetAddress').message</span>
+											</td>
+										</tr>
+										<tr>
+											<td>邮政编码:</td>
+											<td width="460" style="color:red;font-weight:bold;font-size:13px;">
+											<input value="$!form.getField('postCode').value" id="postCode" name="postCode" class="input5" maxLength="6"/>
+											<span class="red">*$!form.getField('postCode').message</span></td>
+										</tr>
+										<tr>
+											<td>电话号码:</td>
+											<td width="460" style="color:red;font-weight:bold;font-size:13px;">
+											<input value="$!form.getField('phone').value" id="phone" name="phone" class="input3"/>
+											<span class="red">(例如：0571-88889999)$!form.getField('phone').message</span>
+											</td>
+										</tr>
+										<tr>
+											<td>手机号码:</td>
+											<td width="460" style="color:red;font-weight:bold;font-size:13px;">
+											<input value="$!form.getField('mobile').value" id="mobile" name="mobile" class="input3"/>
+											<span class="red">*$!form.getField('mobile').message</span>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">最多保存5个有效地址</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+											<input type="hidden" name="addressId" id="addressId" value="$!form.getField('addressId').value"/>
+											<img src="${imgServer}/images/btm_Submitted.gif" onClick="onSubmitClick();" style="cursor:pointer"></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					  </td>
+					</tr>
+				</table>
+				</form>
+				<br>
+				</td>
+			</tr>
+		</table>
+		</td>
+		<script language="javascript" type="text/javascript">
+			function onActionClick(action, addressId){
+				if(!addressId)
+					window.alert("请选择一个地址.");
+				
+				if(action == "update"){
+					//window.alert($("#formModify").attr("action"));
+					$("#address_title").html("<b>修改收货地址</b>");
+					$("#addressId").val(addressId);
+					$("#consignee").val($("#td_" + addressId + "_consignee").text());
+					$("#streetAddress").val($("#td_" + addressId + "_streetAddress").text());
+					$("#postCode").val($("#td_" + addressId + "_postCode").text());
+					$("#phone").val($("#td_" + addressId + "_phone_mobile").text().split("/")[0]);
+					$("#mobile").val($("#td_" + addressId + "_phone_mobile").text().split("/")[1]);
+					$("#formModify").attr("action", "$homeMoudle.setTarget('/myaddress/update.htm')");
+					//window.alert($("#formModify").attr("action"));
+					//初始化地区
+					$("input[name*='areaCode']").val($("#input_" + addressId + "_areaCode").val());
+					var areaCode = $("input[name*='areaCode']").val();
+					init(areaCode.substr(0,2), areaCode.substr(2,2), areaCode.substr(4,2));
+					//window.alert(areaCode);
+				}
+				else if(action == "delete"){
+					location.href = "$homeMoudle.setTarget('/myaddress/delete.htm?addressId=" + addressId + "')";
+				}
+			}
+			
+			function onSubmitClick(){
+				sumAreaCode();
+				document.formModify.submit();
+			}
+			
+			function initForm(){
+    			var action = "$!action";
+    			//window.alert(action);
+    			if(action == "update"){
+    				$("#address_title").html("<b>修改收货地址</b>");
+    				$("#formModify").attr("action", "$homeMoudle.setTarget('/myaddress/update.htm')");
+    			}
+			}
+			
+			initForm();
+			
+		</script>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="COMPANY_INFO_SPACE">
+<resultMap id="companyInfo" class="com.nonfamous.tang.domain.CompanyInfo">
+		<result property="companyId" column="COMPANY_ID"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="loginId" column="LOGIN_ID"/>
+		<result property="companyName" column="COMPANY_NAME"/>
+		<result property="companyOwner" column="COMPANY_OWNER"/>
+		<result property="commodity" column="COMMODITY"/>
+		<result property="registeAddress" column="REGISTE_ADDRESS"/>
+		<result property="phone" column="PHONE"/>
+		<result property="mobilePhone" column="MOBILE_PHONE"/>
+		<result property="fax" column="FAX"/>
+		<result property="bank" column="BANK"/>
+		<result property="bankAccount" column="BANK_ACCOUNT"/>
+		<result property="accountName" column="ACCOUNT_NAME"/>
+		<result property="goodsCount" column="GOODS_COUNT"/>
+		<result property="logo" column="LOGO"/>
+		<result property="companyImg" column="COMPANY_IMG"/>
+		<result property="gmtCreate" column="GMT_CREATE"/>
+		<result property="creator" column="CREATOR"/>
+		<result property="gmtModify" column="GMT_MODIFY"/>
+		<result property="modifier" column="MODIFIER"/>
+		<result property="note" column="NOTE"/>
+		<result property="companyUrl" column="COMPANY_URL"/>
+		<result property="postcode" column="POSTCODE"/>
+		<result property="registeNumber" column="REGISTE_NUMBER"/>
+		<result property="companyType" column="COMPANY_TYPE"/>
+		<result property="registeProperty" column="REGISTE_PROPERTY"/>
+		<result property="organization" column="ORGANIZATION"/>
+		<result property="foundDate" column="FOUND_DATE"/>
+		<result property="expireDate" column="EXPIRE_DATE"/>
+		<result property="certificationHonour" column="CERTIFICATION_HONOUR"/>
+		<result property="productTypeChn" column="PRODUCT_TYPE_CHN"/>
+</resultMap>
+
+<insert id="company_info_insert" parameterClass="com.nonfamous.tang.domain.CompanyInfo">
+		INSERT INTO company_info (
+				COMPANY_ID,
+				MEMBER_ID,
+				LOGIN_ID,
+				COMPANY_NAME,
+				COMPANY_OWNER,
+				COMMODITY,
+				BELONG_MARKET_ID,
+				ADDRESS,
+				PHONE,
+				BANK,
+				BANK_ACCOUNT,
+				ACCOUNT_NAME,
+				GOODS_COUNT,
+				CAMERA,
+				WEB_PHONE,
+				LOGO,
+				COMPANY_IMG,
+				GMT_CREATE,
+				CREATOR,
+				GMT_MODIFY,
+				MODIFIER,
+				GIS_ADDRESS
+	                     )
+	             VALUES ( 
+				#companyId#,
+				#memberId#,
+				#loginId#,
+				#companyName#,
+				#companyOwner#,
+				#commodity#,
+				#belongMarketId#,
+				#address#,
+				#phone#,
+				#bank#,
+				#bankAccount#,
+				#accountName#,
+				0,
+				#camera#,
+				#webPhone#,
+				#logo#,
+				#companyImg#,
+				sysdate(),
+				#creator#,
+				sysdate(),
+				#modifier#,)
+	</insert>
+</sqlMap>

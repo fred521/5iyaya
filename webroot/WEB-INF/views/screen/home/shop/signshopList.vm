@@ -1,0 +1,105 @@
+#set( $layout = "layout/home/memberdefault.vm" )
+<script>
+<!--
+	function confirmDelete(){
+		flag=window.confirm("确定要删除吗?");  
+  		if(flag==true)return   true;  
+  		else   return   false;  
+	}
+-->
+</script>
+<td width="10" valign="top">　  
+		
+	</td>
+		<td width="740" valign="top">
+			<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>丫丫的payment管理</h1>
+			</div>
+		<table border="0" width="90%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+		<div class="roundCorner gray onlyBottom" style="width: 736px;">
+	    <p>   
+			<div align="center"><img src="${imgServer}/images/logo_copy.gif" align="absmiddle" /></div>
+	    </div>
+	    <p>
+	<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+		<tr>
+			<td align="center">#if($result)
+			     #if("$result.errorCode"=="ERROR_SHOP_NOT_EXIST")
+											#errorOut("店铺不存在")
+										#elseif("$result.errorCode"=="ERROR_HAS_SIGN_SHOP")
+											#errorOut("签约店铺已经存在")
+										#elseif($result.isSuccess())
+											#errorOut("添加签约店铺成功")
+										#elseif("$result"=="delSuccess")
+											#errorOut("删除签约店铺成功")
+				 #end
+				#end
+			</td>
+		</tr>
+	</table>
+	$control.setTemplate("home/trade/tradePayTop").put("menuIndex","1")
+	<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+		<tr>
+			<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+			<table cellSpacing="0" cellPadding="0" width="90%" align="center">
+				<tr>
+					<td align=center>
+						<table border="0" width="560" cellspacing="0" cellpadding="6">
+							<tr>
+								<td height="24" class="tx_title"><b>签约店铺列表</b></td>
+								<td height="24" class="tx_title" align=right>
+								<a href="${homeMoudle.setTarget('signshop/signshop_add.htm')}">
+								<img border="0" src="${imgServer}/images/btn_tjdp.gif" width="81" height="14"></a></td>
+							</tr>
+							<tr>
+								<td width="560" height="35" colspan="2">
+								<table border="1" width="100%" cellspacing="1" cellpadding="2" style="border-collapse: collapse" bordercolor="#E4E4E4" id="table1">
+									<tr>
+										<td width="50%" align="center"><b>店铺名称</b></td>
+										<td width="20%" align="center"><b>店主姓名</b></td>
+										<td width="30%" align="center">
+										<b>删除/转入快速支付</b></td>
+									</tr>
+									#foreach($item in $query.items)
+									<tr>
+										<td bgcolor="#FFFFFF" style="padding-left:6px;">$!item.shopName</td>
+										<td bgcolor="#FFFFFF" align=center>$!item.shopOwner</td>
+										<td bgcolor="#FFFFFF" align=center>
+										<a href="${homeMoudle.setTarget('signshop/delete.htm')}?sid=$!item.shopId">
+										<img border="0" src="${imgServer}/images/btn_del.gif" width="33" height="14" onClick="return confirmDelete()"></a>&nbsp;
+										<a href="${homeMoudle.setTarget('tradepay/quick_pay.htm')}">
+										<img border="0" src="${imgServer}/images/btn_kszf.gif" width="81" height="14"></a></td>
+									</tr>
+									#end
+								</table>
+								</td>
+							</tr>							
+						</table>
+					</td>
+				</tr>
+			</table>
+
+		  </td>
+		</tr>
+	</table>
+	<table border="0" width="100%" cellspacing="0" cellpadding="0" height="6">
+		<tr>
+			<td></td>
+		</tr>
+	</table>
+	#if($query.items.size() > 0)
+		${control.get('signshopListPageSlider')}
+	#end
+	<br>
+	</td>
+</tr>
+</table>
+</td>

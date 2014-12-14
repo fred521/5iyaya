@@ -1,0 +1,97 @@
+#set( $layout = "layout/home/login.vm" )
+<DIV id=RegAll>
+	<H1 align=left>快速注册我爱丫丫网：<span style="FONT-SIZE: 12px; COLOR: #000">（请注意所有项目均为必填项）</span></H1>
+<TABLE cellSpacing=0 cellPadding=0 border=0>
+		<form name="formReg" method="post" action="$homeMoudle.setTarget('/visitor/reginfo.htm')">
+			
+			<TBODY>
+				<tr onmouseover="sTip('1')">
+					<td class=TdTab>真实姓名：<span>*</span></td>
+					<td>
+						<input class="input3" value="$!form.getField('name').value" name="name"><font color="red">*$!form.getField('name').message</font>
+    				</td>
+					<td class=TdDt>
+						<DT id=Dt1>提供真实姓名可更方便您的购物或者发布商品信息</DT></td>
+  				</tr>
+				<tr>
+					<td class=TdTab>性 别：<span>*</span></td>
+					<td  nowrap colspan=2>
+						<input type="radio"  class="Inpr" value="M" name="sex" #if("$!form.getField('sex').value" == "M" || !$form.getField('sex').value)checked#end>男
+						<input type="radio"  class="Inpr" value="F" name="sex" #if("$!form.getField('sex').value" == "F")checked#end>女
+    				</td>
+					
+					</td>
+  				</tr>
+				<tr onmouseover="sTip('2')">
+					<td class=TdTab>会员昵称：<span>*</span></td>
+					<td>
+						<input class="input3" value="$!form.getField('nick').value" name="nick" size="20"><font color="red">$!form.getField('nick').message</font>
+    				</td>
+					<td class=TdDt>
+						<DT id=Dt2>您的昵称如果越是个性化, 越是能够被买卖家搜索的到</DT></td>
+  				</tr>
+				<tr onmouseover="sTip('3')">
+					<td class=TdTab>所在地区：<span>*</span></td>
+					<td nowrap>
+						$control.get('prov_city').put("areaCode",$!form.getField('areaCode').value)<font color="red">*</font>
+    				</td>
+					<td class=TdDt>
+						<DT id=Dt3>详细的物理地址, 将方便我们后期的跟踪和服务</DT></td>
+  				</tr>
+				<tr onmouseover="sTip('4')">
+					<td class=TdTab>居住地址：<span>*</span></td>
+					<td>
+						<input class="input4" type="text" value="$!form.getField('address').value" name="address"><font color="red">*$!form.getField('address').message</font>
+    				</td>
+					<td class=TdDt>
+						<DT id=Dt4>您的家庭地址的记录, 将方便我们提供给您详细的服务和杂志等</DT></td>
+  				</tr>
+				<tr onmouseover="sTip('5')">
+					<td class=TdTab>邮政编码：<span>*</span></td>
+					<td>
+						<input class="input6" type="text" value="$!form.getField('postCode').value" name="postCode" maxLength="6"><font color="red">*$!form.getField('postCode').message</font>
+    				</td>
+					<td class=TdDt>
+						<DT id=Dt5>请您输入正确的邮政编码, 物流公司等可以正确的寄货物到您的地址</DT></td>
+  				</tr>
+  				<tr onmouseover="sTip('7')">
+					<td class=TdTab>手机号码：<span>*</span></td>
+					<td>
+						<input class="input7" type="text" value="$!form.getField('mobile').value" name="mobile" maxLength="11"><font color="red">*$!form.getField('mobile').message</font>
+    				</td>
+					<td class=TdDt>
+						<DT id=Dt7>请您输入您的手机号码, 方便卖家或买家联系您</DT></td>
+  				</tr>
+				<tr onmouseover="sTip('6')">
+					<td class=TdTab>固定电话：<span>*</span></td>
+					<td>
+						<input class="input3" type="text" value="$!form.getField('phone').value" name="phone"><font color="red">$!form.getField('phone').message</font>
+    				</td>
+					<td class=TdDt>
+						<DT id=Dt6>固定的电话号码需要加区号和电话号码,如0571-88889999</DT></td>
+  				</tr>
+				
+				</TBODY>
+				</table>
+				</div>
+				<table style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px; HEIGHT: 20px" cellSpacing="0" cellPadding="0" width="600" align="center" id="table5">
+					<tr>
+						<td style="HEIGHT: 20px" colSpan="2">　</td>
+					</tr>
+					<tr>
+						<td style="WIDTH: 14%; HEIGHT: 28px" align="right">　</td>
+						<td style="WIDTH: 80%; HEIGHT: 28px" align="left">
+						<input type="hidden" name="loginId" value="$!form.getField('loginId').value">
+						<input type="hidden" name="loginPassword" value="$!form.getField('loginPassword').value">
+						<input type="hidden" name="conPassword" value="$!form.getField('conPassword').value">
+						<input type="hidden" name="mobile" value="$!form.getField('mobile').value">
+						<input type="hidden" name="email" value="$!form.getField('email').value">
+						<input type="hidden" name="checkcode" value="1234">
+						<input type="hidden" name="gotoUrl" value="$!gotoUrl">
+						<input type="submit" value=" 完成注册 " class="input6"> 
+						</td>
+					</tr>
+				</table>
+				</span></span></div>
+		</form>		
+</table>

@@ -1,0 +1,43 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=$!{page_encoding}">
+<title>Ñ¾Ñ¾Íø #if($page_title) - ${page_title} #end</title>
+<link rel="stylesheet" type="text/css" href="${appServer}/css/main.css">
+<link rel="stylesheet" href="${appServer}/js/uitabs/ui.tabs.css" type="text/css" media="print, projection, screen">
+<script language="javascript" type="text/javascript" src="${appServer}/js/js1.js"></script>
+<script language="javascript" type="text/javascript" src="${appServer}/js/jquery-1.2.1.pack.js"></script>
+<script language="javascript" type="text/javascript" src="${appServer}/js/roundcorner/roundCorner.js"></script>
+<script language="javascript" type="text/javascript" src="${appServer}/js/addRoundCorner.js"></script>
+<script language="javascript" type="text/javascript" src="${appServer}/js/uitabs/ui.tabs.js"></script>
+<script type='text/javascript' src='${appServer}/lib/3rd/jquery.ifixpng.js'></script>
+
+</head>
+
+<body topmargin="0" leftmargin="0">
+<center>
+<!--head-->
+<table width="1024" align="center" border="0" cellspacing="0" cellpadding="0">
+<tr>
+	<td>
+	<!-- header -->
+	<div id="header">$control.setTemplate("home/header")</div>
+	<!-- header -->
+	<!-- search start-->
+
+	<!-- search end-->
+	<!-- content start-->
+	$screen_content
+	<!-- content end-->
+	<!--bottom start-->
+	##<div id="bottom">$control.setTemplate("home/footer")</div>
+	$control.setTemplate("home/main_footer")
+	<!--bottom end-->
+	</td>
+</tr>
+</form>
+</table>
+<!--end-->
+</body>
+
+</html>

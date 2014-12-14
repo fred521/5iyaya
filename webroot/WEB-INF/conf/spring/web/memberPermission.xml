@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="memberAuthTokenInterceptor" class="com.nonfamous.tang.web.interceptor.MemberAuthTokenInterceptor">
+		<property name="splitSymbol" value="," />
+		<property name="noPermissionPage" value="/visitor/no_per.htm" />
+		<property name="urlPermissionMap">
+			<map>
+				<entry key="/member/active.htm" value="MemberActive" />
+				<entry key="/member/do_active.htm" value="MemberActive" />
+				<entry key="/myshop/addNotes.htm" value="ShopEdit" />
+				<entry key="/myshop/updateShop.htm" value="ShopEdit" />
+				<entry key="/myshop/updateLogo.htm" value="ShopEdit" />
+				<entry key="/myvideo/uploadVideo.htm" value="ShopEdit" />
+				<entry key="/mygoods/add_init.htm" value="ShopEdit" />
+				<entry key="/mygoods/list_init.htm" value="ShopEdit" />
+				<entry key="/mygoods/down_init.htm" value="ShopEdit" />
+				<entry key="/mygoods/update_init.htm" value="ShopEdit" />
+				<entry key="/mynews/news_add_init.htm" value="NewsEdit" />
+				<entry key="/mynews/news_member_list.htm" value="NewsEdit" />
+				<entry key="/myaddress/index.htm" value="MemberActive"/>
+				<entry key="/myaddress/add.htm" value="MemberActive"/>
+				<entry key="/myaddress/update.htm" value="MemberActive"/>
+				<entry key="/myaddress/delete.htm" value="MemberActive"/>
+				<entry key="/tradecar/list.htm" value="TradePay" />
+				<entry key="/tradecar/addCar.htm" value="TradePay" />
+				<entry key="/tradecar/select.htm" value="TradePay" />
+				<entry key="/order/list.htm" value="TradePay" />
+				<entry key="/order/update.htm" value="TradePay" />
+				<entry key="/order/detail.htm" value="TradePay" />
+				<entry key="/signshop/list.htm" value="TradePay" />
+				<entry key="/signshop/signshop_add.htm" value="TradePay" />
+				<entry key="/tradepay/pay_list.htm" value="TradePay" />
+				<entry key="/tradepay/receive_pay_list.htm" value="TradePay" />
+				<entry key="/tradepay/quick_pay.htm" value="TradePay" />
+			</map>	
+		</property>
+	</bean>
+</beans>

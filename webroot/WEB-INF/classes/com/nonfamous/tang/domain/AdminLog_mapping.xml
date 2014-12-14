@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="ADM_LOG_SPACE">
+	<insert id="admin_log_insert" parameterClass="com.nonfamous.tang.domain.AdminLog">
+		INSERT INTO admin_log (
+				id,
+				admin_user_id,
+				action,
+				gmt_create,
+				action_ip,
+				parameter0,
+				parameter1,
+				parameter2,
+				parameter3,
+				parameter4
+	                     )
+	             VALUES ( 
+				#id#,
+				#adminUserId#,
+				#action#,
+				sysdate(),
+				#actionIp#,
+				#paramter0#,
+				#paramter1#,
+				#paramter2#,
+				#paramter3#,
+				#paramter4#
+	                     )
+	</insert>
+</sqlMap>

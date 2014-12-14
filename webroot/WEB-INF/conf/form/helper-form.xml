@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="gb2312"?>
+<formmset>
+	<form name="adminAddHelper">
+		<field name="helperTitle">
+			<required-validator>
+				<message>帮助信息标题不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="40">
+				<message>帮助信息标题长度不能超过40个字符</message>
+			</length-validator>
+		</field>
+		<field name="helperType">
+			<required-validator>
+				<message>帮助信息分类不能为空</message>
+			</required-validator>
+		</field>
+		<field name="content">
+			<required-validator>
+				<message>帮助信息描述不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="4000">
+				<message>帮助信息描述输入长度不能超过4000个字符</message>
+			</length-validator>			
+		</field>							
+	</form>
+	<form name="adminAddHelperType">
+		<field name="helperTitle">
+			<required-validator>
+				<message>帮助信息标题不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="40">
+				<message>帮助信息标题长度不能超过40个字符</message>
+			</length-validator>
+		</field>
+		<field name="showOrder">
+			<regexp-validator pattern="^[1-9]\d*$">
+				<message>显示顺序只能为正整数(两位)</message>
+			</regexp-validator>
+		</field>
+	</form>
+</formmset>

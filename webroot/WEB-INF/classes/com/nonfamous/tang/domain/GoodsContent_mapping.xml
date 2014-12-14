@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="GOODSCONTENT_SPACE">
+	<resultMap id="goodscontent" class="com.nonfamous.tang.domain.GoodsContent">
+		<result property="goodsId" column="GOODS_ID"/>
+		<result property="content" column="CONTENT"/>
+	</resultMap>
+	
+	<insert id="goodscontent_insert" parameterClass="com.nonfamous.tang.domain.GoodsContent">
+		INSERT INTO GOODS_CONTENT (
+				GOODS_ID,
+				CONTENT
+	                     )
+	             VALUES ( 
+				#goodsId#,
+				#content#
+	                     )
+	</insert>
+	
+	<update id="goodscontent_update" parameterClass="com.nonfamous.tang.domain.GoodsContent">
+		UPDATE GOODS_CONTENT t SET  
+			 t.CONTENT = #content# 
+		WHERE t.GOODS_ID = #goodsId#
+	</update>
+	
+	<select id="get_goodscontent_list" parameterClass="java.util.Map" resultMap="goodscontent">
+		SELECT 
+			GOODS_ID,
+			CONTENT
+		FROM GOODS_CONTENT  t  
+	</select>
+	
+	<select id="get_goodscontent" parameterClass="java.lang.String" resultMap="goodscontent">
+		SELECT 
+			GOODS_ID,
+			CONTENT
+		FROM GOODS_CONTENT  t     
+		WHERE t.GOODS_ID = #value#
+	</select>
+	
+	<delete id="delete_goodscontent" parameterClass="java.lang.String">
+		DELETE FROM GOODS_CONTENT  WHERE GOODS_ID = #value#
+	</delete>
+</sqlMap>

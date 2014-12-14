@@ -1,0 +1,191 @@
+#set( $layout = "layout/admin/default.vm" )
+<STYLE type=text/css>.rb {
+	BORDER-RIGHT: #666666 1px solid
+}
+.tb {
+	BORDER-TOP: #666666 1px solid
+}
+</STYLE>
+<script language="JavaScript">
+function showfile()
+{
+	var filetype = document.getElementById("filetype");
+	filetype.style.display = filetype.style.display == "none"?"block":"none";
+}
+function changeStatus(url,memberIdStr) {
+	if(confirm('确认要修改会员的状态吗')) {
+		document.formSearch.action = url;
+		document.formSearch.memberId.value = memberIdStr;
+		document.formSearch.submit();
+	}
+}
+function openWin(url){
+     window.open(url,'win','width=800,height=650,top=50,left=50,resizable=yes,scrollbars=yes');
+}
+
+</script>
+<SCRIPT language=javascript src="${imgServer}/js/page.js"></SCRIPT>
+<META content="MSHTML 6.00.2900.2912" name=GENERATOR></HEAD>
+<BODY leftMargin=8 background="${imgServer}/images/admin/allbg.gif" topMargin=16>
+<table border="0" width="98%" cellspacing="0" cellpadding="0" align=center>
+	<tr>
+		<td><input type="button" value="添加卖家会员" name="B3" onclick="location.href='${adminMoudle}/admin_member/member_add.htm'"></td>
+	</tr>
+</table>
+<FORM name="formSearch" action="${adminMoudle}/admin_member/seller_list.htm" method="post">
+<input type="hidden" name="currentPage" value="$!search.currentPage" />
+<TABLE cellSpacing=1 cellPadding=0 width="98%" align=center border=0>
+	<tr>
+		<td align="center" colspan="7"><span class="red">$!errorMessage</span></td>
+	</tr>
+</TABLE>
+<TABLE cellSpacing=1 cellPadding=0 width="98%" align=center bgColor=#666666 border=0>
+  <TBODY>
+    <TR valign="top"> 
+      <TD height=24 colSpan="8"> 
+		<TABLE width=100% border=0 cellPadding=2 cellSpacing=0 background="${imgServer}/images/admin/tbg.gif">
+            <TBODY>
+              <TR> 
+                <TD width=160 height="24"><STRONG>&nbsp;卖家会员列表</STRONG></TD>
+                <TD align=right>
+                <table border="0" width="70%" cellspacing="0" cellpadding="0">
+                    <tr> 
+                      <td></td>
+                      <td><select name="keyType" size="1" class="px12">
+                          <option value="shopName" #if("$!keyType" == "shopName")selected#end>店铺名称</option>
+                          <option value="loginId" #if("$!keyType" == "loginId")selected#end>用户名</option>
+                          <option value="shopOwner" #if("$!keyType" == "shopOwner")selected#end>店主姓名</option>
+                          <option value="nick" #if("$!keyType" == "nick")selected#end>会员昵称</option>
+                          <option value="mobile" #if("$!keyType" == "mobile")selected#end>手机号码</option>
+                        </select></td>
+                      <td>关键字:</td>
+                      <td width="210"><INPUT style="WIDTH: 200px" size=12 name="keyWord" value="$!keyWord"></td>
+                      <td>
+						<img src="${imgServer}/images/admin/button_search.gif" border=0 name=imageField align=absmiddle onClick="document.formSearch.submit();">
+						<input type="hidden" name="memberId"/>
+						<input type="hidden" name="listFlag" value="S"/>
+					  </td>
+                      <td>
+						##<a href="###" onclick="showfile();">高级搜索</a>
+					  </td>
+                    </tr>
+                  </table>
+                </TD>
+              </TR>
+            </TBODY>
+        </TABLE>
+        <span id="filetype" style="DISPLAY: none"> 
+        <table width="100%" border="0" cellspacing="0" cellpadding="4">
+          <tr> 
+            <td bgcolor="#666666" height="1"></td>
+          </tr>
+          <tr>
+            <td bgcolor="#F7FEEF" align=right>
+			<table width="96%" border="0" cellspacing="0" cellpadding="5" height="71">
+                <tr> 
+                  <td width="10%">店铺名称:</td>
+                  <td width="25%"><INPUT id=keyword0 style="WIDTH: 150px" size=12 name=keyword0></td>
+                  <td width="10%">店主姓名:</td>
+                  <td width="25%"><INPUT id=keyword0 style="WIDTH: 150px" size=12 name=keyword0></td>
+                  <td width="30%"></td>
+                </tr>
+                <tr> 
+                  <td width="10%">会员帐号:</td>
+                  <td width="25%"><INPUT id=keyword0 style="WIDTH: 150px" size=12 name=keyword0></td>
+                  <td width="10%">所在市场:</td>
+                  <td width="25%"><select class="px12" id="DropDownList2" name="DropDownList4">
+					<option value="1" selected>国际服装城</option>
+					</select></td>
+                  <td width="30%"></td>
+                </tr>
+                <tr> 
+                  <td width="10%">会员昵称:</td>
+                  <td width="25%"><INPUT id=keyword0 style="WIDTH: 150px" size=12 name=keyword0></td>
+                  <td width="10%">手机号码:</td>
+                  <td width="25%"><INPUT id=keyword0 style="WIDTH: 150px" size=12 name=keyword0></td>
+                  <td width="30%"></td>
+                </tr>
+				<tr> 
+                  <td width="10%">　</td>
+                  <td width="25%">　</td>
+                  <td width="10%">　</td>
+                  <td width="25%" align="right" style="padding-right:27px;"> 
+                    <INPUT class=np type=image src="${imgServer}/images/admin/button_search.gif" border=0 name=imageField0></td>
+                  <td width="30%" align="right" style="padding-right:5px;cursor:pointer"onclick="showfile();">关闭高级搜索</td>
+                </tr>
+              </table></td>
+          </tr>
+        </table>
+        </span> </TD>
+    </TR>
+    <TR> 
+      <TD width="5%" align=middle bgcolor="#edf7d0" height="22"><b>ID</b></TD>
+      <TD width="25%" align=middle bgcolor="#edf7d0"><b>店铺名称</b></TD>
+      <TD width="10%" align=middle bgcolor="#edf7d0"><b>店主姓名</b></TD>
+      <TD width="10%" align=middle bgcolor="#edf7d0"><b>会员帐号</b></TD>
+      <TD width="10%" align=middle bgcolor="#edf7d0"><b>手机验证状态</b></TD>
+	  <TD width="10%" align=middle bgcolor="#edf7d0"><b>状态</b></TD>
+      <TD align=middle bgcolor="#edf7d0" width="20%"><b>操作</b></TD>
+    </TR>
+	#if($memberList)
+	#foreach($member in $memberList)
+	#set($itemNumber = (-1 + $velocityCount + $search.getPageFristItem()))
+	<TR onmousemove="javascript:this.bgColor='#F3F7EA';" onmouseout="javascript:this.bgColor='#FFFFFF';" align=middle bgColor=#ffffff> 
+      <TD height="30">$itemNumber</TD>
+      <TD style="padding-left:6px;" align="left">$!member.shop.shopName</TD>
+      <TD>$!member.shop.shopOwner</TD>
+      <TD>$!member.loginId</TD>
+      <TD align=middle>
+			#if("$!member.phoneValidate" == "W" || "$!member.phoneValidate" == "A")
+				<font color="#FF0000">手机未验证</font>
+			#elseif("$!member.phoneValidate" == "Y")
+				手机已验证
+			#end
+	  </TD>
+	  <TD align=middle>
+			#if("$!member.status" == "P")
+				已禁用
+			#elseif("$!member.status" == "D")
+				<font color="#FF0000">已删除</font>
+			#elseif("$!member.status" == "N")
+				正常
+			#end
+	  </TD>
+      <TD align=middle width="20%" >
+		<A href="#" onclick="openWin('${adminMoudle}/admin_member/member_edit.htm?memberId=$!member.memberId');">[修改]</A> 
+		#if("$!member.phoneValidate" == "W" && "$!member.status" != "D")
+		<a href="#" onClick="changeStatus('${adminMoudle}/admin_member/do_member_del.htm','$!member.memberId');">[删除]</a>
+		#end
+		#if("$!member.status" == "N")
+		<a href="#" onclick="changeStatus('${adminMoudle}/admin_member/do_member_disable.htm','$!member.memberId');"><font color="#FF0000">[禁用]</font></a>
+		#elseif("$!member.status" == "P")
+		<a href="#" onclick="changeStatus('${adminMoudle}/admin_member/do_member_undisable.htm','$!member.memberId');"><font color="#008000">[取消禁用]</font></a>
+		#end
+		#if($member.shop.shopId)
+		<A href="#" onclick="openWin('${adminMoudle}/admin_user/shop_edit.htm?memberId=$!member.memberId');">[修改店铺]</A> 
+		#else
+		<A href="#" onclick="openWin('${adminMoudle}/admin_user/shop_edit.htm?memberId=$!member.memberId');">[新增店铺]</A> 
+		#end
+		#if($member.shop.shopId)
+		<a href="${adminMoudle}/mygoods/list_goods.htm?shop_id=$member.shop.shopId">[商品管理]</a>&nbsp;
+		#end
+		</TD>
+    </TR>
+	#end
+	
+    <TR> 
+      <TD colSpan="8" align=middle bgcolor="#f1fde3" height="24"> 
+		<script>
+			pageSlider($!search.totalPage,$!search.currentPage,$!search.totalItem,$!search.pageSize,'','formSearch','currentPage','${imgServer}/images/admin');
+    	</script>
+	  </TD>
+    </TR>
+	#else
+		<TR bgColor=#ffffff> 
+         <TD align=middle colspan="8">当前查询无记录</TD>
+        </TR>
+	#end
+  </TBODY>
+</TABLE>
+</form>
+</BODY>

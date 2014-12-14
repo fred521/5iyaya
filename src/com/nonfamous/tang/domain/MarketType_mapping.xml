@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="MARKETTYPE_SPACE">
+	<resultMap id="markettype" class="com.nonfamous.tang.domain.MarketType">
+		<result property="marketType" column="MARKET_TYPE"/>
+		<result property="marketName" column="MARKET_NAME"/>
+		<result property="marketGis" column="MARKET_GIS"/>
+		<result property="marketAddress" column="MARKET_ADDRESS"/>
+		<result property="showOrder" column="SHOW_ORDER"/>
+	</resultMap>
+	
+	<resultMap id="shop" class="com.nonfamous.tang.domain.Shop">
+		<result property="shopId" column="SHOP_ID"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="shopName" column="SHOP_NAME"/>
+		<result property="belongMarketId" column="BELONG_MARKET_ID"/>
+	</resultMap>
+	
+	
+	<insert id="markettype_insert" parameterClass="com.nonfamous.tang.domain.MarketType">
+		INSERT INTO MARKET_TYPE (
+				MARKET_TYPE,
+				MARKET_NAME,
+				MARKET_GIS,
+				MARKET_ADDRESS,
+				SHOW_ORDER
+	                     )
+	             VALUES ( 
+				#marketType#,
+				#marketName#,
+				#marketGis#,
+				#marketAddress#,
+				#showOrder#
+	                     )
+	</insert>
+	
+	<update id="markettype_update" parameterClass="com.nonfamous.tang.domain.MarketType">
+		UPDATE MARKET_TYPE t SET  
+			<isNotEmpty prepend="" property="marketType"> t.MARKET_TYPE = #marketType#,</isNotEmpty>
+			<isNotEmpty prepend="" property="marketName"> t.MARKET_NAME = #marketName#,</isNotEmpty>
+			<isNotEmpty prepend="" property="marketGis"> t.MARKET_GIS = #marketGis#,</isNotEmpty>
+			<isNotEmpty prepend="" property="marketAddress"> t.MARKET_ADDRESS = #marketAddress# </isNotEmpty>
+		WHERE t.MARKET_TYPE = #marketType#
+	</update>
+	
+	<select id="get_markettype_list" parameterClass="java.util.Map" resultMap="markettype">
+		SELECT 
+			MARKET_TYPE,
+			MARKET_NAME,
+			MARKET_GIS,
+			MARKET_ADDRESS,
+			SHOW_ORDER 
+		FROM MARKET_TYPE  t 
+		 ORDER BY t.SHOW_ORDER 
+	</select>
+	
+	<select id="get_markettype" parameterClass="java.lang.String" resultMap="markettype">
+		SELECT 
+			MARKET_TYPE,
+			MARKET_NAME,
+			MARKET_GIS,
+			MARKET_ADDRESS,
+			SHOW_ORDER
+		FROM MARKET_TYPE  t     
+		WHERE t.MARKET_TYPE  = #value#
+	</select>
+	
+	<delete id="delete_markettype" parameterClass="java.lang.String">
+		DELETE FROM MARKET_TYPE  WHERE MARKET_TYPE  = #value#
+	</delete>
+	
+	<select id="get_shops_marketid" parameterClass="java.lang.String" resultMap="shop">
+		select * from (SELECT t.SHOP_ID,t.MEMBER_ID,t.SHOP_NAME,t.BELONG_MARKET_ID FROM shop t where t.BELONG_MARKET_ID =#value# ORDER BY t.GMT_CREATE desc) where rownum &lt;6
+	</select>
+	
+	<select id="get_all_shops_marketid" parameterClass="java.lang.String" resultMap="shop">
+		call list_top6_belong_market_id()
+	</select>
+</sqlMap>

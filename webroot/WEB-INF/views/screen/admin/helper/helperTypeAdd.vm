@@ -1,0 +1,58 @@
+#set( $layout = "layout/admin/default.vm" )
+<STYLE type=text/css>.rb {
+	BORDER-RIGHT: #666666 1px solid
+}
+.tb {
+	BORDER-TOP: #666666 1px solid
+}
+</STYLE>
+<script language="JavaScript">
+<!--
+
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+  window.open(theURL,winName,features);
+}
+//-->
+</script>
+
+<form name="addHelperType" action="${adminMoudle}/helper/add_helper_type.htm?id=$!id" method="post" >
+	<input type="hidden" name="id" value="$!id">
+<TABLE cellSpacing=1 cellPadding=0 width="98%" align=center bgColor=#666666 border=0>
+  <TBODY>
+  <TR valign="top"> 
+      <TD height=24 colSpan=6> 
+      <TABLE width=100% border=0 cellPadding=2 cellSpacing=0 background="${imgServer}/images/admin/tbg.gif">
+  <TR>
+  <TD width=360 height="24"><STRONG>&nbsp;新增帮助类型</STRONG>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">$!succMessage $!errorMessage</font></TD>
+    </TR>
+  <TR>
+      <TD vAlign=top bgColor=#ffffff height=200> <table border="0" width="98%" cellspacing="0" cellpadding="6">
+          #if("$!id" == "")
+          <tr> 
+            <td colspan="2" height="20"><hr size="1"></td>
+          </tr>
+		  #else
+			<input name="nick" id="loginId" type="hidden" value="defaultValue">
+		  #end
+          <tr> 
+            <td>帮助标题:</td>
+            <td><input name="helperTitle" class="input4" size="29" value="$!form.getField("helperTitle").value"> <span class="red">*$!form.getField("helperTitle").message</span></td>
+          </tr>
+		  <tr> 
+            <td>显示顺序:</td>
+            <td>
+				<select name="showOrder" class="px12" id="showOrder">
+                   <option value="1" #if("$!form.getField('showOrder').value"=="1") selected #end>1</option>
+				   <option value="2" #if("$!form.getField('showOrder').value"=="2") selected #end>2</option>
+				   <option value="3" #if("$!form.getField('showOrder').value"=="3") selected #end>3</option>
+				</select> <span class="red">*$!form.getField("showOrder").message</span>
+			</td>
+          </tr>
+          <tr> 
+            <td>　</td>
+            <td> <INPUT type="submit" value="提  交" name="" > &nbsp;&nbsp; <INPUT type=reset value="重置" name="Submit2222"></td>
+          </tr>
+          </table>
+      </TD>
+    </TR></TBODY></TABLE>
+</form>

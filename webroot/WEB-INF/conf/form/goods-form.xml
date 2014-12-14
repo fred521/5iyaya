@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="gb2312"?>
+<formmset>
+	<form name="addGoods">
+		<field name="goodsName">
+			<required-validator>
+				<message>商品名称不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="40">
+				<message>商品名称长度不能超过40个字符</message>
+			</length-validator>
+		</field>
+		<field name="firstCat">
+			<required-validator>
+				<message>请选择一级分类</message>
+			</required-validator>
+		</field>
+		<field name="secondCat">
+			<required-validator>
+				<message>请选择二级分类</message>
+			</required-validator>
+		</field>
+		<field name="thirdCat">
+		</field>
+		<field name="goodsType"></field>
+		<field name="batchPrice">
+			<required-validator>
+				<message>商品批发价不能为空</message>
+			</required-validator>
+			<regexp-validator pattern="-?([0-9]+)|([0-9]+[.][0-9]{1,2})">
+				<message>商品批发价格式不正确,请确认小数点后最多两位</message>
+			</regexp-validator>
+			<number-validator greaterThanOrEqualTo="0">
+				<message>商品批发价不能为负数</message>
+			</number-validator>
+			<length-validator min="0" max="11">
+				<message>商品批发价输入长度不能超过11位数字</message>
+			</length-validator>
+		</field>
+		<field name="batchNum">
+			<required-validator>
+				<message>商品起批量不能为空</message>
+			</required-validator>
+			<regexp-validator pattern="-?[0-9]+">
+				<message>商品起批量格式不正确</message>
+			</regexp-validator>	
+			<number-validator greaterThanOrEqualTo="0">
+				<message>商品起批量不能为负数</message>
+			</number-validator>	
+			<length-validator min="0" max="19">
+				<message>起批量输入长度不能超过19位数字</message>
+			</length-validator>	
+		</field>
+		<field name="groupPrice">
+			<required-validator>
+				<message>商品团购价不能为空</message>
+			</required-validator>
+			<regexp-validator pattern="-?([0-9]+)|([0-9]+[.][0-9]{1,2})">
+				<message>商品团购价格式不正确,请确认小数点后最多两位</message>
+			</regexp-validator>
+			<number-validator greaterThanOrEqualTo="0">
+				<message>商品团购价不能为负数</message>
+			</number-validator>
+			<length-validator min="0" max="11">
+				<message>商品团购价输入长度不能超过11位数字</message>
+			</length-validator>
+		</field>
+		<field name="groupDefaultNum">
+			<required-validator>
+				<message>商品起团数不能为空</message>
+			</required-validator>
+			<regexp-validator pattern="-?[0-9]+">
+				<message>商品起团数格式不正确</message>
+			</regexp-validator>	
+			<number-validator greaterThanOrEqualTo="0">
+				<message>商品起团数不能为负数</message>
+			</number-validator>	
+			<length-validator min="0" max="19">
+				<message>起团数输入长度不能超过19位数字</message>
+			</length-validator>	
+		</field>
+		<field name="marketPrice">
+			<required-validator>
+				<message>商品市场价不能为空</message>
+			</required-validator>
+			<regexp-validator pattern="-?([0-9]+)|([0-9]+[.][0-9]{1,2})">
+				<message>商品市场价格式不正确,请确认小数点后最多两位</message>
+			</regexp-validator>
+			<number-validator greaterThanOrEqualTo="0">
+				<message>商品市场价不能为负数</message>
+			</number-validator>
+			<length-validator min="0" max="11">
+				<message>商品市场价输入长度不能超过11位数字</message>
+			</length-validator>
+		</field>
+		<field name="priceDes" >
+			<length-validator min="0" max="64">
+				<message>价格描述长度不能超过64个字符</message>
+			</length-validator>
+		</field>
+		<field name="goodsNum" >
+			<regexp-validator pattern="-?[0-9]+">
+				<message>商品库存量格式不正确</message>
+			</regexp-validator>
+			<number-validator greaterThanOrEqualTo="0">
+				<message>商品库存量不能为负数</message>
+			</number-validator>
+			<length-validator min="0" max="19">
+				<message>库存量输入长度不能超过19位数字</message>
+			</length-validator>
+		</field>
+		<field name="goodsPic" />
+		<field name="abandonDays" />
+		<field name="content">
+			<required-validator>
+				<message>商品描述不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="4000">
+				<message>商品描述输入长度不能超过4000个字符</message>
+			</length-validator>		
+		</field>		
+		<field name="colors" />
+		<field name="size" />		
+		<field name="brand" />
+		<field name="ageRange"/>			
+	</form>
+	
+	<form name="adminAddGoods">
+		<field name="memberId">
+			<required-validator>
+				<message>卖家帐号不能为空</message>
+			</required-validator>
+		</field>
+		<field name="goodsName">
+			<required-validator>
+				<message>商品名称不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="40">
+				<message>商品名称长度不能超过40个字符</message>
+			</length-validator>
+		</field>
+		<field name="firstCat">
+			<required-validator>
+				<message>请选择一级分类</message>
+			</required-validator>
+		</field>
+		<field name="secondCat">
+			<required-validator>
+				<message>请选择二级分类</message>
+			</required-validator>
+		</field>
+		<field name="thirdCat">
+		</field>
+		<field name="batchPrice">
+			<required-validator>
+				<message>商品批发价不能为空</message>
+			</required-validator>
+			<regexp-validator pattern="-?([0-9]+)|([0-9]+[.][0-9]{1,2})">
+				<message>商品批发价格式不正确,请确认小数点后最多两位</message>
+			</regexp-validator>
+			<number-validator greaterThanOrEqualTo="0">
+				<message>商品批发价不能为负数</message>
+			</number-validator>
+			<length-validator min="0" max="11">
+				<message>商品批发价输入长度不能超过11位数字</message>
+			</length-validator>
+		</field>
+		<field name="marketPrice">
+			<required-validator>
+				<message>商品市场价不能为空</message>
+			</required-validator>
+			<regexp-validator pattern="-?([0-9]+)|([0-9]+[.][0-9]{1,2})">
+				<message>商品市场价格式不正确,请确认小数点后最多两位</message>
+			</regexp-validator>
+			<number-validator greaterThanOrEqualTo="0">
+				<message>商品市场价不能为负数</message>
+			</number-validator>
+			<length-validator min="0" max="11">
+				<message>商品市场价输入长度不能超过11位数字</message>
+			</length-validator>
+		</field>
+		<field name="batchNum">
+			<required-validator>
+				<message>商品起批量不能为空</message>
+			</required-validator>
+			<regexp-validator pattern="-?[0-9]+">
+				<message>商品起批量格式不正确</message>
+			</regexp-validator>		
+			<number-validator greaterThanOrEqualTo="0">
+				<message>商品起批量不能为负数</message>
+			</number-validator>	
+			<length-validator min="0" max="19">
+				<message>商品起批量输入长度不能超过19位数字</message>
+			</length-validator>
+		</field>	
+		<field name="priceDes" >
+			<length-validator min="0" max="64">
+				<message>价格描述长度不能超过64个字符</message>
+			</length-validator>
+		</field>
+		<field name="goodsNum" >
+			<regexp-validator pattern="-?[0-9]+">
+				<message>商品库存量格式不正确</message>
+			</regexp-validator>
+			<number-validator greaterThanOrEqualTo="0">
+				<message>商品库存量不能为负数</message>
+			</number-validator>
+			<length-validator min="0" max="19">
+				<message>商品库存量输入长度不能超过19位数字</message>
+			</length-validator>
+		</field>
+		<field name="goodsPic" />
+		<field name="abandonDays" />
+		<field name="content">
+			<required-validator>
+				<message>商品描述不能为空</message>
+			</required-validator>
+			<length-validator min="0" max="4000">
+				<message>商品描述输入长度不能超过4000个字符</message>
+			</length-validator>		
+		</field>	
+		<field name="colors" />
+		<field name="size" />
+		<field name="brand" />
+		<field name="ageRange"/>					
+	</form>
+</formmset>

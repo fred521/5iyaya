@@ -1,0 +1,112 @@
+#set( $layout = "layout/home/memberdefault.vm" )
+	<script>
+		function changeShopInfo() {	
+			var shopOption = formQuickPay.shopSelect;
+			if(shopOption.selectedIndex == 0) {
+				formQuickPay.shopId.value = "";
+				formQuickPay.shopName.value = "";
+			} else {
+				formQuickPay.shopId.value = shopOption.options[shopOption.selectedIndex].value;
+				formQuickPay.shopName.value = shopOption.options[shopOption.selectedIndex].text;
+			}
+		}
+		
+		function openShopSelect(url){
+	        window.open(url,'win','width=600,height=450,top=100,left=300,resizable=yes,scrollbars=yes,location=no');
+	    }
+	</script>
+	<td width="10" valign="top">　  
+	
+	</td>
+		<td width="740" valign="top">
+			<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>丫丫的Payment管理</h1>
+			</div>
+		<table border="0" width="90%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+		<div class="roundCorner gray onlyBottom" style="width: 736px;">
+	    <p>   
+			<div align="center"><img src="${imgServer}/images/logo_copy.gif" align="absmiddle" /></div>
+	    </div>
+	    <p>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td align="center"><span class="red">$!errorMessage</span></td>
+					</tr>
+				</table>
+				$control.setTemplate("home/trade/tradePayTop").put("menuIndex","3")
+				<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<form name="formQuickPay" method="post" action="$homeMoudle.setTarget('/tradepay/do_quick_pay.htm')">
+						<input type="hidden" name="shopId" value="$!form.getField('shopId').value"/>
+						<table cellSpacing="0" cellPadding="0" width="90%" align="center">
+							<tr>
+								<td align=center>
+									<table border="0" width="560" cellspacing="0" cellpadding="6">
+										<tr>
+											<td height="24" class="tx_title" colspan="2"><b>快速支付</b></td>
+										</tr>
+										<tr>
+											<td width="100">支付店铺:</td>
+											<td width="460"><input value="$!form.getField('shopName').value" name="shopName" class="input3" readonly> <span class="red">*$!form.getField('shopName').message</span>
+											&nbsp;
+											<select size="1" name="shopSelect" onChange="changeShopInfo();">
+												<option value="">从签约店铺中选择</option>
+												#foreach($shop in $mySignShopList)
+												<option #if($!form.getField('shopId').value == $!shop.shopId)selected#end value="$!shop.shopId">$!shop.shopName</option>
+												#end
+											</select>
+											<font color="#999999">或</font>
+											<input type="button" value=" 搜索店铺 " name="" class="input6" onclick="javaScript:openShopSelect('$appServer.setTarget('/member/select_shop_list.htm')');" style="cursor:pointer" align=absmiddle>
+											</td>
+										</tr>
+										<tr>
+											<td width="100">支付金额:</td>
+											<td width="460"><input value="$!form.getField('payMoney').value" name="payMoney" class="input3" style="width:100" maxlength="12" > <span class="red">*$!form.getField('payMoney').message</span>
+											</td>
+										</tr>
+										<tr>
+											<td width="100">支付备注:</td>
+											<td width="460">
+												<input value="$!form.getField('memo').value" name="memo" class="input3" style="width:300">
+												<span class="red">$!form.getField('memo').message</span>
+											</td>
+										</tr>
+										<tr>
+											<td width="100">给店主留言:</td>
+											<td width="460">
+												<textarea rows="3" name="note" cols="20" style="width:300">$!form.getField('note').value</textarea>
+												<span class="red">$!form.getField('note').message</span>
+											</td>
+										</tr>
+										<tr>
+											<td width="100"></td>
+											<td width="460"><input type="submit" value=" 支&nbsp;&nbsp;付 " class="input6"></td>
+										</tr>
+										
+									</table>
+								</td>
+							</tr>
+						</table>
+						</form>
+					  </td>
+					</tr>
+				</table>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="6">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+				<br>
+				</td>
+			</tr>
+		</table>
+	</td>

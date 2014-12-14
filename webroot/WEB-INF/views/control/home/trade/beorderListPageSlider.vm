@@ -1,0 +1,38 @@
+<table border="0" cellspacing="0" cellpadding="2">
+	<form action="${homeMoudle}/tradecar/list.htm" id="pagingForm">		
+		<tr>
+			#if($query.hasPreviousPage())
+			<td>
+				<img border="0" src="${imgServer}/images/btn_pre.gif" width="22" height="18" onclick="window.location.href='${homeMoudle}/tradecar/list.htm?page=${query.PreviousPage}'" style="cursor:pointer" />
+			</td>
+			#end
+			#foreach($grid in $grids)
+				#if($grid == 0)
+					<td align="center" width="12">...</td>
+					#elseif($grid == $sliderCurrent)
+						<td align="center" class="pagetb1" width="14">${grid}</td>
+						#else
+							<td width="20">
+								<table border="0" width="100%" cellspacing="0" cellpadding="0">
+									<tr>
+										<td align=center class="pagetb">
+											<a href="${homeMoudle}/tradecar/list.htm?page=${grid}">${grid}</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+				#end
+			#end
+			<td width="6"></td>
+			#if($query.hasNextPage())
+			<td width="52">
+				<img border="0" src="${imgServer}/images/btn_next.gif" width="52" height="18" onclick="window.location.href='${homeMoudle}/tradecar/list.htm?page=${query.nextPage}'" style="cursor:pointer"/>
+			</td>
+			#end
+			<td width="100" align=right>µ½µÚ <input id="inputPage" size="4" name="page"> Ò³ </td>
+			<td width="42" style="cursor:pointer">
+						<img border="0" src="${imgServer}/images/btn_jump.gif" width="42" height="18" onclick="document.getElementById('pagingForm').submit()">
+			</td>
+		</tr>
+	</form>
+</table>

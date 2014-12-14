@@ -1,0 +1,11 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=$!{page_encoding}">
+<title>µÍ∆Ã—°‘Ò</title>
+<link rel="stylesheet" type="text/css" href="${imgServer}/css/style.css">
+</head>
+
+<body topmargin="0" leftmargin="0">
+		$screen_content
+</body>
+</html>

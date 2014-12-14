@@ -1,0 +1,371 @@
+#set( $layout = "layout/home/viewShopDefault.vm" )
+#if($error)
+	$!error
+#else
+<script language="JavaScript">
+function order(num){
+	self.location='${homeMoudle}/shop/$!{shop.shopId}.htm?order='+num;
+}
+jQuery().ready( function(){
+    new window["component.Gallery"]( document.getElementById( "p_image_ul" ) );
+    jQuery( '#p_video' ).click( function(){
+	    var $this = jQuery(this);
+	    if( $this.not( '.on' ) ){
+		    $this.addClass( 'on' ) ;
+		    jQuery( '#p_image' ).removeClass( 'on' );
+		    jQuery( '#p_video_ul' ).show();
+		    jQuery( '#p_image_ul' ).hide();
+	    }
+	} );
+    jQuery( '#p_image' ).click( function(){
+	    var $this = jQuery(this);
+	    if( $this.not( '.on' ) ){
+		    $this.addClass( 'on' ) ;
+		    jQuery( '#p_video' ).removeClass( 'on' );
+		    jQuery( '#p_image_ul' ).show();
+		    jQuery( '#p_video_ul' ).hide();
+	    }
+	} );
+	document.getElementById( 'p_image_ul' ).onGalleryImageClicked=function( image ){
+	    window.open( image.getAttribute("goodsUrl") ) ;
+	}
+} );
+</script>
+
+<script language="javascript" type="text/javascript">
+    function showLocation() {
+	    window.open('${homeMoudle}/shop/showLocation.htm','','location=0,scrollbars=0,resizable=0,height=400,width=420,top=300,left=600')
+	}
+</script>
+<table width="950" cellspacing="1" cellpadding="0" height="30" >
+	<tr>
+		<td background="${imgServer}/images/sreach_conbg.gif" align="center">
+		<table border="0" width="100%" cellspacing="0" cellpadding="3">
+			<tr>
+				<td><a href="$appServer" class="good">首页</a> <span style="font-family:宋体">>></span>
+					##<a href="${appServer}/gis.htm">网上店铺</a> <span style="font-family:宋体">>></span>
+					<a href="${homeMoudle}/search/search.htm?marketType=$!{shop.belongMarketId}&searchtype=shop" class="gray">$!shop.belongMarketName</a> <span style="font-family:宋体">>></span>$stringUtils.abbreviate($!shop.shopName,20)</td>
+			</tr>
+		</table>
+		</td>
+	</tr>
+</table>
+
+<div style="width:990px;height:340px;">
+	   <div style="width:355px;float:left;">
+					  <ul class="video_image_title" >
+					      <li id="p_video" class="line-right"   >产品视频</li>
+						  <li id="p_image" class="line-left on" >产品图片</li>
+					  </ul>
+
+					  <ul id="p_image_ul" class="gallery component.Gallery" batch_size="3" no_picture="${imgServer}/images/gallery/no_picture.gif" >
+					        #foreach($good in $shop.goods)
+			        		    #if( "$!{good.goodsPic}" != "")
+			        		      <li><img src="${upServer}$!{good.goodsPic}.s.jpg" rel="${upServer}$!{good.goodsPic}.l.jpg" goodsUrl="${homeMoudle}/goods/$!{good.goodsId}.htm" /></li>
+			        			#end
+			        		#end
+					  </ul>
+
+					  <ul id="p_video_ul" class="gallery video" style='display:none;' >
+					    #if($!shop.videoId)
+					    <iframe
+					        id="customerVideo"
+					        src="/video/publicPlay.action?share=true&playVideoId=$!shop.videoId&mp_width=320&mp_height=240"
+					        width="320px"
+						      height="240px"
+						      marginwidth="0px"
+						      marginheight="0"
+						      scrolling="no"
+						      border="0"
+						      frameborder="0"
+						      style="margin-top: 0px; border: 0px solid #F6F6F6;vAlign:top;">
+						</iframe>
+						#end
+					  </ul>
+		    </div>
+
+		<div style="width:250px;float:left;padding-left:20px;margin-left:0px;">
+			<table cellSpacing="0" cellPadding="3" border="0" height="239">
+				<tr>
+					<td width="66">店铺名称:</td>
+					<td>
+					<table border="0" width="100%" cellspacing="0" cellpadding="0">
+						<tr>
+							<td><span style="font-size:14px;font-weight:bold">$!shop.shopName</span>&nbsp;</td>
+							<td>
+							<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table2">
+								<TBODY>
+								<tr>
+									<td>　</td>
+								</tr>
+								</TBODY>
+							</table>
+							</td>
+							<td>　</td>
+						</tr>
+					</table>
+					</td>
+				</tr>
+
+				<tr>
+					<td>主营商品:</td>
+					<td>$!shop.commodity</td>
+				</tr>
+				<tr>
+					<td>店铺位置:</td>
+					<td >
+						##$!shop.address&nbsp;
+						<img border="0" src="${imgServer}/images/icon_Show_location.gif" style="cursor:pointer;" onClick="showLocation();">
+						<input type="hidden" value="$!shop.gisAddress" id="location"/><input type="hidden" id="videoId" value="$!shop.videoId"/>
+					</td>
+				</tr>
+				<tr>
+					<td>店主姓名:</td>
+					<td>
+					##$!shop.shopOwner
+					</td>
+				</tr>
+				<tr>
+					<td>商品数量:</td>
+					<td>$!query.totalItem</td>
+				</tr>
+				<tr>
+					<td>开店时间:</td>
+					<td>$!shop.gmtCreateFormat</td>
+				</tr>
+				<tr>
+					<td width="66"></td>
+					<td>
+						<img border="0" src="${imgServer}/images/icon_contact.gif" style="cursor:pointer;" onClick="window.open('${appServer}/webchat.html?workgroup=$!{shop.loginId}&username=$!{shop.shopOwner}的客户&question=$!{shop.shopName}&link=${appServer}/shop/$!{shop.shopId}.htm','客服','width=700,height=535,left=300,top=100');">
+					</td>
+				</tr>
+				##<tr>
+					##<td>固定电话:</td>
+					##<td>$!member.phone</td>
+				##</tr>
+				##<tr>
+					##<td>手机号码:</td>
+					##<td>$!member.mobile</td>
+				##</tr>
+				##<tr>
+					##<td>邮箱地址:</td>
+					##<td>$!member.email</td>
+				##</tr>
+				<tr>
+					<td colspan="2" align="center">
+						&nbsp;
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div title="$!shop.shopName" style="background: url(${imgServer}/images/shop_board.jpg) no-repeat left top;width:307px;height:260px;float:right;padding:100px 20px 10px 20px;margin:0px 0px 0px 0px;" >
+		    <marquee id="marqueeText" style="height:150px;width:270px;"
+	             onMouseOver="this.stop()" onMouseOut="this.start()"
+	             scrollamount="1" scrolldelay="150" direction="up" behavior="scroll">
+	             $!shop.shopCommend.commend
+			</marquee>
+		</div>
+</div>
+#set ($tableWidth= 990)
+<table width="$tableWidth" style="margin-left:-4">
+	<tr>
+		<td align="center">
+			<table border="0" width="950" cellspacing="0" cellpadding="0" >
+				<tr>
+					<td height="8"></td>
+				</tr>
+			</table>
+		<table border="0" width="950" cellspacing="0" cellpadding="0">
+			<tr>
+				<td height="8"></td>
+			</tr>
+		</table>
+
+
+
+<table height="18" width="100%" cellspacing="0" cellpadding="0" border="0">
+			<tbody><tr>
+
+				#if(!$goodsType)
+					#set ($tabImagePostfix="02_on.gif")
+				#else
+					#set ($tabImagePostfix="02_off.gif")
+				#end
+				<td width="89"  style="background-image:url(${imgServer}/images/tgl_btm$tabImagePostfix);background-repeat: no-repeat;line-height: 28px;" align="center">
+<a style="text-decoration: none;" href="${homeMoudle}/shop/$!{shop.shopId}.htm"><strong><font color="#ffffff">全部产品</font></strong></a></td>
+				</td>
+				#if($goodsType == "T")
+					#set ($tabImagePostfix="02_on.gif")
+				#else
+					#set ($tabImagePostfix="02_off.gif")
+				#end
+				<td width="89"  style="background-image:url(${imgServer}/images/tgl_btm$tabImagePostfix);background-repeat: no-repeat;line-height: 28px;" align="center">
+<a style="text-decoration: none;" href="${homeMoudle}/shop/$!{shop.shopId}.htm?type=T"><strong><font color="#ffffff">团购产品</font></strong></a></td>
+				</td>
+				#if($goodsType == "N")
+					#set ($tabImagePostfix="02_on.gif")
+				#else
+					#set ($tabImagePostfix="02_off.gif")
+				#end
+				<td width="89" style="background-image:url(${imgServer}/images/tgl_btm$tabImagePostfix);background-repeat: no-repeat;line-height: 28px;" align="center">
+<a style="text-decoration: none;" href="${homeMoudle}/shop/$!{shop.shopId}.htm?type=N"><strong><font color="#ffffff">批发产品</font></strong></a></td>
+				</td>
+				<td>
+				<a href="$appServer/html/wuliu.html" target="_blank">物流价格表</a>
+				<a href="$appServer/html/sizeMapping.html" target="_blank">童装尺寸对照表</a>
+				</td>
+				<td> 0 2　 0 2</td>
+			</tr>
+		</tbody></table>
+
+
+<table border="0" width="$tableWidth" cellspacing="0" cellpadding="0" bgcolor="#EBEBEB">
+	<tr>
+		<td height="10"></td>
+	</tr>
+</table>
+#if("$!query.getTotalPage()"!="0")
+
+<table border="0" width="$tableWidth" cellspacing="0" cellpadding="0" bgcolor="#EBEBEB">
+	<tr>
+		<td width="10"></td>
+		<td valign="top">
+		<table border="0" width="970" cellspacing="0" cellpadding="0" height="28" style="border: 1px solid #C5C5C5">
+			<tr>
+				<td bgcolor="#FFFFFF">
+				<table height="30" cellSpacing="0" cellPadding="0" width="970" align="right" border="0">
+					<tr>
+						<td align="center" width="100"><a name="products"></a>请选择排序方式</td>
+						<td align="middle" width="182">
+							<select name="OrderStyle" onChange="order(this.options[this.options.selectedIndex].value);">
+								<option value="3" #if($orderBy && "$orderBy"=="3")selected#end>请选择合适的排序方式</option>
+								<optgroup label="价格">
+								<option value="1" #if($orderBy && "$orderBy"=="1")selected#end>　由低到高排列↑</option>
+								<option value="0" #if($orderBy && "$orderBy"=="0")selected#end>　由高到低排列↓</option>
+								</optgroup>
+							</select>
+						</td>
+						<td width="353">
+							&nbsp;
+						</td>
+						<td align="right" width="315">
+						第 $!query.currentPage / $!query.getTotalPage()页&nbsp;&nbsp;
+						#if($!{query.getTotalPage()}==1)第一页
+						#else
+						<a href="${homeMoudle}/shop/$!{shop.shopId}.htm?page=1#if($!orderBy)&order=$!orderBy#end#if($!goodsType)&type=$!goodsType#end" class="gray" >第一页</a>
+						#end
+						#if(!${query.firstPage})
+							<a href="${homeMoudle}/shop/$!{shop.shopId}.htm?page=$!{query.previousPage}#if($!orderBy)&order=$!orderBy#end#if($!goodsType)&type=$!goodsType#end" class="gray" >上一页</a>
+						#else
+							上一页
+						#end
+						#if(!${query.lastPage})
+							<a href="${homeMoudle}/shop/$!{shop.shopId}.htm?page=$!{query.nextPage}#if($!orderBy)&order=$!orderBy#end#if($!goodsType)&type=$!goodsType#end" class="gray" >下一页</a>
+						#else
+							下一页
+						#end
+						#if($!{query.getTotalPage()}==1)最后页
+						#else
+						<a href="${homeMoudle}/shop/$!{shop.shopId}.htm?page=$!{query.totalPage}#if($!orderBy)&order=$!orderBy#end#if($!goodsType)&type=$!goodsType#end" class="gray" >最后页</a>
+						#end
+						</td>
+						<td align="middle" width="20">&nbsp;</td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+		<table border="0" width="970" cellspacing="0" cellpadding="0" height="8">
+			<tr>
+				<td></td>
+			</tr>
+		</table>
+		<table border="0" width="970" cellspacing="0" cellpadding="5" height="116" bgcolor="#FFFFFF" style="border: 1px solid #C5C5C5">
+			#set($rootCount = 1)
+					#foreach($good in $shop.goods)
+					#if($rootCount%5 == 1)
+			<tr>
+				#end
+		<td align="center">
+			<table width="135" height="102">
+					<tr>
+					<td height="66" width="135" align="center">    
+						<a href="${homeMoudle}/goods/$!{good.goodsId}.htm">
+	        		    #if( "$!{good.goodsPic}" != "")
+	        			  <img border="0" src="${upServer}$!{good.goodsPic}.s.jpg" width="80" height="80">
+	        			#else
+	        			  <img border="0" src="${imgServer}/images/showimg.gif" width="80" height="80">
+	        			#end
+						</a>
+					</td>
+					</tr>
+			<tr>
+			<td height="36" width="135" align="center">
+			#if($dateUtils.getBetweenDate($good.gmtCreate)<30)<img border="0" src="${imgServer}/images/new_icon.gif" width="25" height="9" />#end
+			<a class="good" href="${homeMoudle}/goods/$!{good.goodsId}.htm"> $!good.goodsName</a>
+			</td>
+			</tr>
+			</table>
+		</td>
+					#if($rootCount%5 == 0)
+					</tr>
+					#end
+					#set($rootCount = $rootCount + 1)
+					#end
+			</table>
+		<table border="0" width="970" cellspacing="0" cellpadding="0" height="8">
+			<tr>
+				<td></td>
+			</tr>
+		</table>
+		<table border="0" width="970" cellspacing="0" cellpadding="0" height="28" style="border: 1px solid #C5C5C5">
+			<tr>
+				<td bgcolor="#FFFFFF">
+				<table height="30" cellSpacing="0" cellPadding="0" width="650" align="right" border="0">
+					<tr>
+						<td align="right" width="138">请选择排序方式</td>
+						<td align="middle" width="180">
+							<select name="OrderStyle" onChange="order(this.options[this.options.selectedIndex].value);">
+							<option value="3" #if($orderBy && "$orderBy"=="3")selected#end>请选择合适的排序方式</option>
+							<optgroup label="价格">
+							<option value="1" #if($orderBy && "$orderBy"=="1")selected#end>　由低到高排列↑</option>
+							<option value="0" #if($orderBy && "$orderBy"=="0")selected#end>　由高到低排列↓</option>
+							</optgroup>
+							</select>
+						</td>
+						<td align="right" width="315">
+						第 $!query.currentPage / $!query.getTotalPage()页&nbsp;&nbsp;
+						<a href="${homeMoudle}/shop/$!{shop.shopId}.htm?page=1#if($!orderBy)&order=$!orderBy#end#if($!goodsType)&type=$!goodsType#end" class="gray">第一页</a>
+						#if(!${query.firstPage})
+							<a href="${homeMoudle}/shop/$!{shop.shopId}.htm?page=$!{query.previousPage}#if($!orderBy)&order=$!orderBy#end#if($!goodsType)&type=$!goodsType#end" class="gray" >上一页</a>
+						#else
+							上一页
+						#end
+						#if(!${query.lastPage})
+							<a href="${homeMoudle}/shop/$!{shop.shopId}.htm?page=$!{query.nextPage}#if($!orderBy)&order=$!orderBy#end#if($!goodsType)&type=$!goodsType#end" class="gray">下一页</a>
+						#else
+							下一页
+						#end
+						<a href="${homeMoudle}/shop/$!{shop.shopId}.htm?page=$!{query.totalPage}#if($!orderBy)&order=$!orderBy#end#if($!goodsType)&type=$!goodsType#end" class="gray" >最后页</a>
+						</td>
+						<td align="middle" width="20">&nbsp;</td>
+					</tr>
+				</table>
+				</td>
+			</tr>
+		</table>
+
+		</td>
+
+	</tr>
+</table>
+#end
+<table border="0" width="$tableWidth" cellspacing="0" cellpadding="0" bgcolor="#EBEBEB">
+	<tr>
+		<td height="10"></td>
+	</tr>
+</table>
+#end
+</td>
+	</tr>
+</table>

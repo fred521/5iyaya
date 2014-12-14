@@ -1,0 +1,46 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=$!{page_encoding}">
+		<title>我爱丫丫网 #if($page_title) - ${page_title} #end</title>
+		<meta name="Description" content="我爱丫丫网是新一代可视化的专业母婴类电子商务平台，其丰富的内容和多元的形式，让每个家庭都享受到互联网带来的乐趣。" />
+		<meta name="Keywords" content="我爱丫丫网,丫丫网,母婴,母婴购物平台,专业母婴购物平台,电子商务平台,可视化电子商务平台,团购,团购主页" />
+	</head>
+ <body>
+ <script language="javascript" src="http://api.51ditu.com/js/maps.js"></script>
+ <script language="javascript" src="http://api.51ditu.com/js/search.js"></script>
+ <script language="javascript" src="http://api.51ditu.com/js/ezmarker.js"></script>
+ <script language="javascript">
+	 function run(point,zoom){
+		 o = window.opener;
+		 if (point !=null && (point.getLongitude()!=null && point.getLongitude()!="" && point.getLongitude()!=" ")) {
+			 theposition = point.getLongitude()+","+point.getLatitude()+","+zoom;
+			 tempstr=theposition.replace(/,/g, "");
+			 tempstr=tempstr.replace(/(^\s*)|(\s*$)/g, "");
+			 if (tempstr!=null && tempstr!=""){
+			 o.document.getElementById("mapposition").value=theposition;
+		 }
+		 try {
+		 	o.document.getElementById("emarked").src = "${imgServer}/images/modify_note.gif" ;
+		 }catch(e){}
+		 try {
+		 	o.document.getElementById("emarked").innerHTML = "标注修改" ;
+		 }catch(e){}
+		 }
+	 	window.close();
+	 }
+	 var ezmarker = new LTEZMarker("ezmarker");
+	 ezmarker.setDefaultView("hangzhou",0);
+	 try{
+	 position=window.opener.document.getElementById("mapposition");
+	 if (position!=null && position.value!=""){
+	 	ezmarker.setValue(new LTPoint(position.value.split(",")[0],position.value.split(",")[1]),0);
+	 }
+	 }catch(e){}
+	 ezmarker.setSearch(true,"杭州");
+	 ezmarker.setPlaceList(true);
+	 ezmarker.showMap();
+	 ezmarker.win.maxSize();
+	 LTEvent.addListener(ezmarker,"mark",run);
+ </script>
+ </body>
+</html>

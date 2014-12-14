@@ -1,0 +1,163 @@
+<script>
+	function pageTo(num) {
+	    document.main.page.value=num;
+		document.main.submit();
+	}
+	function pageTopre(num) {
+	    document.main.page.value=num-1;
+		document.main.submit();
+	}
+	function pageTonext(num) {
+	    document.main.page.value=parseInt(num)+1;
+		document.main.submit();
+	}
+	function toSort(sort,reverse) {
+	    document.main.sort.value=sort;
+	    document.main.reverse.value=reverse;
+		document.main.submit();
+	}
+</script>
+#set( $layout = "layout/home/searchDefault.vm" )
+<table border="0" width="950" cellspacing="0" cellpadding="0" height="30">
+	<tr>
+		<td>当前类目下共有 <b><font color="#FF6600">$!{query.totalItem}</font></b> 条分类信息</td>
+	</tr>
+</table>
+<table border="0" width="950" cellspacing="0" cellpadding="0" >
+	<tr>
+		<td width="230" valign="top" align=center>
+		##$control.get('home/news/newsCommonLink')
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" height="6">
+			<tr>
+				<td></td>
+			</tr>
+		</table>
+		#if($news_search_left_commend && $news_search_left_commend.size()>0)
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+			<tr>
+				<td width="23">
+				<img border="0" src="${imgServer}/images/left_2.gif" width="23" height="28"></td>
+				<td background="${imgServer}/images/left_3.gif" class="title1">
+				推荐信息</td>
+				<td width="123">
+				<img border="0" src="${imgServer}/images/left_4.gif" width="123" height="28"></td>
+			</tr>
+		</table>
+		<table width="100%" cellspacing="0" cellpadding="0" id="table6" class="border1">
+			<tr>
+				<td style="padding-bottom:4px;padding-left:5px;">
+				<table width="100%" cellspacing="0" cellpadding="5" >
+			      <tr>
+				    <td>
+				    <table width="100%" cellspacing="0" cellpadding="1">
+					   #foreach($commend in $news_search_left_commend)	
+							<tr>																			
+								<td width="76%">·<a href="$!commend.commendUrl" class="blue">$stringUtils.abbreviate($!commend.commendText,19)</a></td>
+							</tr>
+						#end		
+		              </table>
+				    </td>
+			      </tr>
+		        </table>
+				</td>
+			</tr>
+		</table>
+		#end
+		</td>
+		<td width="15"></td>
+		<td width="705" valign="top">
+		<table border="0" width="100%" cellspacing="0" cellpadding="0">
+			<tr>
+				<td>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table5">
+					<tr>
+						<td width="92">
+						<img border="0" src="${imgServer}/images/classad_title1.gif" width="88" height="29"></td>
+						<td width="313" align="center">　</td>
+						<td width="300">
+						<table border="0" width="100%" cellspacing="0" cellpadding="3" id="table6">
+							<tr>
+								<td width="138">　</td>
+								#if($!{query.getTotalPage()}>1)
+								<td width="80" align="right">$!{query.currentPage}/$!{query.getTotalPage()}</td>
+								<td width="19" align="center"><img border="0" onClick="pageTopre('$!{query.currentPage}')" src="${imgServer}/images/btn_pre.gif" width="19" height="18"></td>
+								<td width="52" align="center"><img border="0" onClick="pageTonext('$!{query.currentPage}')" src="${imgServer}/images/btn_next.gif" width="52" height="18"></td>
+							    #end
+							</tr>
+						</table>
+						</td>
+					</tr>
+				</table>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" style="background:url(${imgServer}/images/gb_gd_8.gif) repeat-x;">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+				#if($!{query.totalItem}>0)
+				<table border="0" width="100%" cellspacing="0" cellpadding="0">
+					<tr>
+						
+						<td width="100%">
+						<table border="0" width="100%" cellspacing="0" cellpadding="3">
+			              <tr>
+				            <td width="70%" height="28" background="${imgServer}/images/list_title_bg.gif" align="left" style="padding-left:10px">信息简要内容</td>
+						#if(${query.sort} && "$!{query.sort}"=="viewCount" && !$!{query.reverse})
+				            <td width="10%%" height="28" background="${imgServer}/images/list_title_bg.gif" align="center"><a href="#" onClick="toSort('viewCount','true')" class="good">浏览量</a><img border="0" src="${imgServer}/images/arrow_up.gif" width="10" height="10"></td>
+				        #else
+				            <td width="10%%" height="28" background="${imgServer}/images/list_title_bg.gif" align="center"><a href="#" onClick="toSort('viewCount','false')" class="good">浏览量</a><img border="0" src="${imgServer}/images/arrow_down.gif" width="10" height="10"></td>
+				        #end
+				        #if(${query.sort} && "$!{query.sort}"=="gmtModify" && !$!{query.reverse}) 
+				        <td width="20%" height="28" background="${imgServer}/images/list_title_bg.gif" align="center"><a href="#" onClick="toSort('gmtModify','true')" class="good">发布时间</a><img border="0" src="${imgServer}/images/arrow_up.gif" width="10" height="10"></td>
+			            #else
+			            <td width="20%" height="28" background="${imgServer}/images/list_title_bg.gif" align="center"><a href="#" onClick="toSort('gmtModify','false')" class="good">发布时间</a><img border="0" src="${imgServer}/images/arrow_down.gif" width="10" height="10"></td>
+			            #end
+			              </tr>
+			              
+			               #foreach($new in $news)
+			              <tr>
+				            <td style="padding-left:10px;word-break: break-all" #if($velocityCount%2==0) bgcolor="#F6F6F6" #end>
+				            <table border="0" width="100%" cellspacing="0" cellpadding="3">
+								<tr>
+									<td><a href="${appServer}/yynews/$!{new.newsId}.htm" class="good" target="_blank"><b>$!{new.newsTitle}</b></a></td>
+								</tr>
+								<tr>
+									<td style="color: #777777">$!{new.content.content}</td>
+								</tr>
+							</table>
+				            </td>
+				            <td align=center  #if($velocityCount%2==0) bgcolor="#F6F6F6" #end><b><font color="#FF3300">$!{new.viewCount}</font></b></td>
+				            <td align=center  #if($velocityCount%2==0) bgcolor="#F6F6F6" #end>${dateUtils.dtSimpleChineseFormat($!{new.gmtModify})}</td>
+						 </tr>
+			              #end
+		                </table>
+						 </td>
+						</tr>
+				</table>
+				#else
+				<table align="center">
+				  <tr><td height="15"> &nbsp;</td></tr>
+				  <tr>
+				    <td> <font color="#FF6600">没有找到分类信息!</font></td>
+				  </tr>
+				</table>
+				#end
+				</td>
+			</tr>
+			<tr>
+				<td height="10"></td>
+			</tr>
+		</table>
+		#if($!{query.getTotalPage()}>1)
+		<table border="0" width="100%" cellspacing="0" cellpadding="0" id="table4" height="46" bgcolor="#F7F7F7">
+			<tr>
+				<td width="100%" align="center">
+				
+				${control.get('searchPageSlider')}
+				
+				</td>
+			</tr>	
+		</table>
+		#end
+		</td>
+	</tr>
+</table>

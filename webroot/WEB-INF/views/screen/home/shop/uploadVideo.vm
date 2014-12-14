@@ -1,0 +1,174 @@
+#set( $layout = "layout/home/memberdefault.vm" )	
+	<td width="10" valign="top">　  
+		
+	</td>
+		<td width="740" valign="top">
+			<div style="background:url(${imgServer}/images/title_left.gif) height:23px; margin: 15px 0 0 0;" class="panelTitle">
+				<h1>丫丫店铺管理</h1>
+			</div>
+		<table border="0" width="90%" cellspacing="2" cellpadding="0" style="border: 1px solid #CCCCCC; background-color: #FFFFFF" bordercolor="#CCCCCC" height="400">
+			<tr>
+				<td valign=top align=center>
+				
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td></td>
+					</tr>
+				</table>
+		<div class="roundCorner gray onlyBottom" style="width: 736px;">
+	    <p>   
+			<div align="center"><img src="${imgServer}/images/logo_copy.gif" align="absmiddle" /></div>
+	    </div>
+	    <p>
+				<table border="0" width="100%" cellspacing="0" cellpadding="0" height="10">
+					<tr>
+						<td align="center"><font color="red">$!success $!error</font></td>
+					</tr>
+				</table>
+				<table border="0" width="90%" cellspacing="0" cellpadding="0" height="18">
+					<tr>
+						<td width="96">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="${homeMoudle}/myshop/addNotes.htm" style="text-decoration: none"><font color="#A1A1A1">店铺公告管理</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td width="96">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="${homeMoudle}/myshop/updateShop.htm" style="text-decoration: none"><font color="#A1A1A1">修改店铺信息</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td width="96">
+						
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left_on.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg_on.gif" style="line-height:15px;padding-top:3px;">
+								上传店铺图片</td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right_on.gif"></td>
+							</tr>
+						</table>
+						
+						</td>
+						<td width="96">
+							<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="${homeMoudle}/shop/detail.htm?id=$!shopId" style="text-decoration: none" target="_blank"><font color="#A1A1A1">查看我的店铺</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						<!--
+						<table border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="3"><img border="0" src="${imgServer}/images/mem_title_left.gif"></td>
+								<td background="${imgServer}/images/mem_title_bg.gif" style="line-height:15px;padding-top:3px;">
+								<a href="shop_category.html" style="text-decoration: none"><font color="#A1A1A1">店铺商品类目</font></a></td>
+								<td width="13"><img border="0" src="${imgServer}/images/mem_title_right.gif"></td>
+							</tr>
+						</table>
+						-->
+						</td>
+						<td>&nbsp;　&nbsp;</td>
+					</tr>
+				</table>
+				
+				<table border="1" width="90%" cellpadding="0" height="110" cellspacing="1" bordercolor="#E4E4E4" style="border-collapse: collapse">
+					<form name="shopLogo"  action="${homeMoudle}/myshop/saveLogo.htm" method="post" encType="multipart/form-data" id="updateLogo">
+					<input type="hidden" name="shopId" value="$!shopId">
+					<input type="hidden" name="img" value="$!shopImg">
+					<input type="hidden" name="logo" value="$!logo">
+					<tr>
+						<td bgcolor="#F6F6F6" align=center style="padding:10 10 10 10">
+						<table cellSpacing="0" cellPadding="0" width="90%" align="center">
+							<tr>
+								<td align=center>
+									<table border="0" width="560" cellspacing="0" cellpadding="6">
+										<tr>
+											<td height="24" class="tx_title" colspan="2"><b>更新商铺标志</b></td>
+										</tr>
+										<tr>
+											<td width="100" height="35">标志显示区:</td>
+											<td width="460" id="signature">
+												<div id="imagek">
+												#if($!logo&&$!logo!='')
+													<img border="0" src="${upServer}$!{logo}.n.jpg" width="120" height="60" style="border: 1px solid #EFEFEF">
+												#else
+											<img border="0" src="${imgServer}/images/nologo.gif" width="120" height="60" style="border: 1px solid #EFEFEF">
+												#end
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td height="35">上传新标志:</td>
+											<td><input type="file" id="pic" name="shopLogo" class="input4"><span class="red">$!uploadLogoError</span>
+											</td>
+										</tr>
+										<tr>
+											<td height="30" colspan="2"></td>
+										</tr>
+										<tr>
+											<td height="30" class="tx_title" colspan="2"><b>更新商铺形象图片</b></td>
+										</tr>
+										<tr>
+											<td width="100" height="35">图片显示区:</td>
+											<td width="460">
+												#if($!shopImg&&$!shopImg!='')
+											<img border="0" src="${upServer}$!{shopImg}.l.jpg" width="80" height="80">
+											#else
+												<img border="0" src="${imgServer}/images/showimg.gif" width="80" height="80">
+												#end
+											</td>
+										</tr>
+										<tr>
+											<td height="35">上传店铺图片:</td>
+											<td><input type="file" name="shopImg" class="input4"><span class="red">$!uploadShopError</span>
+											</td>
+										</tr>
+										<tr>
+											<td>　</td>
+											<td>
+											<img src="${imgServer}/images/btm_Submitted.gif" onClick="document.shopLogo.submit();"><br>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">　</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+											<font color="#777777">
+											请使用GIF、JPG格式的图片文件<br>
+											请确认您的图像大小为120像素×60像素<br>
+											请控制图片文件在40KB以下<br>
+											任何有违国家法律法规的图像将被拒绝<br> 
+											</font> 
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					  </td>
+					</tr>
+					</form>
+				</table>
+				
+				<br>
+				</td>
+			</tr>
+		</table>
+		</td>

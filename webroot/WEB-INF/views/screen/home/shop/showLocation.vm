@@ -1,0 +1,95 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=$!{page_encoding}">
+		<title>我爱丫丫网 #if($page_title) - ${page_title} #end</title>
+		<meta name="Description" content="我爱丫丫网是新一代可视化的专业母婴类电子商务平台，其丰富的内容和多元的形式，让每个家庭都享受到互联网带来的乐趣。" />
+		<meta name="Keywords" content="我爱丫丫网,丫丫网,母婴,母婴购物平台,专业母婴购物平台,电子商务平台,可视化电子商务平台,团购,团购主页" />
+	    <script language="javascript" src="http://api.51ditu.com/js/maps.js"></script>
+		<script language="javascript" src="http://api.51ditu.com/js/search.js"></script>
+		<script language="javascript">
+		    var map,search,points,defaultM,defaultT;
+		    function showPoint(searchResult)
+			{
+				if(searchResult.count>0)//如果存在搜索结果
+				{
+					map.clearOverLays();
+					points=[];
+					//var html="";
+					
+            		//在地图上显示中心点，中心点的匹配可能有多个
+            		for(var i=0;i<searchResult.centerPoints.length;i++)
+            		{
+            			var poi=searchResult.centerPoints[i];
+            			var point=new LTPoint(poi.point[0],poi.point[1]);
+            			var icon=new LTIcon();//为中心点指定不同的图标
+            			icon.setImageUrl("http://www.51ditu.com/ls/img/poi/centerPoi.gif");
+            			var marker=new LTMarker(point,icon);
+            			map.addOverLay(marker);
+            			marker.name=poi.name;
+            			LTEvent.bind(marker,"click",marker,function(){this.openInfoWinHtml(this.name)});
+            		}
+					
+					for(var i=0;i<searchResult.count;i++)	//依次将搜索结果显示到地图上
+					{
+						var poi=searchResult.searchPoints[i];
+						var point=new LTPoint(poi.point[0],poi.point[1]);
+						var marker=new LTMarker(point);
+						map.addOverLay(marker);
+						marker.name=poi.name;
+						LTEvent.bind(marker,"click",marker,function(){this.openInfoWinHtml(this.name)});
+						points.push(point);
+						//html+=poi.id+'.<a href="'+poi.url+'" target="_blank">'+poi.name+'</a><br/>';	//输出POI信息列表
+					}
+					//document.getElementById("resultDiv").innerHTML=html;
+					map.getBestMap(points);
+				}
+				else
+				{
+					alert('无结果');
+				}
+				showDefault();
+			}
+			
+		    function onLoad() {
+			    var o = window.opener;
+				var vid = o.document.getElementById("videoId").value;
+				var vtext = '';
+			    var v = o.document.getElementById("location").value;
+			    v = (v==null||v=='')?'12018465,3029844,10':v; //12018465,3029844,10  杭州市地址
+			    var r = v.split(",");
+			    if(r.length==3) {
+					map = new LTMaps( "maps" );		
+					var c = new LTSmallMapControl();
+					map.addControl(c);
+					var point = new LTPoint( r[0] , r[1] );
+					defaultM = new LTMarker( point );
+					if(vid!='')
+						vtext = '<iframe src="/video/publicPlay.action?playVideoId='+vid+'&mp_width=310" width="320px" height="300" marginwidth="0" marginheight="0"  scrolling="no" border="0" frameborder="0" style="border: 0px solid #C4C6C4"></iframe>'
+					LTEvent.bind(defaultM,"click",defaultM,function(){this.openInfoWinHtml(vtext)});
+					map.addOverLay( defaultM );
+					defaultT = new LTMapText( defaultM );
+					defaultT.setLabel( "我的位置" ); 
+					map.addOverLay( defaultT ); 
+					map.centerAndZoom(point, r[2]*1 );
+				}
+				search=new LTLocalSearch(showPoint);
+			    search.setCity('杭州');
+			    //search.search('四季青');
+			}
+			
+			function showDefault() {
+				map.addOverLay( defaultM );
+				map.addOverLay( defaultT ); 
+			}
+		</script>
+	</head>
+	<body onload="onLoad()">
+    	<div style=" position: absolute; color: rgb(255, 255, 255); height: 20px; right: 200px; top: 15px; background-color: rgb(139, 162, 215); z-index: 1100;">
+    	   <span style="font-size: 13px;">在<input type="text" id="city" value="杭州" size="3" onchange="search.setCity(this.value);"/>市搜索</span> 
+    	   <input type="text" id="word" value="四季青" size="10" style="border: 1px solid green; font-size: 13px;"/>
+           <input type="button" onclick="search.search(document.getElementById('word').value);" value="搜索" style="border: 1px solid green; font-size: 12px; background-color: rgb(255, 255, 255);"/>
+    	</div>
+	   <div id="maps" style="position:relative; width:405px; height:385px;z-index:0">
+	   </div>
+	</body>
+</html>

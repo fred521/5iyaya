@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+   <bean id="adminUserDAO" class="com.nonfamous.tang.dao.admin.ibatis.IbatisAdminUserDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="smsDAO" class="com.nonfamous.tang.dao.sms.ibatis.IbatisSmsDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="goodsDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisGoodsDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="addressDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisAddressDAO">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="pictureDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisPictureDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="searchKeyWordDAO" class="com.nonfamous.tang.dao.home.cache.CachedSearchKeyWordDAO" >
+    	<property name="cache" >
+    		<bean class="com.nonfamous.commom.cache.ehcache.CompactEhCacheFactoryBean">
+				<property name="overflowToDisk" value="false" />
+				<property name="cacheName" value="searchKeyWordDAOCache" />
+			</bean>
+    	</property>
+    	<property name="target" ref="searchKeyWordDAOTarget"/>
+    	<property name="cacheKeyWordSize" value="10"/>
+	</bean>		
+	
+	<bean id="searchKeyWordDAOTarget" class="com.nonfamous.tang.dao.home.ibatis.IbatisSearchKeyWordDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="goodsCatDAO" class="com.nonfamous.tang.dao.home.cache.CachedGoodsCatDAO" >
+    	<property name="cache" >
+    		<bean class="com.nonfamous.commom.cache.ehcache.CompactEhCacheFactoryBean">
+				<property name="overflowToDisk" value="false" />
+				<property name="cacheName" value="goodsCatDAOCache" />
+			</bean>
+    	</property>
+    	<property name="target" ref="goodsCatDAOTarget"/>
+	</bean>		
+	<bean id="goodsCatDAOTarget" class="com.nonfamous.tang.dao.home.ibatis.IbatisGoodsCatDAO" >
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	
+	<bean id="recommendCache" class="com.nonfamous.commom.cache.ehcache.CompactEhCacheFactoryBean">
+		<property name="overflowToDisk" value="false" />
+		<property name="cacheName" value="recommendDAOCache" />
+	</bean>
+			
+	<bean id="commendContentDAO" class="com.nonfamous.tang.dao.home.cache.CacheRecommendDAO" >
+    	<property name="cache" ref="recommendCache" />
+    	<property name="target">
+    		<bean class="com.nonfamous.tang.dao.admin.ibatis.IbatisCommendContentDAO" >
+    			<property name="sqlMapClient" ref="sqlMapClient"/>
+			</bean>
+    	</property>
+	</bean>
+	
+	<bean id="commendPositionDAO" class="com.nonfamous.tang.dao.home.cache.CacheCommendPositionDAO" >
+    	<property name="cache" ref="recommendCache" />
+    	<property name="target">
+    		<bean class="com.nonfamous.tang.dao.admin.ibatis.IbatisCommendPositionDAO">
+				<property name="sqlMapClient" ref="sqlMapClient"/>
+			</bean>
+    	</property>
+	</bean>
+	<!--<bean id="commendContentDAO" class="com.nonfamous.tang.dao.admin.ibatis.IbatisCommendContentDAO" >
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>-->
+	<bean id="marketTypeDAO" class="com.nonfamous.tang.dao.home.cache.CacheMarketTypeDAO" >
+    	<property name="cache" >
+    		<bean class="com.nonfamous.commom.cache.ehcache.CompactEhCacheFactoryBean">
+				<property name="overflowToDisk" value="false" />
+				<property name="cacheName" value="marketTypeDAOCache" />
+			</bean>
+    	</property>
+    	<property name="target" ref="marketTypeDAOTarget"/>
+	</bean>
+	<bean id="marketTypeDAOTarget" class="com.nonfamous.tang.dao.home.ibatis.IbatisMarketTypeDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="newsTypeDAO" class="com.nonfamous.tang.dao.home.cache.CacheNewsTypeDAO" >
+    	<property name="cache" >
+    		<bean class="com.nonfamous.commom.cache.ehcache.CompactEhCacheFactoryBean">
+				<property name="overflowToDisk" value="false" />
+				<property name="cacheName" value="newsTypeDAOCache" />
+			</bean>
+    	</property>
+    	<property name="target" ref="newsTypeDAOTarget"/>
+	</bean>
+	<bean id="newsTypeDAOTarget" class="com.nonfamous.tang.dao.home.ibatis.IbatisNewsTypeDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="memberDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisMemberDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="mobileValidateDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisMobileValidateDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="shopDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisShopDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="newsDAO" class="com.nonfamous.tang.dao.home.cache.CacheNewsDAO">
+    	<property name="cache" >
+    		<bean class="com.nonfamous.commom.cache.ehcache.CompactEhCacheFactoryBean">
+				<property name="overflowToDisk" value="false" />
+				<property name="cacheName" value="newsDAOCache" />
+			</bean>
+    	</property>
+    	<property name="target" ref="newsDAOTarget"/>
+	</bean>
+	<bean id="yyNewsDAO" class="com.nonfamous.tang.dao.home.cache.CacheYYNewsDAO">
+    	<property name="cache" >
+    		<bean class="com.nonfamous.commom.cache.ehcache.CompactEhCacheFactoryBean">
+				<property name="overflowToDisk" value="false" />
+				<property name="cacheName" value="yyNewsDAOCache" />
+			</bean>
+    	</property>
+    	<property name="target" ref="yyNewsDAOTarget"/>
+	</bean>
+	<bean id="yyNewsDAOTarget" class="com.nonfamous.tang.dao.home.ibatis.IbatisYYNewsDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="newsDAOTarget" class="com.nonfamous.tang.dao.home.ibatis.IbatisNewsDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="newsContentDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisNewsContentDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="quartzLogDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisQuartzLogDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="searchGoodsDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisSearchGoodsDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+    	<property name="indexFilePath" value="${search.good.indexfile}" />
+	    <property name="goodsCatDAO" ref="goodsCatDAO" />
+	    <property name="goodsDAO" ref="goodsDAO" />
+	    <property name="quartzLogDAO" ref="quartzLogDAO" />
+	    <property name="shopDAO" ref="shopDAO" />
+	    <property name="marketTypeDAO" ref="marketTypeDAO" />
+	</bean>
+	<bean id="searchMemberShopDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisSearchMemberShopDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+    	<property name="indexFilePath" value="${search.shop.indexfile}" />
+    	<property name="shopDAO" ref="shopDAO" />
+	    <property name="quartzLogDAO" ref="quartzLogDAO" />
+   	    <property name="marketTypeDAO" ref="marketTypeDAO" />
+	</bean>
+	<bean id="searchNewsDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisSearchNewsDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+    	<property name="indexFilePath" value="${search.news.indexfile}" />
+    	<property name="newsDAO" ref="newsDAO" />
+	    <property name="quartzLogDAO" ref="quartzLogDAO" />
+	</bean>
+	
+	<bean id="adminLogDAO" class="com.nonfamous.tang.dao.admin.ibatis.IbatisAdminLogDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="tradeOrderDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisTradeOrderDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	
+	<bean id="tradeCarShopDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisTradeCarShopDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="tradeCarDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisTradeCarDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="signShopDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisSignShopDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>	
+	<bean id="tradePayDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisTradePayDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="helperDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisHelperDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="helperTypeDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisHelperTypeDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	<bean id="urlDAO" class="com.nonfamous.tang.dao.home.ibatis.IbatisURLDAO">
+    	<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+	
+	<bean id="userCenterDAO" class="com.nonfamous.tang.dao.home.usercenter.UserCenterDAOImpl">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+</beans>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+  xmlns="http://www.springframework.org/schema/beans"
+  xmlns:amq="http://activemq.org/config/1.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://activemq.org/config/1.0 http://people.apache.org/repository/org.apache.activemq/xsds/activemq-core-4.1-incubator-SNAPSHOT.xsd">
+  
+  <bean id="jmsConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop">
+    <property name="connectionFactory">
+      <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL">
+          <value>tcp://${mq.server.host}:${mq.port}</value>
+        </property>
+      </bean>
+    </property>
+  </bean>
+  
+  <amq:queue id="finished-queue"  physicalName="${mq.queue.finished}" />
+  
+  <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+    <property name="connectionFactory">
+      <bean class="org.springframework.jms.connection.SingleConnectionFactory">
+        <property name="targetConnectionFactory">
+          <ref local="jmsConnectionFactory" />
+        </property>
+      </bean>
+    </property>
+    <property name="messageConverter" ref="stringMessageConverter" />
+  </bean>  
+  <bean id="stringMessageConverter" class="com.nonfamous.tang.service.video.JSONMessageConverter"/>
+  
+  <bean id="videoConvertListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+	<property name="connectionFactory" ref="jmsConnectionFactory"/>
+	<property name="destination"       ref="finished-queue"/>
+	<property name="messageListener"   ref="videoConvertMessageListener"/>
+	<property name="concurrentConsumers" value="${mq.consumer.threadsNo}" />	
+  </bean> 
+  
+  <bean id="videoConvertMessageListener" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+    <constructor-arg>
+	  <bean class="com.nonfamous.tang.service.video.pojo.GoodsVideoManager">
+	      <property name="tokenCacheManager"       ref="tokenCacheManager"  />	
+	      <property name="shopDAO"       ref="shopDAO"  /> 
+	  </bean>
+	</constructor-arg>  
+	<property name="defaultListenerMethod" value="onVideoConvertFinished"   />
+	<property name="messageConverter" ref="stringMessageConverter"          />
+  </bean>
+        
+</beans>
